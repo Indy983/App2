@@ -1,0 +1,133 @@
+<svg width="300" height="320" viewBox="0 0 300 320" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradients for trunk -->
+    <linearGradient id="trunkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6B4423;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5A3A1A;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradients for leaves -->
+    <radialGradient id="leafGrad1" cx="30%" cy="30%">
+      <stop offset="0%" style="stop-color:#4ADE80;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16A34A;stop-opacity:1" />
+    </radialGradient>
+    
+    <radialGradient id="leafGrad2" cx="30%" cy="30%">
+      <stop offset="0%" style="stop-color:#34D399;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </radialGradient>
+    
+    <radialGradient id="leafGrad3" cx="30%" cy="30%">
+      <stop offset="0%" style="stop-color:#6EE7B7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10B981;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Drop shadow filter -->
+    <filter id="dropshadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="3" stdDeviation="2" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
+    
+    <!-- Soft glow filter -->
+    <filter id="softglow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="1" flood-color="#ffffff" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Tree trunk with natural curve -->
+  <path d="M 140 300 
+           Q 142 280 145 260
+           Q 147 240 149 220
+           Q 151 200 153 180
+           Q 155 160 157 140
+           L 165 140
+           Q 163 160 161 180
+           Q 159 200 157 220
+           Q 155 240 153 260
+           Q 151 280 149 300
+           Z" 
+        fill="url(#trunkGrad)" 
+        stroke="#4A2C17" 
+        stroke-width="1.5" 
+        filter="url(#dropshadow)"/>
+  
+  <!-- Trunk highlight -->
+  <path d="M 142 300 
+           Q 144 280 146 260
+           Q 148 240 150 220
+           Q 152 200 154 180
+           Q 156 160 158 140
+           L 160 142
+           Q 158 162 156 182
+           Q 154 202 152 222
+           Q 150 242 148 262
+           Q 146 282 144 300
+           Z" 
+        fill="none" 
+        stroke="#A0663B" 
+        stroke-width="1" 
+        opacity="0.6"/>
+  
+  <!-- Back layer leaves (shadows) -->
+  <ellipse cx="135" cy="95" rx="32" ry="28" fill="#0F5132" opacity="0.3" transform="translate(3,3)"/>
+  <ellipse cx="180" cy="105" rx="28" ry="25" fill="#0F5132" opacity="0.3" transform="translate(3,3)"/>
+  <ellipse cx="110" cy="120" rx="25" ry="22" fill="#0F5132" opacity="0.3" transform="translate(3,3)"/>
+  <ellipse cx="165" cy="135" rx="30" ry="26" fill="#0F5132" opacity="0.3" transform="translate(3,3)"/>
+  <ellipse cx="150" cy="75" rx="35" ry="30" fill="#0F5132" opacity="0.3" transform="translate(3,3)"/>
+  
+  <!-- Main foliage layers -->
+  <!-- Layer 1 - Back leaves -->
+  <ellipse cx="135" cy="95" rx="32" ry="28" 
+           fill="url(#leafGrad2)" 
+           stroke="#0D9488" 
+           stroke-width="1.5" 
+           filter="url(#dropshadow)"/>
+  
+  <ellipse cx="180" cy="105" rx="28" ry="25" 
+           fill="url(#leafGrad3)" 
+           stroke="#059669" 
+           stroke-width="1.5" 
+           filter="url(#dropshadow)"/>
+  
+  <!-- Layer 2 - Middle leaves -->
+  <ellipse cx="110" cy="120" rx="25" ry="22" 
+           fill="url(#leafGrad1)" 
+           stroke="#16A34A" 
+           stroke-width="1.5" 
+           filter="url(#dropshadow)"/>
+  
+  <ellipse cx="165" cy="135" rx="30" ry="26" 
+           fill="url(#leafGrad2)" 
+           stroke="#0D9488" 
+           stroke-width="1.5" 
+           filter="url(#dropshadow)"/>
+  
+  <!-- Layer 3 - Front leaves -->
+  <ellipse cx="150" cy="75" rx="35" ry="30" 
+           fill="url(#leafGrad1)" 
+           stroke="#16A34A" 
+           stroke-width="1.5" 
+           filter="url(#softglow)"/>
+  
+  <!-- Subtle highlights on front leaves -->
+  <ellipse cx="145" cy="70" rx="12" ry="10" 
+           fill="#86EFAC" 
+           opacity="0.4"/>
+  
+  <ellipse cx="160" cy="130" rx="10" ry="8" 
+           fill="#86EFAC" 
+           opacity="0.3"/>
+  
+  <!-- Small accent leaves for natural variation -->
+  <circle cx="190" cy="85" r="8" 
+          fill="url(#leafGrad3)" 
+          stroke="#059669" 
+          stroke-width="1" 
+          filter="url(#dropshadow)"/>
+  
+  <circle cx="125" cy="65" r="6" 
+          fill="url(#leafGrad1)" 
+          stroke="#16A34A" 
+          stroke-width="1" 
+          filter="url(#dropshadow)"/>
+</svg>

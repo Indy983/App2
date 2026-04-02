@@ -1,0 +1,8 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="400" fill="#1a1a1a" rx="40" ry="40"/>
+  
+  <!-- Subtle top highlight bar -->
+  <rect x="100" y="90" width="600" height="40" rx="20" ry="20"
+        fill="white" opacity="0.03"/>
+</svg>

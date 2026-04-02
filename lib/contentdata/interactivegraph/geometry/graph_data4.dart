@@ -1,0 +1,85 @@
+import 'package:flutter/material.dart';
+import 'graph_ui_base.dart';
+import 'dart:math' as math;
+
+/// ✅ Graph Data for f(x) = x Game - ข้อมูลทั้งหมดอยู่ที่นี่
+class GraphDataFEqualX {
+  // Function definition: f(x) = x
+ static double _function(double x) => math.sqrt(1 - x * x); 
+
+  // ✅ Configuration ทั้งหมดรวมอยู่ที่นี่
+  static const GraphConfig config = GraphConfig(
+    // Graph bounds (coordinate system limits)
+    xMin: -3,
+    xMax: 3,
+    yMin: -3,
+    yMax: 3,
+    functionXMin: -2,
+    functionXMax: 2,
+
+    // Visual settings
+    pointRadius: 4.25,
+    axisStrokeWidth: 3.0,
+    functionStrokeWidth: 6.0,
+    padding: 30.0,
+    graphSize: 270.0,
+
+    // Tick marks for axes
+    xTicks: [-2,-1,2,1],
+    yTicks: [-2,-1,2,1],
+
+    // Colors
+    backgroundColor: Colors.white,
+    axisColor: Colors.black,
+    pointColor: Color(0xFFFF3D00),
+    selectedPointColor: Color(0xFF5C84FF),
+    functionLineColor: Color(0xFFA9BFFD), // Blue
+    correctIconColor: Colors.green,
+    incorrectIconColor: Colors.grey,
+
+    // Function
+    function: _function,
+    functionExpression: 'f(x) = x',
+
+    // Game data: All points shown on the graph (mix of correct and distractor points)
+    allPoints: [
+      // Correct points (on the line f(x) = x)
+      GamePoint(x: 0, y: 1, isCorrect: true),
+      GamePoint(x: 1, y: 0, isCorrect: true),
+      GamePoint(x: -1, y: 0, isCorrect: true),
+      GamePoint(x: 0, y: -1, isCorrect: true), // เพิ่มจุดนี้
+
+      // Distractor points (not on the line f(x) = x)
+      GamePoint(x: 1.0, y: 3.0, isCorrect: false),
+      GamePoint(x: 4.0, y: 2.0, isCorrect: false),
+    ],
+
+    // Extract only the correct points for validation
+    correctPoints: [
+      GamePoint(x: 0, y: 1, isCorrect: true),
+      GamePoint(x: 1, y: 0, isCorrect: true),
+      GamePoint(x: -1, y: 0, isCorrect: true),
+      GamePoint(x: 0, y: -1, isCorrect: true), // เพิ่มจุดนี้
+    ],
+
+    // Maximum selectable points
+    maxSelectablePoints: 4, // เพิ่มจาก 3 เป็น 4
+
+    // Feedback messages
+    correctFeedback: 'เยี่ยม! คุณเลือกจุดที่ถูกต้องทั้งหมด!', // ข้อความเมื่อถูก
+    incorrectFeedback: 'ลองใหม่อีกครั้ง! มีบางจุดที่คุณเลือกไม่ถูกต้อง', // ข้อความเมื่อผิด
+
+    // วาดทั้งครึ่งบนและครึ่งล่างเพื่อให้ได้วงกลมเต็มวง
+    drawBothHalves: true,
+  );
+}
+
+/// ✅ Export widget - ง่ายมาก แค่ส่ง config
+Widget getGraphWidget() {
+  return OptimizedInteractiveGraph(
+    config: GraphDataFEqualX.config,
+  );
+}
+
+/// Alternative: Export as a constant variable for reuse
+final Widget graphFEqualX = getGraphWidget();
