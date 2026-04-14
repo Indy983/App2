@@ -30,6 +30,7 @@ class LoginScreen extends StatelessWidget {
                 ],
                 nativeGoogleAuthConfig: NativeGoogleAuthConfig(
                   webClientId: '2255303404-sdddvm4j925jft63lb8d83j2lof0u9s7.apps.googleusercontent.com',
+                  iosClientId: '2255303404-7s4pt5k901sp74736jdfc6n8n57h5okq.apps.googleusercontent.com'
                 ),
                 onSuccess: (Session session) {
                   // ✅ Create database and sync service
