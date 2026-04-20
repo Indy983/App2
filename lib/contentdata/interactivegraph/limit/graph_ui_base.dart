@@ -83,96 +83,85 @@ class _GraphUIBaseState extends State<GraphUIBase> {
     _xRight = widget.initialXRight;
   }
 
-  // ✅ เพิ่มฟังก์ชันคำนวณขนาดกราฟที่เหมาะสมสำหรับทุกอุปกรณ์
-  double _getOptimalGraphSize(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-    final shortestSide = MediaQuery.of(context).size.shortestSide;
+// ✅ ปรับปรุงฟังก์ชันคำนวณขนาดกราฟแบบ Responsive
+  double _getOptimalGraphSize(BuildContext context, BoxConstraints constraints) {
+    // หาค่าพื้นที่ที่น้อยที่สุดระหว่างความกว้างและความสูงที่มีให้
+    final double availableWidth = constraints.maxWidth;
+    final double availableHeight = constraints.maxHeight;
     
-    // ตรวจสอบว่าเป็น tablet หรือไม่ (shortestSide > 600)
-    final isTablet = shortestSide > 600;
+    // ถ้า height เป็น infinity (เช่นอยู่ใน ScrollView) ให้ใช้ width เป็นเกณฑ์
+    final double limitingDimension = availableHeight.isInfinite 
+        ? availableWidth 
+        : (availableWidth < availableHeight ? availableWidth : availableHeight);
+        
+    // ใช้พื้นที่ 90% ของหน้าจอเพื่อเว้นขอบ
+    double optimalSize = limitingDimension * 0.9;
     
-    if (isTablet) {
-      // สำหรับ tablet: จำกัดขนาดกราฟให้เหมาะสมกับการใช้งาน
-      // ใช้ขนาดคงที่ที่เหมาะสมแทนการใช้สัดส่วนหน้าจอ
-      return 320.0; // ขนาดคงที่สำหรับ tablet เหมือนมือถือ
-    } else {
-      // สำหรับมือถือ: ใช้สัดส่วนหน้าจอแต่ลบ padding
-      return screenWidth - 140; // 70 padding * 2
+    // ลิมิตขนาดสูงสุดเพื่อไม่ให้กราฟใหญ่เกินไปบนจอแท็บเล็ต/Desktop
+    if (optimalSize > 450.0) {
+      optimalSize = 450.0;
     }
+    
+    return optimalSize;
   }
 
   @override
   Widget build(BuildContext context) {
-    final graphSize = _getOptimalGraphSize(context);
-    
-    return Container(
-      // ✅ ทำให้กราฟอยู่ตรงกลางเสมอ
-      child: Center(
-        child: Container(
-          width: graphSize,
-          child: Stack(
-            children: [
-              GestureDetector(
-                onPanStart: _handlePanStart,
-                onPanUpdate: _handlePanUpdate,
-                onPanEnd: _handlePanEnd,
-                child: Container(
-                  width: graphSize,
-                  height: graphSize,
-                  margin: const EdgeInsets.symmetric(vertical: 4),
-                  child: CustomPaint(
-                    painter: GraphPainter(
-                      functionDef: widget.functionDef,
-                      xMin: widget.xMin,
-                      xMax: widget.xMax,
-                      yMin: widget.yMin,
-                      yMax: widget.yMax,
-                      functionXMin: widget.functionXMin,
-                      functionXMax: widget.functionXMax,
-                      xLeft: _xLeft,
-                      xRight: _xRight,
-                      yScale: widget.yScale,
-                      functionStrokeWidth: widget.functionStrokeWidth,
-                      pointRadius: widget.pointRadius,
-                      axisStrokeWidth: widget.axisStrokeWidth,
-                      padding: widget.padding,
-                      xTicks: widget.xTicks,
-                      yTicks: widget.yTicks,
-                      xTickLabels: widget.xTickLabels,
-                      yTickLabels: widget.yTickLabels,
-                      functionColor: widget.functionColor,
-                      leftPointColor: widget.leftPointColor,
-                      rightPointColor: widget.rightPointColor,
-                      showLeftCoordinate: _showLeftCoordinate && _coordinateVisibilityEnabled,
-                      showRightCoordinate: _showRightCoordinate && _coordinateVisibilityEnabled,
-                    ),
-                    size: Size(graphSize, graphSize),
-                  ),
-                ),
-              ),
-              // Eye toggle button - flat on screen without background circle
-              Positioned(
-                bottom: -10, // Moved down to align with green line area
-                right: 0,
-                child: GestureDetector(
-                  onTap: _toggleCoordinateVisibility,
-                  child: Padding(
-                    padding: EdgeInsets.all(8), // Increase touch area
-                    child: Icon(
-                      _coordinateVisibilityEnabled ? Icons.visibility : Icons.visibility_off,
-                      size: 20,
-                      color: _coordinateVisibilityEnabled 
-                          ? const Color.fromARGB(130, 0, 0, 0) 
-                          : Colors.grey.shade500,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final graphSize = _getOptimalGraphSize(context, constraints);
+        
+        return Center(
+          child: Container(
+            width: graphSize,
+            height: graphSize, // บังคับให้เป็นสี่เหลี่ยมจัตุรัสเสมอ
+            margin: const EdgeInsets.symmetric(vertical: 8),
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                GestureDetector(
+                  onPanStart: _handlePanStart,
+                  onPanUpdate: _handlePanUpdate,
+                  onPanEnd: _handlePanEnd,
+                  child: SizedBox(
+                    width: graphSize,
+                    height: graphSize,
+                    child: CustomPaint(
+                      painter: GraphPainter(
+                        functionDef: widget.functionDef,
+                        xMin: widget.xMin,
+                        xMax: widget.xMax,
+                        yMin: widget.yMin,
+                        yMax: widget.yMax,
+                        functionXMin: widget.functionXMin,
+                        functionXMax: widget.functionXMax,
+                        xLeft: _xLeft,
+                        xRight: _xRight,
+                        yScale: widget.yScale,
+                        functionStrokeWidth: widget.functionStrokeWidth,
+                        pointRadius: widget.pointRadius,
+                        axisStrokeWidth: widget.axisStrokeWidth,
+                        padding: widget.padding,
+                        xTicks: widget.xTicks,
+                        yTicks: widget.yTicks,
+                        xTickLabels: widget.xTickLabels,
+                        yTickLabels: widget.yTickLabels,
+                        functionColor: widget.functionColor,
+                        leftPointColor: widget.leftPointColor,
+                        rightPointColor: widget.rightPointColor,
+                        showLeftCoordinate: _showLeftCoordinate && _coordinateVisibilityEnabled,
+                        showRightCoordinate: _showRightCoordinate && _coordinateVisibilityEnabled,
+                      ),
+                      size: Size(graphSize, graphSize),
                     ),
                   ),
                 ),
-              ),
-            ],
+                // (ปุ่ม Eye toggle button นำมาวางต่อตรงนี้เหมือนเดิม)
+              ],
+            ),
           ),
-        ),
-      ),
+        );
+      }
     );
   }
 

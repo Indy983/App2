@@ -33,11 +33,20 @@ dynamic getLessonData(String id) {
     'real_properties': realPropertiesLesson,
     'real_inequalities': realInequalitiesLesson,
 
-    // 4. Matrix
-    'matrix_intro': matrixIntroLesson,
-    'matrix_operations': matrixOperationsLesson,
-    'matrix_determinant': matrixDeterminantLesson,
-    'matrix_linear_systems': matrixLinearSystemsLesson,
+    // 4. Matrix ────────────────────────────────────────────────────────────
+    // พื้นฐานเมทริกซ์
+    'matrix_basics':        matrixBasicsLesson,
+    'matrix_multiplication': matrixMultiplicationLesson,
+    'matrix_types':         matrixTypesLesson,
+    'matrix_identity':      matrixIdentityLesson,
+    // การดำเนินการ
+    'matrix_transpose':     matrixTransposeLesson,
+    'matrix_det':           matrixDetLesson,
+    'matrix_adj_inverse':   matrixAdjInverseLesson,
+    // สมบัติและโจทย์เพิ่มเติม
+    'matrix_prop_mult':     matrixPropMultLesson,
+    'matrix_prop_ops':      matrixPropOpsLesson,
+    'matrix_prop_det':      matrixPropDetLesson,
 
     // 5. Functions
     'function_intro': functionIntroLesson,

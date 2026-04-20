@@ -54,13 +54,27 @@ final List<Topic> mainCatalog = [
     title: "ระบบสมการเชิงเส้นและเมทริกซ์",
     lessons: [
       LessonSummary(
-        id: "matrix_basics",
+        id: "matrix_all",
         title: "เมทริกซ์",
         subtopics: [
-          SubLesson(id: "matrix_intro", title: "แนะนำเมทริกซ์"),
-          SubLesson(id: "matrix_operations", title: "การดำเนินการเมทริกซ์"),
-          SubLesson(id: "matrix_determinant", title: "ดีเทอร์มิแนนต์"),
-          SubLesson(id: "matrix_linear_systems", title: "ระบบสมการเชิงเส้น"),
+          // Group 1: พื้นฐานเมทริกซ์
+          SubLesson(title: "พื้นฐานเมทริกซ์", isGroupHeader: true),
+          SubLesson(id: "matrix_basics", title: "พื้นฐานและการบวกลบเมทริกซ์"),
+          SubLesson(id: "matrix_multiplication", title: "การคูณเมทริกซ์"),
+          SubLesson(id: "matrix_types", title: "ชนิดเมทริกซ์"),
+          SubLesson(id: "matrix_identity", title: "การประยุกต์เมทริกซ์เอกลักษณ์"),
+
+          // Group 2: การดำเนินการ
+          SubLesson(title: "การดำเนินการ", isGroupHeader: true),
+          SubLesson(id: "matrix_transpose", title: "การทรานสโพส"),
+          SubLesson(id: "matrix_det", title: "การ Det"),
+          SubLesson(id: "matrix_adj_inverse", title: "แอดจอยซ์และอินเวอร์ส"),
+
+          // Group 3: สมบัติและโจทย์เพิ่มเติม
+          SubLesson(title: "สมบัติและโจทย์เพิ่มเติม", isGroupHeader: true),
+          SubLesson(id: "matrix_prop_mult", title: "สมบัติการบวกและคูณ"),
+          SubLesson(id: "matrix_prop_ops", title: "สมบัติการดำเนินการ"),
+          SubLesson(id: "matrix_prop_det", title: "สมบัติการ det"),
         ],
       ),
     ],
@@ -259,7 +273,6 @@ final List<Topic> mainCatalog = [
         id: "calc_limits",
         title: "ลิมิตและความต่อเนื่อง",
         subtopics: [
-          // Group 1: การหาค่าลิมิต
           SubLesson(title: "การหาค่าลิมิต", isGroupHeader: true),
           SubLesson(id: "calc_limit_graph", title: "การหาค่าลิมิตจากกราฟ"),
           SubLesson(id: "calc_limit_comp", title: "การหาค่าลิมิตจากกราฟฟังก์ชันประกอบ"),
@@ -269,8 +282,6 @@ final List<Topic> mainCatalog = [
           SubLesson(id: "calc_limit_piece", title: "ลิมิตฟังก์ชันเงื่อนไข"),
           SubLesson(id: "calc_limit_inf", title: "ลิมิตเข้าใกล้อนันต์"),
           SubLesson(id: "calc_limit_inf2", title: "ลิมิตเข้าใกล้อนันต์เพิ่มเติม"),
-
-          // Group 2: ความต่อเนื่องฟังก์ชันและอัตราเปลี่ยนแปลง
           SubLesson(title: "ความต่อเนื่องฟังก์ชันและอัตราเปลี่ยนแปลง", isGroupHeader: true),
           SubLesson(id: "calc_continuity", title: "ความต่อเนื่องของฟังก์ชัน"),
           SubLesson(id: "calc_rate", title: "อัตราการเปลี่ยนแปลง"),
@@ -283,17 +294,12 @@ final List<Topic> mainCatalog = [
         id: "calc_derivatives",
         title: "อนุพันธ์",
         subtopics: [
-          // Group 1: การหาค่าอนุพันธ์
           SubLesson(title: "การหาค่าอนุพันธ์", isGroupHeader: true),
           SubLesson(id: "calc_deriv_intro", title: "นิยามและสมบัติของอนุพันธ์"),
           SubLesson(id: "calc_chain_rule", title: "กฎลูกโซ่"),
           SubLesson(id: "calc_lhopital", title: "กฎของโลปิตาล"),
-
-          // Group 2: ประยุกต์กับเรขาวิเคราะห์
           SubLesson(title: "ประยุกต์กับเรขาวิเคราะห์", isGroupHeader: true),
           SubLesson(id: "calc_tangent", title: "การหาสมการเส้นสัมผัส"),
-
-          // Group 3: ฟังก์ชันเพิ่ม-ลดและจุดสูงสุด-ต่ำสุด
           SubLesson(title: "ฟังก์ชันเพิ่ม-ลดและจุดสูงสุด-ต่ำสุด", isGroupHeader: true),
           SubLesson(id: "calc_incdec", title: "ฟังก์ชันเพิ่ม-ลด"),
           SubLesson(id: "calc_extrema", title: "จุดสูงสุด-ต่ำสุด"),
@@ -306,12 +312,9 @@ final List<Topic> mainCatalog = [
         id: "calc_integrals",
         title: "ปริพันธ์",
         subtopics: [
-          // Group 1: การหาค่า integrate
           SubLesson(title: "การหาค่า integrate", isGroupHeader: true),
           SubLesson(id: "calc_int_intro", title: "ปริพันธ์ (Integral)"),
           SubLesson(id: "calc_int_sub", title: "การเปลี่ยนตัวแปรในปริพันธ์"),
-
-          // Group 2: พื้นที่ใต้กราฟ
           SubLesson(title: "พื้นที่ใต้กราฟ", isGroupHeader: true),
           SubLesson(id: "calc_area", title: "การหาพื้นที่ใต้กราฟ"),
           SubLesson(id: "calc_area_enc", title: "การหาพื้นที่ปิดล้อม"),

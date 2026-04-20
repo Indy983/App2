@@ -1459,6 +1459,7 @@ $lim = 5$
 final calcLimitPolynomialLesson = ContentLesson(
   title: "ลิมิตการจัดรูปพหุนาม",
   sections: [
+
     // ==========================================
     // SECTION 1: ทำไม 0/0 ถึงยังมีคำตอบ?
     // ==========================================
@@ -1683,10 +1684,160 @@ $x^3+1 = (x+1)(x^2-x+1)$ ← สูตร $a^3+b^3$
     ),
 
     // ==========================================
-    // SECTION 3: วิธีที่ 2 เมื่อมี √
+    // SECTION 3: เมื่อแทนค่าแล้วได้ ∞−∞
     // ==========================================
     ContentSection(
-      headerL1: r"วิธีที่ 2: เมื่อมี √ อยู่ในสมการ",
+      headerL1: r"เมื่อแทนค่าแล้วได้ ∞−∞",
+      blocks: [
+        ContentBlock("lim_poly_t_030", "text", {
+          "content": [
+            r'''บางโจทย์ไม่ได้เป็นเศษส่วนเดียว แต่เป็น **ผลบวกหรือผลต่างของเศษส่วนหลายตัว**
+
+แทนค่าแล้วอาจได้ $\dfrac{k}{0}$ หลายตัวมารวมกัน ซึ่งเป็นรูป $\infty - \infty$ — ก็ต้องจัดรูปเช่นกัน''',
+          ],
+        }),
+        ContentBlock("lim_poly_h_031", "header", {
+          "title": r"ตัวอย่าง — จัดส่วนให้เท่ากันก่อน",
+          "level": 2,
+        }),
+        ContentBlock("lim_poly_t_032", "text", {
+          "content": [
+            r'''จงหา 
+
+$$\lim\limits_{x \to 2} \left(\dfrac{2}{x-2} + \dfrac{1}{x+2} - \dfrac{8}{x^2-4}\right)$$
+
+แทน $x=2$ ตรงๆ ก่อน
+
+$\dfrac{2}{0} + \dfrac{1}{4} - \dfrac{8}{0}$ → ได้รูป $\infty + c - \infty = \infty - \infty$ ต้องจัดรูป
+
+Note = วิธีแก้
+
+เศษส่วนหลายตัวรวมกันเป็นตัวเดียวก่อน โดยหาตัวส่วนร่วม แล้วค่อยแยกตัวประกอบปกติ''',
+          ],
+        }),
+        ContentBlock("lim_poly_ddq_033", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "lim_poly_ddq_033_s1",
+              "content": [
+                r'''ก่อนอื่น สังเกตว่า $x^2-4 = (x-2)(x+2)$
+
+ตัวส่วนร่วม (LCD) ของทั้งสามเศษส่วนคือ''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [
+                r"$x^2-4$",
+                r"$(x-2)$",
+                r"$(x+2)$",
+                r"$(x-2)(x+2)(x^2-4)$",
+              ],
+              "correctAnswers": {"0": r"$x^2-4$"},
+              "explanation":
+                  r'''$x^2-4 = (x-2)(x+2)$ ครอบคลุมทั้งสามตัวส่วนแล้ว ไม่ต้องคูณเพิ่ม''',
+            },
+            {
+              "questionId": "lim_poly_ddq_033_s2",
+              "content": [
+                r'''แปลงแต่ละเศษส่วนให้มีตัวส่วน $x^2-4$
+
+$\dfrac{2}{x-2} = \dfrac{2(x+2)}{x^2-4}$, $\quad \dfrac{1}{x+2} = \dfrac{x-2}{x^2-4}$, $\quad \dfrac{8}{x^2-4} = \dfrac{8}{x^2-4}$
+
+รวมเศษทั้งหมด: $2(x+2) + (x-2) - 8 =$''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [
+                r"$3x-6$",
+                r"$3x+6$",
+                r"$3x-2$",
+                r"$x-6$",
+              ],
+              "correctAnswers": {"0": r"$3x-6$"},
+              "explanation":
+                  r'''$2x+4+x-2-8 = 3x-6$''',
+            },
+            {
+              "questionId": "lim_poly_ddq_033_s3",
+              "content": [
+                r'''ได้ $\dfrac{3x-6}{x^2-4}$ ซึ่งอยู่ในรูปที่แยกตัวประกอบได้แล้ว
+
+$3x-6 = 3(x-2)$ และ $x^2-4 = (x-2)(x+2)$
+
+ตัด $(x-2)$ ออก เหลือ''',
+                {"drop": "0"},
+                r'''แทน $x=2$ ได้คำตอบ''',
+                {"drop": "1"},
+              ],
+              "draggableItems": [
+                r"$\dfrac{3}{x+2}$",
+                r"$\dfrac{3}{x-2}$",
+                r"$3(x+2)$",
+                r"$\dfrac{3}{4}$",
+                r"$\dfrac{3}{2}$",
+                r"$3$",
+              ],
+              "correctAnswers": {
+                "0": r"$\dfrac{3}{x+2}$",
+                "1": r"$\dfrac{3}{4}$",
+              },
+              "explanation":
+                  r'''$\dfrac{3(x-2)}{(x-2)(x+2)} = \dfrac{3}{x+2}$ แทน $x=2$ → $\dfrac{3}{4}$''',
+            },
+          ],
+        }),
+        ContentBlock("lim_poly_h_034", "header", {
+          "title": r"ฝึกเลย",
+          "level": 2,
+        }),
+        ContentBlock("q_lim_poly_035", "question_choice", {
+          "content": [
+            r'''1. จงหา
+
+$$\lim\limits_{x \to 1} \left(\dfrac{1}{x-1} - \dfrac{2}{x^2-1}\right)$$
+
+Note = คำใบ้
+
+$x^2-1 = (x-1)(x+1)$ ใช้เป็น LCD ได้''',
+          ],
+          "options": [r"$\dfrac{1}{4}$", r"$\dfrac{1}{2}$", r"$1$", r"หาค่าไม่ได้"],
+          "correct": r"$\dfrac{1}{2}$",
+          "explanation":
+              r'''แทน $x=1$ → $\dfrac{1}{0} - \dfrac{2}{0}$ = $\infty - \infty$ ต้องจัดรูป
+
+LCD = $x^2-1 = (x-1)(x+1)$
+
+$\dfrac{x+1}{x^2-1} - \dfrac{2}{x^2-1} = \dfrac{x+1-2}{x^2-1} = \dfrac{x-1}{(x-1)(x+1)}$
+
+ตัด $(x-1)$ → $\dfrac{1}{x+1}$
+
+แทน $x=1$ → $\dfrac{1}{2}$''',
+        }),
+        ContentBlock("q_lim_poly_036", "question_choice", {
+          "content": [
+            r'''2. จงหา
+
+$$\lim\limits_{x \to 2} \left(\dfrac{1}{x-2} + \dfrac{1}{x+2} - \dfrac{4}{x^2-4}\right)$$''',
+          ],
+          "options": [r"$\dfrac{1}{4}$", r"$\dfrac{1}{2}$", r"$1$", r"หาค่าไม่ได้"],
+          "correct": r"$\dfrac{1}{2}$",
+          "explanation":
+              r'''แทน $x=2$ → $\infty + c - \infty$ = $\infty - \infty$ ต้องจัดรูป
+
+LCD = $x^2-4 = (x-2)(x+2)$
+
+$\dfrac{x+2}{x^2-4} + \dfrac{x-2}{x^2-4} - \dfrac{4}{x^2-4} = \dfrac{x+2+x-2-4}{x^2-4} = \dfrac{2x-4}{x^2-4}$
+
+$= \dfrac{2(x-2)}{(x-2)(x+2)}$ ตัด $(x-2)$ → $\dfrac{2}{x+2}$
+
+แทน $x=2$ → $\dfrac{2}{4} = \dfrac{1}{2}$''',
+        }),
+      ],
+    ),
+
+    // ==========================================
+    // SECTION 4: วิธีที่ 2 เมื่อมี √ หรือ ∛
+    // ==========================================
+    ContentSection(
+      headerL1: r"วิธีที่ 2: เมื่อมี √ หรือ ∛",
       blocks: [
         ContentBlock("lim_poly_t_014", "text", {
           "content": [
@@ -1742,7 +1893,7 @@ $(2-\sqrt{x+3}) \times$ ''',
               "explanation":
                   r'''$(2-\sqrt{x+3})(2+\sqrt{x+3}) = 4-(x+3)$ ไม่มี $\sqrt{\ }$ แล้ว
 
-Conjugate ของ $a-b$ คือ $a+b$ และในทางกลับกัน — แค่เปลี่ยนเครื่องหมายตรงกลาง''',
+Conjugate ของ $a-b$ คือ $a+b$ — แค่เปลี่ยนเครื่องหมายตรงกลาง''',
             },
             {
               "questionId": "lim_poly_ddq_016_s3",
@@ -1821,7 +1972,7 @@ $= \dfrac{-1}{2+\sqrt{4}} = \dfrac{-1}{2+2} =$''',
           ],
         }),
         ContentBlock("lim_poly_h_019", "header", {
-          "title": r"ฝึกเลย",
+          "title": r"ฝึก √",
           "level": 2,
         }),
         ContentBlock("q_lim_poly_020", "question_choice", {
@@ -1852,7 +2003,7 @@ $$\lim\limits_{x \to 3} \dfrac{x-3}{\sqrt{x+1}-2}$$''',
           "options": [r"$2$", r"$3$", r"$4$", r"$6$"],
           "correct": r"$4$",
           "explanation":
-              r'''แทน $x=3$ → $\dfrac{0}{0}$ มี $\sqrt{\ }$ → ใช้ Conjugate กับส่วน
+              r'''แทน $x=3$ → $\dfrac{0}{0}$ มี $\sqrt{\ }$ ที่ส่วน → Conjugate ส่วน
 
 คูณด้วย $\dfrac{\sqrt{x+1}+2}{\sqrt{x+1}+2}$
 
@@ -1862,21 +2013,144 @@ $$\lim\limits_{x \to 3} \dfrac{x-3}{\sqrt{x+1}-2}$$''',
 
 แทน $x=3$ → $\sqrt{4}+2 = 4$''',
         }),
+        ContentBlock("lim_poly_h_040", "header", {
+          "title": r"เมื่อมี ∛ — ใช้หลักเดิม แต่สูตรต่างกัน",
+          "level": 2,
+        }),
+        ContentBlock("lim_poly_t_041", "text", {
+          "content": [
+            r'''$\sqrt{\ }$ ยกกำลัง 2 หาย → ใช้ $(a-b)(a+b) = a^2-b^2$
+
+$\sqrt[3]{\ }$ ยกกำลัง 3 หาย → ใช้ $(a-b)(a^2+ab+b^2) = a^3-b^3$
+
+สูตรนี้เคยเรียนในเรื่องจำนวนจริงแล้ว แค่นำมาใช้กับ $\sqrt[3]{\ }$''',
+          ],
+        }),
+        ContentBlock("lim_poly_ddq_042", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "lim_poly_ddq_042_s1",
+              "content": [
+                r'''จงหา $\lim\limits_{x \to 8} \dfrac{\sqrt[3]{x}-2}{x-8}$
+
+แทน $x=8$: เศษ $= 2-2 = 0$, ส่วน $= 0$ → $\dfrac{0}{0}$ ต้องจัดรูป
+
+ต้องการให้ $\sqrt[3]{x}$ หายไป ต้องยกกำลัง''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [r"$3$", r"$2$", r"$\dfrac{1}{3}$", r"$6$"],
+              "correctAnswers": {"0": r"$3$"},
+              "explanation": r'''$\left(\sqrt[3]{x}\right)^3 = x$ ยกกำลัง 3 ถึงจะหาย''',
+            },
+            {
+              "questionId": "lim_poly_ddq_042_s2",
+              "content": [
+                r'''ให้ $a = \sqrt[3]{x}$, $b = 2$ แทนในสูตร $a^3-b^3 = (a-b)(a^2+ab+b^2)$
+
+$x - 8 = (\sqrt[3]{x})^3 - 2^3 = (\sqrt[3]{x}-2) \times$''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [
+                r"$(\sqrt[3]{x^2}+2\sqrt[3]{x}+4)$",
+                r"$(\sqrt[3]{x^2}-2\sqrt[3]{x}+4)$",
+                r"$(\sqrt[3]{x}+2)$",
+                r"$(x+2)$",
+              ],
+              "correctAnswers": {"0": r"$(\sqrt[3]{x^2}+2\sqrt[3]{x}+4)$"},
+              "explanation":
+                  r'''$a^2+ab+b^2$ ที่นี่คือ $(\sqrt[3]{x})^2 + 2\sqrt[3]{x} + 4 = \sqrt[3]{x^2}+2\sqrt[3]{x}+4$''',
+            },
+            {
+              "questionId": "lim_poly_ddq_042_s3",
+              "content": [
+                r'''$\dfrac{\sqrt[3]{x}-2}{x-8} = \dfrac{\sqrt[3]{x}-2}{(\sqrt[3]{x}-2)(\sqrt[3]{x^2}+2\sqrt[3]{x}+4)}$
+
+ตัด $(\sqrt[3]{x}-2)$ ออก เหลือ $\dfrac{1}{\sqrt[3]{x^2}+2\sqrt[3]{x}+4}$
+
+แทน $x=8$: $\sqrt[3]{8}=2$ → ได้คำตอบ''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [
+                r"$\dfrac{1}{12}$",
+                r"$\dfrac{1}{4}$",
+                r"$\dfrac{1}{6}$",
+                r"$\dfrac{1}{8}$",
+              ],
+              "correctAnswers": {"0": r"$\dfrac{1}{12}$"},
+              "explanation":
+                  r'''$\dfrac{1}{\sqrt[3]{64}+2\sqrt[3]{8}+4} = \dfrac{1}{4+4+4} = \dfrac{1}{12}$''',
+            },
+          ],
+        }),
+        ContentBlock("lim_poly_h_043", "header", {
+          "title": r"ฝึก ∛",
+          "level": 2,
+        }),
+        ContentBlock("q_lim_poly_044", "question_choice", {
+          "content": [
+            r'''3. จงหา
+
+$$\lim\limits_{x \to 1} \dfrac{\sqrt[3]{x}-1}{x-1}$$
+
+Note = คำใบ้
+
+$x-1 = (\sqrt[3]{x})^3 - 1^3$ ใช้สูตร $a^3-b^3$ ได้''',
+          ],
+          "options": [r"$\dfrac{1}{4}$", r"$\dfrac{1}{3}$", r"$\dfrac{1}{2}$", r"$1$"],
+          "correct": r"$\dfrac{1}{3}$",
+          "explanation":
+              r'''แทน $x=1$ → $\dfrac{0}{0}$ มี $\sqrt[3]{\ }$ → ใช้สูตร $a^3-b^3$
+
+$x-1 = (\sqrt[3]{x}-1)(\sqrt[3]{x^2}+\sqrt[3]{x}+1)$
+
+ตัด $(\sqrt[3]{x}-1)$ → $\dfrac{1}{\sqrt[3]{x^2}+\sqrt[3]{x}+1}$
+
+แทน $x=1$ → $\dfrac{1}{1+1+1} = \dfrac{1}{3}$''',
+        }),
+        ContentBlock("q_lim_poly_045", "question_choice", {
+          "content": [
+            r'''4. จงหา
+
+$$\lim\limits_{x \to -1} \dfrac{x+1}{\sqrt[3]{x}+1}$$
+
+Note = คำใบ้
+
+$x+1 = (\sqrt[3]{x})^3 + 1^3$ ใช้สูตร $a^3+b^3$ ได้''',
+          ],
+          "options": [r"$\dfrac{1}{4}$", r"$\dfrac{1}{3}$", r"$1$", r"$3$"],
+          "correct": r"$3$",
+          "explanation":
+              r'''แทน $x=-1$ → $\dfrac{0}{0}$ มี $\sqrt[3]{\ }$
+
+$x+1 = (\sqrt[3]{x}+1)(\sqrt[3]{x^2}-\sqrt[3]{x}+1)$ ← สูตร $a^3+b^3$
+
+ตัด $(\sqrt[3]{x}+1)$ → $\sqrt[3]{x^2}-\sqrt[3]{x}+1$
+
+แทน $x=-1$: $\sqrt[3]{1}-\sqrt[3]{-1}+1 = 1+1+1 = 3$''',
+        }),
       ],
     ),
 
     // ==========================================
-    // SECTION 4: ฝึกรวม
+    // SECTION 5: ฝึกรวม (ค่อยๆ เพิ่มความยาก)
     // ==========================================
     ContentSection(
       headerL1: r"ฝึกรวม",
       blocks: [
-        ContentBlock("lim_poly_t_022", "text", {
+        ContentBlock("lim_poly_t_050", "text", {
           "content": [
-            r'''แต่ละข้อ แทนค่าดูก่อนเสมอ แล้วค่อยตัดสินใจว่าต้องทำอะไรต่อ''',
+            r'''แทนค่าดูก่อนเสมอ แล้วค่อยตัดสินใจว่าต้องทำอะไรต่อ
+
+โจทย์จะค่อยๆ ยากขึ้น ไม่มีสูตรตายตัว — ต้องวิเคราะห์เองว่าติดอะไร''',
           ],
         }),
-        ContentBlock("q_lim_poly_023", "question_choice", {
+
+        // --- ระดับ 1: แยกตัวประกอบ ---
+        ContentBlock("lim_poly_h_051", "header", {
+          "title": r"แยกตัวประกอบ",
+          "level": 2,
+        }),
+        ContentBlock("q_lim_poly_052", "question_choice", {
           "content": [
             r'''1. จงหา
 
@@ -1891,7 +2165,13 @@ $x^2-25 = (x-5)(x+5)$ → ตัด $(x-5)$ → $x+5$
 
 แทน $x=5$ → $10$''',
         }),
-        ContentBlock("q_lim_poly_024", "question_choice", {
+
+        // --- ระดับ 2: Conjugate √ ---
+        ContentBlock("lim_poly_h_053", "header", {
+          "title": r"Conjugate √",
+          "level": 2,
+        }),
+        ContentBlock("q_lim_poly_054", "question_choice", {
           "content": [
             r'''2. จงหา
 
@@ -1904,28 +2184,13 @@ $$\lim\limits_{x \to 0} \dfrac{\sqrt{x+4}-2}{x}$$''',
 
 คูณด้วย $\dfrac{\sqrt{x+4}+2}{\sqrt{x+4}+2}$
 
-เศษ: $(x+4)-4 = x$ → ตัด $x$ → เหลือ $\dfrac{1}{\sqrt{x+4}+2}$
+เศษ: $(x+4)-4 = x$ → ตัด $x$ → $\dfrac{1}{\sqrt{x+4}+2}$
 
 แทน $x=0$ → $\dfrac{1}{4}$''',
         }),
-        ContentBlock("q_lim_poly_025", "question_choice", {
+        ContentBlock("q_lim_poly_055", "question_choice", {
           "content": [
             r'''3. จงหา
-
-$$\lim\limits_{x \to -1} \dfrac{x^2+4x+3}{x+1}$$''',
-          ],
-          "options": [r"$-3$", r"$-2$", r"$2$", r"$3$"],
-          "correct": r"$2$",
-          "explanation":
-              r'''แทน $x=-1$ → $\dfrac{0}{0}$
-
-$x^2+4x+3 = (x+1)(x+3)$ → ตัด $(x+1)$ → $x+3$
-
-แทน $x=-1$ → $2$''',
-        }),
-        ContentBlock("q_lim_poly_026", "question_choice", {
-          "content": [
-            r'''4. จงหา
 
 $$\lim\limits_{x \to 1} \dfrac{2-\sqrt{x+3}}{x^2-1}$$''',
           ],
@@ -1937,66 +2202,192 @@ $$\lim\limits_{x \to 1} \dfrac{2-\sqrt{x+3}}{x^2-1}$$''',
           ],
           "correct": r"$\dfrac{-1}{8}$",
           "explanation":
-              r'''แทน $x=1$ → $\dfrac{0}{0}$ มี $\sqrt{\ }$ → Conjugate กับเศษ
+              r'''แทน $x=1$ → $\dfrac{0}{0}$ มี $\sqrt{\ }$ → Conjugate เศษ
 
 คูณด้วย $\dfrac{2+\sqrt{x+3}}{2+\sqrt{x+3}}$
 
 เศษ: $4-(x+3) = 1-x = -(x-1)$
 
-ส่วน: $(x^2-1)(2+\sqrt{x+3}) = (x-1)(x+1)(2+\sqrt{x+3})$
+ส่วน: $x^2-1 = (x-1)(x+1)$
 
 ตัด $(x-1)$ → $\dfrac{-1}{(x+1)(2+\sqrt{x+3})}$
 
 แทน $x=1$ → $\dfrac{-1}{2 \times 4} = \dfrac{-1}{8}$''',
         }),
-        ContentBlock("q_lim_poly_027", "question_choice", {
+
+        // --- ระดับ 3: Conjugate ∛ ---
+        ContentBlock("lim_poly_h_056", "header", {
+          "title": r"Conjugate ∛",
+          "level": 2,
+        }),
+        ContentBlock("q_lim_poly_057", "question_choice", {
+          "content": [
+            r'''4. จงหา
+
+$$\lim\limits_{x \to 0} \dfrac{\sqrt[3]{x+1}-1}{x}$$
+
+Note = คำใบ้
+
+$x = (\sqrt[3]{x+1})^3 - 1$ ลองใช้สูตร $a^3-b^3$''',
+          ],
+          "options": [r"$\dfrac{1}{4}$", r"$\dfrac{1}{3}$", r"$\dfrac{1}{2}$", r"$1$"],
+          "correct": r"$\dfrac{1}{3}$",
+          "explanation":
+              r'''แทน $x=0$ → $\dfrac{0}{0}$ มี $\sqrt[3]{\ }$
+
+ให้ $a = \sqrt[3]{x+1}$, $b=1$
+
+$x = (x+1)-1 = a^3-1 = (a-1)(a^2+a+1)$
+
+$\dfrac{a-1}{(a-1)(a^2+a+1)} = \dfrac{1}{a^2+a+1} = \dfrac{1}{\sqrt[3]{(x+1)^2}+\sqrt[3]{x+1}+1}$
+
+แทน $x=0$ → $\dfrac{1}{1+1+1} = \dfrac{1}{3}$''',
+        }),
+
+        // --- ระดับ 4: ต้องวิเคราะห์ว่าทำแบบไหน ---
+        ContentBlock("lim_poly_h_058", "header", {
+          "title": r"วิเคราะห์ก่อนว่าติดอะไร",
+          "level": 2,
+        }),
+        ContentBlock("lim_poly_t_059", "text", {
+          "content": [
+            r'''โจทย์สองข้อถัดไปดูซับซ้อน แต่แทนค่าก่อนแล้วค่อยดูว่าติดอะไร
+
+ลองหาตัวร่วมที่ทำให้ตัด $\dfrac{0}{0}$ ออกได้''',
+          ],
+        }),
+        ContentBlock("q_lim_poly_060", "question_choice", {
           "content": [
             r'''5. จงหา
 
-$$\lim\limits_{x \to 3} \dfrac{x^2-9}{\sqrt{x+1}-2}$$''',
+$$\lim\limits_{x \to 1} \dfrac{(\sqrt{x}-1)(3x-2)}{3x^2-x-2}$$
+
+Note = คำใบ้
+
+ลองแยกตัวประกอบส่วน แล้วดูว่ามีตัวใดหายกับเศษได้''',
           ],
-          "options": [r"$4$", r"$8$", r"$12$", r"$16$"],
-          "correct": r"$12$",
+          "options": [r"$\dfrac{1}{5}$", r"$\dfrac{1}{10}$", r"$\dfrac{1}{4}$", r"$\dfrac{1}{2}$"],
+          "correct": r"$\dfrac{1}{10}$",
           "explanation":
-              r'''แทน $x=3$ → $\dfrac{0}{0}$ มีทั้งพหุนามและ $\sqrt{\ }$
+              r'''แทน $x=1$ → เศษ $= 0$, ส่วน $= 0$ → $\dfrac{0}{0}$
 
-ใช้ Conjugate กับส่วน คูณด้วย $\dfrac{\sqrt{x+1}+2}{\sqrt{x+1}+2}$
+ส่วน: $3x^2-x-2 = (3x+2)(x-1)$
 
-ส่วน: $(x+1)-4 = x-3$
+เศษ: $(\sqrt{x}-1)(3x-2)$ และ $x-1 = (\sqrt{x}-1)(\sqrt{x}+1)$
 
-$\dfrac{(x^2-9)(\sqrt{x+1}+2)}{x-3} = \dfrac{(x-3)(x+3)(\sqrt{x+1}+2)}{x-3}$
+แทน $(x-1)$ → $\dfrac{(\sqrt{x}-1)(3x-2)}{(3x+2)(\sqrt{x}-1)(\sqrt{x}+1)}$
 
-ตัด $(x-3)$ → $(x+3)(\sqrt{x+1}+2)$
+ตัด $(\sqrt{x}-1)$ → $\dfrac{3x-2}{(3x+2)(\sqrt{x}+1)}$
 
-แทน $x=3$ → $6 \times (\sqrt{4}+2) = 6 \times 4 = 24$
+แทน $x=1$ → $\dfrac{1}{5 \times 2} = \dfrac{1}{10}$''',
+        }),
+        ContentBlock("q_lim_poly_061", "question_choice", {
+          "content": [
+            r'''6. จงหา
 
-Note = เฉลย
+$$\lim\limits_{x \to 1} \dfrac{\sqrt{x}-1}{x^2+x-2}$$
 
-ขอโทษ ตอบคือ $24$ ไม่ใช่ $12$ ลองตรวจสอบอีกครั้ง: $(3+3)(\sqrt{3+1}+2) = 6 \times 4 = 24$''',
+Note = คำใบ้
+
+แยกตัวประกอบส่วนก่อน แล้วดูว่าตัดกับเศษได้อย่างไร''',
+          ],
+          "options": [r"$\dfrac{1}{3}$", r"$\dfrac{1}{4}$", r"$\dfrac{1}{6}$", r"$\dfrac{1}{8}$"],
+          "correct": r"$\dfrac{1}{6}$",
+          "explanation":
+              r'''แทน $x=1$ → $\dfrac{0}{0}$
+
+ส่วน: $x^2+x-2 = (x-1)(x+2) = (\sqrt{x}-1)(\sqrt{x}+1)(x+2)$
+
+ตัด $(\sqrt{x}-1)$ → $\dfrac{1}{(\sqrt{x}+1)(x+2)}$
+
+แทน $x=1$ → $\dfrac{1}{2 \times 3} = \dfrac{1}{6}$''',
+        }),
+
+        // --- ระดับ 5: Conjugate ทั้งเศษและส่วน ---
+        ContentBlock("lim_poly_h_062", "header", {
+          "title": r"Conjugate ทั้งเศษและส่วน",
+          "level": 2,
+        }),
+        ContentBlock("lim_poly_t_063", "text", {
+          "content": [
+            r'''บางข้อทั้งเศษและส่วนมี $\sqrt{\ }$ ทำให้ตัดตรงๆ ไม่ได้
+
+ต้อง Conjugate ทั้งสองฝั่ง — ทำทีละฝั่ง ไม่ต้องทำพร้อมกัน''',
+          ],
+        }),
+        ContentBlock("q_lim_poly_064", "question_choice", {
+          "content": [
+            r'''7. จงหา
+
+$$\lim\limits_{x \to 4} \dfrac{\sqrt{x}-2}{\sqrt{x+5}-3}$$
+
+Note = คำใบ้
+
+Conjugate เศษก่อน → ได้ $(x-4)$ ที่เศษ แล้ว Conjugate ส่วนเพื่อได้ $(x-4)$ ที่ส่วน จึงตัดกันได้''',
+          ],
+          "options": [r"$\dfrac{3}{2}$", r"$1$", r"$2$", r"$\dfrac{2}{3}$"],
+          "correct": r"$\dfrac{3}{2}$",
+          "explanation":
+              r'''แทน $x=4$ → $\dfrac{0}{0}$ มี $\sqrt{\ }$ ทั้งเศษและส่วน
+
+คูณด้วย $\dfrac{(\sqrt{x}+2)(\sqrt{x+5}+3)}{(\sqrt{x}+2)(\sqrt{x+5}+3)}$
+
+เศษ: $(\sqrt{x}-2)(\sqrt{x}+2) = x-4$
+
+ส่วน: $(\sqrt{x+5}-3)(\sqrt{x+5}+3) = x+5-9 = x-4$
+
+ตัด $(x-4)$ → $\dfrac{\sqrt{x+5}+3}{\sqrt{x}+2}$
+
+แทน $x=4$ → $\dfrac{\sqrt{9}+3}{\sqrt{4}+2} = \dfrac{6}{4} = \dfrac{3}{2}$''',
+        }),
+        ContentBlock("q_lim_poly_065", "question_choice", {
+          "content": [
+            r'''8. จงหา
+
+$$\lim\limits_{x \to 0} \dfrac{\sqrt{x+1}-1}{\sqrt{x+4}-2}$$''',
+          ],
+          "options": [r"$1$", r"$2$", r"$\dfrac{1}{2}$", r"$4$"],
+          "correct": r"$2$",
+          "explanation":
+              r'''แทน $x=0$ → $\dfrac{0}{0}$ มี $\sqrt{\ }$ ทั้งสองฝั่ง
+
+คูณด้วย $\dfrac{(\sqrt{x+1}+1)(\sqrt{x+4}+2)}{(\sqrt{x+1}+1)(\sqrt{x+4}+2)}$
+
+เศษ: $(\sqrt{x+1}-1)(\sqrt{x+1}+1) = x$
+
+ส่วน: $(\sqrt{x+4}-2)(\sqrt{x+4}+2) = x$
+
+ตัด $x$ → $\dfrac{\sqrt{x+4}+2}{\sqrt{x+1}+1}$
+
+แทน $x=0$ → $\dfrac{2+2}{1+1} = \dfrac{4}{2} = 2$''',
         }),
       ],
     ),
 
     // ==========================================
-    // SECTION 5: สรุป
+    // SECTION 6: สรุป
     // ==========================================
     ContentSection(
       headerL1: r"สรุป",
       blocks: [
         ContentBlock("lim_poly_t_028", "text", {
           "content": [
-            r'''เมื่อแทนค่าแล้วได้ $\dfrac{0}{0}$ ทุกครั้ง — แปลว่ากราฟมีรูที่จุดนั้น แต่ลิมิตอาจยังมีค่าอยู่ ต้องจัดรูปก่อน''',
+            r'''เมื่อแทนค่าแล้วได้ $\dfrac{0}{0}$ หรือ $\infty-\infty$ — ลิมิตอาจยังมีค่าอยู่ ต้องจัดรูปก่อน''',
           ],
         }),
         ContentBlock("lim_poly_t_029", "text", {
           "content": [
-            r'''**มีพหุนามล้วนๆ** → หาตัวร่วมของเศษและส่วน แยกตัวประกอบแล้วตัดออก
+            r'''**พหุนามล้วน** → หาตัวร่วมของเศษและส่วน แยกตัวประกอบแล้วตัดออก
 
-**มี $\sqrt{\ }$ อยู่** → $\sqrt{\ }$ ขัดขวางการตัดตัวร่วม ต้องยกกำลัง 2 โดยใช้ Conjugate ก่อน
+**เศษส่วนหลายตัวรวมกัน** → หา LCD รวมให้เป็นเศษส่วนเดียว แล้วแยกตัวประกอบต่อ
 
-Note = จำไว้
+**มี $\sqrt{\ }$** → ใช้ $(a-b)(a+b) = a^2-b^2$ เพื่อยกกำลัง 2 ให้ $\sqrt{\ }$ หาย
 
-แทนค่าดูก่อนเสมอ เพื่อดูว่าต้องจัดรูปหรือเปล่า และสังเกตหน้าตาสมการเพื่อเลือกวิธี''',
+**มี $\sqrt[3]{\ }$** → ใช้ $(a-b)(a^2+ab+b^2) = a^3-b^3$ เพื่อยกกำลัง 3 ให้ $\sqrt[3]{\ }$ หาย
+
+Note = หลักคิดหลัก
+
+แทนค่าก่อนเสมอ → สังเกตว่าติดอะไร → เลือกวิธีที่จะ "กำจัด" ตัวที่ติด''',
           ],
         }),
       ],
@@ -6592,7 +6983,7 @@ final calcRateAtPointLesson = ContentLesson(
           "level": 2,
         }),
         ContentBlock("rpt_ig_005", "interactive_graph", {
-          "path": "graph_data_14",
+          "path": "graph_data_slope",
         }),
         ContentBlock("rpt_t_006", "text", {
           "content": [
@@ -7148,833 +7539,782 @@ $x^2 → 2x$, $x^3 → 3x^2$ ดูเหมือนจะมีกฎลัด
 final calcDerivIntroLesson = ContentLesson(
   title: "นิยามและสมบัติของอนุพันธ์",
   sections: [
-    ContentSection(
-      headerL1: r"intro",
-      blocks: [
-        ContentBlock("deriv_intro_t_305", "text", {
-          "content": [
-            r'''จากบทที่แล้ว เราได้เรียนการหาอนุพันธ์ด้วย**ลิมิต**
-        
-        $$f'(x) = \lim\limits_{h \to 0} \dfrac{f(x + h) - f(x)}{h}$$
-        
-        บทนี้จะทำให้หาอนุพันธ์ได้**รวดเร็ว** และ**ง่ายดาย**! 🚀''',
-          ],
-        }),
-      ],
-    ),
+    // =============================================
+    // SECTION 1: นิยามของอนุพันธ์
+    // =============================================
     ContentSection(
       headerL1: r"📟 นิยามของอนุพันธ์",
       blocks: [
-        ContentBlock("deriv_intro_t_306", "text", {
+        ContentBlock("di_h_001", "header", {
+          "title": r"ทบทวนจากบทที่แล้ว",
+          "level": 2,
+        }),
+        ContentBlock("di_t_002", "text", {
           "content": [
-            r'''**ทบทวน:** อนุพันธ์ของ $f(x)$ คือ
-        
-        $\dfrac{d}{dx}f(x) = f'(x) = \lim\limits_{h \to 0} \dfrac{f(x + h) - f(x)}{h}$''',
+            r'''จากบทที่แล้ว เราได้เรียนการหาอนุพันธ์ด้วย**ลิมิต**
+
+$$f'(x) = \lim\limits_{h \to 0} \dfrac{f(x + h) - f(x)}{h}$$
+
+บทนี้จะทำให้หาอนุพันธ์ได้**รวดเร็ว**และ**ง่ายดาย**! 🚀''',
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"✨1 ค่าคงที่",
-      blocks: [
-        ContentBlock("deriv_intro_t_307", "text", {
+        ContentBlock("di_h_003", "header", {
+          "title": r"สัญลักษณ์ที่ใช้",
+          "level": 2,
+        }),
+        ContentBlock("di_t_004", "text", {
           "content": [
-            r'''$$\dfrac{d}{dx} c = 0$$
-        
-        เมื่อ $c$ เป็นค่าคงที่ (ไม่มี $x$)
-        
-        💬 **ความหมาย:** อนุพันธ์ของค่าคงที่ = $0$ เสมอ!
-        
-        **📝 เช่น**
-        
-        $\dfrac{d}{dx}(5) = 0$
-        
-        $\dfrac{d}{dx}(100) = 0$
-        
-        $\dfrac{d}{dx}(-7) = 0$
-        
-        Note = ทำไม?
-        
-        💭 **คิดจากความหมาย:**
-        
-        อนุพันธ์ = อัตราการเปลี่ยนแปลง
-        
-        ค่าคงที่ไม่เปลี่ยนแปลง → อัตราการเปลี่ยนแปลง = $0$! 
-        
-        **กราฟ:** เส้นตรงแนวนอน $y = c$ มีความชัน = $0$ 💚''',
+            r'''อนุพันธ์ของ $f(x)$ เขียนได้หลายแบบ หมายความ**เหมือนกัน**ทุกประการ:
+
+🔸 $f'(x)$ อ่านว่า **เอฟ ไพรม์ ของ** $x$
+
+🔸 $\dfrac{d}{dx}f(x)$ อ่านว่า **ดี บาย ดีเอ็กซ์** 
+
+แปลว่า "หาอนุพันธ์เทียบกับ $x$"''',
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"🚀2 เลขยกกำลัง",
-      blocks: [
-        ContentBlock("deriv_intro_t_308", "text", {
+        ContentBlock("di_t_005", "text", {
           "content": [
-            r'''$$\dfrac{d}{dx}x^n = nx^{n-1}$$
-        
-        สำหรับทุกจำนวนจริง $n$
-        
-        💬 **วิธีจำ:** 
-        
-        **"ตบเลขชี้กำลังลงมาคูณ แล้วลบ 1 จากเลขชี้กำลัง"** 🎯
-        
-        **📝 เช่น**
-        
-        $\dfrac{d}{dx}(x^2) = 2x^{2-1} = 2x$
-        
-        $\dfrac{d}{dx}(x^5) = 5x^{5-1} = 5x^4$
-        
-        $\dfrac{d}{dx}(x^{100}) = 100x^{99}$''',
+            r'''ถ้าเขียนฟังก์ชันเป็น $y = f(x)$ ก็เขียนได้อีกแบบ
+
+$$\dfrac{d [f(x)]}{dx} = \dfrac{dy}{dx} = f'(x)$$
+
+$3$ แบบนี้**เหมือนกัน** แค่เขียนคนละแบบ''',
           ],
         }),
-        ContentBlock("ddq_deriv_prop_1", "drag_and_drop", {
+        ContentBlock("di_ddq_006", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_deriv_prop_1",
+              "questionId": "di_ddq_006_s1",
               "content": [
-                r'''**มาลองพิสูจน์กัน! 🥊 (optional)**
-        
-        
-        🎯 **ขั้นที่ 1:** เขียนนิยาม 
-        
-        $\dfrac{d}{dx}(x^2) = \lim\limits_{h \to 0} \dfrac{f(x + h) - f(x)}{h}$
-        
-        เมื่อ $f(x) = x^n$:
-        
-        $f(x) =$ ''',
+                r'''จากบทที่แล้ว เราพิสูจน์แล้วว่า
+
+$f(x) = x^2$ → $f'(x) = 2x$
+
+ดังนั้น $\dfrac{d}{dx}(x^2) = $ ''',
                 {"drop": "0"},
-                r'''$f(x + h) =$ ''',
+                r'''และ ถ้า $y = x^2$ แล้ว $\dfrac{dy}{dx} = $ ''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [r"$2x$", r"$x^2$", r"$2$", r"$2x^2$"],
+              "correctAnswers": {"0": r"$2x$"},
+              "explanation": r'''ทั้ง $f'(x)$, $\dfrac{d}{dx}$ และ $\dfrac{dy}{dx}$ หมายถึงอนุพันธ์เหมือนกัน!''',
+            },
+          ],
+        }),
+        ContentBlock("di_q_007", "question_choice", {
+          "content": [
+            r'''1. ข้อใดเขียนอนุพันธ์ของ $f(x) = x^3$ ได้**ถูกต้อง**?''',
+          ],
+          "options": [
+            r"$f'(x) = 3x^2$ เท่านั้น",
+            r"$\dfrac{d}{dx}(x^3) = 3x^2$ เท่านั้น",
+            r"ทั้ง $f'(x) = 3x^2$ และ $\dfrac{d}{dx}(x^3) = 3x^2$",
+            r"ไม่มีข้อใดถูก",
+          ],
+          "correct": r"ทั้ง $f'(x) = 3x^2$ และ $\dfrac{d}{dx}(x^3) = 3x^2$",
+          "explanation": r'''ทั้งสองแบบเป็นสัญลักษณ์ที่หมายถึงอนุพันธ์เหมือนกัน เขียนแบบไหนก็ได้ 💚''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 2: ค่าคงที่ & เลขยกกำลัง
+    // =============================================
+    ContentSection(
+      headerL1: r"✨ ค่าคงที่ & เลขยกกำลัง",
+      blocks: [
+        ContentBlock("di_h_008", "header", {
+          "title": r"สมบัติที่ 1 — ค่าคงที่",
+          "level": 2,
+        }),
+        ContentBlock("di_t_009", "text", {
+          "content": [
+            r'''$$\dfrac{d}{dx}(c) = 0$$
+
+เมื่อ $c$ เป็นค่าคงที่ (ตัวเลขที่ไม่มี $x$)''',
+          ],
+        }),
+        ContentBlock("di_t_010", "text", {
+          "content": [
+            r'''**📝 เช่น** $\dfrac{d}{dx}(5) = 0$ , $\dfrac{d}{dx}(100) = 0$ , $\dfrac{d}{dx}(-7) = 0$
+
+Note = ทำไม?
+
+อนุพันธ์ = อัตราการเปลี่ยนแปลง แต่ค่าคงที่**ไม่เปลี่ยน** → อัตราการเปลี่ยนแปลง = $0$!''',
+          ],
+        }),
+        ContentBlock("di_h_011", "header", {
+          "title": r"สมบัติที่ 2 — เลขยกกำลัง (Power Rule)",
+          "level": 2,
+        }),
+        ContentBlock("di_t_012", "text", {
+          "content": [
+            r'''$$\dfrac{d}{dx}(x^n) = nx^{n-1}$$
+
+สำหรับทุกจำนวนจริง $n$
+
+💬 **วิธีจำ:** "ตบเลขชี้กำลังลงมาคูณ แล้วลบ 1 จากเลขชี้กำลัง" 🎯''',
+          ],
+        }),
+        ContentBlock("di_t_013", "text", {
+          "content": [
+            r'''**📝 เช่น**
+
+$\dfrac{d}{dx}(x^2) = 2x^{2-1} = 2x$
+
+$\dfrac{d}{dx}(x^5) = 5x^{5-1} = 5x^4$
+
+$\dfrac{d}{dx}(x^{100}) = 100x^{99}$''',
+          ],
+        }),
+        ContentBlock("di_t_014", "text", {
+          "content": [
+            r'''Note = ตรงกับที่พิสูจน์ไว้!
+
+บทที่แล้วเราพิสูจน์ด้วยลิมิตว่า $x^2 → 2x$ และ $x^3 → 3x^2$ ซึ่งตรงกับ Power Rule ทุกอย่าง!''',
+          ],
+        }),
+        ContentBlock("di_h_015", "header", {
+          "title": r"พิสูจน์ Power Rule (optional) 🥊",
+          "level": 2,
+        }),
+        ContentBlock("di_ddq_016", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "di_ddq_016_s1",
+              "content": [
+                r'''**ขั้นที่ 1:** เขียนนิยาม เมื่อ $f(x) = x^n$
+
+$f(x) = $ ''',
+                {"drop": "0"},
+                r''' , $f(x + h) = $ ''',
                 {"drop": "1"},
               ],
               "draggableItems": [r"$x^n$", r"$(x + h)^n$", r"$x + h$", r"$2x$"],
               "correctAnswers": {"0": r"$x^n$", "1": r"$(x + h)^n$"},
-              "explanation":
-                  r'''แทนค่าฟังก์ชัน $f(x) = x^n$ และ $f(x+h) = (x+h)^n$''',
+              "explanation": r'''แทนค่า $f(x) = x^n$ และ $f(x+h) = (x+h)^n$''',
             },
-          ],
-        }),
-        ContentBlock("ddq_deriv_prop_2", "drag_and_drop", {
-          "steps": [
             {
-              "questionId": "ddq_deriv_prop_2",
+              "questionId": "di_ddq_016_s2",
               "content": [
-                r'''🔧 **ขั้นที่ 2:** ใช้ทฤษฎีทวินามจาก "ทวินาม" กระจาย 
-        
-        $(x + h)^n = \binom{n}{0}x^n + \binom{n}{1}x^{n-1}h + \binom{n}{2}x^{n-2}h^2 + \cdots + \binom{n}{n-1}xh^{n-1} + \binom{n}{n}h^n$
-        
-        แทนค่าในลิมิต $\lim\limits_{h \to 0} \dfrac{(x + h)^n - x^n}{h}$
-        
-        $= \lim\limits_{h \to 0} \dfrac{(\binom{n}{0}x^n + \binom{n}{1}x^{n-1}h + \binom{n}{2}x^{n-2}h^2 + \cdots + \binom{n}{n-1}xh^{n-1} + \binom{n}{n}h^n) - x^n}{h}$
-        
-        $= \lim\limits_{h \to 0} \dfrac{\binom{n}{1}x^{n-1}h + \binom{n}{2}x^{n-2}h^2 + \cdots + \binom{n}{n-1}xh^{n-1} + \binom{n}{n}h^n}{h}$
-        
-        $= \lim\limits_{h \to 0}$ ''',
+                r'''**ขั้นที่ 2:** ใช้ทฤษฎีทวินามกระจาย $(x+h)^n$
+
+$(x + h)^n = x^n + nx^{n-1}h + \binom{n}{2}x^{n-2}h^2 + \cdots$
+
+แทนในลิมิต:
+
+$\lim\limits_{h \to 0} \dfrac{(x^n + nx^{n-1}h + \cdots) - x^n}{h}$
+
+$= \lim\limits_{h \to 0} \dfrac{nx^{n-1}h + (\text{เทอมที่มี } h^2, h^3, \ldots)}{h}$
+
+ตัด $h$ ออก แล้วแทน $h = 0$ พจน์ที่มี $h$ จะหายไป เหลือ ''',
                 {"drop": "0"},
               ],
-              "draggableItems": [
-                r"$\binom{n}{1}x^{n-1} + \binom{n}{2}x^{n-2}h + \cdots + \binom{n}{n}h^{n - 1}$",
-                r"$0$",
-                r"$2xh$",
-                r"$\binom{n}{1}x^{n-1}h + \binom{n}{2}x^{n-2}h^2 + \cdots + \binom{n}{n}h^n$",
-              ],
-              "correctAnswers": {
-                "0":
-                    r"$\binom{n}{1}x^{n-1} + \binom{n}{2}x^{n-2}h + \cdots + \binom{n}{n}h^{n - 1}$",
-              },
-              "explanation":
-                  r'''$\lim\limits_{h \to 0} \dfrac{\binom{n}{1}x^{n-1}h + \binom{n}{2}x^{n-2}h^2 + \cdots + \binom{n}{n}h^n}{h}$\n$= \binom{n}{1}x^{n-1} + \binom{n}{2}x^{n-2}h + \cdots + \binom{n}{n}h^{n - 1}$''',
+              "draggableItems": [r"$nx^{n-1}$", r"$x^n$", r"$0$", r"$nx^n$"],
+              "correctAnswers": {"0": r"$nx^{n-1}$"},
+              "explanation": r'''ตัด $h$ ออก เหลือ $nx^{n-1} + (\text{เทอมที่มี } h)$ → แทน $h=0$ ได้ $nx^{n-1}$ ตรงตามสมบัติ! 🎯''',
             },
           ],
         }),
-        ContentBlock("ddq_deriv_prop_3", "drag_and_drop", {
+        ContentBlock("di_h_017", "header", {
+          "title": r"เลขยกกำลังเพิ่ม",
+          "level": 2,
+        }),
+        ContentBlock("di_t_018", "text", {
+          "content": [
+            r'''Power Rule ใช้ได้กับ**ทุกจำนวนจริง** $n$ รวมถึงเลขลบและเศษส่วน!
+
+🔸 $\dfrac{1}{x} = x^{-1}$ → $\dfrac{d}{dx}(x^{-1}) = -1 \cdot x^{-2} = \dfrac{-1}{x^2}$
+
+🔸 $\sqrt{x} = x^{1/2}$ → $\dfrac{d}{dx}(x^{1/2}) = \dfrac{1}{2}x^{-1/2} = \dfrac{1}{2\sqrt{x}}$''',
+          ],
+        }),
+        ContentBlock("di_ddq_019", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_deriv_prop_3",
+              "questionId": "di_ddq_019_s1",
               "content": [
-                r'''✂️ **ขั้นที่ 3:** แทนค่าตรงๆ
-        
-        $\lim\limits_{h \to 0} \binom{n}{1}x^{n-1} + \binom{n}{2}x^{n-2}h + \cdots + \binom{n}{n}h^{n - 1}$
-        
-        $= \lim\limits_{h \to 0} \binom{n}{1}x^{n-1} + 0 =$ ''',
+                r'''จงหา $\dfrac{d}{dx}\left(\dfrac{1}{x^3}\right)$
+
+เขียนใหม่: $\dfrac{1}{x^3} = x^{-3}$
+
+ใช้ Power Rule: $\dfrac{d}{dx}(x^{-3}) = $ ''',
                 {"drop": "0"},
-                r'''ต้องจัดรูป ''',
-                {"drop": "1"},
               ],
-              "draggableItems": [
-                r"$nx^{n-1}$",
-                r"$x^n$",
-                r"$2x$",
-                r"$\dfrac{0}{0}$",
-                r"ใช่",
-                r"ไม่",
-              ],
-              "correctAnswers": {"0": r"$nx^{n-1}$", "1": r"ไม่"},
-              "explanation": r'''ได้ตรงตามสมบัติเลย! 🎯''',
+              "draggableItems": [r"$-3x^{-4}$", r"$3x^{-2}$", r"$-3x^{-2}$", r"$3x^{-4}$"],
+              "correctAnswers": {"0": r"$-3x^{-4}$"},
+              "explanation": r'''$-3 \cdot x^{-3-1} = -3x^{-4} = \dfrac{-3}{x^4}$ 💚''',
             },
           ],
         }),
-        ContentBlock("q_deriv_prop_1", "question_choice", {
-          "content": [r'''1. $\dfrac{d}{dx}(x^3) = ?$'''],
-          "options": [r"$x^2$", r"$3x^2$", r"$3x^3$", r"$x^3$"],
-          "correct": r"$3x^2$",
-          "explanation": r'''ใช้สูตร $\dfrac{d}{dx}(x^n) = nx^{n-1}$
-        
-        $\dfrac{d}{dx}(x^3) = 3x^{3-1} = 3x^2$ 💚''',
+        ContentBlock("di_h_020", "header", {
+          "title": r"ฝึกเลย",
+          "level": 2,
         }),
-        ContentBlock("q_deriv_prop_2", "question_choice", {
-          "content": [r'''2. $\dfrac{d}{dx}(x^{10}) = ?$'''],
+        ContentBlock("di_q_021", "question_choice", {
+          "content": [
+            r'''1. $\dfrac{d}{dx}(x^{10}) = ?$''',
+          ],
           "options": [r"$10x^9$", r"$10x^{10}$", r"$9x^9$", r"$x^9$"],
           "correct": r"$10x^9$",
           "explanation": r'''$\dfrac{d}{dx}(x^{10}) = 10x^{10-1} = 10x^9$ 💚''',
         }),
+        ContentBlock("di_q_022", "question_choice", {
+          "content": [
+            r'''2. $\dfrac{d}{dx}(\sqrt{x}) = ?$''',
+          ],
+          "options": [
+            r"$\dfrac{1}{2\sqrt{x}}$",
+            r"$\dfrac{1}{2} \cdot \sqrt{x}$",
+            r"$\dfrac{1}{2x}$",
+            r"$2\sqrt{x}$",
+          ],
+          "correct": r"$\dfrac{1}{2\sqrt{x}}$",
+          "explanation": r'''$\sqrt{x} = x^{1/2}$ → $\dfrac{1}{2}x^{-1/2} = \dfrac{1}{2\sqrt{x}}$ 💚''',
+        }),
+        ContentBlock("di_q_023", "question_choice", {
+          "content": [
+            r'''3. $\dfrac{d}{dx}\left(\dfrac{1}{x^2}\right) = ?$''',
+          ],
+          "options": [
+            r"$\dfrac{-2}{x^3}$",
+            r"$\dfrac{2}{x^3}$",
+            r"$\dfrac{-1}{x^3}$",
+            r"$\dfrac{-2}{x}$",
+          ],
+          "correct": r"$\dfrac{-2}{x^3}$",
+          "explanation": r'''$\dfrac{1}{x^2} = x^{-2}$ → $-2x^{-3} = \dfrac{-2}{x^3}$ 💚''',
+        }),
       ],
     ),
+
+    // =============================================
+    // SECTION 3: คูณค่าคงที่ & ผลบวก/ลบ
+    // =============================================
     ContentSection(
-      headerL1: r"⚡3 คูณด้วยค่าคงที่",
+      headerL1: r"⚡ คูณค่าคงที่ & ผลบวก/ลบ",
       blocks: [
-        ContentBlock("deriv_intro_t_314", "text", {
+        ContentBlock("di_h_024", "header", {
+          "title": r"สมบัติที่ 3 — คูณด้วยค่าคงที่",
+          "level": 2,
+        }),
+        ContentBlock("di_t_025", "text", {
           "content": [
             r'''$$\dfrac{d}{dx}[c \cdot f(x)] = c \cdot \dfrac{d}{dx}f(x)$$
-        
-        เมื่อ $c$ เป็นค่าคงที่
-        
-        💬 **ความหมาย:** ดึงค่าคงที่ออกมาข้างนอกได้!''',
+
+💬 **ความหมาย:** ค่าคงที่ที่คูณอยู่ **ดึงออกมาข้างนอก** ได้เลย!''',
           ],
         }),
-        ContentBlock("ddq_deriv_prop_4", "drag_and_drop", {
+        ContentBlock("di_ddq_026", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_deriv_prop_4",
+              "questionId": "di_ddq_026_s1",
               "content": [
-                r'''1. จงหา $\dfrac{d}{dx}(5x^2)$
-        
-        $\dfrac{d}{dx}(5x^2) =$ ''',
+                r'''จงหา $\dfrac{d}{dx}(5x^2)$
+
+ดึง $5$ ออกมา → $5 \cdot \dfrac{d}{dx}(x^2) = 5 \cdot 2x = $ ''',
                 {"drop": "0"},
               ],
-              "draggableItems": [
-                r"$x^2$",
-                r"$5x^2$",
-                r"$2x$",
-                r"$10x$",
-                r"$5x$",
-              ],
+              "draggableItems": [r"$10x$", r"$5x$", r"$10x^2$", r"$7x$"],
               "correctAnswers": {"0": r"$10x$"},
-              "explanation":
-                  r'''ดึง 5 ออกมา แล้วหา diff ของ $x^2$ ได้ $5 \cdot 2x = 10x$ 💚''',
+              "explanation": r'''$5 \cdot 2x = 10x$ 💚''',
             },
           ],
         }),
-        ContentBlock("ddq_deriv_prop_5", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_deriv_prop_5",
-              "content": [
-                r'''2. จงหา $\dfrac{d}{dx}(7x^3)$
-        
-        $\dfrac{d}{dx}(7x^3) =$ ''',
-                {"drop": "0"},
-              ],
-              "draggableItems": [r"$7x^2$", r"$21x^2$", r"$7x^3$", r"$3x^2$"],
-              "correctAnswers": {"0": r"$21x^2$"},
-              "explanation":
-                  r'''$7 \cdot \dfrac{d}{dx}(x^3) = 7 \cdot 3x^2 = 21x^2$ 💚''',
-            },
-          ],
+        ContentBlock("di_h_027", "header", {
+          "title": r"สมบัติที่ 4 — ผลบวกและผลต่าง",
+          "level": 2,
         }),
-        ContentBlock("ddq_deriv_prop_6", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_deriv_prop_6",
-              "content": [
-                r'''3. จงหา $\dfrac{d}{dx}\left(\dfrac{2}{x}\right)$
-        
-        เขียนใหม่: $\dfrac{2}{x} =$ ''',
-                {"drop": "0"},
-                r'''$\dfrac{d}{dx}$ (''',
-                {"drop": "0"},
-                r''') ตบเลขชี้กำลังมาคูณจะได้
-        
-        $2 \cdot$ (''',
-                {"drop": "1"},
-                r''') ลบ 1 ตรงเลขชี้กำลังจะได้ 
-        
-        $\dfrac{d}{dx}\left(\dfrac{2}{x}\right) =$ ''',
-                {"drop": "2"},
-              ],
-              "draggableItems": [
-                r"$-1$",
-                r"$-x^{-2}$",
-                r"$-2x^{-2}$",
-                r"$2x^{-1}$",
-                r"$\dfrac{-2}{x^2}$",
-              ],
-              "correctAnswers": {
-                "0": r"$2x^{-1}$",
-                "1": r"$-x^{-2}$",
-                "2": r"$-2x^{-2}$",
-              },
-              "explanation":
-                  r'''$\dfrac{2}{x} = 2x^{-1}$ แล้วหา diff ได้ $2 \cdot (-1)x^{-2} = -2x^{-2} = \dfrac{-2}{x^2}$ 💚''',
-            },
-          ],
-        }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"➕ 4 ผลบวกและผลต่าง",
-      blocks: [
-        ContentBlock("deriv_intro_t_318", "text", {
+        ContentBlock("di_t_028", "text", {
           "content": [
-            r'''$\dfrac{d}{dx}[f(x) \pm g(x)] = \dfrac{d}{dx}f(x) \pm \dfrac{d}{dx}g(x)$
-        
-        💬 **ความหมาย:** แยกหาอนุพันธ์ทีละพจน์ได้!''',
+            r'''$$\dfrac{d}{dx}[f(x) \pm g(x)] = \dfrac{d}{dx}f(x) \pm \dfrac{d}{dx}g(x)$$
+
+💬 **ความหมาย:** แยกหาอนุพันธ์**ทีละพจน์**ได้เลย!''',
           ],
         }),
-        ContentBlock("ddq_deriv_prop_7", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_deriv_prop_7",
-              "content": [
-                r'''จงหา $\dfrac{d}{dx}(x^3 + 5x^2)$
-        
-        $\dfrac{d}{dx}(x^3 + 5x^2) = \dfrac{d}{dx}(x^3) + \dfrac{d}{dx}(5x^2)$
-        
-        $=$ ''',
-                {"drop": "0"},
-                r'''$+$ ''',
-                {"drop": "1"},
-                r'''$=$ ''',
-                {"drop": "2"},
-              ],
-              "draggableItems": [
-                r"$3x^2$",
-                r"$10x$",
-                r"$3x^2 + 10x$",
-                r"$5x$",
-                r"$x^2$",
-              ],
-              "correctAnswers": {
-                "0": r"$3x^2$",
-                "1": r"$10x$",
-                "2": r"$3x^2 + 10x$",
-              },
-              "explanation": r'''แยกหา diff ได้ $3x^2 + 10x$ 💚''',
-            },
+        ContentBlock("di_t_029", "text", {
+          "content": [
+            r'''Note = รวมสมบัติ 1–4 เข้าด้วยกัน
+
+สมบัติ 1–4 ทำให้เราหาอนุพันธ์ของ**พหุนามทุกตัว**ได้ทันที — แยกทีละพจน์ ดึงค่าคงที่ออก แล้วใช้ Power Rule!''',
           ],
         }),
-        ContentBlock("ddq_deriv_prop_8", "drag_and_drop", {
+        ContentBlock("di_h_030", "header", {
+          "title": r"ตัวอย่าง — ลองทำตาม",
+          "level": 2,
+        }),
+        ContentBlock("di_ddq_031", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_deriv_prop_8",
+              "questionId": "di_ddq_031_s1",
               "content": [
                 r'''จงหา $\dfrac{d}{dx}(2x^3 + 5x^2 + 7x - 5)$
-        
-        $= \dfrac{d}{dx}(2x^3) + \dfrac{d}{dx}(5x^2) + \dfrac{d}{dx}(7x) - \dfrac{d}{dx}(5)$
-        
-        $=$ ''',
+
+แยกทีละพจน์:
+
+$\dfrac{d}{dx}(2x^3) = $ ''',
                 {"drop": "0"},
-                r'''$+$ ''',
+                r''' , $\dfrac{d}{dx}(5x^2) = $ ''',
                 {"drop": "1"},
-                r'''$+$ ''',
+                r''' , $\dfrac{d}{dx}(7x) = $ ''',
                 {"drop": "2"},
-                r'''$-$ ''',
+                r''' , $\dfrac{d}{dx}(5) = $ ''',
                 {"drop": "3"},
-                r'''$=$ ''',
-                {"drop": "4"},
               ],
-              "draggableItems": [
-                r"$6x^2$",
-                r"$10x$",
-                r"$7$",
-                r"$0$",
-                r"$6x^2 + 10x + 7$",
-                r"$5$",
-              ],
-              "correctAnswers": {
-                "0": r"$6x^2$",
-                "1": r"$10x$",
-                "2": r"$7$",
-                "3": r"$0$",
-                "4": r"$6x^2 + 10x + 7$",
-              },
-              "explanation":
-                  r'''แยกหาทีละเทอมได้ $6x^2 + 10x + 7 - 0 = 6x^2 + 10x + 7$ 💚''',
+              "draggableItems": [r"$6x^2$", r"$10x$", r"$7$", r"$0$", r"$2x^2$", r"$5$"],
+              "correctAnswers": {"0": r"$6x^2$", "1": r"$10x$", "2": r"$7$", "3": r"$0$"},
+              "explanation": r'''แยกทีละพจน์แล้วรวม → $6x^2 + 10x + 7$ 💚''',
             },
           ],
         }),
-        ContentBlock("ddq_deriv_prop_9", "drag_and_drop", {
+        ContentBlock("di_ddq_032", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_deriv_prop_9",
+              "questionId": "di_ddq_032_s1",
               "content": [
-                r'''จงหา $\dfrac{d}{dx}(4x^5 - 3x^2 + 8)$
-        
-        $=$ ''',
+                r'''จงหา $\dfrac{d}{dx}\left(\dfrac{5}{x^2}\right)$
+
+เขียนใหม่: $\dfrac{5}{x^2} = $ ''',
                 {"drop": "0"},
-                r'''$x^4$ ''',
+                r'''ใช้ Power Rule: $\dfrac{d}{dx}(5x^{-2}) = 5 \cdot (-2)x^{-3} = $ ''',
                 {"drop": "1"},
-                r'''$x +$ ''',
-                {"drop": "2"},
               ],
-              "draggableItems": [
-                r"$20$",
-                r"$-6$",
-                r"$0$",
-                r"$4$",
-                r"$8$",
-                r"$-3$",
-              ],
-              "correctAnswers": {"0": r"$20$", "1": r"$-6$", "2": r"$0$"},
-              "explanation": r'''$20x^4 - 6x + 0 = 20x^4 - 6x$ 💚''',
+              "draggableItems": [r"$5x^{-2}$", r"$5x^2$", r"$-10x^{-3}$", r"$-10x^{-1}$"],
+              "correctAnswers": {"0": r"$5x^{-2}$", "1": r"$-10x^{-3}$"},
+              "explanation": r'''$\dfrac{5}{x^2} = 5x^{-2}$ → $-10x^{-3} = \dfrac{-10}{x^3}$ 💚''',
             },
           ],
+        }),
+        ContentBlock("di_h_033", "header", {
+          "title": r"ฝึกเลย",
+          "level": 2,
+        }),
+        ContentBlock("di_q_034", "question_choice", {
+          "content": [
+            r'''1. $\dfrac{d}{dx}(7x^3) = ?$''',
+          ],
+          "options": [r"$7x^2$", r"$21x^2$", r"$21x^3$", r"$3x^2$"],
+          "correct": r"$21x^2$",
+          "explanation": r'''$7 \cdot 3x^2 = 21x^2$ 💚''',
+        }),
+        ContentBlock("di_q_035", "question_choice", {
+          "content": [
+            r'''2. $\dfrac{d}{dx}(4x^5 - 3x^2 + 8) = ?$''',
+          ],
+          "options": [
+            r"$20x^4 - 6x$",
+            r"$20x^4 - 6x + 8$",
+            r"$4x^4 - 3x$",
+            r"$20x^5 - 6x^2$",
+          ],
+          "correct": r"$20x^4 - 6x$",
+          "explanation": r'''$\dfrac{d}{dx}(4x^5) = 20x^4$ , $\dfrac{d}{dx}(-3x^2) = -6x$ , $\dfrac{d}{dx}(8) = 0$
+
+รวมได้ $20x^4 - 6x$ 💚''',
+        }),
+        ContentBlock("di_q_036", "question_choice", {
+          "content": [
+            r'''3. ถ้า $f(x) = x^3 - 2x^2 + 5$ แล้ว $f'(2) = ?$''',
+          ],
+          "options": [r"$2$", r"$4$", r"$8$", r"$12$"],
+          "correct": r"$4$",
+          "explanation": r'''$f'(x) = 3x^2 - 4x$
+
+$f'(2) = 3(4) - 4(2) = 12 - 8 = 4$ 💚''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 4: ผลคูณ & ผลหาร
+    // =============================================
     ContentSection(
-      headerL1: r"✖️ 5 ผลคูณ",
+      headerL1: r"✖️➗ ผลคูณ & ผลหาร",
       blocks: [
-        ContentBlock("deriv_intro_t_322", "text", {
+        ContentBlock("di_h_037", "header", {
+          "title": r"สมบัติที่ 5 — กฎผลคูณ (Product Rule)",
+          "level": 2,
+        }),
+        ContentBlock("di_t_038", "text", {
           "content": [
-            r'''$\dfrac{d}{dx}[f(x) \cdot g(x)] = f(x) \cdot g'(x) + g(x) \cdot f'(x)$
-        
-        💬 **วิธีจำ:"หน้าดิฟหลัง + หลังดิฟหน้า"**''',
+            r'''$$\dfrac{d}{dx}[f(x) \cdot g(x)] = f(x) \cdot g'(x) + g(x) \cdot f'(x)$$
+
+💬 **วิธีจำ: "หน้าดิฟหลัง + หลังดิฟหน้า"**''',
           ],
         }),
-        ContentBlock("ddq_deriv_prop_10", "drag_and_drop", {
+        ContentBlock("di_t_039", "text", {
+          "content": [
+            r'''Note = ระวัง!
+
+$\dfrac{d}{dx}[f \cdot g] \neq f' \cdot g'$ — จะแยกดิฟคนละตัวแล้วคูณกันไม่ได้!''',
+          ],
+        }),
+        ContentBlock("di_h_040", "header", {
+          "title": r"ตัวอย่าง — ลองทำตาม",
+          "level": 2,
+        }),
+        ContentBlock("di_ddq_041", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_deriv_prop_10",
+              "questionId": "di_ddq_041_s1",
               "content": [
                 r'''จงหา $\dfrac{d}{dx}[(3x + 2)(6x + 5)]$
-        
-        ให้ $f(x) = 3x + 2$ และ $g(x) = 6x + 5$
-        
-        $f'(x) =$ ''',
+
+ให้ $f = 3x + 2$ , $g = 6x + 5$
+
+$f' = $ ''',
                 {"drop": "0"},
-                r'''และ $g'(x) =$ ''',
+                r''' , $g' = $ ''',
                 {"drop": "1"},
-                r'''ใช้สูตร: $f \cdot g' + g \cdot f'$
-        
-        $= (3x + 2) \cdot$ ''',
-                {"drop": "1"},
-                r'''$+ (6x + 5) \cdot$ ''',
-                {"drop": "0"},
+                r'''หน้าดิฟหลัง + หลังดิฟหน้า:
+
+$= (3x + 2)(6) + (6x + 5)(3)$''',
               ],
-              "draggableItems": [r"$3$", r"$6$", r"$(3x + 2)$", r"$(6x + 5)$"],
+              "draggableItems": [r"$3$", r"$6$", r"$3x$", r"$6x$"],
               "correctAnswers": {"0": r"$3$", "1": r"$6$"},
-              "explanation": r'''$f'(x) = 3$ และ $g'(x) = 6$''',
+              "explanation": r'''$f' = 3$ และ $g' = 6$''',
             },
-          ],
-        }),
-        ContentBlock("ddq_deriv_prop_11", "drag_and_drop", {
-          "steps": [
             {
-              "questionId": "ddq_deriv_prop_11",
+              "questionId": "di_ddq_041_s2",
               "content": [
-                r'''👉 คำนวณผลลัพธ์
-        
-        $= (3x + 2)(6) + (6x + 5)(3)$
-        
-        $=$ ''',
+                r'''คำนวณผลลัพธ์:
+
+$(3x + 2)(6) + (6x + 5)(3)$
+
+$= 18x + 12 + 18x + 15 = $ ''',
                 {"drop": "0"},
-                r'''$+$ ''',
-                {"drop": "1"},
-                r'''$+$ ''',
-                {"drop": "2"},
-                r'''$+$ ''',
-                {"drop": "3"},
-                r'''$=$ ''',
-                {"drop": "4"},
               ],
-              "draggableItems": [
-                r"$18x$",
-                r"$12$",
-                r"$18x$",
-                r"$15$",
-                r"$36x + 27$",
-                r"$36x$",
-              ],
-              "correctAnswers": {
-                "0": r"$18x$",
-                "1": r"$12$",
-                "2": r"$18x$",
-                "3": r"$15$",
-                "4": r"$36x + 27$",
-              },
-              "explanation":
-                  r'''$(3x+2)(6) = 18x + 12$ และ $(6x+5)(3) = 18x + 15$ รวมได้ $36x + 27$ 💚''',
+              "draggableItems": [r"$36x + 27$", r"$36x + 17$", r"$18x + 27$", r"$36x^2 + 27$"],
+              "correctAnswers": {"0": r"$36x + 27$"},
+              "explanation": r'''$18x + 12 + 18x + 15 = 36x + 27$ 💚''',
             },
           ],
         }),
-        ContentBlock("ddq_deriv_prop_12", "drag_and_drop", {
+        ContentBlock("di_ddq_042", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_deriv_prop_12",
+              "questionId": "di_ddq_042_s1",
               "content": [
                 r'''จงหา $\dfrac{d}{dx}[(x^2)(x^3)]$
-        
-        หน้าดิฟหลัง + หลังดิฟหน้า:
-        
-        $= x^2 \cdot$ ''',
+
+หน้าดิฟหลัง + หลังดิฟหน้า:
+
+$= x^2 \cdot 3x^2 + x^3 \cdot 2x = 3x^4 + 2x^4 = $ ''',
                 {"drop": "0"},
-                r'''$+ x^3 \cdot$ ''',
-                {"drop": "1"},
-                r'''$=$ ''',
-                {"drop": "2"},
-                r'''$+$ ''',
-                {"drop": "3"},
-                r'''$=$ ''',
-                {"drop": "4"},
               ],
-              "draggableItems": [
-                r"$3x^2$",
-                r"$2x$",
-                r"$3x^4$",
-                r"$2x^4$",
-                r"$5x^4$",
-              ],
-              "correctAnswers": {
-                "0": r"$3x^2$",
-                "1": r"$2x$",
-                "2": r"$3x^4$",
-                "3": r"$2x^4$",
-                "4": r"$5x^4$",
-              },
-              "explanation":
-                  r'''$(x^2)(3x^2) + (x^3)(2x) = 3x^4 + 2x^4 = 5x^4$ 💚''',
+              "draggableItems": [r"$5x^4$", r"$6x^4$", r"$5x^3$", r"$x^4$"],
+              "correctAnswers": {"0": r"$5x^4$"},
+              "explanation": r'''$3x^4 + 2x^4 = 5x^4$ 💚
+
+🧠 **ข้อสังเกต:** $x^2 \cdot x^3 = x^5$ ดิฟตรงๆ ก็ได้ $5x^4$ เหมือนกัน!''',
             },
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"➗ 6 ผลหาร",
-      blocks: [
-        ContentBlock("deriv_intro_t_326", "text", {
+        ContentBlock("di_h_043", "header", {
+          "title": r"สมบัติที่ 6 — กฎผลหาร (Quotient Rule)",
+          "level": 2,
+        }),
+        ContentBlock("di_t_044", "text", {
           "content": [
-            r'''$\dfrac{d}{dx}\left[\dfrac{f(x)}{g(x)}\right] = \dfrac{g(x) \cdot f'(x) - f(x) \cdot g'(x)}{[g(x)]^2}$
-        
-        💬 **วิธีจำ:"ล่างดิฟบน - บนดิฟล่าง หารด้วยล่างกำลัง 2"**''',
+            r'''$$\dfrac{d}{dx}\left[\dfrac{f(x)}{g(x)}\right] = \dfrac{g(x) \cdot f'(x) - f(x) \cdot g'(x)}{[g(x)]^2}$$
+
+💬 **วิธีจำ: "ล่างดิฟบน − บนดิฟล่าง หารด้วยล่างกำลัง 2"**''',
           ],
         }),
-        ContentBlock("ddq_deriv_prop_13", "drag_and_drop", {
+        ContentBlock("di_h_045", "header", {
+          "title": r"ตัวอย่าง — ลองทำตาม",
+          "level": 2,
+        }),
+        ContentBlock("di_ddq_046", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_deriv_prop_13",
+              "questionId": "di_ddq_046_s1",
               "content": [
                 r'''จงหา $\dfrac{d}{dx}\left(\dfrac{2x + 3}{x + 1}\right)$
-        
-        ให้ $f(x) = 2x + 3$ (บน) และ $g(x) = x + 1$ (ล่าง)
-        
-        $f'(x) =$ ''',
+
+บน: $f = 2x + 3$ → $f' = 2$
+
+ล่าง: $g = x + 1$ → $g' = 1$
+
+ล่างดิฟบน − บนดิฟล่าง:
+
+$(x + 1)(2) - (2x + 3)(1) = 2x + 2 - 2x - 3 = $ ''',
                 {"drop": "0"},
-                r'''และ $g'(x) =$ ''',
+                r'''หารด้วยล่าง$^2$:
+
+$\dfrac{d}{dx}\left(\dfrac{2x + 3}{x + 1}\right) = $ ''',
                 {"drop": "1"},
-                r'''ใช้สูตร: 💬 ล่างดิฟบน - บนดิฟล่าง หารด้วยล่างกำลัง 2 
-        
-        $=$ ''',
-                {"drop": "2"},
-              ],
-              "draggableItems": [
-                r"$3$",
-                r"$2$",
-                r"$1$",
-                r"$\dfrac{(x + 1)(2) - (2x +3)(1)}{(2x + 3)^2}$",
-                r"$\dfrac{(x + 1)(2) - (2x +3)(1)}{(x + 1)^2}$",
-                r"$\dfrac{(x + 1)(2) + (2x +3)(1)}{(x + 1)^2}$",
-                r"$x + 1$",
-              ],
-              "correctAnswers": {
-                "0": r"$2$",
-                "1": r"$1$",
-                "2": r"$\dfrac{(x + 1)(2) - (2x +3)(1)}{(x + 1)^2}$",
-              },
-              "explanation":
-                  r'''แทนค่าล่างดิฟบน - บนดิฟล่าง หารด้วยล่างกำลัง 2 ได้ $\dfrac{(x + 1)(2) - (2x +3)(1)}{(x + 1)^2}$''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_deriv_prop_14", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_deriv_prop_14",
-              "content": [
-                r'''👉 คำนวณผลลัพธ์
-        
-        $= \dfrac{(x + 1)(2) - (2x + 3)(1)}{(x + 1)^2}$
-        
-        $= \dfrac{2x + 2 - 2x - 3}{(x + 1)^2}$
-        
-        $=$ ''',
-                {"drop": "0"},
               ],
               "draggableItems": [
                 r"$-1$",
+                r"$1$",
+                r"$5$",
                 r"$\dfrac{-1}{(x + 1)^2}$",
                 r"$\dfrac{1}{(x + 1)^2}$",
-                r"$\dfrac{2}{(x + 1)^2}$",
               ],
-              "correctAnswers": {"0": r"$\dfrac{-1}{(x + 1)^2}$"},
-              "explanation":
-                  r'''$2x + 2 - 2x - 3 = -1 \to \dfrac{-1}{(x + 1)^2}$ 💚''',
+              "correctAnswers": {"0": r"$-1$", "1": r"$\dfrac{-1}{(x + 1)^2}$"},
+              "explanation": r'''ล่างดิฟบน − บนดิฟล่าง $= -1$ หารด้วย $(x+1)^2$ ได้ $\dfrac{-1}{(x+1)^2}$ 💚''',
             },
           ],
         }),
-        ContentBlock("ddq_deriv_prop_15", "drag_and_drop", {
+        ContentBlock("di_ddq_047", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_deriv_prop_15",
+              "questionId": "di_ddq_047_s1",
               "content": [
                 r'''จงหา $\dfrac{d}{dx}\left(\dfrac{x^2}{x + 1}\right)$
-        
-        ล่างดิฟบน - บนดิฟล่าง หารด้วยล่าง$^2$:
-        
-        $= ''',
+
+ล่างดิฟบน − บนดิฟล่าง:
+
+$(x+1)(2x) - (x^2)(1) = 2x^2 + 2x - x^2 = $ ''',
                 {"drop": "0"},
+                r'''หารด้วย $(x+1)^2$:
+
+$= $ ''',
+                {"drop": "1"},
               ],
               "draggableItems": [
-                r"$2x$",
-                r"$1$",
-                r"$2x^2 + 2x - x^2$",
                 r"$x^2 + 2x$",
-                r"$x$",
+                r"$2x^2 + 2x$",
                 r"$\dfrac{x^2 + 2x}{(x + 1)^2}$",
+                r"$\dfrac{2x^2 + 2x}{(x + 1)^2}$",
               ],
-              "correctAnswers": {"0": r"$\dfrac{x^2 + 2x}{(x + 1)^2}$"},
-              "explanation":
-                  r'''$(x+1)(2x) - x^2(1) = 2x^2 + 2x - x^2 = x^2 + 2x$ 💚''',
+              "correctAnswers": {"0": r"$x^2 + 2x$", "1": r"$\dfrac{x^2 + 2x}{(x + 1)^2}$"},
+              "explanation": r'''$2x^2 + 2x - x^2 = x^2 + 2x$ หารด้วย $(x+1)^2$ 💚''',
             },
           ],
         }),
+        ContentBlock("di_h_048", "header", {
+          "title": r"ฝึกเลย",
+          "level": 2,
+        }),
+        ContentBlock("di_q_049", "question_choice", {
+          "content": [
+            r'''1. $\dfrac{d}{dx}[(2x - 1)(3x + 4)] = ?$''',
+          ],
+          "options": [r"$6x + 5$", r"$12x + 5$", r"$12x - 3$", r"$6x + 8$"],
+          "correct": r"$12x + 5$",
+          "explanation": r'''หน้าดิฟหลัง + หลังดิฟหน้า:
+
+$(2x-1)(3) + (3x+4)(2) = 6x - 3 + 6x + 8 = 12x + 5$ 💚''',
+        }),
+        ContentBlock("di_q_050", "question_choice", {
+          "content": [
+            r'''2. $\dfrac{d}{dx}\left(\dfrac{3x - 2}{x + 5}\right) = ?$''',
+          ],
+          "options": [
+            r"$\dfrac{17}{(x + 5)^2}$",
+            r"$\dfrac{-17}{(x + 5)^2}$",
+            r"$\dfrac{13}{(x + 5)^2}$",
+            r"$\dfrac{3}{(x + 5)^2}$",
+          ],
+          "correct": r"$\dfrac{17}{(x + 5)^2}$",
+          "explanation": r'''ล่างดิฟบน − บนดิฟล่าง:
+
+$(x+5)(3) - (3x-2)(1) = 3x + 15 - 3x + 2 = 17$
+
+หารด้วย $(x+5)^2$ ได้ $\dfrac{17}{(x+5)^2}$ 💚''',
+        }),
+        ContentBlock("di_q_051", "question_choice", {
+          "content": [
+            r'''3. จงหาความชันของเส้นสัมผัส $y = x^2 + 3x - 1$ ที่ $x = 1$''',
+          ],
+          "options": [r"$3$", r"$4$", r"$5$", r"$6$"],
+          "correct": r"$5$",
+          "explanation": r'''$\dfrac{dy}{dx} = 2x + 3$
+
+ที่ $x = 1$: $2(1) + 3 = 5$ 💚''',
+        }),
       ],
     ),
+
+    // =============================================
+    // SECTION 5: แบบฝึกหัดรวม (โจทย์ยาก)
+    // =============================================
     ContentSection(
-      headerL1: r"📝 แบบฝึกหัด",
+      headerL1: r"📝 แบบฝึกหัดรวม",
       blocks: [
-        ContentBlock("ddq_deriv_ex_1", "drag_and_drop", {
+        ContentBlock("di_t_052", "text", {
+          "content": [
+            r'''โจทย์ในส่วนนี้จะ**ยากขึ้น** ต้องใช้หลายสมบัติร่วมกัน ลองทำดู! 💪''',
+          ],
+        }),
+        ContentBlock("di_ddq_053", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_deriv_ex_1",
+              "questionId": "di_ddq_053_s1",
               "content": [
-                r'''1. $\dfrac{d}{dx}(8x^4 - 5x^3 + 2x - 7) = $''',
+                r'''1. จงหา $\dfrac{d}{dx}\left(\dfrac{x^3 - 4x}{2}\right)$
+
+Note = คำใบ้: ดึง $\dfrac{1}{2}$ ออกมาก่อน!
+
+$= \dfrac{1}{2} \cdot \dfrac{d}{dx}(x^3 - 4x) = \dfrac{1}{2}(3x^2 - 4) = $ ''',
                 {"drop": "0"},
-                r'''$x^3 -$ ''',
-                {"drop": "1"},
-                r'''$x^2 +$ ''',
-                {"drop": "2"},
               ],
               "draggableItems": [
-                r"$32$",
-                r"$15$",
-                r"$2$",
-                r"$0$",
-                r"$8$",
-                r"$5$",
-                r"$-7$",
+                r"$\dfrac{3x^2 - 4}{2}$",
+                r"$3x^2 - 4$",
+                r"$\dfrac{3x^2}{2}$",
+                r"$\dfrac{x^2 - 4}{2}$",
               ],
-              "correctAnswers": {"0": r"$32$", "1": r"$15$", "2": r"$2$"},
-              "explanation": r'''$32x^3 - 15x^2 + 2$ 💚''',
+              "correctAnswers": {"0": r"$\dfrac{3x^2 - 4}{2}$"},
+              "explanation": r'''ดึง $\dfrac{1}{2}$ ออก แล้วดิฟทีละพจน์ ง่ายกว่าใช้ Quotient Rule! 💚''',
             },
           ],
         }),
-        ContentBlock("ddq_deriv_ex_2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_deriv_ex_2",
-              "content": [
-                r'''2. $\dfrac{d}{dx}(x^{-3}) = $''',
-                {"drop": "0"},
-              ],
-              "draggableItems": [
-                r"$-3$",
-                r"$-x$",
-                r"$3$",
-                r"$-3x^{4}$",
-                r"$-3x^{-4}$",
-              ],
-              "correctAnswers": {"0": r"$-3x^{-4}$"},
-              "explanation": r'''$\dfrac{d}{dx}(x^{-3}) = -3x^{-4}$ 💚''',
-            },
+        ContentBlock("di_q_054", "question_choice", {
+          "content": [
+            r'''2. ให้ $f(x) = x^4 - 8x^2 + 16$
+
+จงหาค่า $x$ ที่ $f'(x) = 0$''',
           ],
+          "options": [
+            r"$x = 0, \pm 2$",
+            r"$x = 0, \pm 4$",
+            r"$x = \pm 2$ เท่านั้น",
+            r"$x = 0$ เท่านั้น",
+          ],
+          "correct": r"$x = 0, \pm 2$",
+          "explanation": r'''$f'(x) = 4x^3 - 16x = 4x(x^2 - 4) = 4x(x-2)(x+2)$
+
+$f'(x) = 0$ เมื่อ $x = 0, 2, -2$ 💚
+
+🧠 **ข้อสังเกต:** จุดที่ $f'(x) = 0$ คือจุดที่กราฟมีความชัน $= 0$ (จุดสูงสุด/ต่ำสุด) — จะได้เรียนเพิ่มเติมในบทถัดๆ ไป!''',
         }),
-        ContentBlock("ddq_deriv_ex_3", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_deriv_ex_3",
-              "content": [
-                r'''3. $\dfrac{d}{dx}\left(\dfrac{5}{x^2}\right) = $ ''',
-                {"drop": "0"},
-              ],
-              "draggableItems": [
-                r"$-2$",
-                r"$-3$",
-                r"$-10x^{-3}$",
-                r"$-10x^{-1}$",
-                r"$10x^3$",
-              ],
-              "correctAnswers": {"0": r"$-10x^{-3}$"},
-              "explanation": r'''เขียนใหม่เป็น $5x^{-2}$
-        
-        จะได้ว่า $\dfrac{d}{dx}\left(\dfrac{5}{x^2}\right) = 5 \cdot (-2)x^{-3} = -10x^{-3}$ 💚''',
-            },
+        ContentBlock("di_q_055", "question_choice", {
+          "content": [
+            r'''3. จงหา $\dfrac{d}{dx}\left[(x^2 + 1)(x^2 - 1)\right]$''',
           ],
+          "options": [r"$4x^3$", r"$4x^3 - 2x$", r"$2x \cdot 2x$", r"$4x$"],
+          "correct": r"$4x^3$",
+          "explanation": r'''**วิธี 1:** Product Rule
+
+$(x^2+1)(2x) + (x^2-1)(2x) = 2x^3 + 2x + 2x^3 - 2x = 4x^3$
+
+**วิธี 2:** กระจายก่อน
+
+$(x^2+1)(x^2-1) = x^4 - 1$ → $\dfrac{d}{dx}(x^4 - 1) = 4x^3$ 💚
+
+🧠 บางทีกระจายก่อนแล้วดิฟง่ายกว่า!''',
         }),
-        ContentBlock("ddq_deriv_ex_4", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_deriv_ex_4",
-              "content": [
-                r'''4. $\dfrac{d}{dx}(\sqrt{x}) = $''',
-                {"drop": "0"},
-              ],
-              "draggableItems": [
-                r"$\dfrac{1}{2\sqrt{x}}$",
-                r"$\dfrac{1}{2} \cdot \sqrt{x}$",
-                r"$\dfrac{1}{2x}$",
-              ],
-              "correctAnswers": {"0": r"$\dfrac{1}{2\sqrt{x}}$"},
-              "explanation": r'''เขียนใหม่เป็น $x^{\dfrac{1}{2}}$
-        
-        ดังนั้น $\dfrac{d}{dx}(\sqrt{x}) = $
-        
-        $\dfrac{1}{2} \cdot x^{1/2 - 1} = \dfrac{1}{2}x^{-1/2} = \dfrac{1}{2\sqrt{x}}$ 💚''',
-            },
+        ContentBlock("di_q_056", "question_choice", {
+          "content": [
+            r'''4. จงหา $\dfrac{d}{dx}\left(\dfrac{x^2 + 3x - 10}{x - 2}\right)$
+
+Note = คำใบ้: ลองแยกตัวประกอบเศษก่อน!''',
           ],
+          "options": [r"$0$", r"$1$", r"$2x + 3$", r"$\dfrac{2x + 3}{(x-2)^2}$"],
+          "correct": r"$1$",
+          "explanation": r'''แยกตัวประกอบเศษ: $x^2 + 3x - 10 = (x+5)(x-2)$
+
+$\dfrac{(x+5)(x-2)}{x-2} = x + 5$
+
+$\dfrac{d}{dx}(x + 5) = 1$ 💚
+
+🧠 **จัดรูปก่อนดิฟ** ช่วยให้ง่ายขึ้นมาก!''',
         }),
-        ContentBlock("ddq_deriv_ex_5", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_deriv_ex_5",
-              "content": [
-                r'''5. $\dfrac{d}{dx}[(2x - 1)(3x + 4)] = $
-        
-        หน้าดิฟหลัง + หลังดิฟหน้า:
-        
-        $= (2x - 1) \cdot$ ''',
-                {"drop": "0"},
-                r'''$+ (3x + 4) \cdot$ ''',
-                {"drop": "1"},
-                r'''$=$ ''',
-                {"drop": "2"},
-              ],
-              "draggableItems": [
-                r"$2$",
-                r"$3$",
-                r"$12x + 5$",
-                r"$6x - 3$",
-                r"$6x + 8$",
-              ],
-              "correctAnswers": {"0": r"$3$", "1": r"$2$", "2": r"$12x + 5$"},
-              "explanation":
-                  r'''$(2x-1)(3) + (3x+4)(2) = 6x - 3 + 6x + 8 = 12x + 5$ 💚''',
-            },
+        ContentBlock("di_q_057", "question_choice", {
+          "content": [
+            r'''5. ให้ $f(x) = (2x + 1)(x^2 - 3)$
+
+จงหา $f'(1)$''',
           ],
+          "options": [r"$-2$", r"$0$", r"$2$", r"$8$"],
+          "correct": r"$2$",
+          "explanation": r'''Product Rule: $f'(x) = (2x+1)(2x) + (x^2-3)(2)$
+
+$= 4x^2 + 2x + 2x^2 - 6 = 6x^2 + 2x - 6$
+
+$f'(1) = 6(1) + 2(1) - 6 = 2$ 💚''',
         }),
-        ContentBlock("ddq_deriv_ex_6", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_deriv_ex_6",
-              "content": [
-                r'''6. $\dfrac{d}{dx}\left(\dfrac{3x - 2}{x + 5}\right) = $''',
-                {"drop": "0"},
-              ],
-              "draggableItems": [
-                r"$\dfrac{17}{(x + 5)^2}$",
-                r"$\dfrac{-5}{(x + 5)^2}$",
-                r"$\dfrac{8}{(x + 5)^2}$",
-                r"$3x + 15$",
-                r"$-2$",
-              ],
-              "correctAnswers": {"0": r"$\dfrac{17}{(x + 5)^2}$"},
-              "explanation": r'''ล่างดิฟบน - บนดิฟล่างหารด้วย ล่างกำลัง 2
-        
-        จะได้ ดิฟบน $= \dfrac{d}{dx} 3x - 2 = 3$
-        
-        ดิฟล่าง $= \dfrac{d}{dx} x + 5 = 1$
-        
-        ล่างดิฟบน - บนดิฟล่าง $= (x + 5)(3) - (3x - 2)(1)$
-        $= 3x + 15 - (3x - 2) = 17$
-        
-        ล่างกำลัง 2 $= (x + 5)^2$
-        
-        ดังนั้น $\dfrac{d}{dx}\left(\dfrac{3x - 2}{x + 5}\right) = \dfrac{17}{(x + 5)^2}$''',
-            },
+        ContentBlock("di_q_058", "question_choice", {
+          "content": [
+            r'''6. จงหา $\dfrac{d}{dx}\left(\dfrac{x^3 + 1}{x + 1}\right)$
+
+Note = คำใบ้: $x^3 + 1 = (x+1)(x^2 - x + 1)$''',
           ],
+          "options": [r"$2x - 1$", r"$3x^2$", r"$x^2 - x + 1$", r"$\dfrac{3x^2}{(x+1)^2}$"],
+          "correct": r"$2x - 1$",
+          "explanation": r'''แยกตัวประกอบ: $\dfrac{(x+1)(x^2 - x + 1)}{x + 1} = x^2 - x + 1$
+
+$\dfrac{d}{dx}(x^2 - x + 1) = 2x - 1$ 💚''',
         }),
-        ContentBlock("ddq_deriv_ex_7", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_deriv_ex_7",
-              "content": [
-                r'''7. ถ้า $f(x) = x^3 - 2x^2 + 5$ แล้ว $f'(2) = ?$
-        
-        $f'(x) = \dfrac{d}{dx}(x^3 - 2x^2 + 5) =$ ''',
-                {"drop": "0"},
-                r'''$f'(2) =$ ''',
-                {"drop": "1"},
-              ],
-              "draggableItems": [
-                r"$3x^2 - 4x$",
-                r"$12$",
-                r"$8$",
-                r"$4$",
-                r"$3x^2 - 2x$",
-              ],
-              "correctAnswers": {"0": r"$3x^2 - 4x$", "1": r"$4$"},
-              "explanation":
-                  r'''$f'(x) = 3x^2 - 4x$ แทน $x=2$ ได้ $3(4) - 4(2) = 12 - 8 = 4$ 💚''',
-            },
+        ContentBlock("di_q_059", "question_choice", {
+          "content": [
+            r'''7. ให้ $f(x) = 3\sqrt{x} + \dfrac{2}{x}$
+
+จงหา $f'(4)$''',
           ],
+          "options": [
+            r"$\dfrac{5}{8}$",
+            r"$\dfrac{3}{4}$",
+            r"$\dfrac{7}{8}$",
+            r"$\dfrac{1}{2}$",
+          ],
+          "correct": r"$\dfrac{5}{8}$",
+          "explanation": r'''เขียนใหม่: $f(x) = 3x^{1/2} + 2x^{-1}$
+
+$f'(x) = 3 \cdot \dfrac{1}{2}x^{-1/2} + 2 \cdot (-1)x^{-2} = \dfrac{3}{2\sqrt{x}} - \dfrac{2}{x^2}$
+
+$f'(4) = \dfrac{3}{2\sqrt{4}} - \dfrac{2}{16} = \dfrac{3}{4} - \dfrac{1}{8} = \dfrac{6}{8} - \dfrac{1}{8} = \dfrac{5}{8}$ 💚''',
         }),
-        ContentBlock("ddq_deriv_ex_8", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_deriv_ex_8",
-              "content": [
-                r'''8. จงหาความชันของเส้นสัมผัส $y = x^2 + 3x - 1$ ที่ $x = 1$
-        
-        ความชัน $= \dfrac{dy}{dx}$ ที่ $x = 1$
-        
-        $\dfrac{dy}{dx} =$ ''',
-                {"drop": "0"},
-                r'''ที่ $x = 1$: ความชัน $=$ ''',
-                {"drop": "1"},
-              ],
-              "draggableItems": [
-                r"$2x + 3$",
-                r"$5$",
-                r"$2x$",
-                r"$3$",
-                r"$x + 3$",
-              ],
-              "correctAnswers": {"0": r"$2x + 3$", "1": r"$5$"},
-              "explanation":
-                  r'''$\dfrac{dy}{dx} = 2x + 3$ แทน $x=1$ ได้ $2(1) + 3 = 5$ 💚''',
-            },
+        ContentBlock("di_q_060", "question_choice", {
+          "content": [
+            r'''8. เส้นสัมผัสของ $y = \dfrac{x^2 + 2}{x}$ ที่ $x = 1$ มีความชันเท่าไร?
+            
+Note = คำใบ้
+            
+$f'(x)$ คือ ความชัน ณ จุด $x$''',
           ],
+          "options": [r"$-1$", r"$0$", r"$1$", r"$3$"],
+          "correct": r"$-1$",
+          "explanation": r'''จัดรูปก่อน: $\dfrac{x^2 + 2}{x} = x + 2x^{-1}$
+
+$\dfrac{dy}{dx} = 1 - 2x^{-2} = 1 - \dfrac{2}{x^2}$
+
+ที่ $x = 1$: $1 - \dfrac{2}{1} = 1 - 2 = -1$ 💚
+
+🧠 จัดรูปก่อนดิฟง่ายกว่าใช้ Quotient Rule!''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 6: สรุป
+    // =============================================
     ContentSection(
       headerL1: r"สรุป",
       blocks: [
-        ContentBlock("deriv_intro_t_338", "text", {
+        ContentBlock("di_t_061", "text", {
           "content": [
             r'''🎯 **6 สมบัติสำคัญของอนุพันธ์**
-        
-        **1. ค่าคงที่:** $\dfrac{d}{dx}(c) = 0$
-        
-        **2. เลขยกกำลัง:** $\dfrac{d}{dx}(x^n) = nx^{n-1}$ (ตบลงมาคูณ ลบ 1)
-        
-        **3. คูณค่าคงที่:** $\dfrac{d}{dx}[c \cdot f(x)] = c \cdot f'(x)$ (ดึงออกมาได้)
-        
-        **4. ผลบวก/ลบ:** $\dfrac{d}{dx}[f \pm g] = f' \pm g'$ (แยกได้)
-        
-        **5. ผลคูณ:** $\dfrac{d}{dx}[f \cdot g] = f \cdot g' + g \cdot f'$ (หน้าดิฟหลัง + หลังดิฟหน้า)
-        
-        **6. ผลหาร:** $\dfrac{d}{dx}\left[\dfrac{f}{g}\right] = \dfrac{g \cdot f' - f \cdot g'}{g^2}$ (ล่างดิฟบน - บนดิฟล่าง หารล่าง$^2$)''',
+
+**1. ค่าคงที่:** $\dfrac{d}{dx}(c) = 0$
+
+**2. เลขยกกำลัง:** $\dfrac{d}{dx}(x^n) = nx^{n-1}$ — ตบลงมาคูณ ลบ 1
+
+**3. คูณค่าคงที่:** $\dfrac{d}{dx}[c \cdot f(x)] = c \cdot f'(x)$ — ดึงออกมาได้''',
+          ],
+        }),
+        ContentBlock("di_t_062", "text", {
+          "content": [
+            r'''**4. ผลบวก/ลบ:** $\dfrac{d}{dx}[f \pm g] = f' \pm g'$ — แยกทีละพจน์ได้
+
+**5. ผลคูณ:** $\dfrac{d}{dx}[f \cdot g] = f \cdot g' + g \cdot f'$ — หน้าดิฟหลัง + หลังดิฟหน้า
+
+**6. ผลหาร:** $\dfrac{d}{dx}\left[\dfrac{f}{g}\right] = \dfrac{g \cdot f' - f \cdot g'}{g^2}$ — ล่างดิฟบน − บนดิฟล่าง หารล่าง$^2$''',
+          ],
+        }),
+        ContentBlock("di_t_063", "text", {
+          "content": [
+            r'''Note = เทคนิคสำคัญ
+
+🔸 เจอเศษส่วนที่ส่วนเป็นค่าคงที่ เช่น $\dfrac{x^3}{2}$ → ดึงค่าคงที่ออก ไม่ต้องใช้ Quotient Rule
+
+🔸 เจอ $\dfrac{1}{x^n}$ → เขียนเป็น $x^{-n}$ แล้วใช้ Power Rule
+
+🔸 เจอเศษที่แยกตัวประกอบตัดกับส่วนได้ → **จัดรูปก่อนดิฟ** ง่ายกว่าเสมอ!''',
           ],
         }),
       ],
@@ -7987,704 +8327,658 @@ final calcDerivIntroLesson = ContentLesson(
 // Exercise: โจทย์ปัญหาความต่อเนื่อง (โจทย์ปัญหาความต่อเนื่อง)
 
 final calcChainRuleLesson = ContentLesson(
-  title: "กฎลูกโซ่",
+  title: "กฎลูกโซ่ (Chain Rule)",
   sections: [
+
+    // =============================================
+    // SECTION 1: Chain Rule — แนวคิดแทนตัวแปร
+    // =============================================
     ContentSection(
-      headerL1: r"intro",
+      headerL1: r"🔗 Chain Rule — แนวคิดแทนตัวแปร",
       blocks: [
-        ContentBlock("chain_t_339", "text", {
-          "content": [
-            r'''จากบทที่แล้ว เราสามารถหา diff ของ $x^5, x^{10}, x^{100}$ ได้แล้ว! 👑
-        
-        **แต่ถ้าเจอแบบนี้ล่ะ?** 🤔
-        
-        $$(3x + 2)^5$$
-        
-        ต้องใช้ **กฎลูกโซ่ (Chain Rule)**! 🔗''',
-          ],
-        }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"Chain Rule",
-      blocks: [
-        ContentBlock("chain_t_340", "text", {
-          "content": [
-            r'''มาจากแนวคิดการ **เปลี่ยนตัวแปร** ♻️
-        
-        ลองดูตัวอย่างนี้:
-        
-        สมมติว่ามี 2 ฟังก์ชัน:
-        
-        🔸 $y = 2t^2 + 3$
-        
-        🔸 $t = x^3 - 2x + 1$
-        
-        **❓คำถาม:** จะหา $\dfrac{dy}{dx}$ ยังไง? 🤔
-        
-        💡 **คำตอบ:** 
-        
-        $$\dfrac{dy}{dx} = \dfrac{dy}{dt} \cdot \dfrac{dt}{dx}$$
-        
-        **ความหมาย:** 
-        
-        🔸 $\dfrac{dy}{dt}$ = อัตราการเปลี่ยนแปลงของ $y$ เทียบกับ $t$
-        
-        🔸 $\dfrac{dt}{dx}$ = อัตราการเปลี่ยนแปลงของ $t$ เทียบกับ $x$
-        
-        ⭐ คูณกัน = อัตราการเปลี่ยนแปลงของ $y$ เทียบกับ $x$! 🎯
-        
-        Note = ทำไม?
-        
-        💭 **ลองคิดแบบง่ายๆ:**
-        
-        🔸 $y$ เปลี่ยน $2$ หน่วย $t$ เปลี่ยน $1$ หน่วย 
-        
-        $(\dfrac{dy}{dt} = \dfrac{2}{1})$
-        
-        🔸 $t$ เปลี่ยน $3$ หน่วย $x$ เปลี่ยน $1$ หน่วย 
-        
-        $(\dfrac{dt}{dx} = \dfrac{3}{1})$
-        
-        แล้ว $y$ เปลี่ยนกี่หน่วย เมื่อ $x$ เปลี่ยน $1$ หน่วย?
-        
-        $x$ เปลี่ยน $1$ จะได้ $t$ เปลี่ยน $3$
-        
-        และ $t$ เปลี่ยน $3$ คือ $y$ เปลี่ยน $2 \times 3 = 6$ ⭐
-        
-        นี่คือหลักการของ **Chain Rule**! 🔗''',
-          ],
-        }),
-        ContentBlock("chain_h_341", "header", {"title": r"เช่น", "level": 2}),
-        ContentBlock("chain_t_342", "text", {
-          "content": [
-            r'''ให้ $y = 2t^2 + 3$ และ $t = x^3 - 2x + 1$
-        
-        จงหา $\dfrac{dy}{dx}$
-        
-        **วิธีทำ:**''',
-          ],
-        }),
-        ContentBlock("ddq_chain_1", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_chain_1",
-              "content": [
-                r'''🎯 **ขั้นที่ 1:** หา $\dfrac{dy}{dt}$
-        
-        จาก $y = 2t^2 + 3$
-        
-        $\dfrac{dy}{dt} =$ ''',
-                {"drop": "0"},
-              ],
-              "draggableItems": [
-                r"$4t$",
-                r"$2t$",
-                r"$2t^2$",
-                r"$4t^2$",
-                r"$2$",
-              ],
-              "correctAnswers": {"0": r"$4t$"},
-              "explanation": r'''$\dfrac{d}{dt}(2t^2 + 3) = 4t$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_chain_2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_chain_2",
-              "content": [
-                r'''🔧 **ขั้นที่ 2:** หา $\dfrac{dt}{dx}$
-        
-        จาก $t = x^3 - 2x + 1$
-        
-        $\dfrac{dt}{dx} =$ ''',
-                {"drop": "0"},
-              ],
-              "draggableItems": [
-                r"$3x^2 - 2$",
-                r"$x^3 - 2$",
-                r"$3x^2$",
-                r"$x^2 - 2$",
-                r"$3x$",
-              ],
-              "correctAnswers": {"0": r"$3x^2 - 2$"},
-              "explanation": r'''$\dfrac{d}{dx}(x^3 - 2x + 1) = 3x^2 - 2$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_chain_3", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_chain_3",
-              "content": [
-                r'''🏁 **ขั้นที่ 3:** คูณกัน
-        
-        $\dfrac{dy}{dx} = \dfrac{dy}{dt} \cdot \dfrac{dt}{dx}$
-        
-        $=$ ''',
-                {"drop": "0"},
-                r'''$\times$ ''',
-                {"drop": "1"},
-                r'''$= 4t(3x^2 - 2)$ 
-        
-        แทนค่า $t = x^3 - 2x + 1$ ลงไปจะได้
-        
-        $\dfrac{dy}{dx} = \dfrac{dy}{dt} \cdot \dfrac{dt}{dx} =$''',
-                {"drop": "2"},
-              ],
-              "draggableItems": [
-                r"$4t$",
-                r"$3x^2 - 2$",
-                r"$4t(3x^2 - 2)$",
-                r"$12x^2 - 8$",
-                r"$4(x^3 - 2x + 1)(3x^2 - 2)$",
-              ],
-              "correctAnswers": {
-                "0": r"$4t$",
-                "1": r"$3x^2 - 2$",
-                "2": r"$4(x^3 - 2x + 1)(3x^2 - 2)$",
-              },
-              "explanation":
-                  r'''$\dfrac{dy}{dx} = \dfrac{dy}{dt} \cdot \dfrac{dt}{dx}$
-        
-        $= 4t \times (3x^2 - 2) = 4t(3x^2 - 2)$ แทนค่า $t = x^3 - 2x + 1$ ที่กำหนดตอนแรก
-        
-        จะได้ $\dfrac{dy}{dx} = 4(x^3 - 2x + 1)(3x^2 - 2)$ 🎉''',
-            },
-          ],
-        }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"🌟 Chain Rule หลายชั้น",
-      blocks: [
-        ContentBlock("chain_t_346", "text", {
-          "content": [
-            r'''Chain Rule ใช้ได้**หลายชั้น**! 🏗️
-        
-        $$\dfrac{dy}{dx} = \dfrac{dy}{dt} \cdot \dfrac{dt}{dw} \cdot \dfrac{dw}{dx}$$
-        
-        หรือมากกว่านั้น!
-        
-        $\dfrac{dy}{dx} = \dfrac{dy}{dt} \cdot \dfrac{dt}{dw} \cdot \dfrac{dw}{dv} \cdot ... \cdot \dfrac{d?}{dx}$
-        
-        💡 **หลักการ:** เชื่อมโซ่ไปเรื่อยๆ จนถึง $x$! 🔗''',
-          ],
-        }),
-        ContentBlock("chain_h_347", "header", {
-          "title": r"ตัวอย่าง",
+        ContentBlock("cr_h_001", "header", {
+          "title": r"Power Rule ยังไม่พอ",
           "level": 2,
         }),
-        ContentBlock("chain_t_348", "text", {
+        ContentBlock("cr_t_002", "text", {
           "content": [
-            r'''ให้ $y = t^2$, $t = w + 1$, $w = 3x - 2$
-        
-        จงหา $\dfrac{dy}{dx}$''',
+            r'''เรารู้แล้วว่า $\dfrac{d}{dx}(x^5) = 5x^4$ จาก Power Rule
+
+แต่ถ้าข้างในไม่ใช่ $x$ เปล่าๆ ล่ะ?
+
+$$\dfrac{d}{dx}\left[(3x + 2)^5\right] = ?$$''',
           ],
         }),
-        ContentBlock("ddq_chain_4", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_chain_4",
-              "content": [
-                r'''1. หา $\dfrac{dy}{dx}$ โดยใช้ Chain Rule
-        
-        $\dfrac{dy}{dt} =$ ''',
-                {"drop": "0"},
-                r'''$\dfrac{dt}{dw} =$ ''',
-                {"drop": "1"},
-                r'''$\dfrac{dw}{dx} =$ ''',
-                {"drop": "2"},
-                r'''$\dfrac{dy}{dx} = \dfrac{dy}{dt} \cdot \dfrac{dt}{dw} \cdot \dfrac{dw}{dx} =$ ''',
-                {"drop": "3"},
-              ],
-              "draggableItems": [
-                r"$2t$",
-                r"$1$",
-                r"$3$",
-                r"$6t$",
-                r"$2w$",
-                r"$6w$",
-              ],
-              "correctAnswers": {
-                "0": r"$2t$",
-                "1": r"$1$",
-                "2": r"$3$",
-                "3": r"$6t$",
-              },
-              "explanation":
-                  r'''$\dfrac{dy}{dx} = 2t \times 1 \times 3 = 6t$ ✅''',
-            },
-          ],
-        }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"Chain Rule แบบเร็ว",
-      blocks: [
-        ContentBlock("chain_t_350", "text", {
+        ContentBlock("cr_t_003", "text", {
           "content": [
-            r'''ตอนนี้มาดูกรณีที่ฟังก์ชันซ้อนกันใน**สมการเดียว** 🎯
-        
-        เช่น $(3x + 2)^5$
-        
-        เราสามารถ**มองเป็นการเปลี่ยนตัวแปร**ได้!
-        
-        ให้ $t = 3x + 2$ แล้ว $y = t^5$
-        
-        ใช้ Chain Rule: $\dfrac{dy}{dx} = \dfrac{dy}{dt} \cdot \dfrac{dt}{dx}$
-        
-        💬 **วิธีย่อ:** **"ดิฟปกติ** $\times$ **ดิฟไส้"** 🎯''',
+            r'''ถ้าใช้ Power Rule ตรงๆ ได้ $5(3x+2)^4$ — แต่นี่**ยังไม่ครบ!**
+
+เพราะ $3x+2$ ก็เปลี่ยนแปลงตาม $x$ ด้วย เราต้องคำนึงถึงส่วนนั้นด้วยเสมอ''',
           ],
         }),
-        ContentBlock("chain_h_351", "header", {
-          "title": r"สูตร Chain Rule",
+        ContentBlock("cr_h_004", "header", {
+          "title": r"แนวคิด: แทนส่วนที่ซับซ้อนด้วยตัวแปรใหม่",
           "level": 2,
         }),
-        ContentBlock("chain_t_352", "text", {
+        ContentBlock("cr_t_005", "text", {
           "content": [
-            r'''$$\dfrac{d}{dx}[f(g(x))] = f'(g(x)) \cdot g'(x)$$
-        
-        หรือพูดง่ายๆ:
-        
-        **ดิฟปกติ** $\times$ **ดิฟไส้**
-        
-        Note = เพื่อความเข้าใจ
-        
-        นี่เป็นวิธีเดียวกัน แค่เปลี่ยนรูปแบบให้ง่ายขึ้น''',
+            r'''ลองตั้ง $t = 3x+2$ — ทันทีที่แทน $(3x+2)^5$ กลายเป็น $t^5$
+
+ตอนนี้เรามี $y = t^5$ ซึ่งดิฟเทียบ $t$ ได้ และ $t = 3x+2$ ซึ่งดิฟเทียบ $x$ ได้''',
           ],
         }),
-        ContentBlock("chain_h_353", "header", {"title": r"เช่น", "level": 2}),
-        ContentBlock("chain_t_354", "text", {
+        ContentBlock("cr_t_006", "text", {
           "content": [
-            r'''จงหา $\dfrac{d}{dx}[(3x + 2)^5]$
-        
-        **วิธีที่ 1: เปลี่ยนตัวแปร** ♻️''',
+            r'''แต่เราต้องการ $\dfrac{dy}{dx}$ ไม่ใช่ $\dfrac{dy}{dt}$
+
+**กฎลูกโซ่ (Chain Rule)** แก้ปัญหานี้:
+
+$$\dfrac{dy}{dx} = \dfrac{dy}{dt} \cdot \dfrac{dt}{dx}$$''',
           ],
         }),
-        ContentBlock("ddq_chain_5", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_chain_5",
-              "content": [
-                r'''ให้ $t = 3x + 2$ แล้ว $y = t^5$
-        
-        $\dfrac{dy}{dt} =$ ''',
-                {"drop": "0"},
-                r'''$\dfrac{dt}{dx} =$ ''',
-                {"drop": "1"},
-                r'''$\dfrac{dy}{dx} = \dfrac{dy}{dt} \cdot \dfrac{dt}{dx} =$ ''',
-                {"drop": "2"},
-                r'''แทน $t = 3x + 2$ กลับ: $\dfrac{dy}{dx} =$ ''',
-                {"drop": "3"},
-              ],
-              "draggableItems": [
-                r"$5t^4$",
-                r"$3$",
-                r"$15t^4$",
-                r"$15(3x + 2)^4$",
-                r"$5(3x + 2)^4$",
-                r"$t^4$",
-              ],
-              "correctAnswers": {
-                "0": r"$5t^4$",
-                "1": r"$3$",
-                "2": r"$15t^4$",
-                "3": r"$15(3x + 2)^4$",
-              },
-              "explanation": r'''$5t^4 \times 3 = 15t^4 = 15(3x + 2)^4$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("chain_t_356", "text", {
-          "content": [r'''**วิธีที่ 2: ดิฟปกติ** $\times$ **ดิฟไส้** ⚡'''],
-        }),
-        ContentBlock("ddq_chain_6", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_chain_6",
-              "content": [
-                r'''$\dfrac{d}{dx}[(3x + 2)^5]$
-        
-        **ดิฟปกติ** : ของ $(3x + 2)^5$ ได้ ''',
-                {"drop": "0"},
-                r'''**ดิฟไส้** (ดิฟของ $3x + 2$): ''',
-                {"drop": "1"},
-                r'''**ดิฟปกติ** $\times$ **ดิฟไส้**''',
-                {"drop": "0"},
-                r'''$\times$ ''',
-                {"drop": "1"},
-                r'''$=$ ''',
-                {"drop": "2"},
-              ],
-              "draggableItems": [
-                r"$3$",
-                r"$15(3x + 2)^4$",
-                r"$5$",
-                r"$5(3x + 2)^4$",
-                r"$(3x + 2)^4$",
-                r"$2$",
-                r"$3x$",
-              ],
-              "correctAnswers": {
-                "0": r"$5(3x + 2)^4$",
-                "1": r"$3$",
-                "2": r"$15(3x + 2)^4$",
-              },
-              "explanation": r'''$5(3x + 2)^4 \times 3 = 15(3x + 2)^4$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("chain_t_358", "text", {
+        ContentBlock("cr_t_007", "text", {
           "content": [
-            r'''💡 **เห็นไหม?** ทั้ง 2 วิธีให้คำตอบเหมือนกัน! วิธีที่ 2 เร็วกว่า! 🚀''',
+            r'''Note = Chain Rule คืออะไร?
+
+Chain Rule คือวิธีหาอนุพันธ์ของ**ฟังก์ชันที่ซ้อนกัน** โดยแยกดิฟทีละส่วน แล้วคูณผลลัพธ์เข้าด้วยกัน
+
+ใช้ทุกครั้งที่ส่วนข้างในไม่ใช่ $x$ เปล่าๆ''',
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"📝 แบบฝึกหัด",
-      blocks: [
-        ContentBlock("ddq_chain_ex1", "drag_and_drop", {
+        ContentBlock("cr_ddq_008", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_chain_ex1",
+              "questionId": "cr_ddq_008_s1",
               "content": [
-                r'''1. ให้ $y = 2(x^3 - 2x + 1)^2 + 3$
-        
-        **ลองเปลี่ยนตัวแปร!** ให้ $t =$ ''',
+                r'''มาหา $\dfrac{d}{dx}\left[(3x+2)^5\right]$ โดยตั้ง $t = 3x+2$ , $y = t^5$
+
+$\dfrac{dy}{dt} = $ ''',
                 {"drop": "0"},
-                r'''แล้ว $y =$ ''',
+                r'''  (ดิฟ $t^5$ เทียบ $t$)
+
+$\dfrac{dt}{dx} = $ ''',
                 {"drop": "1"},
-                r'''$\dfrac{dy}{dt} =$ ''',
-                {"drop": "2"},
-                r'''$\dfrac{dt}{dx} =$ ''',
-                {"drop": "3"},
-                r'''$\dfrac{dy}{dx} = \dfrac{dy}{dt} \cdot \dfrac{dt}{dx} =$ ''',
-                {"drop": "4"},
+                r'''  (ดิฟ $3x+2$ เทียบ $x$)''',
+              ],
+              "draggableItems": [r"$5t^4$", r"$3$", r"$5$", r"$2$"],
+              "correctAnswers": {"0": r"$5t^4$", "1": r"$3$"},
+              "explanation": r'''$\dfrac{d}{dt}(t^5) = 5t^4$ และ $\dfrac{d}{dx}(3x+2) = 3$''',
+            },
+            {
+              "questionId": "cr_ddq_008_s2",
+              "content": [
+                r'''คูณตาม Chain Rule แล้วแทน $t = 3x+2$ กลับ
+
+$\dfrac{dy}{dx} = 5t^4 \times 3 = 15t^4 = $ ''',
+                {"drop": "0"},
               ],
               "draggableItems": [
-                r"$x^3 - 2x + 1$",
-                r"$2t^2 + 3$",
-                r"$4t$",
-                r"$3x^2 - 2$",
-                r"$4t(3x^2 - 2)$",
-                r"$2t$",
-                r"$t^2 + 3$",
+                r"$15(3x+2)^4$",
+                r"$5(3x+2)^4$",
+                r"$15(3x+2)^5$",
+                r"$15x^4$",
               ],
-              "correctAnswers": {
-                "0": r"$x^3 - 2x + 1$",
-                "1": r"$2t^2 + 3$",
-                "2": r"$4t$",
-                "3": r"$3x^2 - 2$",
-                "4": r"$4t(3x^2 - 2)$",
-              },
-              "explanation":
-                  r'''ให้ $t = x^3 - 2x + 1$ แล้ว $y = 2t^2 + 3$, $\dfrac{dy}{dx} = 4t(3x^2 - 2)$ ✅''',
+              "correctAnswers": {"0": r"$15(3x+2)^4$"},
+              "explanation": r'''แทน $t = 3x+2$ กลับ: $15t^4 = 15(3x+2)^4$ 💚''',
             },
           ],
         }),
-        ContentBlock("ddq_chain_ex2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_chain_ex2",
-              "content": [
-                r'''2. ให้ $y = (2x + 1)^3 - 5(2x + 1) + 7$
-        
-        **ลองเปลี่ยนตัวแปร!** ให้ $t =$ ''',
-                {"drop": "0"},
-                r'''แล้ว $y =$ ''',
-                {"drop": "1"},
-                r'''$\dfrac{dy}{dt} =$ ''',
-                {"drop": "2"},
-                r'''$\dfrac{dt}{dx} =$ ''',
-                {"drop": "3"},
-                r'''$\dfrac{dy}{dx} =$ ''',
-                {"drop": "4"},
-              ],
-              "draggableItems": [
-                r"$2x + 1$",
-                r"$t^3 - 5t + 7$",
-                r"$3t^2 - 5$",
-                r"$2$",
-                r"$2(3t^2 - 5)$",
-                r"$6t^2 - 10$",
-                r"$t^3 - 5$",
-              ],
-              "correctAnswers": {
-                "0": r"$2x + 1$",
-                "1": r"$t^3 - 5t + 7$",
-                "2": r"$3t^2 - 5$",
-                "3": r"$2$",
-                "4": r"$2(3t^2 - 5)$",
-              },
-              "explanation":
-                  r'''ให้ $t = 2x + 1$ แล้ว $y = t^3 - 5t + 7$, $\dfrac{dy}{dx} = (3t^2 - 5) \times 2$ ✅''',
-            },
+        ContentBlock("cr_h_009", "header", {
+          "title": r"ลองกับตัวอย่างที่ซับซ้อนขึ้น",
+          "level": 2,
+        }),
+        ContentBlock("cr_t_010", "text", {
+          "content": [
+            r'''แนวคิดเดิม: มองหาส่วนที่ทำให้ดิฟตรงๆ ไม่ได้ แล้วตั้งเป็น $t$
+
+ส่วนนั้นมักอยู่**ในวงเล็บ** หรือ**ใต้ราก** — นั่นแหละที่ควรแทน''',
           ],
         }),
-        ContentBlock("ddq_chain_ex3", "drag_and_drop", {
+        ContentBlock("cr_ddq_011", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_chain_ex3",
+              "questionId": "cr_ddq_011_s1",
               "content": [
-                r'''3. ให้ $y = \sqrt{x^2 + 1}$
-        
-        เขียนใหม่: $y = (x^2 + 1)^{1/2}$
-        
-        **ลองเปลี่ยนตัวแปร!** ให้ $t =$ ''',
+                r'''จงหา $\dfrac{d}{dx}\left[(x^2 + 1)^3\right]$
+
+ส่วนที่ซับซ้อนคือ $x^2+1$ → ตั้ง $t = $ ''',
                 {"drop": "0"},
-                r'''แล้ว $y =$ ''',
+                r'''  แล้ว $y = $ ''',
                 {"drop": "1"},
-                r'''$\dfrac{dy}{dt} =$ ''',
-                {"drop": "2"},
-                r'''$\dfrac{dt}{dx} =$ ''',
-                {"drop": "3"},
-                r'''$\dfrac{dy}{dx} =$ ''',
-                {"drop": "4"},
+              ],
+              "draggableItems": [r"$x^2 + 1$", r"$t^3$", r"$x^2$", r"$(x^2+1)^3$"],
+              "correctAnswers": {"0": r"$x^2 + 1$", "1": r"$t^3$"},
+              "explanation": r'''แทน $x^2+1 = t$ ทำให้ $y = t^3$ ซึ่งดิฟได้ทันที''',
+            },
+            {
+              "questionId": "cr_ddq_011_s2",
+              "content": [
+                r'''$\dfrac{dy}{dt} = 3t^2$  ,  $\dfrac{dt}{dx} = $ ''',
+                {"drop": "0"},
+                r'''คูณกัน แล้วแทน $t = x^2+1$ กลับ:
+
+$3t^2 \times \dfrac{dt}{dx} = $ ''',
+                {"drop": "1"},
               ],
               "draggableItems": [
-                r"$x^2 + 1$",
-                r"$t^{1/2}$",
-                r"$\dfrac{1}{2}t^{-1/2}$",
                 r"$2x$",
-                r"$\dfrac{x}{t^{1/2}}$",
-                r"$\dfrac{x}{\sqrt{x^2 + 1}}$",
-                r"$\sqrt{t}$",
-              ],
-              "correctAnswers": {
-                "0": r"$x^2 + 1$",
-                "1": r"$t^{1/2}$",
-                "2": r"$\dfrac{1}{2}t^{-1/2}$",
-                "3": r"$2x$",
-                "4": r"$\dfrac{x}{\sqrt{x^2 + 1}}$",
-              },
-              "explanation":
-                  r'''$\dfrac{dy}{dx} = \dfrac{1}{2}t^{-1/2} \times 2x = \dfrac{x}{\sqrt{t}} = \dfrac{x}{\sqrt{x^2 + 1}}$ ✅''',
-            },
-          ],
-        }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"⚡ แบบฝึกหัด: ใช้สูตรโดยตรง",
-      blocks: [
-        ContentBlock("ddq_chain_ex4", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_chain_ex4",
-              "content": [
-                r'''1. $\dfrac{d}{dx}[(2x - 1)^3] = ?$
-        
-        ดิฟปกติ $=$ ''',
-                {"drop": "0"},
-                r'''ดิฟไส้ $=$ ''',
-                {"drop": "1"},
-                r'''คำตอบ $=$ ''',
-                {"drop": "2"},
-              ],
-              "draggableItems": [
-                r"$3(2x - 1)^2$",
-                r"$2$",
-                r"$6(2x - 1)^2$",
-                r"$(2x - 1)^2$",
-                r"$3$",
-              ],
-              "correctAnswers": {
-                "0": r"$3(2x - 1)^2$",
-                "1": r"$2$",
-                "2": r"$6(2x - 1)^2$",
-              },
-              "explanation": r'''$3(2x - 1)^2 \times 2 = 6(2x - 1)^2$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_chain_ex5", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_chain_ex5",
-              "content": [
-                r'''2. $\dfrac{d}{dx}[(x^2 + 3x)^4] = ?$
-        
-        ดิฟปกติ $=$ ''',
-                {"drop": "0"},
-                r'''ดิฟไส้ $=$ ''',
-                {"drop": "1"},
-                r'''คำตอบ $=$ ''',
-                {"drop": "2"},
-              ],
-              "draggableItems": [
-                r"$4(x^2 + 3x)^3$",
-                r"$2x + 3$",
-                r"$4(2x + 3)(x^2 + 3x)^3$",
-                r"$(x^2 + 3x)^3$",
-                r"$x + 3$",
-              ],
-              "correctAnswers": {
-                "0": r"$4(x^2 + 3x)^3$",
-                "1": r"$2x + 3$",
-                "2": r"$4(2x + 3)(x^2 + 3x)^3$",
-              },
-              "explanation": r'''$4(x^2 + 3x)^3 \times (2x + 3)$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_chain_ex6", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_chain_ex6",
-              "content": [
-                r'''3. $\dfrac{d}{dx}\left[\dfrac{1}{(3x + 1)^2}\right] = ?$
-        
-        เขียนใหม่: $(3x + 1)^{-2}$
-        
-        ดิฟปกติ $=$ ''',
-                {"drop": "0"},
-                r'''ดิฟไส้ $=$ ''',
-                {"drop": "1"},
-                r'''คำตอบ $=$ ''',
-                {"drop": "2"},
-              ],
-              "draggableItems": [
-                r"$-2(3x + 1)^{-3}$",
-                r"$3$",
-                r"$-6(3x + 1)^{-3}$",
-                r"$(3x + 1)^{-3}$",
-                r"$-2$",
-              ],
-              "correctAnswers": {
-                "0": r"$-2(3x + 1)^{-3}$",
-                "1": r"$3$",
-                "2": r"$-6(3x + 1)^{-3}$",
-              },
-              "explanation":
-                  r'''$-2(3x + 1)^{-3} \times 3 = -6(3x + 1)^{-3}$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_chain_ex7", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_chain_ex7",
-              "content": [
-                r'''4. $\dfrac{d}{dx}[\sqrt{5x - 2}] = ?$
-        
-        เขียนใหม่: $(5x - 2)^{1/2}$
-        
-        ดิฟปกติ $=$ ''',
-                {"drop": "0"},
-                r'''ดิฟไส้ $=$ ''',
-                {"drop": "1"},
-                r'''คำตอบ $=$ ''',
-                {"drop": "2"},
-              ],
-              "draggableItems": [
-                r"$\dfrac{1}{2}(5x - 2)^{-1/2}$",
-                r"$5$",
-                r"$\dfrac{5}{2}(5x - 2)^{-1/2}$",
-                r"$\dfrac{5}{2\sqrt{5x - 2}}$",
-                r"$(5x - 2)^{-1/2}$",
-              ],
-              "correctAnswers": {
-                "0": r"$\dfrac{1}{2}(5x - 2)^{-1/2}$",
-                "1": r"$5$",
-                "2": r"$\dfrac{5}{2}(5x - 2)^{-1/2}$",
-              },
-              "explanation":
-                  r'''$\dfrac{1}{2}(5x - 2)^{-1/2} \times 5 = \dfrac{5}{2\sqrt{5x - 2}}$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_chain_ex8", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_chain_ex8",
-              "content": [
-                r'''5. $\dfrac{d}{dx}[(x^3 - 1)^{10}] = ?$
-        
-        ดิฟปกติ: ตบ ''',
-                {"drop": "0"},
-                r'''ลงมา ยกกำลัง ''',
-                {"drop": "1"},
-                r'''ดิฟไส้ $=$ ''',
-                {"drop": "2"},
-                r'''คำตอบ $=$ ''',
-                {"drop": "3"},
-              ],
-              "draggableItems": [
-                r"$10$",
-                r"$9$",
+                r"$6x(x^2+1)^2$",
                 r"$3x^2$",
-                r"$30x^2(x^3 - 1)^9$",
-                r"$10(x^3 - 1)^9$",
-                r"$x^2$",
+                r"$3(x^2+1)^2$",
               ],
-              "correctAnswers": {
-                "0": r"$10$",
-                "1": r"$9$",
-                "2": r"$3x^2$",
-                "3": r"$30x^2(x^3 - 1)^9$",
-              },
-              "explanation":
-                  r'''$10(x^3 - 1)^9 \times 3x^2 = 30x^2(x^3 - 1)^9$ ✅''',
+              "correctAnswers": {"0": r"$2x$", "1": r"$6x(x^2+1)^2$"},
+              "explanation": r'''$\dfrac{dt}{dx} = 2x$ → $3t^2 \times 2x = 6x(x^2+1)^2$ 💚''',
             },
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"คำถามชวนคิด 💭",
-      blocks: [
-        ContentBlock("chain_t_367", "text", {
+        ContentBlock("cr_h_012", "header", {
+          "title": r"ฝึกเลย",
+          "level": 2,
+        }),
+        ContentBlock("cr_q_013", "question_choice", {
           "content": [
-            r'''**ทำไม** $\dfrac{dy}{dx} = \dfrac{dy}{dt} \cdot \dfrac{dt}{dx}$ **ถึงใช้ได้?** 🤔
-        
-        มันดูเหมือนเราจะ **"ตัด $dt$ ออก"** ได้เลย! 
-        
-        $$\dfrac{dy}{\cancel{dt}} \cdot \dfrac{\cancel{dt}}{dx} = \dfrac{dy}{dx}$$
-        
-        **นี่ถูกต้องจริงหรือ?** 🔍
-        
-        Note = คำใบ้
-        
-        💭 **คิดจากนิยาม:**
-        
-        $\dfrac{dy}{dt} = \lim\limits_{h \to 0} \dfrac{y(t + h) - y(t)}{h}$
-        
-        $\dfrac{dt}{dx} = \lim\limits_{k \to 0} \dfrac{t(x + k) - t(x)}{k}$
-        
-        เมื่อเอามาคูณกัน จะได้ $\dfrac{dy}{dx}$ จริงๆ!
-        
-        ตอบ
-        
-        💡 **สรุป:** 
-        
-        แม้ $\dfrac{dy}{dt}$ จะไม่ใช่เศษส่วนธรรมดา แต่มันมีสมบัติ**เหมือนเศษส่วน**!
-        
-        เราสามารถ **"ตัด"** ได้จริง! ✨''',
+            r'''1. จงหา $\dfrac{d}{dx}\left[(4x+1)^3\right]$''',
           ],
+          "options": [
+            r"$3(4x+1)^2$",
+            r"$12(4x+1)^2$",
+            r"$12(4x+1)^3$",
+            r"$4(4x+1)^2$",
+          ],
+          "correct": r"$12(4x+1)^2$",
+          "explanation": r'''ตั้ง $t = 4x+1$ , $y = t^3$
+
+$\dfrac{dy}{dt} = 3t^2$ , $\dfrac{dt}{dx} = 4$
+
+$\dfrac{dy}{dx} = 3t^2 \times 4 = 12(4x+1)^2$ 💚''',
+        }),
+        ContentBlock("cr_q_014", "question_choice", {
+          "content": [
+            r'''2. จงหา $\dfrac{d}{dx}\left[\sqrt{2x + 3}\right]$
+
+Note = คำใบ้: $\sqrt{2x+3} = (2x+3)^{1/2}$ ตั้ง $t = 2x+3$''',
+          ],
+          "options": [
+            r"$\dfrac{1}{\sqrt{2x+3}}$",
+            r"$\dfrac{1}{2\sqrt{2x+3}}$",
+            r"$\dfrac{2}{\sqrt{2x+3}}$",
+            r"$\sqrt{2x+3}$",
+          ],
+          "correct": r"$\dfrac{1}{\sqrt{2x+3}}$",
+          "explanation": r'''ตั้ง $t = 2x+3$ , $y = t^{1/2}$
+
+$\dfrac{dy}{dt} = \dfrac{1}{2}t^{-1/2}$ , $\dfrac{dt}{dx} = 2$
+
+$\dfrac{dy}{dx} = \dfrac{1}{2}t^{-1/2} \times 2 = \dfrac{1}{\sqrt{2x+3}}$ 💚''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 2: ทำไม Chain Rule ถึงได้ผล?
+    // =============================================
+    ContentSection(
+      headerL1: r"💡 ทำไม Chain Rule ถึงได้ผล?",
+      blocks: [
+        ContentBlock("cr_h_015", "header", {
+          "title": r"นึกภาพ — อัตราการเปลี่ยนแปลงซ้อนกัน",
+          "level": 2,
+        }),
+        ContentBlock("cr_t_016", "text", {
+          "content": [
+            r'''ลองนึกภาพแบบนี้:
+
+🔸 $t$ เปลี่ยน **3 หน่วย** เมื่อ $x$ เปลี่ยน 1 หน่วย → $\dfrac{dt}{dx} = 3$
+
+🔸 $y$ เปลี่ยน **4 หน่วย** เมื่อ $t$ เปลี่ยน 1 หน่วย → $\dfrac{dy}{dt} = 4$''',
+          ],
+        }),
+        ContentBlock("cr_t_017", "text", {
+          "content": [
+            r'''ถ้า $x$ เปลี่ยน 1 หน่วย → $t$ เพิ่มขึ้น 3 หน่วย → $y$ เพิ่มขึ้น $4 \times 3 = 12$ หน่วย
+
+ดังนั้น $\dfrac{dy}{dx} = 12 = 4 \times 3 = \dfrac{dy}{dt} \cdot \dfrac{dt}{dx}$ 🎯''',
+          ],
+        }),
+        ContentBlock("cr_t_018", "text", {
+          "content": [
+            r'''Note = ที่มาของสูตร
+
+ดูสูตรเหมือนตัด $dt$ ออก: $\dfrac{dy}{\cancel{dt}} \cdot \dfrac{\cancel{dt}}{dx} = \dfrac{dy}{dx}$
+
+แม้ $\dfrac{dy}{dt}$ จะไม่ใช่เศษส่วนธรรมดา แต่มีสมบัติ**เหมือนเศษส่วน** และพิสูจน์ได้ด้วยลิมิต ✨''',
+          ],
+        }),
+        ContentBlock("cr_ig_019", "interactive_graph", {
+          "path": "graph_data_15",
+        }),
+        ContentBlock("cr_t_020", "text", {
+          "content": [
+            r'''ลองเลื่อน slider เพื่อเปลี่ยน $x$ สังเกตว่า $t$ เปลี่ยน แล้ว $y$ ก็เปลี่ยนตาม
+
+ค่า $\dfrac{dy}{dx}$ ที่แต่ละจุดเท่ากับผลคูณ $\dfrac{dy}{dt} \times \dfrac{dt}{dx}$ เสมอ''',
+          ],
+        }),
+        ContentBlock("cr_h_021", "header", {
+          "title": r"เชื่อมกลับกับตัวอย่างที่ทำไป",
+          "level": 2,
+        }),
+        ContentBlock("cr_ddq_022", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "cr_ddq_022_s1",
+              "content": [
+                r'''กลับมาดู $(3x+2)^5$ กับ $t = 3x+2$ , $y = t^5$
+
+$\dfrac{dt}{dx} = 3$ หมายความว่า: $x$ เพิ่ม 1 หน่วย → $t$ เพิ่ม ''',
+                {"drop": "0"},
+                r''' หน่วย
+
+$\dfrac{dy}{dt} = 5t^4$ หมายความว่า: $t$ เพิ่ม 1 หน่วย → $y$ เพิ่ม $5t^4$ หน่วย
+
+ดังนั้น $x$ เพิ่ม 1 หน่วย → $y$ เพิ่ม $5t^4 \times 3 = $ ''',
+                {"drop": "1"},
+                r''' หน่วย — นี่คือ $\dfrac{dy}{dx}$ ที่เราคำนวณได้ตั้งแต่ต้น!''',
+              ],
+              "draggableItems": [r"$3$", r"$15t^4$", r"$5t^4$", r"$5$"],
+              "correctAnswers": {"0": r"$3$", "1": r"$15t^4$"},
+              "explanation": r'''"$x$ เพิ่ม 1 → $t$ เพิ่ม 3 → $y$ เพิ่ม $5t^4 \times 3 = 15t^4$"
+
+นี่คือสาระสำคัญของ Chain Rule 💚''',
+            },
+          ],
+        }),
+        ContentBlock("cr_q_023", "question_choice", {
+          "content": [
+            r'''1. ถ้า $\dfrac{dy}{dt} = 6t^2$ และ $\dfrac{dt}{dx} = 4x$
+
+แล้ว $\dfrac{dy}{dx} = ?$''',
+          ],
+          "options": [
+            r"$24t^2x$",
+            r"$6t^2 + 4x$",
+            r"$24t^2$",
+            r"$24x$",
+          ],
+          "correct": r"$24t^2x$",
+          "explanation": r'''$\dfrac{dy}{dx} = \dfrac{dy}{dt} \cdot \dfrac{dt}{dx} = 6t^2 \times 4x = 24t^2x$ 💚
+
+🧠 **ข้อสังเกต:** ผลลัพธ์ยังมีทั้ง $t$ และ $x$ อยู่ — ในทางปฏิบัติเราจะแทน $t = g(x)$ กลับเพื่อให้เป็น $x$ ล้วนๆ''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 3: Chain Rule แบบเร็ว
+    // =============================================
+    ContentSection(
+      headerL1: r"⚡ Chain Rule แบบเร็ว — สูตรเดียวกัน เขียนต่างกัน",
+      blocks: [
+        ContentBlock("cr_h_024", "header", {
+          "title": r"จากสูตรแทนตัวแปร สู่สูตรย่อ",
+          "level": 2,
+        }),
+        ContentBlock("cr_t_025", "text", {
+          "content": [
+            r'''สูตรแทนตัวแปร: $\dfrac{dy}{dx} = \dfrac{dy}{dt} \cdot \dfrac{dt}{dx}$
+
+เมื่อ $y = f(t)$ และ $t = g(x)$:
+
+🔸 $\dfrac{dy}{dt} = f'(t)$ — แต่เมื่อแทน $t = g(x)$ กลับ จะได้ $f'(g(x))$
+
+🔸 $\dfrac{dt}{dx} = g'(x)$''',
+          ],
+        }),
+        ContentBlock("cr_t_026", "text", {
+          "content": [
+            r'''ดังนั้นสูตรเขียนสั้นได้เป็น
+
+$$\dfrac{d}{dx}\left[f(g(x))\right] = f'(g(x)) \cdot g'(x)$$
+
+**สูตรนี้เหมือนเดิมทุกอย่าง** แค่รวมขั้นตอนแทน $t$ กลับเข้าไปในสูตรเลย ไม่ต้องเขียนตั้ง $t$ แยก''',
+          ],
+        }),
+        ContentBlock("cr_t_027", "text", {
+          "content": [
+            r'''Note = จำง่ายๆ ว่า "ดิฟนอก × ดิฟใน"
+
+🔸 **ดิฟนอก** = $f'(g(x))$ หาอนุพันธ์ของฟังก์ชันชั้นนอก **แต่เก็บส่วนข้างในไว้เหมือนเดิม**
+
+🔸 **ดิฟใน** = $g'(x)$ หาอนุพันธ์ของส่วนข้างใน''',
+          ],
+        }),
+        ContentBlock("cr_ddq_028", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "cr_ddq_028_s1",
+              "content": [
+                r'''มาเปรียบเทียบสองวิธีสำหรับ $(3x+2)^5$:
+
+**วิธีแทนตัวแปร:** $t=3x+2$, $y=t^5$ → $5t^4 \times 3$ → แทน $t$ กลับ $= 15(3x+2)^4$
+
+**วิธีสูตรย่อ** — ดิฟนอก × ดิฟใน:
+
+ดิฟนอก (ดิฟ $(\square)^5$ เก็บข้างในไว้) $= $ ''',
+                {"drop": "0"},
+                r'''ดิฟใน (ดิฟ $3x+2$) $= $ ''',
+                {"drop": "1"},
+                r'''ผลคูณ $= $ ''',
+                {"drop": "2"},
+              ],
+              "draggableItems": [
+                r"$5(3x+2)^4$",
+                r"$3$",
+                r"$15(3x+2)^4$",
+                r"$5$",
+              ],
+              "correctAnswers": {
+                "0": r"$5(3x+2)^4$",
+                "1": r"$3$",
+                "2": r"$15(3x+2)^4$",
+              },
+              "explanation": r'''ทั้งสองวิธีได้ $15(3x+2)^4$ เหมือนกัน!
+
+วิธีสูตรย่อเร็วกว่าเพราะไม่ต้องตั้ง $t$ แยก — เลือกใช้แบบที่ถนัด 💚''',
+            },
+          ],
+        }),
+        ContentBlock("cr_h_029", "header", {
+          "title": r"ฝึกด้วยสูตรเร็ว",
+          "level": 2,
+        }),
+        ContentBlock("cr_ddq_030", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "cr_ddq_030_s1",
+              "content": [
+                r'''จงหา $\dfrac{d}{dx}\left[(x^2+1)^{-2}\right]$ ด้วยสูตรเร็ว
+
+ดิฟนอก (ดิฟ $(\square)^{-2}$ เก็บข้างในไว้): ''',
+                {"drop": "0"},
+                r'''ดิฟใน (ดิฟ $x^2+1$): ''',
+                {"drop": "1"},
+                r'''ผลลัพธ์: ''',
+                {"drop": "2"},
+              ],
+              "draggableItems": [
+                r"$-2(x^2+1)^{-3}$",
+                r"$2x$",
+                r"$-4x(x^2+1)^{-3}$",
+                r"$2(x^2+1)^{-3}$",
+              ],
+              "correctAnswers": {
+                "0": r"$-2(x^2+1)^{-3}$",
+                "1": r"$2x$",
+                "2": r"$-4x(x^2+1)^{-3}$",
+              },
+              "explanation":
+                  r'''$-2(x^2+1)^{-3} \times 2x = -4x(x^2+1)^{-3} = \dfrac{-4x}{(x^2+1)^3}$ 💚''',
+            },
+          ],
+        }),
+        ContentBlock("cr_q_031", "question_choice", {
+          "content": [
+            r'''1. $\dfrac{d}{dx}\left[(2x^2 - 1)^5\right] = ?$''',
+          ],
+          "options": [
+            r"$5(2x^2-1)^4$",
+            r"$10x(2x^2-1)^4$",
+            r"$20x(2x^2-1)^4$",
+            r"$20(2x^2-1)^4$",
+          ],
+          "correct": r"$20x(2x^2-1)^4$",
+          "explanation": r'''ดิฟนอก: $5(2x^2-1)^4$  ,  ดิฟใน: $4x$
+
+$5(2x^2-1)^4 \times 4x = 20x(2x^2-1)^4$ 💚''',
+        }),
+        ContentBlock("cr_q_032", "question_choice", {
+          "content": [
+            r'''2. $\dfrac{d}{dx}\left[\sqrt{x^2 + 4x}\right] = ?$''',
+          ],
+          "options": [
+            r"$\dfrac{1}{2\sqrt{x^2+4x}}$",
+            r"$\dfrac{2x+4}{\sqrt{x^2+4x}}$",
+            r"$\dfrac{x+2}{2\sqrt{x^2+4x}}$",
+            r"$\dfrac{x+2}{\sqrt{x^2+4x}}$",
+          ],
+          "correct": r"$\dfrac{x+2}{\sqrt{x^2+4x}}$",
+          "explanation": r'''เขียนใหม่: $(x^2+4x)^{1/2}$
+
+ดิฟนอก: $\dfrac{1}{2}(x^2+4x)^{-1/2}$  ,  ดิฟใน: $2x+4$
+
+$\dfrac{1}{2}(x^2+4x)^{-1/2} \times (2x+4) = \dfrac{2x+4}{2\sqrt{x^2+4x}} = \dfrac{x+2}{\sqrt{x^2+4x}}$ 💚''',
+        }),
+        ContentBlock("cr_q_033", "question_choice", {
+          "content": [
+            r'''3. $\dfrac{d}{dx}\left[\dfrac{1}{\sqrt{5x-2}}\right] = ?$''',
+          ],
+          "options": [
+            r"$\dfrac{5}{2}(5x-2)^{-3/2}$",
+            r"$-\dfrac{1}{2}(5x-2)^{-3/2}$",
+            r"$-\dfrac{5}{2}(5x-2)^{-3/2}$",
+            r"$-5(5x-2)^{-3/2}$",
+          ],
+          "correct": r"$-\dfrac{5}{2}(5x-2)^{-3/2}$",
+          "explanation": r'''เขียนใหม่: $(5x-2)^{-1/2}$
+
+ดิฟนอก: $-\dfrac{1}{2}(5x-2)^{-3/2}$  ,  ดิฟใน: $5$
+
+$-\dfrac{1}{2}(5x-2)^{-3/2} \times 5 = -\dfrac{5}{2}(5x-2)^{-3/2}$ 💚''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 4: แบบฝึกหัดรวม
+    // =============================================
+    ContentSection(
+      headerL1: r"📝 แบบฝึกหัดรวม",
+      blocks: [
+        ContentBlock("cr_t_034", "text", {
+          "content": [
+            r'''โจทย์ในส่วนนี้มี 2 ประเภท:
+
+🔸 **คำนวณ** — หาอนุพันธ์หรือหาค่าที่จุดใดจุดหนึ่ง
+
+🔸 **วิเคราะห์** — หา $x$ ที่ทำให้ $f'(x) = $ ค่าที่กำหนด ต้องหา $f'(x)$ ด้วย Chain Rule ก่อน แล้วตั้งสมการแก้''',
+          ],
+        }),
+        ContentBlock("cr_h_035", "header", {
+          "title": r"โจทย์คำนวณ",
+          "level": 2,
+        }),
+        ContentBlock("cr_q_036", "question_choice", {
+          "content": [
+            r'''1. จงหาความชันของกราฟ $y = (x^2 + 1)^4$ ที่ $x = 1$''',
+          ],
+          "options": [r"$16$", r"$32$", r"$48$", r"$64$"],
+          "correct": r"$64$",
+          "explanation": r'''$\dfrac{dy}{dx} = 4(x^2+1)^3 \times 2x = 8x(x^2+1)^3$
+
+ที่ $x = 1$: $8(1)(1+1)^3 = 8 \times 8 = 64$ 💚''',
+        }),
+        ContentBlock("cr_q_037", "question_choice", {
+          "content": [
+            r'''2. ให้ $f(x) = \sqrt{5 - x^2}$ จงหา $f'(1)$''',
+          ],
+          "options": [
+            r"$\dfrac{-1}{2}$",
+            r"$\dfrac{-1}{\sqrt{2}}$",
+            r"$\dfrac{1}{2}$",
+            r"$\dfrac{1}{\sqrt{2}}$",
+          ],
+          "correct": r"$\dfrac{-1}{2}$",
+          "explanation": r'''$f'(x) = \dfrac{1}{2}(5-x^2)^{-1/2} \times (-2x) = \dfrac{-x}{\sqrt{5-x^2}}$
+
+$f'(1) = \dfrac{-1}{\sqrt{5-1}} = \dfrac{-1}{\sqrt{4}} = \dfrac{-1}{2}$ 💚''',
+        }),
+        ContentBlock("cr_q_038", "question_choice", {
+          "content": [
+            r'''3. $\dfrac{d}{dx}\left[(x^2 - 4x + 4)^3\right]$ ที่ $x = 2$ มีค่าเท่าใด?
+
+Note = คำใบ้: $x^2 - 4x + 4 = (x-2)^2$''',
+          ],
+          "options": [r"$0$", r"$12$", r"$24$", r"$48$"],
+          "correct": r"$0$",
+          "explanation": r'''$\dfrac{dy}{dx} = 3(x^2-4x+4)^2 \times (2x-4)$
+
+ที่ $x = 2$: ข้างในวงเล็บ $= 4-8+4 = 0$
+
+$(0)^2 \times (4-4) = 0$ 💚
+
+🧠 **ข้อสังเกต:** เมื่อ inner $= 0$ ที่จุดนั้น และกำลัง $> 1$ ผลลัพธ์จะเป็น $0$ เสมอ!''',
+        }),
+        ContentBlock("cr_h_039", "header", {
+          "title": r"โจทย์วิเคราะห์ — หา $x$ ที่ $f'(x) = $ ค่าที่กำหนด",
+          "level": 2,
+        }),
+        ContentBlock("cr_t_040", "text", {
+          "content": [
+            r'''ทำ 2 ขั้นเสมอ: **① หา $f'(x)$** ด้วย Chain Rule → **② ตั้งสมการ $f'(x) = $ ค่าที่โจทย์ให้ แล้วแก้หา $x$**''',
+          ],
+        }),
+        ContentBlock("cr_ddq_041", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "cr_ddq_041_s1",
+              "content": [
+                r'''จงหาค่า $x$ ที่ทำให้ $f'(x) = 0$ เมื่อ $f(x) = (x^2 - 4)^3$
+
+**① หา $f'(x)$** — ดิฟนอก: $3(x^2-4)^2$  ,  ดิฟใน: $2x$
+
+$f'(x) = $ ''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [
+                r"$6x(x^2-4)^2$",
+                r"$6x(x^2-4)^3$",
+                r"$3x(x^2-4)^2$",
+                r"$6(x^2-4)^2$",
+              ],
+              "correctAnswers": {"0": r"$6x(x^2-4)^2$"},
+              "explanation": r'''$f'(x) = 3(x^2-4)^2 \times 2x = 6x(x^2-4)^2$ ✅''',
+            },
+            {
+              "questionId": "cr_ddq_041_s2",
+              "content": [
+                r'''**② ตั้งสมการ** $6x(x^2-4)^2 = 0$
+
+ผลคูณเป็น 0 เมื่อตัวใดตัวหนึ่งเป็น 0:
+
+🔸 $6x = 0$ → $x = $ ''',
+                {"drop": "0"},
+                r'''🔸 $(x^2-4)^2 = 0$ → $x^2 = 4$ → $x = $ ''',
+                {"drop": "1"},
+                r'''ดังนั้น $f'(x) = 0$ เมื่อ $x = 0, 2, -2$ (3 คำตอบ)''',
+              ],
+              "draggableItems": [r"$0$", r"$\pm 2$", r"$\pm 4$", r"$\pm 1$"],
+              "correctAnswers": {"0": r"$0$", "1": r"$\pm 2$"},
+              "explanation":
+                  r'''ต้องหาค่า $x$ ที่ทำให้**แต่ละปัจจัย**เป็นศูนย์ → $x = 0, 2, -2$ 💚''',
+            },
+          ],
+        }),
+        ContentBlock("cr_q_042", "question_choice", {
+          "content": [
+            r'''4. ให้ $f(x) = (2x - 3)^3$
+
+จงหาค่า $x$ **ทั้งหมด** ที่ทำให้ $f'(x) = 24$''',
+          ],
+          "options": [
+            r"$x = \dfrac{3}{2}$",
+            r"$x = 1$ หรือ $x = 2$",
+            r"$x = \dfrac{1}{2}$ หรือ $x = \dfrac{5}{2}$",
+            r"$x = \dfrac{7}{2}$",
+          ],
+          "correct": r"$x = \dfrac{1}{2}$ หรือ $x = \dfrac{5}{2}$",
+          "explanation": r'''$f'(x) = 3(2x-3)^2 \times 2 = 6(2x-3)^2$
+
+ตั้งสมการ: $6(2x-3)^2 = 24$ → $(2x-3)^2 = 4$
+
+$2x-3 = \pm 2$ → $x = \dfrac{5}{2}$ หรือ $x = \dfrac{1}{2}$ 💚
+
+🧠 กำลังสองมี **2 ราก** ($+$ และ $-$) ดังนั้นได้ 2 คำตอบ!''',
+        }),
+        ContentBlock("cr_q_043", "question_choice", {
+          "content": [
+            r'''5. ให้ $f(x) = (x - 2)^3$
+
+จงหาค่า $x$ **ทั้งหมด** ที่ทำให้ $f'(x) = 27$''',
+          ],
+          "options": [
+            r"$x = 5$",
+            r"$x = -1$",
+            r"$x = 5$ หรือ $x = -1$",
+            r"$x = 2$",
+          ],
+          "correct": r"$x = 5$ หรือ $x = -1$",
+          "explanation": r'''$f'(x) = 3(x-2)^2 \times 1 = 3(x-2)^2$
+
+ตั้งสมการ: $3(x-2)^2 = 27$ → $(x-2)^2 = 9$
+
+$x-2 = \pm 3$ → $x = 5$ หรือ $x = -1$ 💚''',
+        }),
+        ContentBlock("cr_q_044", "question_choice", {
+          "content": [
+            r'''6. ให้ $f(x) = \dfrac{1}{(x-1)^2}$
+
+จงหาค่า $x$ ที่ทำให้ $f'(x) = -2$ (กำหนด $x > 1$)''',
+          ],
+          "options": [
+            r"$x = \dfrac{3}{2}$",
+            r"$x = 2$",
+            r"$x = 3$",
+            r"$x = 4$",
+          ],
+          "correct": r"$x = 2$",
+          "explanation": r'''เขียนใหม่: $(x-1)^{-2}$
+
+$f'(x) = -2(x-1)^{-3} \times 1 = \dfrac{-2}{(x-1)^3}$
+
+ตั้งสมการ: $\dfrac{-2}{(x-1)^3} = -2$ → $(x-1)^3 = 1$ → $x - 1 = 1$ → $x = 2$ 💚
+
+🧠 กำลังสาม**มีรากเดียว** จึงได้คำตอบเดียว (ต่างจากกำลังสองที่ได้ 2 คำตอบ)''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 5: สรุป
+    // =============================================
     ContentSection(
       headerL1: r"สรุป",
       blocks: [
-        ContentBlock("chain_t_368", "text", {
+        ContentBlock("cr_t_045", "text", {
           "content": [
             r'''🎯 **กฎลูกโซ่ (Chain Rule)**
-        
-        **1. แนวคิดหลัก:** มาจากการเปลี่ยนตัวแปร และ **ใช้ได้หลายชั้น**
-        
-        $\dfrac{dy}{dx} = \dfrac{dy}{dt} \cdot \dfrac{dt}{dw} \cdot \dfrac{dw}{dx}$
-        
-        **2. สูตรฟังก์ชันซ้อน:**
-        
-        $$\dfrac{d}{dx}[f(g(x))] = f'(g(x)) \cdot g'(x)$$
-        
-        **3. วิธีจำ:** "ดิฟปกติ $\times$ ดิฟไส้" 🎯
-        
-        **4. หลายชั้น:** ดิฟทีละชั้นจากนอกเข้าใน 🏗️''',
+
+**เมื่อไหร่ต้องใช้:** เมื่อส่วนข้างในไม่ใช่ $x$ เปล่าๆ เช่น $(3x+2)^5$, $\sqrt{x^2+1}$, $\dfrac{1}{(x+1)^3}$
+
+**สูตร (สองแบบ เหมือนกันทุกอย่าง):**
+
+$$\dfrac{d}{dx}\left[f(g(x))\right] = f'(g(x)) \cdot g'(x) = \dfrac{dy}{dt} \cdot \dfrac{dt}{dx}$$''',
+          ],
+        }),
+        ContentBlock("cr_t_046", "text", {
+          "content": [
+            r'''**วิธีคิด:**
+
+🔸 **แบบแทนตัวแปร:** ตั้ง $t$ = ส่วนที่ซับซ้อน → หา $\dfrac{dy}{dt}$ และ $\dfrac{dt}{dx}$ → คูณ → แทน $t$ กลับ
+
+🔸 **แบบสูตรย่อ:** ดิฟนอก (เก็บข้างในไว้) × ดิฟใน''',
+          ],
+        }),
+        ContentBlock("cr_t_047", "text", {
+          "content": [
+            r'''**ทำไมได้ผล:** อัตราการเปลี่ยนแปลงซ้อนกัน**คูณ**กันเสมอ
+
+$x$ เปลี่ยน 1 → $t$ เปลี่ยน $\dfrac{dt}{dx}$ → $y$ เปลี่ยน $\dfrac{dy}{dt} \times \dfrac{dt}{dx}$
+
+Note = โจทย์วิเคราะห์
+
+หา $f'(x)$ ด้วย Chain Rule → ตั้งสมการ $f'(x) = $ ค่าที่โจทย์ให้ → แก้หา $x$
+
+💡 กำลังสอง → **2 ราก** ($\pm$)  /  กำลังสาม → **1 ราก** — สังเกตให้ดีก่อนตอบ!''',
           ],
         }),
       ],
@@ -8692,483 +8986,571 @@ final calcChainRuleLesson = ContentLesson(
   ],
 );
 
-// Exercise: โจทย์ปัญหาความต่อเนื่อง (โจทย์ปัญหาความต่อเนื่อง)
-
 final calcLHopitalLesson = ContentLesson(
-  title: "กฎของโลปิตาล (L'Hospital's Rule)",
+  title: "กฎของโลปิตาล (L'Hôpital's Rule)",
   sections: [
+
+    // =============================================
+    // SECTION 1: ปัญหาที่เจอบ่อย — รูปไม่กำหนด
+    // =============================================
     ContentSection(
-      headerL1: r"intro",
+      headerL1: r"😩 ปัญหาที่เจอบ่อย — รูปไม่กำหนด",
       blocks: [
-        ContentBlock("lhop_t_369", "text", {
+        ContentBlock("lhop_h_001", "header", {
+          "title": r"ลองแทนค่าดู",
+          "level": 2,
+        }),
+        ContentBlock("lhop_t_002", "text", {
           "content": [
-            r'''จากบทที่ผ่านมา เราได้เรียนการหาลิมิตด้วยวิธีต่างๆ มาแล้ว 📚
-        
-        - แยกตัวประกอบ
-        - Conjugate
-        - จัดรูปเศษส่วนพหุนาม
-        - การหาค่าต่างๆ...
-        
-        **แต่บางทีมันซับซ้อนมาก!** 😅
-        
-        **มีวิธีที่**ง่ายกว่า**มาก!** 
-        
-        นั่นคือ **กฎของโลปิตาล (L'Hospital's Rule)**! 🚀''',
+            r'''จากบทที่ผ่านมา เรารู้แล้วว่าวิธีแรกที่ควรลองคือ**แทนค่าตรงๆ**
+
+แต่บางครั้งผลที่ได้ไม่ใช่จำนวนจริง แต่เป็น $\dfrac{0}{0}$ หรือ $\dfrac{\infty}{\infty}$
+
+เราเรียกรูปแบบเหล่านี้ว่า**รูปไม่กำหนด (indeterminate form)** — ต้องจัดการเพิ่มเติม''',
           ],
+        }),
+        ContentBlock("lhop_t_003", "text", {
+          "content": [
+            r'''ตัวอย่างเช่น $\lim\limits_{x \to 2} \dfrac{x^2 - 4}{x - 2}$ แทน $x = 2$ ได้ $\dfrac{0}{0}$
+
+วิธีเดิมคือแยกตัวประกอบ: $\dfrac{(x-2)(x+2)}{x-2} = x + 2 \to 4$ — ได้ผล แต่ต้องคิดมาก
+
+ถ้าฟังก์ชันซับซ้อนกว่านี้ จะมีวิธีที่**ง่ายกว่า**ไหม?''',
+          ],
+        }),
+        ContentBlock("lhop_t_004", "text", {
+          "content": [
+            r'''Note = มีวิธีที่ง่ายกว่า!
+
+**กฎของโลปิตาล (L'Hôpital's Rule)** ช่วยแก้ปัญหานี้ได้โดย**ดิฟบน ดิฟล่าง** แล้วหาลิมิตใหม่
+
+ไม่ต้องแยกตัวประกอบหรือจัดรูปเลย 🚀''',
+          ],
+        }),
+        ContentBlock("lhop_ddq_005", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "lhop_ddq_005_s1",
+              "content": [
+                r'''ลองตรวจสอบรูปก่อนเรียนสูตร
+
+แทน $x = 0$ ใน $\dfrac{x^2 + 3x}{x}$: เศษ $= 0$, ส่วน $= 0$
+
+รูปที่ได้คือ ''',
+                {"drop": "0"},
+                r''' → ต้องจัดการเพิ่มเติม ใช้โลปิตาล''',
+                {"drop": "1"},
+              ],
+              "draggableItems": [r"$\dfrac{0}{0}$", r"ได้", r"ไม่ได้", r"$\dfrac{1}{0}$"],
+              "correctAnswers": {"0": r"$\dfrac{0}{0}$", "1": r"ได้"},
+              "explanation": r'''เศษ $= 0$, ส่วน $= 0$ → รูป $\dfrac{0}{0}$ ซึ่งเป็นรูปไม่กำหนด → ใช้โลปิตาลได้ ✅''',
+            },
+          ],
+        }),
+        ContentBlock("lhop_q_006", "question_choice", {
+          "content": [
+            r'''1. แทน $x = 3$ ใน $\dfrac{x^2 - 9}{x - 3}$ ได้รูปใด?''',
+          ],
+          "options": [
+            r"$\dfrac{0}{0}$ — รูปไม่กำหนด ต้องจัดการเพิ่ม",
+            r"$6$ — ตอบได้เลย",
+            r"$0$ — ตอบได้เลย",
+            r"$\dfrac{9}{0}$ — ลิมิตไม่มีค่า",
+          ],
+          "correct": r"$\dfrac{0}{0}$ — รูปไม่กำหนด ต้องจัดการเพิ่ม",
+          "explanation": r'''$\dfrac{3^2 - 9}{3 - 3} = \dfrac{0}{0}$ — เป็นรูปไม่กำหนด ยังหาค่าไม่ได้!
+
+🧠 $\dfrac{0}{0}$ ไม่เท่ากับ $0$ หรือ $1$ — มันแค่หมายความว่า "ยังต้องวิเคราะห์ต่อ"''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 2: กฎของโลปิตาลคืออะไร?
+    // =============================================
     ContentSection(
       headerL1: r"🎯 กฎของโลปิตาลคืออะไร?",
       blocks: [
-        ContentBlock("lhop_t_370", "text", {
+        ContentBlock("lhop_h_007", "header", {
+          "title": r"สูตรและเงื่อนไข",
+          "level": 2,
+        }),
+        ContentBlock("lhop_t_008", "text", {
           "content": [
-            r'''**กฎของโลปิตาล** เป็นเทคนิคพิเศษสำหรับหาลิมิตที่ได้รูปแบบ
-        
-        $$\dfrac{0}{0} , \dfrac{\infty}{\infty}$$
-        
-        💬 **แนวคิด:** แทนที่จะจัดรูปซับซ้อน เรา**ดิฟบนและดิฟล่าง**แทน!
-        
-        ดิฟเรื่อยๆจนกว่าจะได้จำนวนจริง''',
+            r'''ถ้าแทนค่าแล้วได้ $\dfrac{0}{0}$ หรือ $\dfrac{\infty}{\infty}$ จะใช้กฎนี้ได้:
+
+$$\lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}$$
+
+💬 **แนวคิด:** ดิฟบน ดิฟล่าง**แยกกัน** (ไม่ใช่ Quotient Rule!) แล้วหาลิมิตใหม่''',
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"สูตร",
-      blocks: [
-        ContentBlock("lhop_t_371", "text", {
+        ContentBlock("lhop_t_009", "text", {
           "content": [
-            r'''ถ้า $\lim\limits_{x \to a} \dfrac{f(x)}{g(x)}$ แทนตรงๆได้รูป $\dfrac{0}{0}$ หรือ $\dfrac{\infty}{\infty}$
-        
-        แล้ว
-        
-        $$\lim\limits_{x \to a} \dfrac{f(x)}{g(x)} = \lim\limits_{x \to a} \dfrac{f'(x)}{g'(x)}$$
-        
-        💡 **ความหมาย:** 
-        
-        **ดิฟบน ดิฟล่าง แล้วหาลิมิตใหม่!** 🎯
-        
-        Note = เงื่อนไขสำคัญ
-        
-        ใช้ได้**เฉพาะ** $\dfrac{0}{0}$ หรือ $\dfrac{\infty}{\infty}$ เท่านั้น!
-        
-        ถ้าได้รูปอื่น เช่น $\dfrac{k}{0}$ ($k \neq 0$) หรือ $\infty - \infty$ 
-        
-        ใช้ไม่ได้''',
+            r'''Note = เงื่อนไขที่ต้องตรวจก่อน**เสมอ**
+
+ใช้ได้เฉพาะเมื่อแทนค่าแล้วได้ $\dfrac{0}{0}$ หรือ $\dfrac{\infty}{\infty}$ เท่านั้น
+
+ถ้าได้รูปอื่น เช่น $\dfrac{5}{2}$ หรือ $\dfrac{7}{0}$ — **ห้ามใช้กฎนี้!**''',
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"แนวคิดหลัก",
-      blocks: [
-        ContentBlock("lhop_t_372", "text", {
-          "content": [
-            r'''**ขั้นที่ 1:** แทนค่าตรงๆ ตรวจสอบว่าได้ $\dfrac{0}{0}$ หรือ $\dfrac{\infty}{\infty}$ ไหม?
-        
-        **ขั้นที่ 2:** ถ้าใช่ $\to$ ดิฟบน ดิฟล่าง (แยกกัน)
-        
-        **ขั้นที่ 3:** หาลิมิตใหม่
-        
-        **ขั้นที่ 4:** ถ้ายังเป็น $\dfrac{0}{0}$ หรือ $\dfrac{\infty}{\infty} \to$ ใช้ L'Hospital ต่อ!''',
-          ],
+        ContentBlock("lhop_h_010", "header", {
+          "title": r"ตัวอย่างแรก — ทำทีละขั้น",
+          "level": 2,
         }),
-        ContentBlock("lhop_h_373", "header", {"title": r"เช่น", "level": 2}),
-        ContentBlock("lhop_t_374", "text", {
-          "content": [
-            r'''จงหา
-        
-        $$\lim\limits_{x \to 2} \dfrac{x^2 - 4}{x - 2}$$
-        
-        **มาทำทีละขั้นตอน! 🚀**''',
-          ],
-        }),
-        ContentBlock("ddq_lhospital_1", "drag_and_drop", {
+        ContentBlock("lhop_ddq_011", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_lhospital_1",
+              "questionId": "lhop_ddq_011_s1",
               "content": [
-                r'''🎯 **ขั้นที่ 1:** ตรวจสอบรูปแบบ
-        
-        แทน $x = 2$:
-        
-        $\dfrac{2^2 - 4}{2 - 2} = \dfrac{0}{0}$
-        
-        ได้รูป ''',
+                r'''จงหา $\lim\limits_{x \to 2} \dfrac{x^2 - 4}{x - 2}$
+
+**① ตรวจสอบ:** แทน $x = 2$ ได้ $\dfrac{0}{0}$ → ใช้โลปิตาลได้ ✅
+
+**② ดิฟบนและล่างแยกกัน:**
+
+ดิฟบน: $\dfrac{d}{dx}(x^2 - 4) = $ ''',
                 {"drop": "0"},
-                r'''$\to$ ใช้ L'Hospital ได้ ''',
+                r'''  ,  ดิฟล่าง: $\dfrac{d}{dx}(x - 2) = $ ''',
                 {"drop": "1"},
               ],
-              "draggableItems": [
-                r"$\dfrac{0}{0}$",
-                r"$\dfrac{\infty}{\infty}$",
-                r"$\infty - \infty$",
-                r"ใช่",
-                r"ไม่",
-              ],
-              "correctAnswers": {"0": r"$\dfrac{0}{0}$", "1": r"ใช่"},
-              "explanation": r'''ได้ $\dfrac{0}{0}$ ใช้ L'Hospital ได้! ✅''',
+              "draggableItems": [r"$2x$", r"$1$", r"$x^2$", r"$2$"],
+              "correctAnswers": {"0": r"$2x$", "1": r"$1$"},
+              "explanation": r'''ดิฟแยกกัน: บนได้ $2x$, ล่างได้ $1$ — ไม่ใช่ Quotient Rule''',
             },
-          ],
-        }),
-        ContentBlock("ddq_lhospital_2", "drag_and_drop", {
-          "steps": [
             {
-              "questionId": "ddq_lhospital_2",
+              "questionId": "lhop_ddq_011_s2",
               "content": [
-                r'''🔧 **ขั้นที่ 2:** ดิฟบนและดิฟล่าง
-        
-        ดิฟบน: $\dfrac{d}{dx}(x^2 - 4) =$ ''',
-                {"drop": "0"},
-                r'''ดิฟล่าง: $\dfrac{d}{dx}(x - 2) =$ ''',
-                {"drop": "1"},
-                r'''ลิมิตใหม่ ดิฟบนส่วนดิฟล่าง: $\lim\limits_{x \to 2}$ ''',
-                {"drop": "2"},
-              ],
-              "draggableItems": [
-                r"$2x$",
-                r"$1$",
-                r"$x$",
-                r"$2$",
-                r"$x^2$",
-                r"$\dfrac{x}{1}$",
-                r"$\dfrac{2x}{1}$",
-              ],
-              "correctAnswers": {
-                "0": r"$2x$",
-                "1": r"$1$",
-                "2": r"$\dfrac{2x}{1}$",
-              },
-              "explanation": r'''ดิฟบนได้ $2x$ และดิฟล่างได้ $1$
-        จะได้ลิมิตใหม่ดิฟบนส่วนดิฟล่าง $\lim\limits_{x \to 2} \dfrac{x^2 - 4}{x - 2} = \lim\limits_{x \to 2} \dfrac{2x}{1}$''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_lhospital_3", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_lhospital_3",
-              "content": [
-                r'''🏁 **ขั้นที่ 3:** หาลิมิตใหม่
-        
-        $\lim\limits_{x \to 2} \dfrac{2x}{1}$
-        
-        แทน $x = 2$: $\dfrac{2(2)}{1} =$ ''',
-                {"drop": "0"},
-                r'''**คำตอบ:** ''',
+                r'''**③ หาลิมิตใหม่:**
+
+$\lim\limits_{x \to 2} \dfrac{x^2 - 4}{x - 2} = \lim\limits_{x \to 2} \dfrac{2x}{1}$
+
+แทน $x = 2$ ตรงๆ: $\dfrac{2 \times 2}{1} = $ ''',
                 {"drop": "0"},
               ],
-              "draggableItems": [r"$2$", r"$4$", r"$6$", r"$0$", r"$1$"],
+              "draggableItems": [r"$4$", r"$2$", r"$0$", r"$1$"],
               "correctAnswers": {"0": r"$4$"},
-              "explanation": r'''แทนค่าได้ $4$ ทันที! 🎉''',
+              "explanation": r'''หลังดิฟแล้วแทนค่าได้ $4$ ทันที! 💚
+
+🧠 เทียบกับวิธีแยกตัวประกอบ: ค่าเหมือนกัน แต่ไม่ต้องคิดมากเลย!''',
             },
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"📝 แบบฝึกหัด",
-      blocks: [
-        ContentBlock("ddq_lhospital_ex1", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_lhospital_ex1",
-              "content": [
-                r'''1. $\lim\limits_{x \to 3} \dfrac{x^2 - 9}{x - 3} =$''',
-                {"drop": "0"},
-              ],
-              "draggableItems": [
-                r"$\dfrac{0}{0}$",
-                r"$2x$",
-                r"$1$",
-                r"$6$",
-                r"$\dfrac{\infty}{\infty}$",
-                r"$3$",
-              ],
-              "correctAnswers": {"0": r"$6$"},
-              "explanation": r'''ดิฟบน : $\dfrac{d}{dx}(x^2 - 9) = 2x$
-        
-        ดิฟล่าง: $\dfrac{d}{dx}(x - 3) = 1$
-        
-        ดิฟบนส่วนดิฟล่างได้ 
-        
-        $\lim\limits_{x \to 3} \dfrac{x^2 - 9}{x - 3} = \lim\limits_{x \to 3} \dfrac{2x}{1}$ 
-        
-        แทน $x=3$ ได้ $6$''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_lhospital_ex2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_lhospital_ex2",
-              "content": [
-                r'''2. $\lim\limits_{x \to 1} \dfrac{x^3 - 1}{x - 1} = ?$''',
-                {"drop": "0"},
-              ],
-              "draggableItems": [
-                r"$\dfrac{0}{0}$",
-                r"$3x^2$",
-                r"$1$",
-                r"$3$",
-                r"$x^2$",
-                r"$0$",
-              ],
-              "correctAnswers": {"0": r"$3$"},
-              "explanation": r'''ดิฟบน : $\dfrac{d}{dx}(x^3 - 1) = 3x^2$
-        
-        ดิฟล่าง: $\dfrac{d}{dx}(x - 1) = 1$
-        
-        ดิฟบนส่วนดิฟล่างได้ 
-        
-        $\lim\limits_{x \to 1} \dfrac{x^3 - 1}{x - 1} = \lim\limits_{x \to 1} \dfrac{3x^2}{1}$
-        
-        แทน $x = 1$ ได้ $3$''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_lhospital_ex3", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_lhospital_ex3",
-              "content": [
-                r'''3. $\lim\limits_{x \to 0} \dfrac{x^2 + 2x}{x} = ?$''',
-                {"drop": "0"},
-              ],
-              "draggableItems": [
-                r"$\dfrac{0}{0}$",
-                r"$2x + 2$",
-                r"$1$",
-                r"$2$",
-                r"$x + 2$",
-                r"$0$",
-              ],
-              "correctAnswers": {"0": r"$2$"},
-              "explanation": r'''ดิฟบน : $\dfrac{d}{dx}(x^2 + 2x) = 2x + 2$
-        
-        ดิฟล่าง: $\dfrac{d}{dx}(x) = 1$
-        
-        ดิฟบนส่วนดิฟล่างได้ 
-        
-        $\lim\limits_{x \to 0} \dfrac{x^2 + 2x}{x} = \lim\limits_{x \to 0} \dfrac{2x + 2}{1}$
-        
-        แทน $x = 0$ ได้ $2$''',
-            },
-          ],
-        }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"🔁 ใช้ L'Hospital หลายครั้ง",
-      blocks: [
-        ContentBlock("lhop_t_381", "text", {
+        ContentBlock("lhop_q_012", "question_choice", {
           "content": [
-            r'''บางทีใช้ครั้งเดียวยังได้ $\dfrac{0}{0}$ หรือ $\dfrac{\infty}{\infty}$ อยู่!
-        
-        → **ใช้ L'Hospital ต่อ!** 🔄''',
+            r'''1. ข้อใดคือ**ขั้นตอนที่ถูกต้อง**ของกฎโลปิตาล?''',
           ],
-        }),
-        ContentBlock("ddq_lhospital_multi1", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_lhospital_multi1",
-              "content": [
-                r'''1. จงหา $\lim\limits_{x \to 0} \dfrac{x^3}{x^2}$
-        
-        **ครั้งที่ 1:**
-        
-        แทนค่า: $\dfrac{0}{0}$ ใช้ L'Hospital
-        
-        ดิฟบน: $\dfrac{d}{dx}(x^3) =$ ''',
-                {"drop": "0"},
-                r'''ดิฟล่าง $\dfrac{d}{dx}(x^2) = 2x$
-        
-        ได้ $\lim\limits_{x \to 0} \dfrac{x^3}{x^2} = \lim\limits_{x \to 0}$ ''',
-                {"drop": "1"},
-                r'''แทนค่า $x = 0$ ได้ ''',
-                {"drop": "2"},
-                r'''ต้องใช้ L'Hospital อีกรอบ ''',
-                {"drop": "3"},
-              ],
-              "draggableItems": [
-                r"$3x^2$",
-                r"$2x$",
-                r"ใช่",
-                r"ไม่",
-                r"$x^2$",
-                r"$x$",
-                r"$3$",
-                r"$\dfrac{0}{0}$",
-                r"$\dfrac{\infty}{\infty}$",
-                r"$\dfrac{3x^2}{2x}$",
-              ],
-              "correctAnswers": {
-                "0": r"$3x^2$",
-                "1": r"$\dfrac{3x^2}{2x}$",
-                "2": r"$\dfrac{0}{0}$",
-                "3": r"ใช่",
-              },
-              "explanation":
-                  r'''ใช้ L'hospital ได้ $\lim\limits_{x \to 0} \dfrac{x^3}{x^2} = \lim\limits_{x \to 0} \dfrac{3x^2}{2x}$
-        
-        แทนค่า $x = 0$ ตรงๆ ยังได้ $\dfrac{0}{0}$ ต้องใช้ต่อ!''',
-            },
+          "options": [
+            r"ตรวจสอบรูป → ดิฟบน/ล่างแยกกัน → หาลิมิตใหม่",
+            r"ดิฟทั้งเศษส่วนด้วย Quotient Rule ก่อนเลย",
+            r"ใช้ได้กับลิมิตทุกรูปแบบ ไม่ต้องตรวจสอบ",
+            r"ดิฟบนและล่างแล้วคูณกัน",
           ],
-        }),
-        ContentBlock("ddq_lhospital_multi2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_lhospital_multi2",
-              "content": [
-                r'''**ครั้งที่ 2:**
-        
-        ดิฟบน: $\dfrac{d}{dx}(3x^2) =$ ''',
-                {"drop": "0"},
-                r'''ดิฟล่าง: $\dfrac{d}{dx}(2x) =$ ''',
-                {"drop": "1"},
-                r'''$\lim\limits_{x \to 0} \dfrac{3x^2}{2x} = \lim\limits_{x \to 0}$ ''',
-                {"drop": "2"},
-                r'''แทนค่า $x = 0$ จะได้ ''',
-                {"drop": "3"},
-                r'''ซึ่งเป็นจำนวนจริง
-        
-        ดังนั้นตอบ ''',
-                {"drop": "3"},
-              ],
-              "draggableItems": [
-                r"$6x$",
-                r"$2$",
-                r"$0$",
-                r"$3$",
-                r"$6$",
-                r"$x$",
-                r"$\dfrac{6x}{2}$",
-                r"$\dfrac{2x}{1}$",
-              ],
-              "correctAnswers": {
-                "0": r"$6x$",
-                "1": r"$2$",
-                "2": r"$\dfrac{6x}{2}$",
-                "3": r"$0$",
-              },
-              "explanation":
-                  r'''ใช้ L'hospital ได้ $\lim\limits_{x \to 0} \dfrac{3x^2}{2x} = \lim\limits_{x \to 0} \dfrac{6x}{2}$
-        
-        แทนค่า $x = 0$ ตรงๆ ได้ $0$ ซึ่งเป็นจำนวนจริงดังนั้นตอบได้เลย''',
-            },
-          ],
+          "correct": r"ตรวจสอบรูป → ดิฟบน/ล่างแยกกัน → หาลิมิตใหม่",
+          "explanation": r'''ขั้นตอนที่ถูก: ① ตรวจว่าเป็น $\dfrac{0}{0}$ หรือ $\dfrac{\infty}{\infty}$ ② ดิฟแยกกัน ③ หาลิมิตใหม่
+
+🧠 ถ้าข้ามขั้น ① จะใช้กฎผิดเงื่อนไขและอาจได้คำตอบผิด!''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 3: ฝึกใช้ครั้งแรก — รูป 0/0
+    // =============================================
     ContentSection(
-      headerL1: r"📚 แบบฝึกหัดเพิ่มเติม",
+      headerL1: r"🔢 ฝึกใช้ครั้งแรก — รูป $\frac{0}{0}$",
       blocks: [
-        ContentBlock("ddq_lhospital_add1", "drag_and_drop", {
+        ContentBlock("lhop_h_013", "header", {
+          "title": r"ฝึก 3 ขั้นให้ชำนาญ",
+          "level": 2,
+        }),
+        ContentBlock("lhop_t_014", "text", {
+          "content": [
+            r'''จำ 3 ขั้นนี้ให้ขึ้นใจ:
+
+🔸 **① ตรวจสอบ** — แทนค่าดูว่าได้ $\dfrac{0}{0}$ ไหม
+
+🔸 **② ดิฟ** — ดิฟบน ดิฟล่างแยกกัน (ทีละตัว)
+
+🔸 **③ หาลิมิต** — แทนค่าในลิมิตใหม่ ถ้าได้จำนวนจริง หยุดได้เลย''',
+          ],
+        }),
+        ContentBlock("lhop_ddq_015", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_lhospital_add1",
+              "questionId": "lhop_ddq_015_s1",
               "content": [
-                r'''1. $\lim\limits_{x \to 2} \dfrac{x^3 - 8}{x^2 - 4} = $''',
+                r'''จงหา $\lim\limits_{x \to 3} \dfrac{x^2 - 9}{x - 3}$
+
+**① ตรวจสอบ:** แทน $x = 3$: $\dfrac{9 - 9}{3 - 3} = \dfrac{0}{0}$ ✅
+
+**② ดิฟ:**
+
+ดิฟบน: $\dfrac{d}{dx}(x^2 - 9) = $ ''',
                 {"drop": "0"},
+                r'''  ,  ดิฟล่าง: $\dfrac{d}{dx}(x - 3) = $ ''',
+                {"drop": "1"},
+                r'''**③ หาลิมิต:** แทน $x = 3$ ใน $\dfrac{2x}{1}$ ได้ ''',
+                {"drop": "2"},
               ],
-              "draggableItems": [
-                r"$\dfrac{0}{0}$",
-                r"$3x^2$",
-                r"$2x$",
-                r"$3$",
-                r"$12$",
-              ],
-              "correctAnswers": {"0": r"$3$"},
-              "explanation": r'''แทนค่า: ได้ $\dfrac{0}{0}$ ใช้ L'hospital
-        
-        ดิฟบน: $\dfrac{d}{dx}(x^3 - 8) = 3x^2$
-        
-        ดิฟล่าง $\dfrac{d}{dx}(x^2 - 4) = 2x$
-        
-        $\lim\limits_{x \to 2} \dfrac{x^3 - 8}{x^2 - 4} = \lim\limits_{x \to 2} \dfrac{3x^2}{2x}$
-        
-        $= \dfrac{3(2)^2}{2(2)} = \dfrac{12}{4} = 3$''',
+              "draggableItems": [r"$2x$", r"$1$", r"$6$", r"$3$"],
+              "correctAnswers": {"0": r"$2x$", "1": r"$1$", "2": r"$6$"},
+              "explanation": r'''ดิฟบน $2x$, ล่าง $1$ → แทน $x = 3$: $2(3) = 6$ 💚''',
             },
           ],
         }),
-        ContentBlock("ddq_lhospital_add2", "drag_and_drop", {
+        ContentBlock("lhop_ddq_016", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_lhospital_add2",
+              "questionId": "lhop_ddq_016_s1",
               "content": [
-                r'''2. $\lim\limits_{x \to 0} \dfrac{x^2 + 3x}{2x} = ?$''',
+                r'''จงหา $\lim\limits_{x \to 1} \dfrac{x^3 - 1}{x - 1}$
+
+**① ตรวจสอบ:** แทน $x = 1$: $\dfrac{1 - 1}{1 - 1} = \dfrac{0}{0}$ ✅
+
+**② ดิฟ:**
+
+ดิฟบน: $\dfrac{d}{dx}(x^3 - 1) = $ ''',
                 {"drop": "0"},
+                r'''  ,  ดิฟล่าง: $\dfrac{d}{dx}(x - 1) = $ ''',
+                {"drop": "1"},
+                r'''**③ หาลิมิต:** แทน $x = 1$ ใน $\dfrac{3x^2}{1}$ ได้ ''',
+                {"drop": "2"},
               ],
-              "draggableItems": [
-                r"$\dfrac{0}{0}$",
-                r"$2x + 3$",
-                r"$2$",
-                r"$\dfrac{3}{2}$",
-                r"$3$",
-                r"$0$",
-              ],
-              "correctAnswers": {"0": r"$\dfrac{3}{2}$"},
-              "explanation": r'''แทนค่า: ได้ $\dfrac{0}{0}$ ใช้ L'hospital
-        
-        ดิฟบน: $\dfrac{d}{dx}(x^2 + 3x) = 2x + 3$
-        
-        ดิฟล่าง $\dfrac{d}{dx}(2x) = 2$
-        
-        $\lim\limits_{x \to 0} \dfrac{x^2 + 3x}{2x} = \lim\limits_{x \to 0} \dfrac{2x + 3}{2}$
-        
-        $= \dfrac{3}{2}$''',
+              "draggableItems": [r"$3x^2$", r"$1$", r"$3$", r"$2x$"],
+              "correctAnswers": {"0": r"$3x^2$", "1": r"$1$", "2": r"$3$"},
+              "explanation": r'''ดิฟบน $3x^2$, ล่าง $1$ → แทน $x = 1$: $3(1)^2 = 3$ 💚''',
             },
           ],
         }),
-        ContentBlock("ddq_lhospital_add3", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_lhospital_add3",
-              "content": [
-                r'''3. $\lim\limits_{x \to \infty} \dfrac{3x + 5}{2x - 1} = $''',
-                {"drop": "0"},
-              ],
-              "draggableItems": [
-                r"$\dfrac{\infty}{\infty}$",
-                r"$3$",
-                r"$2$",
-                r"$\dfrac{3}{2}$",
-                r"$0$",
-                r"$1$",
-              ],
-              "correctAnswers": {"0": r"$\dfrac{3}{2}$"},
-              "explanation":
-                  r'''แทนค่า: ได้ $\dfrac{\infty}{\infty}$ ใช้ L'hospital
-        
-        ดิฟบน: $\dfrac{d}{dx}(3x + 5) = 3$
-        
-        ดิฟล่าง $\dfrac{d}{dx}(2x - 1) = 2$
-        
-        $\lim\limits_{x \to \infty} \dfrac{3x + 5}{2x - 1} = \lim\limits_{x \to \infty} \dfrac{3}{2}$
-        
-        $= \dfrac{3}{2}$''',
-            },
+        ContentBlock("lhop_h_017", "header", {
+          "title": r"ฝึกเลย",
+          "level": 2,
+        }),
+        ContentBlock("lhop_q_018", "question_choice", {
+          "content": [
+            r'''1. $\lim\limits_{x \to 0} \dfrac{x^2 + 5x}{x} = ?$''',
           ],
+          "options": [r"$5$", r"$0$", r"$1$", r"$2$"],
+          "correct": r"$5$",
+          "explanation": r'''แทน $x = 0$: $\dfrac{0}{0}$ ✅
+
+ดิฟบน: $2x + 5$  ,  ดิฟล่าง: $1$
+
+$\lim\limits_{x \to 0} \dfrac{2x + 5}{1}$ แทน $x = 0$: $2(0) + 5 = 5$ 💚''',
+        }),
+        ContentBlock("lhop_q_019", "question_choice", {
+          "content": [
+            r'''2. $\lim\limits_{x \to 2} \dfrac{x^3 - 8}{x - 2} = ?$''',
+          ],
+          "options": [r"$12$", r"$6$", r"$8$", r"$3$"],
+          "correct": r"$12$",
+          "explanation": r'''แทน $x = 2$: $\dfrac{0}{0}$ ✅
+
+ดิฟบน: $3x^2$  ,  ดิฟล่าง: $1$
+
+$\lim\limits_{x \to 2} \dfrac{3x^2}{1}$ แทน $x = 2$: $3(2)^2 = 12$ 💚''',
+        }),
+        ContentBlock("lhop_q_020", "question_choice", {
+          "content": [
+            r'''3. $\lim\limits_{x \to 1} \dfrac{x^2 - 2x + 1}{x^2 - 1} = ?$''',
+          ],
+          "options": [r"$0$", r"$\dfrac{1}{2}$", r"$1$", r"$-\dfrac{1}{2}$"],
+          "correct": r"$0$",
+          "explanation": r'''แทน $x = 1$: $\dfrac{0}{0}$ ✅
+
+ดิฟบน: $2x - 2$  ,  ดิฟล่าง: $2x$
+
+$\lim\limits_{x \to 1} \dfrac{2x - 2}{2x}$ แทน $x = 1$: $\dfrac{0}{2} = 0$ 💚''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 4: รูป ∞/∞ และการใช้หลายรอบ
+    // =============================================
+    ContentSection(
+      headerL1: r"♾️ รูป $\frac{\infty}{\infty}$ และการใช้หลายรอบ",
+      blocks: [
+        ContentBlock("lhop_h_021", "header", {
+          "title": r"รูป $\frac{\infty}{\infty}$ — กฎเดิม ใช้ได้เหมือนกัน",
+          "level": 2,
+        }),
+        ContentBlock("lhop_t_022", "text", {
+          "content": [
+            r'''เมื่อ $x \to \infty$ บางฟังก์ชันทั้งบนและล่างต่างพุ่งสู่ $\infty$ พร้อมกัน
+
+รูป $\dfrac{\infty}{\infty}$ ก็เป็นรูปไม่กำหนดเช่นกัน — ใช้กฎโลปิตาลได้เลย
+
+ขั้นตอนเหมือนเดิมทุกอย่าง แค่เปลี่ยนจากตรวจ $\dfrac{0}{0}$ เป็นตรวจ $\dfrac{\infty}{\infty}$''',
+          ],
+        }),
+        ContentBlock("lhop_ddq_023", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "lhop_ddq_023_s1",
+              "content": [
+                r'''จงหา $\lim\limits_{x \to \infty} \dfrac{3x + 5}{2x - 1}$
+
+**① ตรวจสอบ:** เมื่อ $x \to \infty$: บน $\to \infty$, ล่าง $\to \infty$ → รูป ''',
+                {"drop": "0"},
+                r''' ✅
+
+**② ดิฟ:**
+
+ดิฟบน: $\dfrac{d}{dx}(3x + 5) = $ ''',
+                {"drop": "1"},
+                r'''  ,  ดิฟล่าง: $\dfrac{d}{dx}(2x - 1) = $ ''',
+                {"drop": "2"},
+              ],
+              "draggableItems": [r"$\dfrac{\infty}{\infty}$", r"$3$", r"$2$", r"$\dfrac{0}{0}$"],
+              "correctAnswers": {"0": r"$\dfrac{\infty}{\infty}$", "1": r"$3$", "2": r"$2$"},
+              "explanation": r'''รูป $\dfrac{\infty}{\infty}$ → ดิฟบนได้ $3$, ล่างได้ $2$''',
+            },
+            {
+              "questionId": "lhop_ddq_023_s2",
+              "content": [
+                r'''**③ หาลิมิต:**
+
+$\lim\limits_{x \to \infty} \dfrac{3}{2} = $ ''',
+                {"drop": "0"},
+                r'''เพราะ $\dfrac{3}{2}$ เป็นค่าคงที่ ''',
+                {"drop": "1"},
+                r'''ขึ้นกับ $x$''',
+              ],
+              "draggableItems": [r"$\dfrac{3}{2}$", r"ไม่", r"$\infty$", r"ยัง"],
+              "correctAnswers": {"0": r"$\dfrac{3}{2}$", "1": r"ไม่"},
+              "explanation": r'''หลังดิฟแล้วไม่มี $x$ เหลือ → $\dfrac{3}{2}$ เป็นค่าคงที่ → ลิมิต $= \dfrac{3}{2}$ 💚''',
+            },
+          ],
+        }),
+        ContentBlock("lhop_h_024", "header", {
+          "title": r"ใช้หลายรอบ — เมื่อดิฟแล้วยังได้รูปไม่กำหนด",
+          "level": 2,
+        }),
+        ContentBlock("lhop_t_025", "text", {
+          "content": [
+            r'''บางครั้งหลังดิฟครั้งแรกแล้ว แทนค่ายังได้ $\dfrac{0}{0}$ หรือ $\dfrac{\infty}{\infty}$ อีก
+
+**ดิฟต่อได้เลย!** ใช้โลปิตาลซ้ำจนกว่าจะแทนค่าแล้วได้จำนวนจริง
+
+Note = ตรวจสอบก่อนทุกรอบ
+
+ก่อนใช้รอบถัดไปต้องมั่นใจว่าลิมิตใหม่ยังเป็น $\dfrac{0}{0}$ หรือ $\dfrac{\infty}{\infty}$ อยู่จริงๆ''',
+          ],
+        }),
+        ContentBlock("lhop_ddq_026", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "lhop_ddq_026_s1",
+              "content": [
+                r'''จงหา $\lim\limits_{x \to 0} \dfrac{x^3}{x^2}$
+
+**รอบที่ 1:** แทน $x = 0$: $\dfrac{0}{0}$ ✅ → ดิฟ
+
+ดิฟบน: $3x^2$  ,  ดิฟล่าง: $2x$ → ได้ $\lim\limits_{x \to 0} \dfrac{3x^2}{2x}$
+
+แทน $x = 0$: $\dfrac{0}{0}$ อีกรั้ง → ต้องดิฟ ''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [r"อีกรอบ", r"หยุด แล้วตอบ $0$", r"หยุด แล้วตอบ $3$"],
+              "correctAnswers": {"0": r"อีกรอบ"},
+              "explanation": r'''ยังได้ $\dfrac{0}{0}$ อีก → ดิฟต่อ!''',
+            },
+            {
+              "questionId": "lhop_ddq_026_s2",
+              "content": [
+                r'''**รอบที่ 2:** ดิฟ $\dfrac{3x^2}{2x}$
+
+ดิฟบน: $\dfrac{d}{dx}(3x^2) = $ ''',
+                {"drop": "0"},
+                r'''  ,  ดิฟล่าง: $\dfrac{d}{dx}(2x) = $ ''',
+                {"drop": "1"},
+                r'''$\lim\limits_{x \to 0} \dfrac{6x}{2}$ แทน $x = 0$: $\dfrac{6(0)}{2} = $ ''',
+                {"drop": "2"},
+                r'''ได้จำนวนจริง — **หยุดได้!** ✅''',
+              ],
+              "draggableItems": [r"$6x$", r"$2$", r"$0$", r"$6$"],
+              "correctAnswers": {"0": r"$6x$", "1": r"$2$", "2": r"$0$"},
+              "explanation": r'''รอบที่ 2: ได้ $\dfrac{6x}{2}$ แทน $x = 0$ ได้ $0$ — เป็นจำนวนจริง ตอบ $0$ ได้เลย! 💚''',
+            },
+          ],
+        }),
+        ContentBlock("lhop_q_027", "question_choice", {
+          "content": [
+            r'''1. $\lim\limits_{x \to \infty} \dfrac{5x^2 + 1}{3x^2 - 2} = ?$''',
+          ],
+          "options": [r"$\dfrac{5}{3}$", r"$\infty$", r"$0$", r"$\dfrac{5}{6}$"],
+          "correct": r"$\dfrac{5}{3}$",
+          "explanation": r'''รูป $\dfrac{\infty}{\infty}$ ✅
+
+รอบที่ 1: ดิฟบน $10x$, ล่าง $6x$ → $\lim\limits_{x \to \infty} \dfrac{10x}{6x}$ ยังเป็น $\dfrac{\infty}{\infty}$
+
+รอบที่ 2: ดิฟบน $10$, ล่าง $6$ → $\dfrac{10}{6} = \dfrac{5}{3}$ 💚''',
+        }),
+        ContentBlock("lhop_q_028", "question_choice", {
+          "content": [
+            r'''2. $\lim\limits_{x \to 2} \dfrac{x^2 - 4}{x^2 - 3x + 2} = ?$''',
+          ],
+          "options": [r"$4$", r"$1$", r"$2$", r"$0$"],
+          "correct": r"$4$",
+          "explanation": r'''แทน $x = 2$: $\dfrac{0}{0}$ ✅
+
+ดิฟบน: $2x$  ,  ดิฟล่าง: $2x - 3$
+
+แทน $x = 2$: $\dfrac{2(2)}{2(2) - 3} = \dfrac{4}{1} = 4$ 💚''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 5: แบบฝึกหัดรวม
+    // =============================================
+    ContentSection(
+      headerL1: r"📝 แบบฝึกหัดรวม",
+      blocks: [
+        ContentBlock("lhop_t_029", "text", {
+          "content": [
+            r'''โจทย์ในส่วนนี้มีทั้ง $\dfrac{0}{0}$, $\dfrac{\infty}{\infty}$, และ**กับดัก** — รูปที่ใช้โลปิตาล**ไม่ได้!**
+
+🔸 ต้องตรวจสอบรูปก่อน**ทุกครั้ง** อย่าเผลอใช้โดยไม่ตรวจ''',
+          ],
+        }),
+        ContentBlock("lhop_h_030", "header", {
+          "title": r"ระวัง — รูปที่ใช้โลปิตาลไม่ได้!",
+          "level": 2,
+        }),
+        ContentBlock("lhop_t_031", "text", {
+          "content": [
+            r'''ถ้าแทนค่าแล้วได้ตัวเลขปกติ เช่น $\dfrac{5}{3}$ หรือ $7$ — **แค่ตอบค่านั้นได้เลย!**
+
+ไม่ต้องดิฟอะไรทั้งนั้น เพราะไม่ใช่รูปไม่กำหนด
+
+Note = ใช้กฎโลปิตาลผิดเงื่อนไข → คำตอบผิดทันที!''',
+          ],
+        }),
+        ContentBlock("lhop_ddq_032", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "lhop_ddq_032_s1",
+              "content": [
+                r'''จงหา $\lim\limits_{x \to 3} \dfrac{x^2 + 1}{x - 1}$
+
+**① ตรวจสอบ:** แทน $x = 3$: $\dfrac{3^2 + 1}{3 - 1} = \dfrac{10}{2} = 5$
+
+รูปนี้ ''',
+                {"drop": "0"},
+                r''' รูปไม่กำหนด → ''',
+                {"drop": "1"},
+              ],
+              "draggableItems": [r"ไม่ใช่", r"ตอบ $5$ ได้เลย", r"ต้องใช้โลปิตาล", r"ใช่"],
+              "correctAnswers": {"0": r"ไม่ใช่", "1": r"ตอบ $5$ ได้เลย"},
+              "explanation": r'''$\dfrac{10}{2} = 5$ — ได้จำนวนจริงเลย ตอบ $5$ ได้ทันที ไม่ต้องดิฟ! 💚''',
+            },
+          ],
+        }),
+        ContentBlock("lhop_q_033", "question_choice", {
+          "content": [
+            r'''1. $\lim\limits_{x \to 0} \dfrac{3x^2 + x}{x} = ?$''',
+          ],
+          "options": [r"$1$", r"$0$", r"$3$", r"$4$"],
+          "correct": r"$1$",
+          "explanation": r'''แทน $x = 0$: $\dfrac{0}{0}$ ✅
+
+ดิฟบน: $6x + 1$  ,  ดิฟล่าง: $1$
+
+แทน $x = 0$: $6(0) + 1 = 1$ 💚''',
+        }),
+        ContentBlock("lhop_q_034", "question_choice", {
+          "content": [
+            r'''2. $\lim\limits_{x \to 1} \dfrac{x^4 - 1}{x^2 - 1} = ?$''',
+          ],
+          "options": [r"$2$", r"$4$", r"$1$", r"$0$"],
+          "correct": r"$2$",
+          "explanation": r'''แทน $x = 1$: $\dfrac{0}{0}$ ✅
+
+ดิฟบน: $4x^3$  ,  ดิฟล่าง: $2x$
+
+$\lim\limits_{x \to 1} \dfrac{4x^3}{2x}$ แทน $x = 1$: $\dfrac{4}{2} = 2$ 💚''',
+        }),
+        ContentBlock("lhop_q_035", "question_choice", {
+          "content": [
+            r'''3. $\lim\limits_{x \to \infty} \dfrac{2x^2 + 3x}{x^2 + 1} = ?$''',
+          ],
+          "options": [r"$2$", r"$3$", r"$\infty$", r"$0$"],
+          "correct": r"$2$",
+          "explanation": r'''รูป $\dfrac{\infty}{\infty}$ ✅
+
+รอบที่ 1: ดิฟบน $4x + 3$, ล่าง $2x$ → ยัง $\dfrac{\infty}{\infty}$
+
+รอบที่ 2: ดิฟบน $4$, ล่าง $2$ → $\dfrac{4}{2} = 2$ 💚''',
+        }),
+        ContentBlock("lhop_q_036", "question_choice", {
+          "content": [
+            r'''4. ข้อใดต่อไปนี้**ควรใช้**กฎโลปิตาล?
+
+Note = ตรวจสอบรูปที่ได้จากการแทนค่าก่อน''',
+          ],
+          "options": [
+            r"$\lim\limits_{x \to 2} \dfrac{x^2 - 4}{x - 2}$ (แทนค่าได้ $\dfrac{0}{0}$)",
+            r"$\lim\limits_{x \to 1} \dfrac{x^2 + 3}{x + 2}$ (แทนค่าได้ $\dfrac{4}{3}$)",
+            r"$\lim\limits_{x \to 0} \dfrac{x + 5}{x - 3}$ (แทนค่าได้ $\dfrac{5}{-3}$)",
+            r"$\lim\limits_{x \to 2} \dfrac{x^2}{x + 1}$ (แทนค่าได้ $\dfrac{4}{3}$)",
+          ],
+          "correct": r"$\lim\limits_{x \to 2} \dfrac{x^2 - 4}{x - 2}$ (แทนค่าได้ $\dfrac{0}{0}$)",
+          "explanation": r'''ใช้โลปิตาลได้เฉพาะรูป $\dfrac{0}{0}$ หรือ $\dfrac{\infty}{\infty}$ เท่านั้น
+
+ตัวเลือกอื่นแทนค่าแล้วได้จำนวนจริงเลย — ตอบได้ทันทีโดยไม่ต้องดิฟ! 💚''',
+        }),
+        ContentBlock("lhop_q_037", "question_choice", {
+          "content": [
+            r'''5. $\lim\limits_{x \to 0} \dfrac{x^3 + 2x}{x} = ?$''',
+          ],
+          "options": [r"$2$", r"$0$", r"$1$", r"$3$"],
+          "correct": r"$2$",
+          "explanation": r'''แทน $x = 0$: $\dfrac{0}{0}$ ✅
+
+ดิฟบน: $3x^2 + 2$  ,  ดิฟล่าง: $1$
+
+แทน $x = 0$: $3(0)^2 + 2 = 2$ 💚''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 6: สรุป
+    // =============================================
     ContentSection(
       headerL1: r"สรุป",
       blocks: [
-        ContentBlock("lhop_t_387", "text", {
+        ContentBlock("lhop_t_038", "text", {
           "content": [
-            r'''🎯 **กฎของโลปิตาล (L'Hospital's Rule)**
-        
-        **1. ใช้เมื่อไหร่:** เจอ $\dfrac{0}{0}$ หรือ $\dfrac{\infty}{\infty}$ เท่านั้น! ⚠️
-        
-        **2. สูตร:**
-        
-        $$\lim\limits_{x \to a} \dfrac{f(x)}{g(x)} = \lim\limits_{x \to a} \dfrac{f'(x)}{g'(x)}$$
-        
-        **3. วิธีใช้:** **ดิฟบน ดิฟล่าง แล้วหาลิมิตใหม่!** 🎯
-        
-        **4. ใช้หลายครั้งได้:** ถ้ายังได้ $\dfrac{0}{0}$ หรือ $\dfrac{\infty}{\infty}$ → ใช้ L'Hospital ต่อ! 🔄''',
+            r'''🎯 **กฎของโลปิตาล (L'Hôpital's Rule)**
+
+**ใช้เมื่อไหร่:** แทนค่าแล้วได้ $\dfrac{0}{0}$ หรือ $\dfrac{\infty}{\infty}$ เท่านั้น!
+
+$$\lim_{x \to a} \frac{f(x)}{g(x)} \;\overset{0/0 \;\text{หรือ}\; \infty/\infty}{=}\; \lim_{x \to a} \frac{f'(x)}{g'(x)}$$''',
+          ],
+        }),
+        ContentBlock("lhop_t_039", "text", {
+          "content": [
+            r'''**3 ขั้นตอน:**
+
+**①** ตรวจสอบรูป — แทนค่าก่อน**เสมอ**
+
+**②** ดิฟบน ดิฟล่าง**แยกกัน** (ไม่ใช่ Quotient Rule!)
+
+**③** หาลิมิตใหม่ — ถ้าได้จำนวนจริง หยุด / ถ้าได้ $\dfrac{0}{0}$ หรือ $\dfrac{\infty}{\infty}$ อีก → ดิฟต่อได้''',
+          ],
+        }),
+        ContentBlock("lhop_t_040", "text", {
+          "content": [
+            r'''Note = ข้อควรระวัง 3 ข้อ
+
+🔸 ถ้าแทนค่าได้จำนวนปกติ — **ตอบเลย** ไม่ต้องดิฟ
+
+🔸 ดิฟบน/ล่าง**แยกกัน** — ไม่ใช่ดิฟเศษส่วนทั้งก้อนด้วย Quotient Rule
+
+🔸 ใช้ซ้ำได้ แต่ต้องตรวจสอบรูปก่อน**ทุกรอบ**''',
           ],
         }),
       ],
@@ -9181,286 +9563,346 @@ final calcLHopitalLesson = ContentLesson(
 // ── ประยุกต์กับเรขาวิเคราะห์ ──────────────────────────────────────────────────────────────
 
 final calcTangentLineLesson = ContentLesson(
-  title: "การหาสมการเส้นสัมผัส",
+  title: "เส้นสัมผัสและการประยุกต์",
   sections: [
+    // =============================================
+    // SECTION 1: แนวคิด — diff คือความชัน
+    // =============================================
     ContentSection(
-      headerL1: r"intro",
+      headerL1: r"💡 diff คือความชัน",
       blocks: [
-        ContentBlock("tangent_t_388", "text", {
+        ContentBlock("tl_t_001", "text", {
           "content": [
-            r'''จากบทที่ผ่านมา 🎥 เรารู้แล้วว่า
-        
-        $\mathbf{f'(x) =}$ ความชันของเส้นสัมผัส ณ $\mathbf{x}$
-        
-        ซึ่งมันสามารถประยุกต์กับบทเรขาคณิตวิเคราะห์ได้
-        
-        บทนี้เราจะมาเรียนกัน! 🚀
-        
-        Note = สำคัญ
-        
-        หากยังไม่แม่นเรื่อง เรขาคณิตวิเคราะห์ให้ไปทบทวนใน ... หรือข้ามเรื่องนี้ไปก่อน''',
+            r'''Note = ก่อนเรียนบทนี้
+
+บทนี้ใช้เรขาคณิตวิเคราะห์เป็นฐาน ถ้ายังไม่แม่นเรื่อง **สมการเส้นตรง ความชัน เส้นขนาน/ตั้งฉาก** ให้ไปทบทวนก่อน หรือข้ามบทนี้ไปก่อน''',
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"🔑 แนวคิดหลัก",
-      blocks: [
-        ContentBlock("tangent_t_389", "text", {
+        ContentBlock("tl_t_002", "text", {
           "content": [
-            r'''การหาสมการเส้นสัมผัส ใช้ **2 เครื่องมือ** รวมกัน:
-        
-        **1. อนุพันธ์** $\to$ หาความชัน (diff) 📐
-        
-        **2. เรขาวิเคราะห์**
-        
-        **สรุป:** 
-        
-        🔸 Diff ใช้แค่หา**ความชันเส้นสัมผัส**เท่านั้น! 
-        
-        🔸 **ที่เหลือใช้เรขาวิเคราะห์**''',
+            r'''จากบทที่แล้ว เรารู้แล้วว่า $f'(x)$ คือ **ความชันของเส้นสัมผัสกราฟ ณ จุด $x$**
+
+diff ทำหน้าที่ **เดียว** — ให้ความชัน 📐 ที่เหลือทั้งหมดคือ **เรขาคณิตวิเคราะห์**''',
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"📐 ทบทวน: สมการเส้นตรง",
-      blocks: [
-        ContentBlock("tangent_t_390", "text", {
+        ContentBlock("tl_ig_003", "interactive_graph", {
+          "path": "graph_data_tangent",
+        }),
+        ContentBlock("tl_t_004", "text", {
           "content": [
-            r'''จากเรขาวิเคราะห์ เส้นตรงที่ผ่านจุด $(x_1, y_1)$ และมีความชัน $m$:
-        
-        $$y - y_1 = m(x - x_1)$$
-        
-        💬 **นี่คือสูตรที่เราจะใช้!** เพียงแค่รู้:
-        
-        🔸 จุดที่เส้นตรงผ่าน $(x_1, y_1)$ 
-        
-        🔸 ความชัน $m$
-        
-        เราก็เขียนสมการเส้นสัมผัสของ $f(x)$ ที่จุด $(x, f(x))$ ได้แล้ว! ✅''',
+            r'''กราฟนี้แสดง $f(x) = -x^3 + 3x^2 - 2x$ พร้อมเส้นสัมผัส ณ จุดที่เลือก
+
+ลองเลื่อน $x$ ดู — สังเกตว่าความชันของเส้นสัมผัสเปลี่ยนไปตาม $x$ และค่านั้นตรงกับ $f'(x)$ เสมอ''',
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"🎯 ขั้นตอนหาสมการเส้นสัมผัส",
-      blocks: [
-        ContentBlock("tangent_h_391", "header", {"title": r"เช่น", "level": 2}),
-        ContentBlock("tangent_t_392", "text", {
+        ContentBlock("tl_t_005", "text", {
           "content": [
-            r'''จงหาสมการเส้นสัมผัสของ $f(x) = x^2$ ที่จุด $x = 1$''',
+            r'''**ตัวอย่าง** ที่ $x = 1$:
+
+$f'(x) = -3x^2 + 6x - 2$ ดังนั้น $f'(1) = -3 + 6 - 2 = 1$ และ $f(1) = 0$
+
+เส้นสัมผัส: $y - 0 = 1(x - 1)$ ดังนั้น $y = x - 1$ — ลองเลื่อนกราฟไปที่ $x = 1$ เพื่อยืนยัน!''',
           ],
         }),
-        ContentBlock("tangent_t_393", "image", {"path": "assets/diff6.png"}),
-        ContentBlock("tangent_t_394", "text", {
-          "content": [
-            r'''**มาทำทีละขั้นตอน! 🚀**
-        
-        Note = หมายเหตุ
-        
-        สมการเส้นสัมผัสที่จะหาคือ สมการเส้นประสีเทา''',
-          ],
-        }),
-        ContentBlock("ddq_tangent_step1", "drag_and_drop", {
+        ContentBlock("tl_ddq_006", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_tangent_step1",
+              "questionId": "tl_ddq_006_s1",
               "content": [
-                r'''🎯 **ขั้นที่ 1:** หาจุดสัมผัส และความชัน
-        🔸 หาจุดสัมผัส
-        
-        เมื่อ $x_1 = 1$:
-        
-        $y_1 = f(1) = (1)^2 =$ ''',
+                r'''ทดสอบที่ $x = 2$ บนกราฟเดียวกัน
+
+$f'(2) = -3(4) + 6(2) - 2 = $ ''',
                 {"drop": "0"},
-                r'''👉 จุดสัมผัสคือ ''',
+                r''' และ $f(2) = -(8) + 3(4) - 2(2) = $ ''',
                 {"drop": "1"},
-                r'''🔸 หาความชันของเส้นประสีเทา
-        
-        ดิฟ $f(x)$ เพื่อหาความชัน ณ จุด $x$ ใดๆ
-        
-        $f'(x) = \dfrac{d}{dx}(x^2) =$ ''',
-                {"drop": "2"},
-                r'''👉 ความชัน ณ $x = 1$:
-        
-        $m = f'(1) =$ ''',
-                {"drop": "3"},
               ],
-              "draggableItems": [
-                r"$1$",
-                r"$(1, 1)$",
-                r"$(1, 2)$",
-                r"$2$",
-                r"$(0, 1)$",
-                r"$2x$",
-                r"$2$",
-                r"$x$",
-                r"$1$",
-                r"$x^2$",
+              "draggableItems": [r"$-2$", r"$0$", r"$2$", r"$4$"],
+              "correctAnswers": {"0": r"$-2$", "1": r"$0$"},
+              "explanation": r'''$f'(2) = -2$ และ $f(2) = 0$ → จุดสัมผัส $(2, 0)$ ความชัน $-2$''',
+            },
+            {
+              "questionId": "tl_ddq_006_s2",
+              "content": [
+                r'''จุด $(2, 0)$ และความชัน $-2$ → เส้นสัมผัส $y - 0 = -2(x - 2)$ จัดรูปได้
+
+$y = $ ''',
+                {"drop": "0"},
+                r'''🎯 ลองเลื่อนกราฟไปที่ $x = 2$ เพื่อยืนยัน!''',
               ],
-              "correctAnswers": {
-                "0": r"$1$",
-                "1": r"$(1, 1)$",
-                "2": r"$2x$",
-                "3": r"$2$",
-              },
-              "explanation":
-                  r'''แทน $x = 1$ ได้ $y = 1$ จุดสัมผัสคือ $(1, 1)$ $f'(x) = 2x$ แทน $x=1$ ได้ความชัน $m = 2$ ✅''',
+              "draggableItems": [r"$-2x + 4$", r"$-2x - 4$", r"$2x - 4$", r"$2x + 4$"],
+              "correctAnswers": {"0": r"$-2x + 4$"},
+              "explanation": r'''$y = -2x + 4$ ✅ ตรงกับที่กราฟแสดงพอดี!''',
             },
           ],
         }),
-        ContentBlock("ddq_tangent_step2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_tangent_step2",
-              "content": [
-                r'''📏 **ขั้นที่ 2:** หาสมการเส้นสัมผัส
-        
-        จุด: $(1, 1)$ และ ความชัน: $m = 2$
-        
-        ใช้สูตร: $y - y_1 = m(x - x_1)$
-        
-        $y -$ ''',
-                {"drop": "0"},
-                r'''$=$ ''',
-                {"drop": "1"},
-                r'''$\times(x - 1)$''',
-              ],
-              "draggableItems": [r"$1$", r"$2$", r"$0$", r"$x$", r"$1$"],
-              "correctAnswers": {"0": r"$1$", "1": r"$2$"},
-              "explanation": r'''แทนค่าได้ $y - 1 = 2(x - 1)$ ✅''',
-            },
+        ContentBlock("tl_q_007", "question_choice", {
+          "content": [
+            r'''1. ที่ $x = 3$ บนกราฟ $f(x) = -x^3 + 3x^2 - 2x$ ความชันของเส้นสัมผัสคือ?''',
           ],
+          "options": [r"$-11$", r"$-3$", r"$7$", r"$3$"],
+          "correct": r"$-11$",
+          "explanation": r'''$f'(3) = -3(9) + 6(3) - 2 = -27 + 18 - 2 = -11$ 💚
+
+ลองเลื่อนกราฟไปที่ $x = 3$ ดูได้!''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 2: แบบฝึกหัด
+    // =============================================
     ContentSection(
       headerL1: r"📝 แบบฝึกหัด",
       blocks: [
-        ContentBlock("ddq_tangent_ex1", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_tangent_ex1",
-              "content": [
-                r'''1. จงหาสมการเส้นสัมผัสของ $y = x^2$ ที่ $x = 2$
-        
-        $y =$ ''',
-                {"drop": "0"},
-              ],
-              "draggableItems": [
-                r"$4$",
-                r"$(2, 4)$",
-                r"$4x - 4$",
-                r"$2$",
-                r"$2x$",
-              ],
-              "correctAnswers": {"0": r"$4x - 4$"},
-              "explanation": r'''เมื่อ $x = 2$: $y = 4$, จุด $(2, 4)$
-        $f'(x) = 2x$, $m = 4$
-        $y - 4 = 4(x - 2) \to y = 4x - 4$ ✅''',
-            },
+        ContentBlock("tl_q_008", "question_choice", {
+          "content": [
+            r'''1. สมการเส้นสัมผัสของ $y = x^3 - x$ ที่ $x = 2$ คือ?''',
           ],
+          "options": [r"$y = 11x - 16$", r"$y = 11x + 16$", r"$y = 11x - 22$", r"$y = 3x - 6$"],
+          "correct": r"$y = 11x - 16$",
+          "explanation": r'''$f'(x) = 3x^2 - 1$, $f'(2) = 11$, $f(2) = 6$
+
+$y - 6 = 11(x - 2) \to y = 11x - 16$ 💚''',
         }),
-        ContentBlock("ddq_tangent_ex2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_tangent_ex2",
-              "content": [
-                r'''2. จงหาสมการเส้นสัมผัสของ $y = x^3$ ที่ $x = 1$
-        
-        **ขั้นที่ 1:** จุด
-        
-        $y_1 =$ ''',
-                {"drop": "0"},
-                r''', จุด = ''',
-                {"drop": "1"},
-                r'''**ขั้นที่ 2:** ความชัน
-        
-        $f'(x) = 3x^2$, $m =$ ''',
-                {"drop": "2"},
-                r'''**ขั้นที่ 3:** สมการ
-        
-        $y =$ ''',
-                {"drop": "3"},
-              ],
-              "draggableItems": [
-                r"$1$",
-                r"$(1, 1)$",
-                r"$3$",
-                r"$3x - 2$",
-                r"$2$",
-                r"$3x$",
-              ],
-              "correctAnswers": {
-                "0": r"$1$",
-                "1": r"$(1, 1)$",
-                "2": r"$3$",
-                "3": r"$3x - 2$",
-              },
-              "explanation":
-                  r'''จุด $(1, 1)$ ความชัน $3$ ได้ $y - 1 = 3(x - 1) \to y = 3x - 2$ ✅''',
-            },
+        ContentBlock("tl_q_009", "question_choice", {
+          "content": [
+            r'''2. สมการเส้นตั้งฉากกับเส้นสัมผัสของ $f(x) = x^2$ ที่ $x = 3$ คือ?''',
           ],
+          "options": [
+            r"$x + 6y = 57$",
+            r"$x - 6y = 57$",
+            r"$6x + y = 57$",
+            r"$x + 6y = 3$",
+          ],
+          "correct": r"$x + 6y = 57$",
+          "explanation": r'''$f'(3) = 6$, จุด $(3, 9)$, ความชันตั้งฉาก $= -\dfrac{1}{6}$
+
+$y - 9 = -\dfrac{1}{6}(x - 3) \to x + 6y = 57$ 💚''',
         }),
-        ContentBlock("ddq_tangent_ex3", "drag_and_drop", {
+        ContentBlock("tl_q_010", "question_choice", {
+          "content": [
+            r'''3. จุดบน $y = x^2$ ที่เส้นสัมผัสขนานกับเส้นตรง $y = 6x - 1$ คือ?''',
+          ],
+          "options": [r"$(3, 9)$", r"$(6, 36)$", r"$(3, 6)$", r"$(-3, 9)$"],
+          "correct": r"$(3, 9)$",
+          "explanation": r'''เส้นสัมผัสขนาน $y = 6x - 1$ → ความชันต้องเท่ากัน
+
+$f'(a) = 2a = 6 \to a = 3$ → จุดคือ $(3, 9)$ 💚''',
+        }),
+        ContentBlock("tl_q_011", "question_choice", {
+          "content": [
+            r'''4. เส้นตั้งฉากกับเส้นสัมผัส $f(x) = x^2$ ที่ $x = 1$ ตัดกราฟ $y = x^2$ อีกครั้งที่จุดใด?''',
+          ],
+          "options": [
+            r"$\left(-\dfrac{3}{2},\ \dfrac{9}{4}\right)$",
+            r"$\left(\dfrac{3}{2},\ \dfrac{9}{4}\right)$",
+            r"$\left(-\dfrac{1}{2},\ \dfrac{1}{4}\right)$",
+            r"$(-2,\ 4)$",
+          ],
+          "correct": r"$\left(-\dfrac{3}{2},\ \dfrac{9}{4}\right)$",
+          "explanation": r'''$f'(1) = 2$, จุด $(1, 1)$, เส้นตั้งฉากความชัน $-\dfrac{1}{2}$: $y = -\dfrac{x}{2} + \dfrac{3}{2}$
+
+แทนใน $y = x^2$: $2x^2 + x - 3 = 0 \to (2x + 3)(x - 1) = 0$
+
+$x = -\dfrac{3}{2}$, $y = \dfrac{9}{4}$ 💚''',
+        }),
+        ContentBlock("tl_ddq_012", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_tangent_ex3",
+              "questionId": "tl_ddq_012_s1",
               "content": [
-                r'''3. จงหาสมการเส้นสัมผัสของ $y = 2x^2 - 3x + 1$ ที่ $x = 2$
-        
-        **ขั้นที่ 1:** จุด
-        
-        $y_1 = 2(4) - 6 + 1 =$ ''',
+                r'''5. จงหาสมการเส้นสัมผัส $y = x^2$ **ทุกเส้น**ที่ผ่านจุด $(0, -4)$
+
+ให้จุดสัมผัสอยู่ที่ $(a, a^2)$ → ความชัน $2a$ → เส้นสัมผัส: $y - a^2 = 2a(x - a)$
+
+แทน $(0, -4)$: $-4 - a^2 = -2a^2 \implies a^2 = $ ''',
                 {"drop": "0"},
-                r'''จุด = ''',
+                r'''$\therefore\ a = $ ''',
                 {"drop": "1"},
-                r'''**ขั้นที่ 2:** ความชัน
-        
-        $f'(x) = 4x - 3$, $m = 4(2) - 3 =$ ''',
-                {"drop": "2"},
-                r'''**ขั้นที่ 3:** สมการ
-        
-        $y =$ ''',
-                {"drop": "3"},
               ],
-              "draggableItems": [
-                r"$3$",
-                r"$(2, 3)$",
-                r"$5$",
-                r"$5x - 7$",
-                r"$4$",
-                r"$5x$",
+              "draggableItems": [r"$4$", r"$16$", r"$2$", r"$\pm 2$", r"$\pm 4$"],
+              "correctAnswers": {"0": r"$4$", "1": r"$\pm 2$"},
+              "explanation": r'''$a = \pm 2$ → มีสองจุดสัมผัส จึงมีสองเส้นสัมผัส''',
+            },
+            {
+              "questionId": "tl_ddq_012_s2",
+              "content": [
+                r'''$a = 2$ → จุด $(2, 4)$ → เส้นสัมผัส $y = $ ''',
+                {"drop": "0"},
+                r'''$a = -2$ → จุด $(-2, 4)$ → เส้นสัมผัส $y = $ ''',
+                {"drop": "1"},
               ],
-              "correctAnswers": {
-                "0": r"$3$",
-                "1": r"$(2, 3)$",
-                "2": r"$5$",
-                "3": r"$5x - 7$",
-              },
-              "explanation":
-                  r'''จุด $(2, 3)$ ความชัน $5$ ได้ $y - 3 = 5(x - 2) \to y = 5x - 7$ ✅''',
+              "draggableItems": [r"$4x - 4$", r"$-4x - 4$", r"$4x + 4$", r"$-4x + 4$"],
+              "correctAnswers": {"0": r"$4x - 4$", "1": r"$-4x - 4$"},
+              "explanation": r'''$a = 2$: $y - 4 = 4(x - 2) \to y = 4x - 4$
+
+$a = -2$: $y - 4 = -4(x + 2) \to y = -4x - 4$ 💚
+
+🧠 จากจุดภายนอกกราฟ ลากเส้นสัมผัสได้ **2 เส้น**!''',
             },
           ],
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 3: โจทย์ประยุกต์ขั้นสูง
+    // =============================================
+    ContentSection(
+      headerL1: r"🔥 โจทย์ประยุกต์ขั้นสูง",
+      blocks: [
+        ContentBlock("tl_h_013", "header", {
+          "title": r"ดิฟกราฟโค้ง — Implicit Differentiation",
+          "level": 2,
+        }),
+        ContentBlock("tl_t_014", "text", {
+          "content": [
+            r'''กราฟเช่น $x^2 + y^2 = r^2$ ไม่ใช่ฟังก์ชัน $y = f(x)$ ตรงๆ แต่ดิฟทั้งสองข้างเทียบ $x$ ได้เลย
+
+$$2x + 2y \cdot \dfrac{dy}{dx} = 0 \implies \dfrac{dy}{dx} = -\dfrac{x}{y}$$
+
+นี่คือความชันเส้นสัมผัส ณ จุด $(x, y)$ บนวงกลม''',
+          ],
+        }),
+        ContentBlock("tl_t_015", "text", {
+          "content": [
+            r'''Note = กฎสำคัญ
+
+เมื่อดิฟ $y^n$ เทียบ $x$ ต้องคูณ $\dfrac{dy}{dx}$ เสมอ — เช่น $\dfrac{d}{dx}(y^2) = 2y\dfrac{dy}{dx}$ และ $\dfrac{d}{dx}(y^3) = 3y^2\dfrac{dy}{dx}$''',
+          ],
+        }),
+        ContentBlock("tl_ddq_016", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "tl_ddq_016_s1",
+              "content": [
+                r'''จงหาเส้นสัมผัสของวงกลม $x^2 + y^2 = 25$ ที่จุด $(3, 4)$
+
+ดิฟทั้งสองข้าง: $2x + 2y\dfrac{dy}{dx} = 0$ → ณ $(3, 4)$: $\dfrac{dy}{dx} = -\dfrac{3}{4}$
+
+$4(y - 4) = -3(x - 3)$ → จัดรูปได้ ''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [
+                r"$3x + 4y = 25$",
+                r"$3x - 4y = 25$",
+                r"$4x + 3y = 25$",
+                r"$3x + 4y = -25$",
+              ],
+              "correctAnswers": {"0": r"$3x + 4y = 25$"},
+              "explanation": r'''$4y - 16 = -3x + 9 \to 3x + 4y = 25$ 💚
+
+🧠 สังเกต: เส้นสัมผัสวงกลม ณ $(x_1, y_1)$ ได้รูป $x \cdot x_1 + y \cdot y_1 = r^2$ เสมอ!''',
+            },
+          ],
+        }),
+        ContentBlock("tl_q_017", "question_choice", {
+          "content": [
+            r'''1. เส้นสัมผัสของวงรี $x^2 + 4y^2 = 8$ ที่จุด $(2, 1)$ คือ?''',
+          ],
+          "options": [r"$x + 2y = 4$", r"$x + 2y = 8$", r"$2x + y = 4$", r"$x - 2y = 4$"],
+          "correct": r"$x + 2y = 4$",
+          "explanation": r'''ดิฟ: $2x + 8y\dfrac{dy}{dx} = 0 \to \dfrac{dy}{dx} = -\dfrac{x}{4y} = -\dfrac{1}{2}$ ณ $(2, 1)$
+
+$y - 1 = -\dfrac{1}{2}(x - 2) \to x + 2y = 4$ 💚''',
+        }),
+        ContentBlock("tl_q_018", "question_choice", {
+          "content": [
+            r'''2. เส้นสัมผัสของไฮเพอร์โบลา $x^2 - y^2 = 7$ ที่จุด $(4, 3)$ คือ?''',
+          ],
+          "options": [r"$4x - 3y = 7$", r"$4x + 3y = 7$", r"$3x - 4y = 7$", r"$4x - 3y = -7$"],
+          "correct": r"$4x - 3y = 7$",
+          "explanation": r'''ดิฟ: $2x - 2y\dfrac{dy}{dx} = 0 \to \dfrac{dy}{dx} = \dfrac{x}{y} = \dfrac{4}{3}$ ณ $(4, 3)$
+
+$3(y - 3) = 4(x - 4) \to 4x - 3y = 7$ 💚''',
+        }),
+        ContentBlock("tl_q_019", "question_choice", {
+          "content": [
+            r'''3. เส้นสัมผัสของวงรี $9x^2 + 4y^2 = 72$ ที่จุด $(2, 3)$ ตัดแกน $x$ ที่จุดใด?''',
+          ],
+          "options": [r"$(4, 0)$", r"$(6, 0)$", r"$(3, 0)$", r"$(8, 0)$"],
+          "correct": r"$(4, 0)$",
+          "explanation": r'''ดิฟ: $18x + 8y\dfrac{dy}{dx} = 0 \to \dfrac{dy}{dx} = -\dfrac{9x}{4y} = -\dfrac{3}{2}$ ณ $(2, 3)$
+
+เส้นสัมผัส: $y - 3 = -\dfrac{3}{2}(x - 2) \to 3x + 2y = 12$
+
+ที่ $y = 0$: $x = 4$ → จุด $(4, 0)$ 💚''',
+        }),
+        ContentBlock("tl_q_020", "question_choice", {
+          "content": [
+            r'''4. จงหาจุดบนวงกลม $x^2 + y^2 = 5$ ที่เส้นสัมผัสผ่านจุด $(0, 5)$ (มีคำตอบ 2 จุด)''',
+          ],
+          "options": [
+            r"$(2, 1)$ และ $(-2, 1)$",
+            r"$(1, 2)$ และ $(-1, 2)$",
+            r"$(2, -1)$ และ $(-2, -1)$",
+            r"$(\sqrt{5}, 0)$ และ $(-\sqrt{5}, 0)$",
+          ],
+          "correct": r"$(2, 1)$ และ $(-2, 1)$",
+          "explanation": r'''ให้จุดสัมผัส $(a, b)$ บนวงกลม: $a^2 + b^2 = 5$ และความชัน $= -\dfrac{a}{b}$
+
+เส้นสัมผัสผ่าน $(0, 5)$: $5 - b = \dfrac{a^2}{b}$
+
+$5b - b^2 = a^2 = 5 - b^2 \to b = 1,\ a = \pm 2$ 💚''',
+        }),
+        ContentBlock("tl_q_021", "question_choice", {
+          "content": [
+            r'''5. เส้นสัมผัสร่วมของ $y = x^2$ และ $y = -x^2 + 4x - 2$ มีสมการคือ?
+
+Note = เส้นสัมผัสร่วม คือเส้นตรงเส้นเดียวที่สัมผัสกราฟทั้งสองพร้อมกัน''',
+          ],
+          "options": [r"$y = 2x - 1$", r"$y = 2x + 1$", r"$y = x - 1$", r"$y = 4x - 4$"],
+          "correct": r"$y = 2x - 1$",
+          "explanation": r'''บน $y = x^2$ ณ $(a, a^2)$: เส้นสัมผัส $y = 2ax - a^2$
+
+บน $y = -x^2+4x-2$ ณ $(b, ...)$: เส้นสัมผัส $y = (-2b+4)x + b^2 - 2$
+
+ความชันเท่ากัน: $2a = -2b + 4 \to a = 2 - b$ ... (i)
+
+y-intercept เท่ากัน: $-a^2 = b^2 - 2$ แทน (i):
+
+$-(2-b)^2 = b^2 - 2 \to (b - 1)^2 = 0 \to b = 1,\ a = 1$
+
+เส้นสัมผัสร่วม: $y = 2x - 1$ 💚''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 4: สรุป
+    // =============================================
     ContentSection(
       headerL1: r"สรุป",
       blocks: [
-        ContentBlock("tangent_t_400", "text", {
+        ContentBlock("tl_t_022", "text", {
           "content": [
-            r'''🎯 **การหาสมการเส้นสัมผัส**
-        
-        **1. หลักสำคัญ:**
-          🔸 **Diff** $\to$ **หาความชัน** เท่านั้น! 📐
-        
-          🔸 **เรขาวิเคราะห์** $\to$ **เขียนสมการ** 📏
-        
-        **2. สูตรเส้นตรง:**
-        
-        $$y - y_1 = m(x - x_1)$$''',
+            r'''🎯 **แนวคิดหลัก**
+
+$f'(x)$ ทำหน้าที่เดียว — ให้ **ความชันของเส้นสัมผัส** ณ จุด $x$
+
+ที่เหลือทั้งหมดคือ **เรขาคณิตวิเคราะห์** — สมการเส้นตรง เส้นขนาน/ตั้งฉาก จุดตัด ฯลฯ''',
+          ],
+        }),
+        ContentBlock("tl_t_023", "text", {
+          "content": [
+            r'''**ประยุกต์ได้หลากหลาย:**
+
+🔸 สมการ**เส้นสัมผัส** และ**เส้นตั้งฉาก** ณ จุดบนกราฟ
+
+🔸 หาจุดที่เส้นสัมผัส**ขนาน**กับเส้นที่กำหนด
+
+🔸 ลากเส้นสัมผัส**จากจุดนอกกราฟ** — ได้หลายเส้น!
+
+🔸 เส้นสัมผัสของ**วงกลม วงรี ไฮเพอร์โบลา** ด้วย Implicit Differentiation
+
+🔸 **เส้นสัมผัสร่วม**ระหว่างสองกราฟ''',
+          ],
+        }),
+        ContentBlock("tl_t_024", "text", {
+          "content": [
+            r'''Note = Implicit Differentiation สรุป
+
+ดิฟทั้งสองข้างของ $F(x, y) = c$ เทียบ $x$ โดยจำว่า $\dfrac{d}{dx}(y^n) = ny^{n-1}\dfrac{dy}{dx}$ แล้วแก้หา $\dfrac{dy}{dx}$''',
           ],
         }),
       ],
@@ -9468,642 +9910,415 @@ final calcTangentLineLesson = ContentLesson(
   ],
 );
 
-// Exercise: โจทย์ปัญหาความต่อเนื่อง (โจทย์ปัญหาความต่อเนื่อง)
-
-// ── ฟังก์ชันเพิ่ม-ลดและจุดสูงสุด-ต่ำสุด ──────────────────────────────────────────────────────────────
-
 final calcIncDecLesson = ContentLesson(
   title: "ฟังก์ชันเพิ่ม-ลด",
   sections: [
+
+    // =============================================
+    // SECTION 1: ความชันของเส้นสัมผัส
+    // =============================================
     ContentSection(
-      headerL1: r"intro",
+      headerL1: r"🔍 ความชันของเส้นสัมผัส",
       blocks: [
-        ContentBlock("incdec_t_401", "text", {
+        ContentBlock("incdec_t_001", "text", {
           "content": [
-            r'''เรารู้แล้วว่า
-        
-        $$f'(x) = \text{ความชัน ณ จุด } x$$
-        
-        ใช้ในการประยุกต์กับโจทย์เรขาคณิตวิเคราะห์แล้ว
-        
-        **แล้วเราใช้ทำอะไรได้อีกบ้าง?** 🤔
-        
-        **คำตอบ:** ดูว่าฟังก์ชัน**เพิ่มหรือลด**!🚀''',
+            r'''เราเรียนเรื่องเส้นสัมผัสมาแล้ว บทนี้จะเอาความชันของมันมาใช้ต่อ
+
+ลองเลื่อนจุดไปตามกราฟ แล้วความชัน''',
           ],
+        }),
+        ContentBlock("incdec_ig_002", "interactive_graph", {
+          "path": "graph_data_tangent",
+        }),
+        ContentBlock("incdec_t_003", "text", {
+          "content": [
+            r'''กราฟนี้คือ $f(x) = -x^3 + 6x^2 - 8x + 4$
+            
+จินตนาการว่าเราคือจุดสีส้ม และกราฟคือเนินเขา และกำลังเดินขึ้นลงเขา''',
+          ],
+        }),
+        ContentBlock("incdec_ddq_004", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "incdec_ddq_004_s1",
+              "content": [
+                r'''ตอนที่กำลังเดินขึ้นเขา ความชันจะเป็น''',
+                {"drop": "0"},
+                r'''เสมอ''',
+                r'''
+
+นั่นคือ $f'(x)$ เป็น ''',
+                {"drop": "0"},
+                r'''
+
+ตอนเดินขึ้นเราจะเรียกว่า **ฟังก์ชันเพิ่ม**'''
+
+              ],
+              "draggableItems": [r"บวก", r"ลบ", r"ศูนย์"],
+              "correctAnswers": {"0": r"บวก"},
+              "explanation": r'''กราฟขาขึ้น → เส้นสัมผัสเอียงขึ้น → ความชันเป็นบวก 📈''',
+            },
+            {
+              "questionId": "incdec_ddq_004_s2",
+              "content": [
+                r'''ตอนที่กำลังเดินขึ้นลง ความชันจะเป็น''',
+                {"drop": "0"},
+                r'''เสมอ''',
+                r'''
+
+นั่นคือ $f'(x)$ เป็น ''',
+                {"drop": "0"},
+                r'''
+
+ตอนเดินลงเราจะเรียกว่า **ฟังก์ชันลด**'''
+              ],
+              "draggableItems": [r"บวก", r"ลบ", r"ศูนย์"],
+              "correctAnswers": {"0": r"ลบ"},
+              "explanation": r'''กราฟขาลง → เส้นสัมผัสเอียงลง → ความชันเป็นลบ 📉''',
+            },
+            {
+              "questionId": "incdec_ddq_004_s3",
+              "content": [
+                r'''เลื่อนไปที่ **จุดยอด** (สูงสุดหรือต่ำสุดของเนิน) — เส้นสัมผัสจะอยู่แนวนอนพอดี ความชันตรงนั้นเป็น ''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [r"บวก", r"ลบ", r"ศูนย์"],
+              "correctAnswers": {"0": r"ศูนย์"},
+              "explanation": r'''จุดยอด → เส้นแนวนอน → ความชันเป็นศูนย์ ➡️''',
+            },
+          ],
+        }),
+        ContentBlock("incdec_q_005", "question_choice", {
+          "content": [
+            r'''1. ณ จุดหนึ่งบนกราฟ เส้นสัมผัสมีความชันเท่ากับ $-5$ ข้อใดอธิบายกราฟ ณ จุดนั้นได้ถูกต้อง?''',
+          ],
+          "options": [
+            r"กราฟกำลังพุ่งขึ้น",
+            r"กราฟกำลังปักหัวลง",
+            r"กราฟอยู่ที่จุดยอด",
+            r"ไม่สามารถบอกได้",
+          ],
+          "correct": r"กราฟกำลังปักหัวลง",
+          "explanation": r'''ความชันติดลบ ($-5 < 0$) แปลว่าเส้นสัมผัสเอียงลง ซึ่งหมายความว่ากราฟกำลังปักหัวลง ณ จุดนั้น 💚''',
+        }),
+        ContentBlock("incdec_q_006", "question_choice", {
+          "content": [
+            r'''2. หาช่วงทั้งหมดในกราฟที่เป็นฟังก์ชันลด''',
+            {"graph": "graph_data_tangent2"},
+          ],
+          "options": [
+            r"$x \in (0, 2)$",
+            r"$x$ ตั้งแต่ $0$ ถึง $2$",
+            r"$x \in (0, 4)$",
+            r"ไม่มีคำตอบ",
+          ],
+          "correct": r"$x \in (0, 2)$",
+          "explanation": r'''ความชันติดลบ ($-5 < 0$) แปลว่าเส้นสัมผัสเอียงลง ซึ่งหมายความว่ากราฟกำลังปักหัวลง ณ จุดนั้น 💚''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 2: f'(x) กับความชัน — เชื่อมกัน
+    // =============================================
     ContentSection(
-      headerL1: r"🤨 ฟังก์ชันเพิ่ม-ลดคือ?",
+      headerL1: r"⚡ f'(x) กับความชัน",
       blocks: [
-        ContentBlock("incdec_t_402", "text", {
+        ContentBlock("incdec_t_006", "text", {
           "content": [
-            r'''🔸 **ฟังก์ชันเพิ่ม** ณ จุด $x = a$ 🤩
-        
-        เมื่อ $x$ เพิ่ม ⬆️✨ ค่า $y$ เพิ่ม ⬆️✨ด้วย
-        
-        🔸 **ฟังก์ชันลด** ณ จุด $x = a$ 🚨
-        
-        เมื่อ $x$ เพิ่ม ⬆️✨ ค่า $y$ ลดลง ⬇️💧''',
+            r'''จำ rate at a point ได้ไหม? $f'(a)$ คืออัตราการเปลี่ยนแปลงของฟังก์ชัน ณ จุด $a$ — และนั่นก็คือ **ความชันของเส้นสัมผัส** ณ จุดนั้นนั่นเอง''',
           ],
         }),
-        ContentBlock("incdec_h_403", "header", {
-          "title": r"🧠 เหตุผล",
-          "level": 2,
+        ContentBlock("incdec_t_007", "text", {
+          "content": [
+            r'''เชื่อมกับที่สังเกตมาใน Section แรกได้เลย:
+
+$f'(x) > 0$ → ความชันเป็นบวก → กราฟกำลังพุ่งขึ้น (ฟังก์ชัน**เพิ่ม**) ⬆️
+$f'(x) < 0$ → ความชันติดลบ → กราฟกำลังปักหัวลง (ฟังก์ชัน**ลด**) ⬇️''',
+            r'''Note = ไม่ต้องท่อง
+แค่จำว่า $f'(x)$ บอกความชัน ความชันบอกทิศทางกราฟ เท่านั้นเอง''',
+          ],
         }),
-        ContentBlock("ddq_func_inc_proof_1", "drag_and_drop", {
+        ContentBlock("incdec_ig_008", "interactive_graph", {
+          "path": "graph_data_tangent2",
+        }),
+        ContentBlock("incdec_t_009", "text", {
+          "content": [
+            r'''กราฟนี้คือ $f(x) = x^3 - 3x^2 + 4$ — ลองเลื่อนจุดแล้วดูว่าค่า $f'(x)$ ที่แสดงขึ้นมา สอดคล้องกับทิศทางกราฟไหม''',
+          ],
+        }),
+        ContentBlock("incdec_ddq_010", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_func_inc_proof_1",
+              "questionId": "incdec_ddq_010_s1",
               "content": [
-                r'''**1. ทบทวนความชัน**''',
-                {"image": "assets/diff7.png"},
-                r'''🔸ในรูปความชันเป็น ''',
+                r'''จาก $f(x) = x^3 - 3x^2 + 4$ จะได้ $f'(x) = 3x^2 - 6x$
+
+แทนค่า $x = -1$: $\quad f'(-1) = 3(-1)^2 - 6(-1) = $ ''',
                 {"drop": "0"},
-                {"image": "assets/diff8.png"},
-                r'''🔸 ในรูปความชันเป็น ''',
+                r''' แสดงว่าที่จุดนี้กราฟกำลัง ''',
                 {"drop": "1"},
               ],
-              "draggableItems": [
-                r"$+$",
-                r"$+$",
-                r"$0$",
-                r"$0$",
-                r"$-$",
-                r"$-$",
+              "draggableItems": [r"$9$", r"$-9$", r"พุ่งขึ้น", r"ปักหัวลง"],
+              "correctAnswers": {"0": r"$9$", "1": r"พุ่งขึ้น"},
+              "explanation": r'''$f'(-1) = 3 + 6 = 9 > 0$ → ความชันเป็นบวก → กราฟกำลังพุ่งขึ้น 💚''',
+            },
+            {
+              "questionId": "incdec_ddq_010_s2",
+              "content": [
+                r'''แทนค่า $x = 1$: $\quad f'(1) = 3(1)^2 - 6(1) = $ ''',
+                {"drop": "0"},
+                r''' แสดงว่าที่จุดนี้กราฟกำลัง ''',
+                {"drop": "1"},
               ],
-              "correctAnswers": {"0": r"$+$", "1": r"$-$"},
-              "explanation":
-                  r'''$f'(1) = 4 > 0$ ความชันบวก → ฟังก์ชันเพิ่ม ✅''',
+              "draggableItems": [r"$3$", r"$-3$", r"พุ่งขึ้น", r"ปักหัวลง"],
+              "correctAnswers": {"0": r"$-3$", "1": r"ปักหัวลง"},
+              "explanation": r'''$f'(1) = 3 - 6 = -3 < 0$ → ความชันติดลบ → กราฟกำลังปักหัวลง ลองเลื่อนกราฟไปที่ $x = 1$ เพื่อยืนยันได้เลย! 💚''',
             },
           ],
         }),
-        ContentBlock("ddq_func_inc_proof_2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_func_inc_proof_2",
-              "content": [
-                r'''**2. ลองดูกราฟ** ว่าช่วงไหนกราฟขาขึ้น - ขาลง 💸''',
-                {"graph": "graph_data_tangent2.dart"},
-                r'''🔸 ช่วง $x \in [-1, 0)$ ความชันเป็น ''',
-                {"drop": "0"},
-                r''' เสมอ
-        
-        ซึ่งเป็นขา ''',
-                {"drop": "1"},
-                r''' หรือคือฟังก์ชันกำลังเพิ่ม
-        
-        🔸 ช่วง $x \in (0, 2)$ ความชันเป็น ''',
-                {"drop": "2"},
-                r''' เสมอ
-        
-        ซึ่งเป็นขา ''',
-                {"drop": "3"},
-                r'''หรือคือฟังก์ชันกำลังลด''',
-              ],
-              "draggableItems": [
-                r"$+$",
-                r"$+$",
-                r"ขึ้น",
-                r"ขึ้น",
-                r"ลง",
-                r"$-$",
-                r"$-$",
-              ],
-              "correctAnswers": {
-                "0": r"$+$",
-                "1": r"ขึ้น",
-                "2": r"$-$",
-                "3": r"ลง",
-              },
-              "explanation":
-                  r'''$f'(1) = 4 > 0$ ความชันบวก → ฟังก์ชันเพิ่ม ✅''',
-            },
+        ContentBlock("incdec_q_011", "question_choice", {
+          "content": [
+            r'''1. ให้ $f(x) = 2x^2 - 8x + 5$ ที่จุด $x = 3$ ฟังก์ชันนี้กำลังเพิ่มหรือลด?''',
           ],
+          "options": [r"เพิ่ม เพราะ $f'(3) > 0$", r"ลด เพราะ $f'(3) < 0$", r"ไม่เพิ่มไม่ลด เพราะ $f'(3) = 0$", r"บอกไม่ได้"],
+          "correct": r"เพิ่ม เพราะ $f'(3) > 0$",
+          "explanation": r'''$f'(x) = 4x - 8$
+แทน $x = 3$: $f'(3) = 12 - 8 = 4 > 0$
+ความชันเป็นบวก → กราฟกำลังพุ่งขึ้น → ฟังก์ชันเพิ่ม 💚''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 3: ช่วงที่ฟังก์ชันเพิ่ม-ลด
+    // =============================================
     ContentSection(
-      headerL1: r"⚙️ หลักการ",
+      headerL1: r"📐 ช่วงที่ฟังก์ชันเพิ่ม-ลด",
       blocks: [
-        ContentBlock("incdec_t_406", "text", {
+        ContentBlock("incdec_t_012", "text", {
           "content": [
-            r'''เราใช้**ความชัน** $f'(x)$ ดูว่าฟังก์ชันเพิ่มหรือลด:
-        
-        ณ จุด $x = a$
-        
-        🔸 $f'(a) > 0 \to$ **ฟังก์ชันเพิ่ม** ⬆️✨
-        
-        🔸 $f'(a) < 0 \to$ **ฟังก์ชันลด** ⬇️💧
-        
-        🔸 $f'(a) = 0 \to$ ความชันเป็น**ศูนย์** $\to$ **ไม่เป็นทั้งเพิ่มและลด** 🐎
-        
-        ⭐ **สรุป:** แค่ดู**ความชัน**ก็รู้เลยว่าเพิ่มหรือลด!''',
+            r'''ที่ผ่านมาเราดูแค่จุดเดียว แต่ถ้าอยากรู้ตลอดทั้งช่วงเลยว่ากราฟขึ้นหรือลงตอนไหนบ้าง ก็แค่ถามว่า "ช่วง $x$ ไหนที่ทำให้ $f'(x) > 0$" หรือ "$f'(x) < 0$"''',
           ],
         }),
-        ContentBlock("incdec_h_407", "header", {"title": r"เช่น", "level": 2}),
-        ContentBlock("ddq_func_inc_dec_1", "drag_and_drop", {
+        ContentBlock("incdec_ddq_013", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_func_inc_dec_1",
+              "questionId": "incdec_ddq_013_s1",
               "content": [
-                r'''1. ให้ $f(x) = x^2 + 2x + 1$ 
-        
-        ฟังก์ชันเพิ่มหรือลดที่ $x = 1$?
-        
-        **ขั้นที่ 1:** หาอนุพันธ์
-        
-        $f'(x) =$ ''',
+                r'''อยากหาช่วงที่ $f(x) = x^3 - 12x$ เป็น **ฟังก์ชันลด**
+
+ขั้นแรก ดิฟได้ $f'(x) = 3x^2 - 12$ และเป้าหมายคือต้องแก้ ''',
                 {"drop": "0"},
-                r'''**ขั้นที่ 2:** แทนค่า $x = 1$
-        
-        $f'(1) = 2(1) + 2 =$ ''',
-                {"drop": "1"},
-                r'''**ขั้นที่ 3:** สรุป
-        
-        $f'(1) > 0$ → ฟังก์ชัน ''',
-                {"drop": "2"},
-                r'''ที่ $x = 1$''',
               ],
-              "draggableItems": [
-                r"$2x + 2$",
-                r"$4$",
-                r"เพิ่ม",
-                r"ลด",
-                r"$x + 2$",
-                r"$2$",
-                r"$0$",
-              ],
-              "correctAnswers": {"0": r"$2x + 2$", "1": r"$4$", "2": r"เพิ่ม"},
-              "explanation":
-                  r'''$f'(1) = 4 > 0$ ความชันบวก → ฟังก์ชันเพิ่ม ✅''',
+              "draggableItems": [r"$3x^2 - 12 = 0$", r"$3x^2 - 12 > 0$", r"$3x^2 - 12 < 0$"],
+              "correctAnswers": {"0": r"$3x^2 - 12 < 0$"},
+              "explanation": r'''ฟังก์ชันลด = ความชันติดลบ = $f'(x) < 0$ 💚''',
             },
-          ],
-        }),
-        ContentBlock("ddq_func_inc_dec_2", "drag_and_drop", {
-          "steps": [
             {
-              "questionId": "ddq_func_inc_dec_2",
+              "questionId": "incdec_ddq_013_s2",
               "content": [
-                r'''2. ให้ $f(x) = -x^2 + 3x + 2$
-        
-        ฟังก์ชันเพิ่มหรือลดที่ $x = 2$ และ $x = 3$?
-        
-        $f'(x) =$ ''',
-                {"drop": "0"},
-                r'''ที่ $x = 2$: $f'(2) = -2(2) + 3 =$ ''',
-                {"drop": "1"},
-                r'''→ ฟังก์ชัน ''',
-                {"drop": "2"},
-                r'''ที่ $x = 3$: $f'(3) = -2(3) + 3 =$ ''',
-                {"drop": "3"},
-                r'''→ ฟังก์ชัน ''',
-                {"drop": "4"},
-              ],
-              "draggableItems": [
-                r"$-2x + 3$",
-                r"$-1$",
-                r"ลด",
-                r"$1$",
-                r"เพิ่ม",
-                r"$-3$",
-                r"$0$",
-                r"ลด",
-              ],
-              "correctAnswers": {
-                "0": r"$-2x + 3$",
-                "1": r"$-1$",
-                "2": r"ลด",
-                "3": r"$-3$",
-                "4": r"ลด",
-              },
-              "explanation": r'''$f'(2) = -1 < 0$ ลด, $f'(3) = -3 < 0$ ลด ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_func_inc_dec_3", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_func_inc_dec_3",
-              "content": [
-                r'''3. ให้ $f(x) = x^3 - 3x^2 + 1$
-        
-        ฟังก์ชันเพิ่มหรือลดที่ $x = 0$, $x = 1$, $x = 3$?
-        
-        $f'(x) =$ ''',
-                {"drop": "0"},
-                r'''$x = 0$: $f'(0) =$ ''',
-                {"drop": "1"},
-                r'''→ ''',
-                {"drop": "2"},
-                r'''$x = 1$: $f'(1) = 3 - 6 =$ ''',
-                {"drop": "3"},
-                r'''→ ''',
-                {"drop": "4"},
-                r'''$x = 3$: $f'(3) = 27 - 18 =$ ''',
-                {"drop": "5"},
-                r'''→ ''',
-                {"drop": "6"},
-              ],
-              "draggableItems": [
-                r"$3x^2 - 6x$",
-                r"$0$",
-                r"ไม่เพิ่มไม่ลด",
-                r"$-3$",
-                r"ลด",
-                r"$9$",
-                r"เพิ่ม",
-                r"$3$",
-              ],
-              "correctAnswers": {
-                "0": r"$3x^2 - 6x$",
-                "1": r"$0$",
-                "2": r"ไม่เพิ่มไม่ลด",
-                "3": r"$-3$",
-                "4": r"ลด",
-                "5": r"$9$",
-                "6": r"เพิ่ม",
-              },
-              "explanation":
-                  r'''$f'(0) = 0$ ไม่เพิ่มไม่ลด, $f'(1) < 0$ ลด, $f'(3) > 0$ เพิ่ม ✅''',
-            },
-          ],
-        }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"ฟังก์ชันเพิ่ม-ลดบนช่วง",
-      blocks: [
-        ContentBlock("incdec_t_411", "text", {
-          "content": [
-            r'''ย้อนกลับไปดูด้านบนตรง 🧠 **เหตุผล** ว่าในกราฟที่ให้เติมคำตอบว่าช่วงขาขึ้นหรือขาลง นั่นคือช่วงที่เราจะหาในหัวข้อนี้
-        
-        เช่น ฟังก์ชันเพิ่มบนช่วง $(a, b)$ หมายถึง ฟังก์ชัน**เพิ่ม**ทุกจุดในช่วงนั้น''',
-          ],
-        }),
-        ContentBlock("incdec_h_412", "header", {
-          "title": r"🎯 วิธีหา",
-          "level": 2,
-        }),
-        ContentBlock("incdec_t_413", "text", {
-          "content": [
-            r'''**ขั้นที่ 1:** หา $f'(x)$
-        
-        **ขั้นที่ 2:** ตั้งอสมการ
-        
-        🔸 หาช่วงที่**เพิ่ม**: ให้ $f'(x) > 0$ แล้วแก้
-        
-        🔸 หาช่วงที่**ลด**: ให้ $f'(x) < 0$ แล้วแก้
-        
-        **ขั้นที่ 3:** แก้อสมการ ทบทวนใน "อสมการจำนวนจริง"''',
-          ],
-        }),
-        ContentBlock("incdec_h_414", "header", {"title": r"เช่น", "level": 2}),
-        ContentBlock("incdec_t_415", "text", {
-          "content": [
-            r'''ให้ $f(x) = -x^3 + 12x + 1$
-        
-        จงหาช่วงที่ $f$ เพิ่ม และลด
-        
-        **มาทำทีละขั้น! 🚀**''',
-          ],
-        }),
-        ContentBlock("ddq_func_interval_1", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_func_interval_1",
-              "content": [
-                r'''🎯 **ขั้นที่ 1:** หาอนุพันธ์
-        
-        $f(x) = -x^3 + 12x + 1$
-        
-        $f'(x) =$ ''',
+                r'''จัดรูปได้ $3(x-2)(x+2) < 0$
+
+วาดเส้นจำนวน รากคือ $x = -2$ และ $x = 2$ — ช่วงที่ทำให้อสมการเป็นจริงคือ ''',
                 {"drop": "0"},
               ],
-              "draggableItems": [
-                r"$-3x^2 + 12$",
-                r"$-x^2 + 12$",
-                r"$-3x^2$",
-                r"$12$",
-                r"$-3x^2 + 12x$",
-              ],
-              "correctAnswers": {"0": r"$-3x^2 + 12$"},
-              "explanation": r'''$f'(x) = -3x^2 + 12$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_func_interval_2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_func_interval_2",
-              "content": [
-                r'''🔧 **ขั้นที่ 2:** ตั้งอสมการ (หาช่วงที่เพิ่ม)
-        
-        ฟังก์ชันเพิ่มเมื่อ $f'(x) > 0$
-        
-        $-3x^2 + 12 > 0$
-        
-        หารด้วย $-3$: (เครื่องหมายพลิก!)
-        
-        $x^2$ ''',
-                {"drop": "0"},
-                r'''$4$ ''',
-                {"drop": "1"},
-                r''' $0$
-        
-        $(x - 2)(x + 2)$ ''',
-                {"drop": "1"},
-                r'''$0$''',
-              ],
-              "draggableItems": [
-                r"$<$",
-                r"$>$",
-                r"$\leq$",
-                r"$\geq$",
-                r"$=$",
-                r"$-$",
-                r"$+$",
-              ],
-              "correctAnswers": {"0": r"$-$", "1": r"$<$"},
-              "explanation":
-                  r'''หาร $-3$ ทั้งสองข้าง: $x^2 - 4 < 0$ (เครื่องหมายพลิก) แยกตัวประกอบ: $(x - 2)(x + 2) < 0$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_func_interval_3", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_func_interval_3",
-              "content": [
-                r'''📊 **ขั้นที่ 3:** แก้อสมการ
-        
-        $(x - 2)(x + 2) < 0$''',
-                {"image": "assets/diff1.png"},
-                r'''เขียน + - + จากขวาไปซ้าย
-        
-        เนื่องจากต้องการหาช่วงที่ $(x - 2)(x + 2) < 0$ 
-        
-        ดังนั้นต้องลากเส้นส่วนที่เป็น $-$''',
-                {"image": "assets/diff2.png"},
-                r'''**ช่วงที่ทำให้:** $(x - 2)(x + 2) < 0$ คือ ''',
-                {"drop": "0"},
-              ],
-              "draggableItems": [
-                r"$(-2, 2)$",
-                r"$(-\infty, -2)$",
-                r"$(2, \infty)$",
-              ],
+              "draggableItems": [r"$(-\infty, -2) \cup (2, \infty)$", r"$(-2, 2)$", r"$x > 2$"],
               "correctAnswers": {"0": r"$(-2, 2)$"},
-              "explanation":
-                  r'''ช่วงที่ทำให้ $(x - 2)(x + 2) < 0$ คือ $-2 < x < 2$ หรือ $(-2, 2)$ ✅''',
+              "explanation": r'''ระหว่างราก $-2$ และ $2$ พหุนามมีค่าติดลบ ดังนั้นช่วงที่ฟังก์ชันลดคือ $(-2, 2)$ 💚''',
             },
           ],
         }),
-        ContentBlock("ddq_func_interval_4", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_func_interval_4",
-              "content": [
-                r'''🔽 **หาช่วงที่ลด**
-        
-        ฟังก์ชันลดเมื่อ $f'(x) < 0$
-        
-        จากข้อก่อน $(x - 2)(x + 2) < 0$ เมื่อ $-2 < x < 2$
-        
-        ดังนั้น $(x - 2)(x + 2) > 0$ เมื่อ ''',
-                {"drop": "0"},
-                {"image": "assets/diff3.png"},
-                r'''**ช่วงที่ลด:** ''',
-                {"drop": "0"},
-              ],
-              "draggableItems": [
-                r"$x < -2$ หรือ $x > 2$",
-                r"$-2 < x < 2$",
-                r"$x = -2$",
-                r"$x = 2$",
-                r"$x > 0$",
-              ],
-              "correctAnswers": {"0": r"$x < -2$ หรือ $x > 2$"},
-              "explanation":
-                  r'''ฟังก์ชันลดบนช่วง $(-\infty, -2)$ และ $(2, \infty)$ ✅''',
-            },
-          ],
-        }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"🤯 จุดวิกฤติ",
-      blocks: [
-        ContentBlock("incdec_t_420", "text", {
+        ContentBlock("incdec_q_014", "question_choice", {
           "content": [
-            r'''**จุดวิกฤติ** คือจุด $x = a$ ที่:
-        
-        $f'(a) = 0 \text{ หรือ } f'(a) \text{ หาค่าไม่ได้}$
-        
-        Note = สำคัญ
-        
-        $f(a)$ ต้อง**หาค่าได้**!
-        
-        หลังหาค่า $a$ ได้จะต้องไปดูว่า $f(a)$ หาค่าได้ไหม''',
+            r'''1. ช่วงที่ $f(x) = -2x^3 + 6x^2 - 3$ เป็น **ฟังก์ชันเพิ่ม** คือช่วงใด?''',
           ],
-        }),
-        ContentBlock("ddq_critical_1", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_critical_1",
-              "content": [
-                r'''ให้ $f(x) = x^3 - 3x^2 + 1$
-        
-        จงหาจุดวิกฤติ
-        
-        $f'(x) = 3x^2 - 6x$
-        
-        ให้ $f'(x) = 0$:
-        
-        $3x^2 - 6x = 0$
-        
-        $3x(x - 2) = 0$
-        
-        $x =$ ''',
-                {"drop": "0"},
-                r'''หรือ $x =$ ''',
-                {"drop": "1"},
-                r'''ตรวจสอบ: $f(0)$ และ $f(2)$ หาค่า ''',
-                {"drop": "2"},
-                r'''**จุดวิกฤติ:** $x = 0$ และ $x = 2$ ✅''',
-              ],
-              "draggableItems": [
-                r"$0$",
-                r"$2$",
-                r"ได้",
-                r"ไม่ได้",
-                r"$3$",
-                r"$-3$",
-              ],
-              "correctAnswers": {"0": r"$0$", "1": r"$2$", "2": r"ได้"},
-              "explanation":
-                  r'''แก้ได้ $x = 0, 2$ และ $f(0), f(2)$ หาค่าได้ → จุดวิกฤติคือ $x = 0, 2$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_critical_2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_critical_2",
-              "content": [
-                r'''ให้ $f(x) = \dfrac{1}{x - 1}$
-        
-        จงหาจุดวิกฤติ
-        
-        $f'(x) = -\dfrac{1}{(x - 1)^2}$
-        
-        $f'(x) = 0$ มีคำตอบ ''',
-                {"drop": "0"},
-                r'''$f'(x)$ หาค่าไม่ได้เมื่อ $x =$ ''',
-                {"drop": "1"},
-                r'''แต่ $f(1)$ หาค่า ''',
-                {"drop": "2"},
-                r'''**จุดวิกฤติ:** ''',
-                {"drop": "3"},
-              ],
-              "draggableItems": [
-                r"ไม่มี",
-                r"$1$",
-                r"ได้",
-                r"ไม่ได้",
-                r"ไม่มี",
-                r"$0$",
-                r"มี",
-              ],
-              "correctAnswers": {
-                "0": r"ไม่มี",
-                "1": r"$1$",
-                "2": r"ไม่ได้",
-                "3": r"ไม่มี",
-              },
-              "explanation":
-                  r'''$f'(x) \neq 0$ เสมอ, ที่ $x=1$ หา $f(1)$ ไม่ได้ → ไม่มีจุดวิกฤติ ✅''',
-            },
-          ],
+          "options": [r"$(0, 2)$", r"$(-\infty, 0) \cup (2, \infty)$", r"$(-2, 0)$", r"$(-\infty, -2) \cup (0, \infty)$"],
+          "correct": r"$(0, 2)$",
+          "explanation": r'''$f'(x) = -6x^2 + 12x$
+ต้องการ $f'(x) > 0$:
+$-6x^2 + 12x > 0 \implies x^2 - 2x < 0$ (หารด้วย $-6$ พลิกเครื่องหมาย!)
+$x(x-2) < 0 \implies x \in (0, 2)$ 💚''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 4: จุดวิกฤติ
+    // =============================================
     ContentSection(
-      headerL1: r"📝 แบบฝึกหัด",
+      headerL1: r"🤯 จุดวิกฤติ (Critical Points)",
       blocks: [
-        ContentBlock("ddq_practice_1", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_practice_1",
-              "content": [
-                r'''1. ให้ $f(x) = x^2 - 4x + 3$
-        
-        หาช่วงที่ฟังก์ชันเพิ่มและลด
-        
-        $f'(x) =$ ''',
-                {"drop": "0"},
-                r'''จุดวิกฤติ: $f'(x) = 0$ เมื่อ $x =$ ''',
-                {"drop": "1"},
-                r'''ช่วงที่ลด ($f'(x) < 0$): ''',
-                {"drop": "2"},
-                r'''ช่วงที่เพิ่ม ($f'(x) > 0$): ''',
-                {"drop": "3"},
-              ],
-              "draggableItems": [
-                r"$2x - 4$",
-                r"$2$",
-                r"$x < 2$",
-                r"$x > 2$",
-                r"$0$",
-                r"$(-\infty, 2)$",
-                r"$(2, \infty)$",
-              ],
-              "correctAnswers": {
-                "0": r"$2x - 4$",
-                "1": r"$2$",
-                "2": r"$x < 2$",
-                "3": r"$x > 2$",
-              },
-              "explanation":
-                  r'''$2x - 4 = 0$ ได้ $x = 2$, ลดเมื่อ $x < 2$, เพิ่มเมื่อ $x > 2$ ✅''',
-            },
+        ContentBlock("incdec_t_015", "text", {
+          "content": [
+            r'''จาก Section แรก เราเห็นว่าที่จุดยอดความชันเป็นศูนย์ — นั่นคือรอยต่อของการเปลี่ยนทิศทาง
+
+จุดที่ $f'(x) = 0$ หรือ $f'(x)$ หาค่าไม่ได้ เราเรียกว่า **จุดวิกฤติ**''',
+            r'''Note = เงื่อนไขสำคัญ
+$f(c)$ ต้องมีค่าด้วย ถ้าตัวฟังก์ชันเองหาค่าที่จุดนั้นไม่ได้ ก็ไม่นับเป็นจุดวิกฤติ''',
           ],
         }),
-        ContentBlock("ddq_practice_2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_practice_2",
-              "content": [
-                r'''2. ให้ $f(x) = x^3 - 6x^2 + 9x + 1$
-        
-        หาจุดวิกฤติและช่วงเพิ่ม-ลด
-        
-        $f'(x) = 3x^2 - 12x + 9 = 3(x^2 - 4x + 3) = 3(x - 1)(x - 3)$
-        
-        จุดวิกฤติ: $x =$ ''',
-                {"drop": "0"},
-                r'''และ $x =$ ''',
-                {"drop": "1"},
-                r'''ช่วงที่เพิ่ม ($f'(x) > 0$): ''',
-                {"drop": "2"},
-                r'''ช่วงที่ลด ($f'(x) < 0$): ''',
-                {"drop": "3"},
-              ],
-              "draggableItems": [
-                r"$1$",
-                r"$3$",
-                r"$x < 1$ หรือ $x > 3$",
-                r"$1 < x < 3$",
-                r"$0$",
-                r"$x > 0$",
-              ],
-              "correctAnswers": {
-                "0": r"$1$",
-                "1": r"$3$",
-                "2": r"$x < 1$ หรือ $x > 3$",
-                "3": r"$1 < x < 3$",
-              },
-              "explanation":
-                  r'''จุดวิกฤติ $x = 1, 3$ เพิ่มเมื่อ $x < 1$ หรือ $x > 3$ ลดเมื่อ $1 < x < 3$ ✅''',
-            },
+        ContentBlock("incdec_q_016", "question_choice", {
+          "content": [
+            r'''1. ให้ $f(x) = x^4 - 4x^3$ จุดวิกฤติของฟังก์ชันนี้มีกี่จุด?''',
           ],
+          "options": [r"$1$ จุด", r"$2$ จุด", r"$3$ จุด", r"ไม่มีจุดวิกฤติ"],
+          "correct": r"$2$ จุด",
+          "explanation": r'''$f'(x) = 4x^3 - 12x^2 = 4x^2(x-3) = 0$
+ได้ $x = 0$ และ $x = 3$ — ทั้งสองจุด $f(x)$ หาค่าได้ปกติ
+สรุปมี 2 จุดวิกฤติ 💚''',
+        }),
+        ContentBlock("incdec_q_017", "question_choice", {
+          "content": [
+            r'''2. ให้ $f(x) = \dfrac{1}{x^2}$ จุดวิกฤติของฟังก์ชันนี้คือ?''',
+          ],
+          "options": [r"$x = 0$", r"$x = 1$", r"$x = -1$", r"ไม่มีจุดวิกฤติ"],
+          "correct": r"ไม่มีจุดวิกฤติ",
+          "explanation": r'''$f'(x) = -\dfrac{2}{x^3}$ — สมการ $f'(x) = 0$ ไม่มีคำตอบ
+
+ที่ $x = 0$ นั้น $f'(x)$ หาค่าไม่ได้ก็จริง แต่ $f(0)$ ก็หาค่าไม่ได้ด้วย (หารด้วยศูนย์) จึงไม่นับเป็นจุดวิกฤติ 💚''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 5: แบบฝึกหัดวิเคราะห์
+    // =============================================
+    ContentSection(
+      headerL1: r"🔥 แบบฝึกหัดวิเคราะห์",
+      blocks: [
+        ContentBlock("incdec_t_018", "text", {
+          "content": [
+            r'''โจทย์ชุดนี้ไม่ได้แค่ "หาช่วง" — ต้องวิเคราะห์ให้ดีก่อนตอบ''',
+          ],
+        }),
+
+        // Q1: Multi-statement ก ข ค
+        ContentBlock("incdec_q_019", "question_choice", {
+          "content": [
+            r'''1. ให้ $f(x) = x^3 - 6x^2 + 9x + 2$ พิจารณาข้อความต่อไปนี้
+
+ก. ที่ $x = 2$ ฟังก์ชันนี้เป็นฟังก์ชันลด
+ข. ช่วง $(0, 3)$ ทำให้ $f(x)$ เป็นฟังก์ชันเพิ่ม
+ค. เส้นสัมผัส ณ จุดวิกฤติ $x = 1$ มีสมการ $y = 6$
+
+ข้อใดถูกต้อง?''',
+          ],
+          "options": [
+            r"ก และ ข",
+            r"ก และ ค",
+            r"ข และ ค",
+            r"ถูกทุกข้อ",
+          ],
+          "correct": r"ก และ ค",
+          "explanation": r'''$f'(x) = 3x^2 - 12x + 9 = 3(x-1)(x-3)$
+ช่วงลดจริงคือ $(1, 3)$ ช่วงเพิ่มจริงคือ $(-\infty,1) \cup (3, \infty)$
+
+**ก:** $f'(2) = 3(1)(-1) = -3 < 0$ → ลด ✓
+**ข:** $(0, 3)$ ไม่ใช่ subset ของช่วงลดหรือช่วงเพิ่มทั้งหมด — ผ่านจุดวิกฤติ $x=1$ ด้วย ✗
+**ค:** $x = 1$ เป็นจุดวิกฤติ → $f'(1) = 0$ → เส้นสัมผัสแนวนอน, $f(1) = 1 - 6 + 9 + 2 = 6$ → $y = 6$ ✓ 💚''',
+        }),
+
+        // Q2: Chain rule + หาพารามิเตอร์
+        ContentBlock("incdec_q_020", "question_choice", {
+          "content": [
+            r'''2. ให้ $f(x) = (2x^2 - a)^2$ โดยที่ $a > 0$
+
+ถ้าฟังก์ชันนี้มีจุดที่ไม่เพิ่มไม่ลดที่ $x = 2$ (นอกเหนือจาก $x = 0$) ค่า $a$ เท่ากับเท่าใด?''',
+          ],
+          "options": [r"$a = 4$", r"$a = 6$", r"$a = 8$", r"$a = 16$"],
+          "correct": r"$a = 8$",
+          "explanation": r'''ใช้ Chain Rule: $f'(x) = 2(2x^2 - a) \cdot 4x = 8x(2x^2 - a)$
+
+จุดที่ไม่เพิ่มไม่ลด คือจุดที่ $f'(x) = 0$
+แทน $x = 2$: $8(2)(2 \cdot 4 - a) = 0$
+$16(8 - a) = 0 \implies a = 8$ 💚''',
+        }),
+
+        // Q3: เงื่อนไข always-increasing
+        ContentBlock("incdec_q_021", "question_choice", {
+          "content": [
+            r'''3. $f(x) = x^3 - kx$ จะเป็นฟังก์ชันเพิ่มตลอดเส้นจริงได้ก็ต่อเมื่อ $k$ อยู่ในช่วงใด?''',
+          ],
+          "options": [r"$k < 0$", r"$k \leq 0$", r"$k > 0$", r"$k \geq 0$"],
+          "correct": r"$k \leq 0$",
+          "explanation": r'''$f'(x) = 3x^2 - k$
+
+ต้องการ $f'(x) \geq 0$ ทุกค่า $x$
+ค่าต่ำสุดของ $3x^2$ คือ $0$ (ตอน $x = 0$)
+ดังนั้นต้องการ $-k \geq 0 \implies k \leq 0$
+
+Note = ที่ $k = 0$ จะได้ $f'(x) = 3x^2 \geq 0$ เสมอ ยังนับว่าไม่ลด 💚''',
+        }),
+
+        // Q4: Chain rule + multi-statement
+        ContentBlock("incdec_q_022", "question_choice", {
+          "content": [
+            r'''4. ให้ $f(x) = (3x^2 - 3)^2$ พิจารณาข้อความต่อไปนี้
+
+ก. $f$ มีจุดวิกฤติทั้งหมด $3$ จุด
+ข. $f$ เป็นฟังก์ชันเพิ่มในช่วง $(-1, 0)$
+ค. $f$ เป็นฟังก์ชันลดในช่วง $(1, \infty)$
+
+ข้อใดถูกต้อง?''',
+          ],
+          "options": [
+            r"ก เท่านั้น",
+            r"ก และ ข",
+            r"ข และ ค",
+            r"ถูกทุกข้อ",
+          ],
+          "correct": r"ก และ ข",
+          "explanation": r'''ใช้ Chain Rule: $f'(x) = 2(3x^2-3) \cdot 6x = 12x(3x^2-3) = 36x(x-1)(x+1)$
+
+จุดวิกฤติ: $x = -1, 0, 1$ (ทั้งสามจุด $f(x)$ หาค่าได้) → **ก ✓** (3 จุด)
+
+วิเคราะห์เครื่องหมาย $f'(x) = 36x(x-1)(x+1)$:
+- ช่วง $(-1, 0)$: แทน $x = -0.5$ → $36(-)(-)(-) < 0$... 
+
+🧠 ระวัง! ลองแทน $x = -0.5$:
+$36(-0.5)(-1.5)(-0.5) = 36 \times (-0.5) \times (-1.5) \times (-0.5) = 36 \times (-0.375) < 0$
+
+รอก่อน — นั่นหมายความว่า $f' < 0$ ในช่วง $(-1,0)$ แปลว่าลด ไม่ใช่เพิ่ม?
+
+ลองใหม่อย่างระมัดระวัง: $x = -0.5$
+$x < 0$ → factor $x$ เป็นลบ
+$x - 1 = -1.5 < 0$ → factor $(x-1)$ เป็นลบ
+$x + 1 = 0.5 > 0$ → factor $(x+1)$ เป็นบวก
+ผลคูณ: $(-)(-)(+) = (+)$ → $f' > 0$ → **ข ✓** (เพิ่ม)
+
+- ช่วง $(1, \infty)$: แทน $x = 2$: $(+)(+)(+) = (+) > 0$ → เพิ่ม ไม่ใช่ลด → **ค ✗**
+
+สรุป: ก และ ข ถูก 💚''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 6: สรุป
+    // =============================================
     ContentSection(
       headerL1: r"✨ สรุป",
       blocks: [
-        ContentBlock("incdec_t_425", "text", {
+        ContentBlock("incdec_t_023", "text", {
           "content": [
-            r'''**🎯 ฟังก์ชันเพิ่ม-ลด**
-        
-        **1. หลักการ:** ดูค่า**ความชัน**! 📐
-        
-        🔸$f'(x) > 0 \to$ **ฟังก์ชันเพิ่ม** ⬆️✨
-        
-        🔸$f'(x) < 0 \to$ **ฟังก์ชันลด** ⬇️💧
-        
-        🔸$f'(x) = 0 \to$ **จุดวิกฤติ** 🤯
-        
-        **2. เหตุผล:** 
-        
-        🔸ความชัน $+ \to$ กราฟลาดขึ้น
-        
-        🔸ความชันลบ $- \to$ กราฟลาดลง
-        
-        **3. การหาช่วงที่เพิ่ม-ลด:**
-        
-        ☝️ หา $f'(x)$
-        
-        ✌️ ตั้ง**อสมการ**: $f'(x) > 0$ (เพิ่ม) หรือ $f'(x) < 0$ (ลด)
-        
-        🤟 **แก้อสมการ** (ใช้ความรู้จำนวนจริง)
-        
-        **4. จุดวิกฤติ:**
-        
-        $f'(a) = 0 \text{ หรือ หาค่าไม่ได้}$
-        
-        โดย $f(a)$ หาค่าได้''',
+            r'''**$f'(x)$ = ความชัน = ทิศทางกราฟ**
+$f'(x) > 0$ → กราฟพุ่งขึ้น (ฟังก์ชันเพิ่ม)
+$f'(x) < 0$ → กราฟปักหัวลง (ฟังก์ชันลด)''',
+          ],
+        }),
+        ContentBlock("incdec_t_024", "text", {
+          "content": [
+            r'''**อยากหาทั้งช่วง?**
+นำ $f'(x)$ มาตั้งอสมการ $> 0$ หรือ $< 0$ แล้วแก้หา $x$ ด้วยเส้นจำนวน''',
+          ],
+        }),
+        ContentBlock("incdec_t_025", "text", {
+          "content": [
+            r'''**จุดวิกฤติ** คือจุดที่ $f'(x) = 0$ หรือหาค่าไม่ได้ (และ $f(x)$ ต้องมีค่าด้วย)
+
+Note = บทต่อไป
+จุดวิกฤตินี่แหละคือกุญแจที่จะพาไปหา **จุดสูงสุดและต่ำสุด** ของฟังก์ชัน 🚀''',
           ],
         }),
       ],
@@ -10116,603 +10331,532 @@ final calcIncDecLesson = ContentLesson(
 final calcExtremaLesson = ContentLesson(
   title: "จุดสูงสุด-ต่ำสุด",
   sections: [
+    // =============================================
+    // SECTION 1: จุดเปลี่ยนทิศ
+    // =============================================
     ContentSection(
-      headerL1: r"intro",
+      headerL1: r"💡 จุดเปลี่ยนทิศ",
       blocks: [
-        ContentBlock("extrema_t_426", "text", {
+        ContentBlock("extrema_t_001", "text", {
           "content": [
-            r'''จากบทที่แล้ว เราได้เรียนการหาช่วงที่ฟังก์ชัน**เพิ่ม-ลด**แล้ว 
-        
-        **แล้วถ้าฟังก์ชันเปลี่ยนทิศล่ะ?** 🤔
-        
-        จาก เพิ่ม $\to$ ลด หรือ ลด $\to$ เพิ่ม
-        
-        จุดเปลี่ยนนี้คือ **จุดสูงสุดหรือต่ำสุด**! ⚡
-        
-        บทนี้เราจะมาเรียนกัน! 🚀''',
+            r'''จากบทที่แล้ว เรารู้แล้วว่า $f'(x) > 0$ กราฟพุ่งขึ้น และ $f'(x) < 0$ กราฟปักหัวลง
+
+**แล้วถ้ากราฟเปลี่ยนทิศล่ะ?** 🤔 ลองเล่นกราฟด้านล่างก่อนเลย''',
           ],
+        }),
+        ContentBlock("extrema_ig_002", "interactive_graph", {
+          "path": "graph_data_extrema",
+        }),
+        ContentBlock("extrema_t_003", "text", {
+          "content": [
+            r'''กราฟนี้คือ $f(x) = x^3 - 3x^2 + 1$ — ลองเลื่อนจุดไปตามกราฟ แล้วสังเกตว่าตรง**ยอดเขา**และ**ก้นหุบ** เส้นสัมผัสเป็นยังไง และ $f'(x)$ มีค่าเท่าไร''',
+          ],
+        }),
+        ContentBlock("extrema_ddq_004", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "extrema_ddq_004_s1",
+              "content": [
+                r'''เลื่อนจุดไปที่ **ยอดเขา** (จุดสูงสุดของเนิน) — ค่า $f'(x)$ ตรงนั้นเป็น ''',
+                {"drop": "0"},
+                r''' และก่อนถึงยอดเขากราฟกำลัง ''',
+                {"drop": "1"},
+                r''' หลังยอดเขากราฟกำลัง ''',
+                {"drop": "2"},
+              ],
+              "draggableItems": [r"$0$", r"บวก", r"ลบ", r"พุ่งขึ้น", r"ปักหัวลง"],
+              "correctAnswers": {"0": r"$0$", "1": r"พุ่งขึ้น", "2": r"ปักหัวลง"},
+              "explanation": r'''ยอดเขา → เส้นสัมผัสแนวนอน → $f'(x) = 0$ พอดี ก่อนถึงกราฟพุ่งขึ้น หลังจากนั้นปักหัวลง 💚''',
+            },
+            {
+              "questionId": "extrema_ddq_004_s2",
+              "content": [
+                r'''เลื่อนจุดไปที่ **ก้นหุบ** (จุดต่ำสุดของหลุม) — ก่อนถึงก้นหุบกราฟกำลัง ''',
+                {"drop": "0"},
+                r''' หลังก้นหุบกราฟกำลัง ''',
+                {"drop": "1"},
+                r''' ดังนั้นความชันเปลี่ยนจาก ''',
+                {"drop": "2"},
+              ],
+              "draggableItems": [r"พุ่งขึ้น", r"ปักหัวลง", r"$+ \to -$", r"$- \to +$"],
+              "correctAnswers": {"0": r"ปักหัวลง", "1": r"พุ่งขึ้น", "2": r"$- \to +$"},
+              "explanation": r'''ก้นหุบ → กราฟเปลี่ยนจากลงเป็นขึ้น → ความชันเปลี่ยนจากลบเป็นบวก 💚''',
+            },
+          ],
+        }),
+        ContentBlock("extrema_q_005", "question_choice", {
+          "content": [
+            r'''1. ถ้า $f'(x)$ เปลี่ยนเครื่องหมายจาก $+$ เป็น $-$ ที่ $x = a$ แสดงว่า $x = a$ เป็นจุดอะไร?''',
+          ],
+          "options": [
+            r"จุดสูงสุด (ยอดเขา)",
+            r"จุดต่ำสุด (ก้นหุบ)",
+            r"จุดเปลี่ยนโค้ง",
+            r"บอกไม่ได้",
+          ],
+          "correct": r"จุดสูงสุด (ยอดเขา)",
+          "explanation": r'''$f'$ เปลี่ยนจาก $+$ (ขึ้น) เป็น $-$ (ลง) → กราฟขึ้นแล้วลง → จุดนั้นคือยอดเขา = จุดสูงสุด 💚''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 2: จุดสูงสุด-ต่ำสุดสัมพัทธ์
+    // =============================================
     ContentSection(
       headerL1: r"🎯 จุดสูงสุด-ต่ำสุดสัมพัทธ์",
       blocks: [
-        ContentBlock("extrema_t_427", "text", {
+        ContentBlock("extrema_t_006", "text", {
           "content": [
-            r'''🔹**จุดสูงสุดสัมพัทธ์** ⛰️
-        
-        จุดที่**สูงกว่า**บริเวณรอบๆ
-        
-        🔸**จุดต่ำสุดสัมพัทธ์** 🏞️
-        
-        จุดที่**ต่ำกว่า**บริเวณรอบๆ
-        
-        Note = สำคัญ
-        
-        ไม่จำเป็นต้องสูงสุดหรือต่ำสุดของทั้งกราฟ แค่บริเวณรอบๆ ไปดูตัวอย่างด้านล่างกัน!''',
+            r'''🔹 **จุดสูงสุดสัมพัทธ์** — จุดที่สูงกว่าบริเวณรอบๆ (ยอดเขา ⛰️)
+
+🔸 **จุดต่ำสุดสัมพัทธ์** — จุดที่ต่ำกว่าบริเวณรอบๆ (ก้นหุบ 🏞️)''',
+            r'''Note = สำคัญ
+ไม่จำเป็นต้องสูงสุด/ต่ำสุดของทั้งกราฟ แค่เทียบกับบริเวณรอบๆ เท่านั้น''',
           ],
         }),
-        ContentBlock("extrema_h_428", "header", {
+        ContentBlock("extrema_t_007", "text", {
+          "content": [
+            r'''**ขั้นตอนหาจุดสูงสุด-ต่ำสุดสัมพัทธ์:**
+
+**ขั้นที่ 1:** หา $f'(x)$ แล้วแก้ $f'(x) = 0$
+**ขั้นที่ 2:** วาด **เส้นจำนวน** ใส่เครื่องหมาย $+/-$ ในแต่ละช่วง
+**ขั้นที่ 3:** ดูการเปลี่ยนเครื่องหมาย — $(+) \to (-)$ = สูงสุด, $(-) \to (+)$ = ต่ำสุด
+**ขั้นที่ 4:** แทนค่า $x$ ลง $f(x)$ เพื่อหาพิกัด $(x, y)$''',
+          ],
+        }),
+        ContentBlock("extrema_h_008", "header", {
           "title": r"ตัวอย่าง",
           "level": 2,
         }),
-        ContentBlock("ddq_extrema_relative_0", "drag_and_drop", {
+        ContentBlock("extrema_t_009", "text", {
+          "content": [
+            r'''ให้ $f(x) = x^3 - 3x^2 + 1$ จงหาจุดสูงสุดและต่ำสุดสัมพัทธ์
+
+มาทำทีละขั้น! 🚀''',
+          ],
+        }),
+        ContentBlock("extrema_ddq_010", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_extrema_relative_0",
+              "questionId": "extrema_ddq_010_s1",
               "content": [
-                {"graph": "graph_data_tangent2.dart"},
-                r'''🎯 **ขั้นที่ 1:** หาจุดสูงสุดต่ำสุดสัมพัทธ์
-        
-        จากความหมายด้านบน
-        
-        🔸จุดสูงสุดสัมพัทธ์คือ ''',
+                r'''**ขั้นที่ 1:** หา $f'(x)$
+
+$f(x) = x^3 - 3x^2 + 1$
+
+$f'(x) = $ ''',
                 {"drop": "0"},
-                r'''🔸จุดต่ำสุดสัมพัทธ์คือ ''',
+                r''' $ = 3x \cdot$ ''',
                 {"drop": "1"},
-                r'''🔋 **ขั้นที่ 2:** หาจุดเปลี่ยนความชัน
-        
-        🔹จุด ''',
-                {"drop": "0"},
-                r'''เปลี่ยนความชันจาก ''',
+                r''' ดังนั้น $f'(x) = 0$ ที่ $x = $ ''',
                 {"drop": "2"},
-                r'''🔹จุด ''',
+              ],
+              "draggableItems": [r"$3x^2 - 6x$", r"$3x^2 - 6x + 1$", r"$(x - 2)$", r"$(x + 2)$", r"$0$ และ $2$", r"$0$ และ $-2$"],
+              "correctAnswers": {"0": r"$3x^2 - 6x$", "1": r"$(x - 2)$", "2": r"$0$ และ $2$"},
+              "explanation": r'''$f'(x) = 3x^2 - 6x = 3x(x - 2) = 0$ ได้ $x = 0$ และ $x = 2$ 💚''',
+            },
+          ],
+        }),
+        ContentBlock("extrema_ddq_011", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "extrema_ddq_011_s1",
+              "content": [
+                r'''**ขั้นที่ 2–3:** วาดเส้นจำนวนของ $3x(x - 2)$ แล้วใส่เครื่องหมาย
+
+จุดแบ่งช่วง: $x = 0$ และ $x = 2$''',
+                {"image": "assets/extrema_numberline_1.png"},
+                r'''ที่ $x = 0$: เครื่องหมายเปลี่ยนจาก ''',
+                {"drop": "0"},
+                r''' → เป็นจุด ''',
                 {"drop": "1"},
-                r'''เปลี่ยนความชันจาก ''',
+                r'''ที่ $x = 2$: เครื่องหมายเปลี่ยนจาก ''',
+                {"drop": "2"},
+                r''' → เป็นจุด ''',
                 {"drop": "3"},
               ],
-              "draggableItems": [
-                r"$(4, 0)$",
-                r"$(0, 4)$",
-                r"$(2, 0)$",
-                r"$(0, 2)$",
-                r"$+ \to -$",
-                r"$+ \to -$",
-                r"$- \to +$",
-                r"$- \to +$",
-              ],
-              "correctAnswers": {
-                "0": r"$(0, 4)$",
-                "1": r"$(2, 0)$",
-                "2": r"$+ \to -$",
-                "3": r"$- \to +$",
-              },
-              "explanation":
-                  r'''หาค่าดิฟและแยกตัวประกอบ: $f'(x) = 3x^2 - 6x = 3x(x-2) = 0$ ✅''',
+              "draggableItems": [r"$+ \to -$", r"$- \to +$", r"สูงสุดสัมพัทธ์", r"ต่ำสุดสัมพัทธ์"],
+              "correctAnswers": {"0": r"$+ \to -$", "1": r"สูงสุดสัมพัทธ์", "2": r"$- \to +$", "3": r"ต่ำสุดสัมพัทธ์"},
+              "explanation": r'''เส้นจำนวน: $(+)$ | 0 | $(-)$ | 2 | $(+)$ — ที่ $x=0$ เปลี่ยน $+ \to -$ (สูงสุด) ที่ $x=2$ เปลี่ยน $- \to +$ (ต่ำสุด) 💚''',
             },
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"⭐️ สรุปแนวคิด",
-      blocks: [
-        ContentBlock("extrema_t_430", "text", {
-          "content": [
-            r'''🔹**จุดสูงสุดสัมพัทธ์**คือ จุดที่เปลี่ยนความชันจาก $+ \to -$
-        
-        🔸**จุดต่ำสุดสัมพัทธ์**คือ จุดที่เปลี่ยนความชันจาก $- \to +$
-        
-        **🌱 ขั้นตอน:**
-        
-        **ขั้นที่ 1:** หา $f'(x)$ เพื่อหาความชัน
-        
-        **ขั้นที่ 2:** วาด**เส้นจำนวน** และใส่เครื่องหมาย
-        
-        **ขั้นที่ 3:** ดูการเปลี่ยนเครื่องหมาย:
-        
-        🔸 $(+) \to (-)$ จุดสูงสุดสัมพัทธ์ ⛰️
-        
-        🔸 $(-) \to (+)$ จุดต่ำสุดสัมพัทธ์ 🏞️
-        
-        🔸 ไม่เปลี่ยน $\to$ ไม่เป็นทั้งคู่ 🙅🏻‍♂️
-        
-        **ขั้นที่ 4:** แทนค่าจุด $x$ ที่หาได้ลง $f(x)$ เพื่อหา $y$ จะได้พิกัด $(x, y)$
-        
-        Note = หมายเหตุ
-        
-        โดยทั่วไปมักจะสอนว่าใช้จุดวิกฤติหาจุดสูงสุดต่ำสุดสัมพัทธ์ แต่มันมีข้อยกเว้นเช่น $f''(x) = 0$ และอื่นๆ ทำให้ใช้วิธีนี้ง่ายกว่า''',
-          ],
-        }),
-        ContentBlock("extrema_h_431", "header", {"title": r"เช่น", "level": 2}),
-        ContentBlock("extrema_t_432", "text", {
-          "content": [
-            r'''ให้ $f(x) = x^3 - 3x^2 + 1$
-        
-        จงหาจุดสูงสุดและต่ำสุดสัมพัทธ์
-        
-        **มาทำทีละขั้นตอน! 🚀**''',
-          ],
-        }),
-        ContentBlock("ddq_extrema_relative_1", "drag_and_drop", {
+        ContentBlock("extrema_ddq_012", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_extrema_relative_1",
+              "questionId": "extrema_ddq_012_s1",
               "content": [
-                r'''🎯 **ขั้นที่ 1:** หา $f'(x)$
-        
-        $f(x) = x^3 - 3x^2 + 1$
-        
-        $f'(x) =$ ''',
+                r'''**ขั้นที่ 4:** แทนค่าลง $f(x) = x^3 - 3x^2 + 1$
+
+$f(0) = 0 - 0 + 1 = $ ''',
                 {"drop": "0"},
-                r'''แยกตัวประกอบ ''',
-                {"drop": "0"},
-                r'''$= (3x) \cdot$ ''',
-                {"drop": "1"},
-              ],
-              "draggableItems": [
-                r"$2x$",
-                r"$x - 2$",
-                r"$3x - 6$",
-                r"$3x^2 - 6x + 1$",
-                r"$3x^2 - 6x$",
-              ],
-              "correctAnswers": {"0": r"$3x^2 - 6x$", "1": r"$x - 2$"},
-              "explanation":
-                  r'''หาค่าดิฟและแยกตัวประกอบ: $f'(x) = 3x^2 - 6x = 3x(x-2) = 0$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_extrema_relative_2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_extrema_relative_2",
-              "content": [
-                r'''🙂‍↔️ **ขั้นที่ 2:** วาดเส้นจำนวนของ $3x(x - 2)$
-        
-        จุดแบ่งช่วง: $x = 0$ และ $x = 2$''',
-                {"image": "assets/diff4.png"},
-                r'''🧩 **ขั้นที่ 3:** หาจุดสูงสุดต่ำสุดสัมพัทธ์
-        
-        🔸**จุดต่ำสุดสัมพัทธ์** คือจุดที่เปลี่ยนจาก ''',
-                {"drop": "0"},
-                r'''🔹**จุดสูงสุดสัมพัทธ์** คือจุดที่เปลี่ยนจาก ''',
-                {"drop": "1"},
-                r'''ดูจากเส้นจำนวนจุดที่เปลี่ยนจาก ''',
-                {"drop": "0"},
-                r'''คือ $x =$ ''',
-                {"drop": "2"},
-                r'''จุดที่เปลี่ยนจาก ''',
-                {"drop": "1"},
-                r'''คือ $x =$ ''',
-                {"drop": "3"},
-              ],
-              "draggableItems": [
-                r"$2$",
-                r"$0$",
-                r"$-2$",
-                r"$0$",
-                r"$- \to +$",
-                r"$+ \to -$",
-              ],
-              "correctAnswers": {
-                "0": r"$- \to +$",
-                "1": r"$+ \to -$",
-                "2": r"$2$",
-                "3": r"$0$",
-              },
-              "explanation":
-                  r'''จาก $3x(x - 2)$ วาดเส้นจำนวนได้ + | 0 | - | 2 | + ดังนั้น $- \to +$ ที่ $x=2$ (ต่ำสุดสัมพัทธ์) และ $+ \to -$ ที่ $x=0$ (สูงสุดสัมพัทธ์) ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_extrema_relative_3", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_extrema_relative_3",
-              "content": [
-                r'''⚙️ **ขั้นที่ 4:** แทนค่าจุด $x$ ที่หาได้ลง $f(x)$
-        
-        โดย $f(x) = x^3 - 3x^2 + 1$
-        
-        $x = 2 \to f(x) =$ ''',
-                {"drop": "0"},
-                r'''$x = 0 \to f(x) =$ ''',
-                {"drop": "1"},
-                r'''ดังนั้น **จุดต่ำสุดสัมพัทธ์** คือ $(2,$ ''',
+                r''' → จุดสูงสุดสัมพัทธ์ $(0,$ ''',
                 {"drop": "0"},
                 r'''$)$
-        
-        **จุดสูงสุดสัมพัทธ์** คือ $(0,$ ''',
+
+$f(2) = 8 - 12 + 1 = $ ''',
+                {"drop": "1"},
+                r''' → จุดต่ำสุดสัมพัทธ์ $(2,$ ''',
                 {"drop": "1"},
                 r'''$)$''',
               ],
-              "draggableItems": [
-                r"$2$",
-                r"$0$",
-                r"$-3$",
-                r"$0$",
-                r"$1$",
-                r"$-1$",
-              ],
-              "correctAnswers": {"0": r"$-3$", "1": r"$1$"},
-              "explanation":
-                  r'''$f(2) = 2^3 - 3(2)^2 + 1 = 8 - 12 + 1 = -3$ และ $f(0) = 0^3 -3(0)^2 + 1 = 1$ ดังนั้น จุดต่ำสุดสัมพัทธ์ $(2, -3)$ จุดสูงสุดสัมพัทธ์ $(0, 1)$ ✅''',
+              "draggableItems": [r"$1$", r"$-3$", r"$0$", r"$-1$"],
+              "correctAnswers": {"0": r"$1$", "1": r"$-3$"},
+              "explanation": r'''จุดสูงสุดสัมพัทธ์ $(0, 1)$ และจุดต่ำสุดสัมพัทธ์ $(2, -3)$ 💚''',
             },
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"📝 แบบฝึกหัด",
-      blocks: [
-        ContentBlock("ddq_extrema_relative_practice_1", "drag_and_drop", {
+        ContentBlock("extrema_h_013", "header", {
+          "title": r"แบบฝึก",
+          "level": 2,
+        }),
+        ContentBlock("extrema_ddq_014", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_extrema_relative_practice_1",
+              "questionId": "extrema_ddq_014_s1",
               "content": [
                 r'''1. ให้ $f(x) = x^2 - 4x + 5$
-        
-        จุดต่ำสุดสัมพัทธ์คือ ''',
+
+จุดต่ำสุดสัมพัทธ์คือ ''',
                 {"drop": "0"},
-                r'''จุดสูงสุดสัมพัทธ์คือ ''',
+                r''' จุดสูงสุดสัมพัทธ์คือ ''',
                 {"drop": "1"},
               ],
-              "draggableItems": [
-                r"$(1, 4)$",
-                r"$(2, 4)$",
-                r"$(1, 2)$",
-                r"$(2, 1)$",
-                r"ไม่มี",
-                r"ไม่มี",
-              ],
+              "draggableItems": [r"$(2, 1)$", r"$(1, 2)$", r"$(4, 5)$", r"ไม่มี"],
               "correctAnswers": {"0": r"$(2, 1)$", "1": r"ไม่มี"},
-              "explanation":
-                  r'''$f'(x) = 2x - 4 = 2(x - 2)$ วาดเส้นจำนวน: - | 2 | + เปลี่ยนจาก $- \to +$ ที่ $x=2$ (ต่ำสุดสัมพัทธ์) ไม่มีจุดที่เปลี่ยน $+ \to -$ ดังนั้น $f(2) = 4 - 8 + 5 = 1$ จุดต่ำสุดสัมพัทธ์ $(2, 1)$ ไม่มีจุดสูงสุดสัมพัทธ์ ✅''',
+              "explanation": r'''$f'(x) = 2x - 4 = 2(x - 2)$ เส้นจำนวน: $(-)$ | 2 | $(+)$ เปลี่ยน $- \to +$ ที่ $x=2$ → ต่ำสุดสัมพัทธ์ ไม่มี $+ \to -$ จึงไม่มีสูงสุดสัมพัทธ์ $f(2) = 4 - 8 + 5 = 1$ → $(2, 1)$ 💚''',
             },
           ],
         }),
+        ContentBlock("extrema_q_015", "question_choice", {
+          "content": [
+            r'''2. ให้ $f(x) = x^3$ จุดวิกฤติ $x = 0$ เป็นจุดสูงสุดหรือต่ำสุดสัมพัทธ์?''',
+          ],
+          "options": [
+            r"จุดสูงสุดสัมพัทธ์",
+            r"จุดต่ำสุดสัมพัทธ์",
+            r"ไม่เป็นทั้งคู่",
+            r"เป็นทั้งสูงสุดและต่ำสุด",
+          ],
+          "correct": r"ไม่เป็นทั้งคู่",
+          "explanation": r'''$f'(x) = 3x^2$ → $f'(x) = 0$ ที่ $x = 0$
+
+เส้นจำนวน: $(+)$ | 0 | $(+)$ — เครื่องหมาย**ไม่เปลี่ยน** จึงไม่เป็นทั้งสูงสุดและต่ำสุดสัมพัทธ์ 💚
+
+🧠 ไม่ใช่ทุกจุดวิกฤติจะเป็นจุดสูงสุด-ต่ำสุดเสมอไป!''',
+        }),
       ],
     ),
+
+    // =============================================
+    // SECTION 3: แบบฝึกหัด: สัมพัทธ์
+    // =============================================
+    ContentSection(
+      headerL1: r"📝 แบบฝึกหัด: สัมพัทธ์",
+      blocks: [
+        ContentBlock("extrema_q_016", "question_choice", {
+          "content": [
+            r'''1. ให้ $f(x) = 2x^3 + 3x^2 - 12x + 1$ จุดต่ำสุดสัมพัทธ์อยู่ที่ $x$ เท่าใด?''',
+          ],
+          "options": [r"$x = 1$", r"$x = -2$", r"$x = -1$", r"$x = 2$"],
+          "correct": r"$x = 1$",
+          "explanation": r'''$f'(x) = 6x^2 + 6x - 12 = 6(x^2 + x - 2) = 6(x+2)(x-1)$
+
+เส้นจำนวน: $(+)$ | $-2$ | $(-)$ | $1$ | $(+)$
+
+ที่ $x = 1$: $- \to +$ → ต่ำสุดสัมพัทธ์ 💚
+ที่ $x = -2$: $+ \to -$ → สูงสุดสัมพัทธ์''',
+        }),
+        ContentBlock("extrema_q_017", "question_choice", {
+          "content": [
+            r'''2. ให้ $f(x) = x^4 - 4x^3$ จำนวนจุดสูงสุดและต่ำสุดสัมพัทธ์รวมกันเท่ากับ?''',
+          ],
+          "options": [r"$0$ จุด", r"$1$ จุด", r"$2$ จุด", r"$3$ จุด"],
+          "correct": r"$1$ จุด",
+          "explanation": r'''$f'(x) = 4x^3 - 12x^2 = 4x^2(x - 3)$
+
+เส้นจำนวน: $(-)$ | $0$ | $(-)$ | $3$ | $(+)$
+
+ที่ $x = 0$: $- \to -$ เครื่องหมายไม่เปลี่ยน → **ไม่เป็น**ทั้งสูงสุดและต่ำสุด
+ที่ $x = 3$: $- \to +$ → ต่ำสุดสัมพัทธ์
+
+สรุปมีแค่ **1 จุด** คือต่ำสุดสัมพัทธ์ที่ $x = 3$ 💚''',
+        }),
+        ContentBlock("extrema_q_018", "question_choice", {
+          "content": [
+            r'''3. ให้ $f(x) = -x^3 + 3x^2 + 9x - 5$ ค่า $y$ ของจุดสูงสุดสัมพัทธ์เท่ากับ?''',
+          ],
+          "options": [r"$22$", r"$-5$", r"$-10$", r"$27$"],
+          "correct": r"$22$",
+          "explanation": r'''$f'(x) = -3x^2 + 6x + 9 = -3(x^2 - 2x - 3) = -3(x-3)(x+1)$
+
+เส้นจำนวน: $(-)$ | $-1$ | $(+)$ | $3$ | $(-)$
+
+ที่ $x = 3$: $+ \to -$ → สูงสุดสัมพัทธ์
+
+$f(3) = -27 + 27 + 27 - 5 = 22$ 💚''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 4: จุดสูงสุด-ต่ำสุดสัมบูรณ์
+    // =============================================
     ContentSection(
       headerL1: r"🌍 จุดสูงสุด-ต่ำสุดสัมบูรณ์",
       blocks: [
-        ContentBlock("extrema_t_437", "text", {
+        ContentBlock("extrema_t_019", "text", {
           "content": [
-            r'''🔹**จุดสูงสุดสัมบูรณ์** 🎢 
-        
-        จุดที่สูงที่สุดของ**ทั้งกราฟ** หรือ**ช่วงที่กำหนด**
-        
-        🔸**จุดต่ำสุดสัมบูรณ์** ⌛
-        
-        จุดที่ต่ำที่สุดของ**ทั้งกราฟ** หรือ**ช่วงที่กำหนด**
-        
-        Note = หมายเหตุ
-        
-        โดยทั่วไปโจทย์จะถามบนช่วง เพราะถ้าถามทั้งกราฟคำตอบมักเป็น $\infty$ หรือ $-\infty$''',
+            r'''🔹 **จุดสูงสุดสัมบูรณ์** — จุดที่สูงที่สุดของ**ทั้งช่วงที่กำหนด** 🎢
+
+🔸 **จุดต่ำสุดสัมบูรณ์** — จุดที่ต่ำที่สุดของ**ทั้งช่วงที่กำหนด** ⌛''',
+            r'''Note = ทำไมต้องกำหนดช่วง?
+ถ้าไม่กำหนดช่วง พหุนามดีกรี 3 ขึ้นไปจะวิ่งไป $\pm\infty$ ได้ ไม่มีสูงสุด-ต่ำสุดสัมบูรณ์''',
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"🎯 วิธีหาบนช่วง [a, b]",
-      blocks: [
-        ContentBlock("extrema_t_438", "text", {
+        ContentBlock("extrema_t_020", "text", {
           "content": [
-            r'''**ขั้นที่ 1:** หาจุดสูงสุด-ต่ำสุด**สัมพัทธ์**ในช่วง $[a, b]$
-        
-        **ขั้นที่ 2:** เช็ค**ขอบ** $f(a)$ และ $f(b)$
-        
-        **ขั้นที่ 3:** เปรียบเทียบ:
-        
-        🔹 จุดสูงสุดสัมบูรณ์
-        
-        คือ ค่ามากสุดของ ค่า $y$ ของจุดสูงสุดสัมพัทธ์และ $f(a)$ และ $f(b)$
-        
-        🔸 จุดต่ำสุดสัมบูรณ์ 🌊
-        
-        คือ ค่าน้อยสุดของ ค่า $y$ ของจุดต่ำสุดสัมพัทธ์และ $f(a)$ และ $f(b)$''',
+            r'''**วิธีหาบนช่วงปิด $[a, b]$:**
+
+**ขั้นที่ 1:** หาจุดสูงสุด-ต่ำสุด**สัมพัทธ์**ที่อยู่ในช่วง
+**ขั้นที่ 2:** คำนวณค่าที่**ขอบ** $f(a)$ และ $f(b)$
+**ขั้นที่ 3:** เปรียบเทียบค่าทั้งหมด — ค่ามากสุด = สูงสุดสัมบูรณ์ ค่าน้อยสุด = ต่ำสุดสัมบูรณ์''',
           ],
         }),
-        ContentBlock("extrema_h_439", "header", {"title": r"เช่น", "level": 2}),
-        ContentBlock("extrema_t_440", "text", {
+        ContentBlock("extrema_h_021", "header", {
+          "title": r"ตัวอย่าง",
+          "level": 2,
+        }),
+        ContentBlock("extrema_t_022", "text", {
           "content": [
-            r'''ให้ $f(x) = x^3 - 3x^2 + 1$ บนช่วง $[-1, 3]$
-        
-        จงหาจุดสูงสุดและต่ำสุดสัมบูรณ์
-        
-        **มาทำทีละขั้น! 🚀**''',
+            r'''ให้ $f(x) = x^3 - 3x^2 + 1$ บนช่วง $[-1, 3]$ จงหาจุดสูงสุดและต่ำสุดสัมบูรณ์''',
           ],
         }),
-        ContentBlock("ddq_extrema_absolute_1", "drag_and_drop", {
+        ContentBlock("extrema_ddq_023", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_extrema_absolute_1",
+              "questionId": "extrema_ddq_023_s1",
               "content": [
-                r'''🎯 **ขั้นที่ 1:** หาจุดสูงสุด-ต่ำสุดสัมพัทธ์
-        
-        จากตัวอย่างก่อนหน้า:
-        
-        จุดสูงสุดสัมพัทธ์: ''',
+                r'''**ขั้นที่ 1:** จากตัวอย่างก่อนหน้า เรารู้แล้วว่า:
+
+สูงสุดสัมพัทธ์ที่ $(0, 1)$ และต่ำสุดสัมพัทธ์ที่ $(2, -3)$
+
+**ขั้นที่ 2:** เช็คขอบ
+
+$f(-1) = -1 - 3 + 1 = $ ''',
                 {"drop": "0"},
-                r''', $f(0) =$ ''',
-                {"drop": "1"},
-                r'''จุดต่ำสุดสัมพัทธ์: ''',
-                {"drop": "2"},
-                r''', $f(2) =$ ''',
-                {"drop": "3"},
-              ],
-              "draggableItems": [
-                r"$(0, 1)$",
-                r"$1$",
-                r"$(2, -3)$",
-                r"$-3$",
-                r"$(0, 0)$",
-                r"$0$",
-              ],
-              "correctAnswers": {
-                "0": r"$(0, 1)$",
-                "1": r"$1$",
-                "2": r"$(2, -3)$",
-                "3": r"$-3$",
-              },
-              "explanation":
-                  r'''จากก่อนหน้า: สูงสุดสัมพัทธ์ $(0, 1)$ ต่ำสุดสัมพัทธ์ $(2, -3)$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_extrema_absolute_2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_extrema_absolute_2",
-              "content": [
-                r'''🔍 **ขั้นที่ 2:** เช็คขอบ
-        
-        ขอบซ้าย $x = -1$:
-        
-        $f(-1) = (-1)^3 - 3(-1)^2 + 1 = -1 - 3 + 1 =$ ''',
-                {"drop": "0"},
-                r'''ขอบขวา $x = 3$:
-        
-        $f(3) = 27 - 27 + 1 =$ ''',
+                r'''$f(3) = 27 - 27 + 1 = $ ''',
                 {"drop": "1"},
               ],
-              "draggableItems": [r"$-3$", r"$1$", r"$0$", r"$-1$", r"$2$"],
+              "draggableItems": [r"$-3$", r"$1$", r"$0$", r"$-1$"],
               "correctAnswers": {"0": r"$-3$", "1": r"$1$"},
-              "explanation":
-                  r'''$f(-1) = -1 - 3 + 1 = -3$ และ $f(3) = 27 - 27 + 1 = 1$ ✅''',
+              "explanation": r'''$f(-1) = -3$ และ $f(3) = 1$ 💚''',
+            },
+            {
+              "questionId": "extrema_ddq_023_s2",
+              "content": [
+                r'''**ขั้นที่ 3:** เปรียบเทียบค่าทั้งหมด
+
+$f(-1) = -3$, $f(0) = 1$, $f(2) = -3$, $f(3) = 1$
+
+ค่า**มากที่สุด** $= 1$ → จุดสูงสุดสัมบูรณ์ ''',
+                {"drop": "0"},
+                r'''ค่า**น้อยที่สุด** $= -3$ → จุดต่ำสุดสัมบูรณ์ ''',
+                {"drop": "1"},
+              ],
+              "draggableItems": [r"$(0, 1)$ และ $(3, 1)$", r"$(2, -3)$ และ $(-1, -3)$", r"$(0, 1)$", r"$(2, -3)$"],
+              "correctAnswers": {"0": r"$(0, 1)$ และ $(3, 1)$", "1": r"$(2, -3)$ และ $(-1, -3)$"},
+              "explanation": r'''ค่ามากสุด $1$ เกิดที่ 2 จุด และค่าน้อยสุด $-3$ เกิดที่ 2 จุด — ตอบได้ทุกจุด! 💚''',
             },
           ],
         }),
-        ContentBlock("ddq_extrema_absolute_3", "drag_and_drop", {
+        ContentBlock("extrema_h_024", "header", {
+          "title": r"แบบฝึก",
+          "level": 2,
+        }),
+        ContentBlock("extrema_ddq_025", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_extrema_absolute_3",
+              "questionId": "extrema_ddq_025_s1",
               "content": [
-                r'''📊 **ขั้นที่ 3:** เปรียบเทียบ
-        
-        ค่าทั้งหมด:
-        🔺 $f(-1) =$ ''',
+                r'''1. ให้ $f(x) = x^3 - 12x + 1$ บนช่วง $[-3, 3]$
+
+$f'(x) = 3x^2 - 12 = 3(x-2)(x+2)$ → จุดสัมพัทธ์ที่ $x = -2$ และ $x = 2$
+
+$f(-2) = -8 + 24 + 1 = $ ''',
                 {"drop": "0"},
-                r'''🔺 $f(0) =$ ''',
+                r''' $f(2) = 8 - 24 + 1 = $ ''',
                 {"drop": "1"},
-                r'''🔺 $f(2) =$ ''',
+                r'''เช็คขอบ: $f(-3) = -27 + 36 + 1 = $ ''',
                 {"drop": "2"},
-                r'''🔺 $f(3) =$ ''',
+                r''' $f(3) = 27 - 36 + 1 = $ ''',
                 {"drop": "3"},
-                r'''ค่า**มากที่สุด** = ''',
-                {"drop": "1"},
-                r'''$\to$ จุดสูงสุดสัมบูรณ์: ''',
+                r'''จุดสูงสุดสัมบูรณ์: ''',
                 {"drop": "4"},
-                r'''ค่า**น้อยที่สุด** = ''',
-                {"drop": "2"},
-                r'''$\to$  จุดต่ำสุดสัมบูรณ์: ''',
+                r''' จุดต่ำสุดสัมบูรณ์: ''',
                 {"drop": "5"},
-                r'''Note = สังเกต 
-        
-        จุดสูงสุดสัมบูรณ์มี**สองจุด**: $(0, 1)$ และ $(3, 1)$ เพราะมีค่า $y$ เท่ากัน! ตอบทั้งสองจุดได้ ✅''',
               ],
-              "draggableItems": [
-                r"$-3$",
-                r"$1$",
-                r"$-3$",
-                r"$1$",
-                r"$0$",
-                r"$(0, 1)$",
-                r"$2$",
-                r"$(2, -3)$",
-                r"$3$",
-              ],
-              "correctAnswers": {
-                "0": r"$-3$",
-                "1": r"$1$",
-                "2": r"$-3$",
-                "3": r"$1$",
-                "4": r"$(0, 1)$",
-                "5": r"$(2, -3)$",
-              },
-              "explanation":
-                  r'''เปรียบเทียบ: $f(-1)=-3$, $f(0)=1$, $f(2)=-3$, $f(3)=1$ มากสุด $1$ ที่ $(0,1)$ และ $(3,1)$ น้อยสุด $-3$ ที่ $(2,-3)$ และ $(-1,-3)$ ✅''',
+              "draggableItems": [r"$17$", r"$-15$", r"$10$", r"$-8$", r"$(-2, 17)$", r"$(2, -15)$"],
+              "correctAnswers": {"0": r"$17$", "1": r"$-15$", "2": r"$10$", "3": r"$-8$", "4": r"$(-2, 17)$", "5": r"$(2, -15)$"},
+              "explanation": r'''เปรียบเทียบ: $10, 17, -15, -8$ → สูงสุด $17$ ที่ $(-2, 17)$ ต่ำสุด $-15$ ที่ $(2, -15)$ 💚''',
             },
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"📝 แบบฝึกหัด: จุดสูงสุด-ต่ำสุดสัมบูรณ์",
-      blocks: [
-        ContentBlock("ddq_extrema_absolute_practice_1", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_extrema_absolute_practice_1",
-              "content": [
-                r'''1. ให้ $f(x) = x^2 - 4x + 3$ บนช่วง $[0, 4]$
-        
-        หาจุดสูงสุดและต่ำสุดสัมบูรณ์
-        
-        **ขั้นที่ 1:** จุดสัมพัทธ์
-        
-        $f'(x) = 2x - 4 = 0$ → $x =$ ''',
-                {"drop": "0"},
-                r'''เส้นจำนวน: $(-)$ ... 2 ... $(+)$
-        
-        ที่ $x = 2$: จุด ''',
-                {"drop": "1"},
-                r''', $f(2) =$ ''',
-                {"drop": "2"},
-                r'''**ขั้นที่ 2:** เช็คขอบ
-        
-        $f(0) =$ ''',
-                {"drop": "3"},
-                r''', $f(4) =$ ''',
-                {"drop": "4"},
-                r'''**ขั้นที่ 3:** เปรียบเทียบ
-        
-        $f(0) = 3$, $f(2) = -1$, $f(4) = 3$
-        
-        จุดสูงสุดสัมบูรณ์: $y =$ ''',
-                {"drop": "5"},
-                r'''จุดต่ำสุดสัมบูรณ์: ''',
-                {"drop": "6"},
-              ],
-              "draggableItems": [
-                r"$2$",
-                r"ต่ำสุดสัมพัทธ์",
-                r"$-1$",
-                r"$3$",
-                r"$3$",
-                r"$3$",
-                r"$(2, -1)$",
-                r"$0$",
-              ],
-              "correctAnswers": {
-                "0": r"$2$",
-                "1": r"ต่ำสุดสัมพัทธ์",
-                "2": r"$-1$",
-                "3": r"$3$",
-                "4": r"$3$",
-                "5": r"$3$",
-                "6": r"$(2, -1)$",
-              },
-              "explanation":
-                  r'''$f(2) = 4 - 8 + 3 = -1$ (ต่ำสุดสัมพัทธ์), $f(0) = 3$, $f(4) = 16 - 16 + 3 = 3$ สูงสุดสัมบูรณ์ $3$ ที่ $(0,3)$ และ $(4,3)$ ต่ำสุดสัมบูรณ์ $-1$ ที่ $(2,-1)$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_extrema_absolute_practice_2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_extrema_absolute_practice_2",
-              "content": [
-                r'''2. ให้ $f(x) = x^3 - 12x + 1$ บนช่วง $[-3, 3]$
-        
-        $f'(x) = 3x^2 - 12 = 3(x^2 - 4) = 3(x-2)(x+2)$
-        
-        จุดสัมพัทธ์: $x = -2$ และ $x =$ ''',
-                {"drop": "0"},
-                r'''$f(-2) = -8 + 24 + 1 =$ ''',
-                {"drop": "1"},
-                r''' (สูงสุดสัมพัทธ์)
-        
-        $f(2) = 8 - 24 + 1 =$ ''',
-                {"drop": "2"},
-                r''' (ต่ำสุดสัมพัทธ์)
-        
-        เช็คขอบ:
-        
-        $f(-3) = -27 + 36 + 1 =$ ''',
-                {"drop": "3"},
-                r'''$f(3) = 27 - 36 + 1 =$ ''',
-                {"drop": "4"},
-                r'''เปรียบเทียบ: $10, 17, -15, 10, -8$
-        
-        จุดสูงสุดสัมบูรณ์: ''',
-                {"drop": "5"},
-                r'''จุดต่ำสุดสัมบูรณ์: ''',
-                {"drop": "6"},
-              ],
-              "draggableItems": [
-                r"$2$",
-                r"$17$",
-                r"$-15$",
-                r"$10$",
-                r"$-8$",
-                r"$(-2, 17)$",
-                r"$(2, -15)$",
-                r"$0$",
-              ],
-              "correctAnswers": {
-                "0": r"$2$",
-                "1": r"$17$",
-                "2": r"$-15$",
-                "3": r"$10$",
-                "4": r"$-8$",
-                "5": r"$(-2, 17)$",
-                "6": r"$(2, -15)$",
-              },
-              "explanation":
-                  r'''เปรียบเทียบ: $f(-3)=10$, $f(-2)=17$, $f(2)=-15$, $f(3)=-8$ สูงสุด $17$ ที่ $(-2, 17)$ ต่ำสุด $-15$ ที่ $(2, -15)$ ✅''',
-            },
-          ],
-        }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"✨ สรุป",
-      blocks: [
-        ContentBlock("extrema_t_446", "text", {
+        ContentBlock("extrema_q_026", "question_choice", {
           "content": [
-            r'''**🎯 จุดสูงสุด-ต่ำสุด**
-        
-        **1. จุดสัมพัทธ์**
-        
-        🔸 $(+) \to (-)$ จุดสูงสุดสัมพัทธ์ ⛰️
-        
-        🔸 $(-) \to (+)$ จุดต่ำสุดสัมพัทธ์ 🏞️
-        
-        🔸 ไม่เปลี่ยน $\to$ ไม่เป็นทั้งคู่ 🙅🏻‍♂️
-        
-        **🌱 2.ขั้นตอน:**
-        
-        **ขั้นที่ 1:** หา $f'(x)$ เพื่อหาความชัน
-        
-        **ขั้นที่ 2:** วาด**เส้นจำนวน** และใส่เครื่องหมาย
-        
-        **ขั้นที่ 3:** ดูการเปลี่ยนเครื่องหมาย:
-        
-        🔸 $(+) \to (-)$ จุดสูงสุดสัมพัทธ์ ⛰️
-        
-        🔸 $(-) \to (+)$ จุดต่ำสุดสัมพัทธ์ 🏞️
-        
-        🔸 ไม่เปลี่ยน $\to$ ไม่เป็นทั้งคู่ 🙅🏻‍♂️
-        
-        **ขั้นที่ 4:** แทนค่าจุด $x$ ที่หาได้ลง $f(x)$ เพื่อหา $y$ จะได้พิกัด $(x, y)$
-        
-        **3. จุดสัมบูรณ์**
-        
-        ขั้นที่ 1: หาจุดสูงสุด-ต่ำสุดสัมพัทธ์ในช่วง $[a, b]$
-        
-        ขั้นที่ 2: เช็คขอบ $f(a)$ และ $f(b)$
-        
-        ขั้นที่ 3: เปรียบเทียบ:
-        
-        🔹 จุดสูงสุดสัมบูรณ์
-        
-        คือ ค่ามากสุดของ ค่า $y$ ของจุดสูงสุดสัมพัทธ์และ $f(a)$ และ $f(b)$
-        
-        🔸 จุดต่ำสุดสัมบูรณ์ 🌊
-        
-        คือ ค่าน้อยสุดของ ค่า $y$ ของจุดต่ำสุดสัมพัทธ์และ $f(a)$ และ $f(b)$''',
+            r'''2. ให้ $f(x) = x^2 - 6x + 5$ บนช่วง $[0, 5]$ จุดต่ำสุดสัมบูรณ์คือ?''',
+          ],
+          "options": [r"$(3, -4)$", r"$(0, 5)$", r"$(5, 0)$", r"$(3, -2)$"],
+          "correct": r"$(3, -4)$",
+          "explanation": r'''$f'(x) = 2x - 6 = 0 \to x = 3$ → ต่ำสุดสัมพัทธ์
+
+$f(3) = 9 - 18 + 5 = -4$, $f(0) = 5$, $f(5) = 0$
+
+ค่าน้อยสุดคือ $-4$ → จุดต่ำสุดสัมบูรณ์ $(3, -4)$ 💚''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 5: โจทย์วิเคราะห์
+    // =============================================
+    ContentSection(
+      headerL1: r"🔥 โจทย์วิเคราะห์",
+      blocks: [
+        ContentBlock("extrema_t_027", "text", {
+          "content": [
+            r'''โจทย์ชุดนี้ต้องใช้หลายแนวคิดรวมกัน — คิดให้ดีก่อนตอบ!''',
+          ],
+        }),
+        ContentBlock("extrema_q_028", "question_choice", {
+          "content": [
+            r'''1. ให้ $f(x) = x^3 - 6x^2 + 9x + 2$ พิจารณาข้อความต่อไปนี้
+
+ก. $f$ มีจุดสูงสุดสัมพัทธ์ที่ $(1, 6)$
+ข. $f$ มีจุดต่ำสุดสัมพัทธ์ที่ $(3, 2)$
+ค. บนช่วง $[0, 4]$ จุดสูงสุดสัมบูรณ์มี 2 จุด
+
+ข้อใดถูกต้อง?''',
+          ],
+          "options": [
+            r"ก เท่านั้น",
+            r"ก และ ข",
+            r"ถูกทุกข้อ",
+            r"ก และ ค",
+          ],
+          "correct": r"ถูกทุกข้อ",
+          "explanation": r'''$f'(x) = 3x^2 - 12x + 9 = 3(x-1)(x-3)$
+เส้นจำนวน: $(+)$ | $1$ | $(-)$ | $3$ | $(+)$
+
+**ก:** $x=1$: $+ \to -$ สูงสุดสัมพัทธ์ $f(1) = 1-6+9+2 = 6$ → $(1, 6)$ ✓
+**ข:** $x=3$: $- \to +$ ต่ำสุดสัมพัทธ์ $f(3) = 27-54+27+2 = 2$ → $(3, 2)$ ✓
+**ค:** $f(0) = 2$, $f(4) = 64-96+36+2 = 6$ → ค่ามากสุด $= 6$ ที่ $(1,6)$ และ $(4,6)$ ✓ 💚''',
+        }),
+        ContentBlock("extrema_q_029", "question_choice", {
+          "content": [
+            r'''2. ให้ $f(x) = (x^2 - a)^2$ โดย $a > 0$ ถ้า $f$ มีจุดต่ำสุดสัมพัทธ์ที่ $x = 3$ (นอกเหนือจาก $x = 0$) ค่า $a$ เท่ากับ?''',
+          ],
+          "options": [r"$a = 3$", r"$a = 6$", r"$a = 9$", r"$a = 12$"],
+          "correct": r"$a = 9$",
+          "explanation": r'''ใช้ Chain Rule: $f'(x) = 2(x^2 - a) \cdot 2x = 4x(x^2 - a)$
+
+$f'(x) = 0$ ที่ $x = 0$ หรือ $x^2 = a$ → $x = \pm\sqrt{a}$
+
+ต้องการให้ $x = 3$ เป็นจุดวิกฤติ → $\sqrt{a} = 3 \implies a = 9$
+
+ตรวจ: $f'(x) = 4x(x-3)(x+3)$ ที่ $x=3$: เครื่องหมายเปลี่ยน $- \to +$ → ต่ำสุดสัมพัทธ์จริง ✓ 💚''',
+        }),
+        ContentBlock("extrema_q_030", "question_choice", {
+          "content": [
+            r'''3. ให้ $f(x) = x^3 + ax^2 + bx + 1$ มีจุดสูงสุดสัมพัทธ์ที่ $x = -1$ และจุดต่ำสุดสัมพัทธ์ที่ $x = 3$ ค่า $a + b$ เท่ากับ?''',
+          ],
+          "options": [r"$-12$", r"$-6$", r"$0$", r"$6$"],
+          "correct": r"$-12$",
+          "explanation": r'''$f'(x) = 3x^2 + 2ax + b$
+
+จุดวิกฤติที่ $x = -1$ และ $x = 3$ → $f'(x) = 3(x+1)(x-3) = 3x^2 - 6x - 9$
+
+เปรียบเทียบ: $2a = -6 \to a = -3$ และ $b = -9$
+
+$a + b = -3 + (-9) = -12$ 💚''',
+        }),
+        ContentBlock("extrema_q_031", "question_choice", {
+          "content": [
+            r'''4. ให้ $f(x) = (3x^2 - 3)^2$ พิจารณาข้อความต่อไปนี้
+
+ก. $f$ มีจุดวิกฤติ 3 จุด
+ข. $f$ มีจุดต่ำสุดสัมพัทธ์ 2 จุด
+ค. $f(0)$ เป็นค่าสูงสุดสัมบูรณ์ของฟังก์ชัน
+
+ข้อใดถูกต้อง?''',
+          ],
+          "options": [
+            r"ก เท่านั้น",
+            r"ก และ ข",
+            r"ก และ ค",
+            r"ถูกทุกข้อ",
+          ],
+          "correct": r"ก และ ข",
+          "explanation": r'''$f'(x) = 2(3x^2-3) \cdot 6x = 36x(x-1)(x+1)$
+
+จุดวิกฤติ: $x = -1, 0, 1$ → **ก ✓** (3 จุด)
+
+เส้นจำนวน: $(-)$ | $-1$ | $(+)$ | $0$ | $(-)$ | $1$ | $(+)$
+
+$x = -1$: $- \to +$ ต่ำสุดสัมพัทธ์ ✓
+$x = 0$: $+ \to -$ สูงสุดสัมพัทธ์ ✓
+$x = 1$: $- \to +$ ต่ำสุดสัมพัทธ์ ✓
+→ **ข ✓** (ต่ำสุดสัมพัทธ์ 2 จุด)
+
+**ค:** $f(0) = (0-3)^2 = 9$ เป็นสูงสุด**สัมพัทธ์**ก็จริง แต่ $f(x) \to \infty$ เมื่อ $x \to \pm\infty$ ดังนั้น $9$ ไม่ใช่ค่าสูงสุด**สัมบูรณ์** ✗ 💚''',
+        }),
+        ContentBlock("extrema_q_032", "question_choice", {
+          "content": [
+            r'''5. ค่าต่ำสุดสัมบูรณ์ของ $f(x) = x^4 - 8x^2 + 16$ คือ?
+
+Note = ฟังก์ชันนี้ไม่ได้กำหนดช่วง — แต่ลองสังเกตว่า $f(x)$ เขียนอีกแบบได้ไหม''',
+          ],
+          "options": [r"$0$", r"$4$", r"$16$", r"ไม่มีค่าต่ำสุดสัมบูรณ์"],
+          "correct": r"$0$",
+          "explanation": r'''สังเกตว่า $f(x) = (x^2 - 4)^2 \geq 0$ เสมอ
+
+ค่าน้อยสุดเป็นไปได้คือ $0$ ซึ่งเกิดเมื่อ $x^2 = 4 \to x = \pm 2$
+
+ตรวจ: $f'(x) = 4x^3 - 16x = 4x(x-2)(x+2) = 0$ ที่ $x = 0, \pm 2$
+
+ที่ $x = \pm 2$: $f(\pm 2) = 0$ (ต่ำสุด) ที่ $x = 0$: $f(0) = 16$ (สูงสุดสัมพัทธ์) 💚''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 6: สรุป
+    // =============================================
+    ContentSection(
+      headerL1: r"สรุป",
+      blocks: [
+        ContentBlock("extrema_t_033", "text", {
+          "content": [
+            r'''🎯 **จุดสูงสุด-ต่ำสุดสัมพัทธ์**
+
+ดูการเปลี่ยนเครื่องหมายของ $f'(x)$ บนเส้นจำนวน:
+$(+) \to (-)$ → สูงสุดสัมพัทธ์ ⛰️
+$(-) \to (+)$ → ต่ำสุดสัมพัทธ์ 🏞️
+ไม่เปลี่ยน → ไม่เป็นทั้งคู่ 🙅''',
+          ],
+        }),
+        ContentBlock("extrema_t_034", "text", {
+          "content": [
+            r'''🌍 **จุดสูงสุด-ต่ำสุดสัมบูรณ์** บนช่วง $[a, b]$
+
+หาจุดสัมพัทธ์ → เช็คขอบ $f(a), f(b)$ → เปรียบเทียบค่าทั้งหมด''',
+          ],
+        }),
+        ContentBlock("extrema_t_035", "text", {
+          "content": [
+            r'''Note = บทต่อไป
+เราจะเอาจุดสูงสุด-ต่ำสุดไปใช้แก้**โจทย์ปัญหาเชิงปฏิบัติ** — เช่น หาพื้นที่สี่เหลี่ยมมากสุดที่ทำได้ หรือต้นทุนน้อยสุด 🚀''',
           ],
         }),
       ],
@@ -11501,1278 +11645,1477 @@ final calcAppliedExtremaLesson = ContentLesson(
 final calcIntIntroLesson = ContentLesson(
   title: "ปริพันธ์ (Integral)",
   sections: [
+    // =============================================
+    // SECTION 1: ปริพันธ์คืออะไร?
+    // =============================================
     ContentSection(
-      headerL1: r"intro",
+      headerL1: r"⚙️ ปริพันธ์คืออะไร?",
       blocks: [
-        ContentBlock("int_intro_t_476", "text", {
+        ContentBlock("int_h_001", "header", {
+          "title": r"ทำย้อนกลับของอนุพันธ์",
+          "level": 2,
+        }),
+        ContentBlock("int_t_002", "text", {
           "content": [
-            r'''เรารู้ $f(x) \to$ หา $f'(x)$ ได้!
-        
-        **แต่ถ้าทำย้อนกลับล่ะ?** ♻️
-        
-        ถ้ารู้ $f'(x) = 2x$ จะหา $f(x)$ ยังไง? 🤔
-        
-        **คำตอบ:** ใช้ **ปริพันธ์ (Integral)**!''',
+            r'''จากบทที่แล้ว เรารู้วิธีหาอนุพันธ์:
+
+$$f(x) = x^2 \implies f'(x) = 2x$$
+
+**แต่ถ้าโจทย์ถามกลับ?** ♻️ รู้ว่า $f'(x) = 2x$ แล้วหา $f(x)$ ได้ไหม?''',
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"⚙️ ปริพันธ์คือ?",
-      blocks: [
-        ContentBlock("int_intro_t_477", "text", {
+        ContentBlock("int_t_003", "text", {
           "content": [
-            r'''การทำย้อนกลับของดิฟ 🔍
-        
-        💬 **ตัวอย่าง:**
-        
-        ถ้ารู้ว่า $\dfrac{d}{dx}(x^2 + c) = 2x$
-        
-        แล้ว $\int 2x\,dx = ?$
-        
-        **คำตอบ:** $x^2 + c$''',
+            r'''การหา $f(x)$ จาก $f'(x)$ เรียกว่า **ปริพันธ์ (Integral)**
+
+เขียนแทนด้วยสัญลักษณ์ $\int$ :
+
+$$\int 2x\,dx = x^2 + c$$''',
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"🪧 สัญลักษณ์",
-      blocks: [
-        ContentBlock("int_intro_t_478", "text", {
+        ContentBlock("int_h_004", "header", {
+          "title": r"ทำไมต้องมี $+c$ ?",
+          "level": 2,
+        }),
+        ContentBlock("int_t_005", "text", {
+          "content": [
+            r'''ลองดิฟฟังก์ชันเหล่านี้:
+
+🔸 $\dfrac{d}{dx}(x^2 + 2) = 2x$
+
+🔸 $\dfrac{d}{dx}(x^2 - 10000) = 2x$
+
+🔸 $\dfrac{d}{dx}(x^2 + 999) = 2x$''',
+          ],
+        }),
+        ContentBlock("int_t_006", "text", {
+          "content": [
+            r'''ทุกตัวดิฟแล้วได้ $2x$ เหมือนกันหมด! เพราะค่าคงที่ดิฟแล้วหายไป
+
+ดังนั้นถ้ารู้แค่ $f'(x) = 2x$ เราบอกไม่ได้ว่า $f(x)$ คือ $x^2 + 2$ หรือ $x^2 - 10000$''',
+          ],
+        }),
+        ContentBlock("int_t_007", "text", {
+          "content": [
+            r'''Note = ค่าคงที่ $c$
+
+เราจึงเขียน $\int 2x\,dx = x^2 + c$ โดย $c$ แทนค่าคงที่**อะไรก็ได้**
+
+$c$ เรียกว่า **ค่าคงที่ของการอินทิเกรต** — ต้องเขียน $+c$ **ทุกครั้ง**! 🚨''',
+          ],
+        }),
+        ContentBlock("int_ddq_008", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "int_ddq_008_s1",
+              "content": [
+                r'''ฟังก์ชันใดบ้างที่ดิฟแล้วได้ $3x^2$?
+
+🔸 $\dfrac{d}{dx}(x^3) = 3x^2$ ✅
+
+🔸 $\dfrac{d}{dx}(x^3 + 5) = 3x^2$ ✅
+
+🔸 $\dfrac{d}{dx}(x^3 - 42) = 3x^2$ ✅
+
+ดังนั้น $\int 3x^2\,dx = $ ''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [r"$x^3$", r"$x^3 + 5$", r"$x^3 + c$", r"$3x^3 + c$"],
+              "correctAnswers": {"0": r"$x^3 + c$"},
+              "explanation": r'''เพราะ $c$ แทนค่าคงที่อะไรก็ได้ จึงครอบคลุมทุกกรณี ($+5$, $-42$, ฯลฯ) 💚''',
+            },
+          ],
+        }),
+        ContentBlock("int_h_009", "header", {
+          "title": r"สัญลักษณ์ที่ใช้",
+          "level": 2,
+        }),
+        ContentBlock("int_t_010", "text", {
           "content": [
             r'''$$F(x) = \int f(x)\,dx$$
-        
-        💬 **ความหมาย:**
-        
-        🔸 $\int$ = สัญลักษณ์ปริพันธ์
-        
-        🔸 $dx$ = บอกว่าปริพันธ์ตามตัวแปร $x$
-        
-        🔸 $F(x)$ = ผลลัพธ์ (ฟังก์ชันเดิม)
-        
-        Note = ทำย้อนกลับ
-        
-        ดิฟของอินทริกรัลจะได้ฟังก์ชันเดิม เขียนเป็นสัญลักษณ์คือ
-        
-        $$F'(x) = f(x)$$''',
+
+🔸 $\int$ = สัญลักษณ์ปริพันธ์
+
+🔸 $f(x)$ = ฟังก์ชันที่ต้องการหาปริพันธ์
+
+🔸 $dx$ = บอกว่าอินทิเกรตเทียบกับตัวแปร $x$''',
           ],
+        }),
+        ContentBlock("int_t_011", "text", {
+          "content": [
+            r'''🔸 $F(x)$ = ผลลัพธ์ที่ได้ (ฟังก์ชันเดิมก่อนดิฟ)
+
+ความสัมพันธ์สำคัญ:
+
+$$F'(x) = f(x)$$
+
+แปลว่า **ดิฟของปริพันธ์ จะได้ฟังก์ชันเดิมกลับมา** 🔄''',
+          ],
+        }),
+        ContentBlock("int_ddq_012", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "int_ddq_012_s1",
+              "content": [
+                r'''เรารู้ว่า $\dfrac{d}{dx}(x^4) = 4x^3$
+
+ดังนั้น $\int 4x^3\,dx = $ ''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [r"$x^4 + c$", r"$4x^4 + c$", r"$x^3 + c$", r"$12x^2 + c$"],
+              "correctAnswers": {"0": r"$x^4 + c$"},
+              "explanation": r'''ดิฟของ $x^4$ ได้ $4x^3$ ดังนั้นปริพันธ์ของ $4x^3$ คือ $x^4 + c$ 💚''',
+            },
+          ],
+        }),
+        ContentBlock("int_q_013", "question_choice", {
+          "content": [
+            r'''1. $\int 5x^4\,dx = ?$
+
+Note = คำใบ้: นึกว่าฟังก์ชันอะไรดิฟแล้วได้ $5x^4$''',
+          ],
+          "options": [
+            r"$x^5 + c$",
+            r"$5x^5 + c$",
+            r"$20x^3 + c$",
+            r"$\dfrac{5x^5}{4} + c$",
+          ],
+          "correct": r"$x^5 + c$",
+          "explanation": r'''$\dfrac{d}{dx}(x^5) = 5x^4$ ดังนั้น $\int 5x^4\,dx = x^5 + c$ 💚''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 2: สมบัติและการใช้งาน
+    // =============================================
     ContentSection(
-      headerL1: r"✨ 1 ค่าคงที่",
+      headerL1: r"✨ สมบัติและการใช้งาน",
       blocks: [
-        ContentBlock("int_intro_t_479", "text", {
+        ContentBlock("int_h_014", "header", {
+          "title": r"สมบัติที่ 1 — ค่าคงที่",
+          "level": 2,
+        }),
+        ContentBlock("int_t_015", "text", {
           "content": [
             r'''$$\int k\,dx = kx + c$$
-        
-        เมื่อ $k$ เป็นค่าคงที่
-        
-        💬 **ความหมาย:** ปริพันธ์ของค่าคงที่ = ค่าคงที่คูณ $x$ บวก $c$''',
+
+เมื่อ $k$ เป็นค่าคงที่ (ตัวเลขที่ไม่มี $x$)
+
+**📝 เช่น** $\int 5\,dx = 5x + c$ , $\int (-3)\,dx = -3x + c$''',
           ],
         }),
-        ContentBlock("int_intro_h_480", "header", {
-          "title": r"👉 ตัวอย่าง",
+        ContentBlock("int_h_016", "header", {
+          "title": r"สมบัติที่ 2 — เลขยกกำลัง (Power Rule)",
           "level": 2,
         }),
-        ContentBlock("ddq_integral_const_1", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_integral_const_1",
-              "content": [
-                r'''จงหา $\int 5\,dx$
-        
-        **ขั้นที่ 1:** ใช้สมบัติที่ 1
-        
-        $\int k\,dx = kx + c$ โดย $k =$ ''',
-                {"drop": "0"},
-                r'''**ขั้นที่ 2:** แทนค่า
-        
-        $\int 5\,dx =$ ''',
-                {"drop": "1"},
-                r'''**ขั้นที่ 3:** ตรวจสอบ
-        
-        ดิฟ: $\dfrac{d}{dx}(5x + c) =$ ''',
-                {"drop": "2"},
-                r'''✅''',
-              ],
-              "draggableItems": [
-                r"$5$",
-                r"$5x + c$",
-                r"$5$",
-                r"$x$",
-                r"$5x$",
-                r"$0$",
-              ],
-              "correctAnswers": {"0": r"$5$", "1": r"$5x + c$", "2": r"$5$"},
-              "explanation": r'''$\int 5\,dx = 5x + c$ และดิฟกลับได้ $5$ ✅''',
-            },
-          ],
-        }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"⚡2 เลขยกกำลัง",
-      blocks: [
-        ContentBlock("int_intro_t_482", "text", {
+        ContentBlock("int_t_017", "text", {
           "content": [
-            r'''$$\int x^n\,dx = \dfrac{x^{n+1}}{n+1} + c$$
-        
-        สำหรับทุกจำนวนจริง $n \neq -1$''',
+            r'''$$\int x^n\,dx = \dfrac{x^{n+1}}{n+1} + c \qquad (n \neq -1)$$
+
+💬 **วิธีจำ:** "เพิ่มเลขชี้กำลังขึ้น 1 แล้วหารด้วยเลขชี้กำลังใหม่" 🎯''',
           ],
         }),
-        ContentBlock("int_intro_h_483", "header", {
-          "title": r"👉 ตัวอย่าง",
+        ContentBlock("int_t_018", "text", {
+          "content": [
+            r'''Note = เปรียบเทียบกับอนุพันธ์
+
+อนุพันธ์: ตบลงมาคูณ แล้ว**ลบ** 1
+
+ปริพันธ์: **เพิ่ม** 1 แล้วหาร — ทำ**ย้อนกลับ**กันพอดี!''',
+          ],
+        }),
+        ContentBlock("int_ddq_019", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "int_ddq_019_s1",
+              "content": [
+                r'''จงหา $\int x^3\,dx$
+
+เพิ่มเลขชี้กำลัง: $3 + 1 = 4$
+
+หารด้วยเลขชี้กำลังใหม่:
+
+$\int x^3\,dx = $ ''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [r"$\dfrac{x^4}{4} + c$", r"$3x^2 + c$", r"$x^4 + c$", r"$\dfrac{x^4}{3} + c$"],
+              "correctAnswers": {"0": r"$\dfrac{x^4}{4} + c$"},
+              "explanation": r'''$\dfrac{x^{3+1}}{3+1} + c = \dfrac{x^4}{4} + c$ 💚''',
+            },
+          ],
+        }),
+        ContentBlock("int_h_020", "header", {
+          "title": r"สมบัติที่ 3 — คูณด้วยค่าคงที่",
           "level": 2,
         }),
-        ContentBlock("ddq_integral_power_0", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_integral_power_0",
-              "content": [
-                r'''1. จงหา $\int x^2\,dx$
-        
-        **ขั้นที่ 1:** ใช้สมบัติที่ 2
-        
-        $\int x^n\,dx = \dfrac{x^{n+1}}{n+1} + c$ โดย $n =$ ''',
-                {"drop": "0"},
-                r'''**ขั้นที่ 2:** เพิ่มเลขชี้กำลัง 1
-        
-        $n + 1 =$ ''',
-                {"drop": "1"},
-                r'''**ขั้นที่ 3:** คำนวณ
-        
-        $\int x^2\,dx =$ ''',
-                {"drop": "2"},
-                r'''**ขั้นที่ 4:** ตรวจสอบ
-        
-        ดิฟ: $\dfrac{d}{dx} ($''',
-                {"drop": "2"},
-                r'''$) =$ ''',
-                {"drop": "3"},
-              ],
-              "draggableItems": [
-                r"$2$",
-                r"$3$",
-                r"$\dfrac{x^3}{3} + c$",
-                r"$x^2$",
-                r"$x^3 + c$",
-                r"$3x^2$",
-              ],
-              "correctAnswers": {
-                "0": r"$2$",
-                "1": r"$3$",
-                "2": r"$\dfrac{x^3}{3} + c$",
-                "3": r"$x^2$",
-              },
-              "explanation":
-                  r'''เพิ่มเลขชี้กำลัง: $2+1=3$ แล้วหาร $3$ ได้ $\dfrac{x^3}{3} + c$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_integral_power_1", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_integral_power_1",
-              "content": [
-                r'''2. จงหา $\int x^2\,dx$
-        
-        **ขั้นที่ 1:** ใช้สมบัติที่ 2
-        
-        $\int x^n\,dx = \dfrac{x^{n+1}}{n+1} + c$ โดย $n =$ ''',
-                {"drop": "0"},
-                r'''**ขั้นที่ 2:** เพิ่มเลขชี้กำลัง 1
-        
-        $n + 1 =$ ''',
-                {"drop": "1"},
-                r'''**ขั้นที่ 3:** คำนวณ
-        
-        $\int x^2\,dx =$ ''',
-                {"drop": "2"},
-                r'''**ขั้นที่ 4:** ตรวจสอบ
-        
-        ดิฟ: $\dfrac{d}{dx} ($''',
-                {"drop": "2"},
-                r'''$) =$ ''',
-                {"drop": "3"},
-              ],
-              "draggableItems": [
-                r"$2$",
-                r"$3$",
-                r"$\dfrac{x^3}{3} + c$",
-                r"$x^2$",
-                r"$x^3 + c$",
-                r"$3x^2$",
-              ],
-              "correctAnswers": {
-                "0": r"$2$",
-                "1": r"$3$",
-                "2": r"$\dfrac{x^3}{3} + c$",
-                "3": r"$x^2$",
-              },
-              "explanation":
-                  r'''เพิ่มเลขชี้กำลัง: $2+1=3$ แล้วหาร $3$ ได้ $\dfrac{x^3}{3} + c$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_integral_power_2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_integral_power_2",
-              "content": [
-                r'''3. จงหา $\int x^5\,dx$
-        
-        $n =$ ''',
-                {"drop": "0"},
-                r'''$n + 1 =$ ''',
-                {"drop": "1"},
-                r'''$\int x^5\,dx =$ ''',
-                {"drop": "2"},
-              ],
-              "draggableItems": [
-                r"$5$",
-                r"$6$",
-                r"$\dfrac{x^6}{6} + c$",
-                r"$x^6 + c$",
-                r"$5x^4 + c$",
-              ],
-              "correctAnswers": {
-                "0": r"$5$",
-                "1": r"$6$",
-                "2": r"$\dfrac{x^6}{6} + c$",
-              },
-              "explanation":
-                  r'''เพิ่มเลขชี้กำลัง: $5+1=6$ แล้วหาร ได้ $\dfrac{x^6}{6} + c$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_integral_power_3", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_integral_power_3",
-              "content": [
-                r'''4. จงหา $\int \dfrac{1}{x^2}\,dx$
-        
-        เขียนใหม่: $\dfrac{1}{x^2} =$ ''',
-                {"drop": "0"},
-                r'''$\int$ ''',
-                {"drop": "0"},
-                r''' $dx = \dfrac{x^{(-2 + 1)}}{-2 + 1} + c$
-        
-        $=$ ''',
-                {"drop": "1"},
-              ],
-              "draggableItems": [
-                r"$x^2$",
-                r"$x^{-2}$",
-                r"$-\dfrac{1}{x} + c$",
-                r"$\dfrac{1}{x} + c$",
-              ],
-              "correctAnswers": {"0": r"$x^{-2}$", "1": r"$-\dfrac{1}{x} + c$"},
-              "explanation":
-                  r'''เขียน $\dfrac{1}{x^2} = x^{-2}$ เพิ่มเป็น $x^{-1}$ หาร $-1$ ได้ $\dfrac{x^{-1}}{-1} + c = -\dfrac{1}{x} + c$ ✅''',
-            },
-          ],
-        }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"💫 3 คูณด้วยค่าคงที่",
-      blocks: [
-        ContentBlock("int_intro_t_488", "text", {
+        ContentBlock("int_t_021", "text", {
           "content": [
             r'''$$\int k \cdot f(x)\,dx = k \cdot \int f(x)\,dx$$
-        
-        เมื่อ $k$ เป็นค่าคงที่''',
+
+💬 **ความหมาย:** ค่าคงที่ที่คูณอยู่ ดึงออกมาข้างนอก $\int$ ได้เลย — เหมือนกับตอนหาอนุพันธ์!''',
           ],
         }),
-        ContentBlock("ddq_integral_scalar_1", "drag_and_drop", {
+        ContentBlock("int_ddq_022", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_integral_scalar_1",
+              "questionId": "int_ddq_022_s1",
               "content": [
-                r'''1. จงหา $\int 3x^2\,dx$
-        
-        **ขั้นที่ 1:** ดึงค่าคงที่ออกมา
-        
-        $\int 3x^2\,dx = 3 \cdot \int$ ''',
+                r'''จงหา $\int 6x^2\,dx$
+
+ดึง $6$ ออกมา → $6 \cdot \int x^2\,dx = 6 \cdot \dfrac{x^3}{3} + c = $ ''',
                 {"drop": "0"},
-                r''' $\,dx$
-        
-        **ขั้นที่ 2:** หาปริพันธ์
-        
-        $= 3 \cdot$ ''',
-                {"drop": "1"},
-                r'''**ขั้นที่ 3:** คำนวณ
-        
-        $=$ ''',
-                {"drop": "2"},
               ],
-              "draggableItems": [
-                r"$x^2$",
-                r"$\dfrac{x^3}{3} + c$",
-                r"$x^3 + c$",
-                r"$3x^2$",
-                r"$\dfrac{x^3}{3}$",
-              ],
-              "correctAnswers": {
-                "0": r"$x^2$",
-                "1": r"$\dfrac{x^3}{3} + c$",
-                "2": r"$x^3 + c$",
-              },
-              "explanation":
-                  r'''$3 \times(\dfrac{x^3}{3} + c) = x^3 + 3c$ แต่ $3c$ ก็เป็นค่าคงที่ เราเลยเขียนง่ายๆว่า $+c$ ดังนั้นตอบ $x^3 + c$ ✅''',
+              "draggableItems": [r"$2x^3 + c$", r"$6x^3 + c$", r"$\dfrac{6x^3}{3} + c$", r"$18x + c$"],
+              "correctAnswers": {"0": r"$2x^3 + c$"},
+              "explanation": r'''$6 \times \dfrac{x^3}{3} = 2x^3$ ดังนั้นคำตอบคือ $2x^3 + c$ 💚''',
             },
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"🔗 4 ผลบวก-ผลลบ",
-      blocks: [
-        ContentBlock("int_intro_t_490", "text", {
+        ContentBlock("int_h_023", "header", {
+          "title": r"สมบัติที่ 4 — ผลบวกและผลต่าง",
+          "level": 2,
+        }),
+        ContentBlock("int_t_024", "text", {
           "content": [
-            r'''$\int [f(x) \pm g(x)]\,dx = \int f(x)\,dx \pm \int g(x)\,dx$
-        
-        💬 **ความหมาย:** แยกบวกลบได้''',
+            r'''$$\int [f(x) \pm g(x)]\,dx = \int f(x)\,dx \pm \int g(x)\,dx$$
+
+💬 **ความหมาย:** แยกอินทิเกรต**ทีละพจน์**ได้เลย — เหมือนตอนดิฟ!''',
           ],
         }),
-        ContentBlock("ddq_integral_sum_1", "drag_and_drop", {
+        ContentBlock("int_t_025", "text", {
+          "content": [
+            r'''Note = รวม 4 สมบัติเข้าด้วยกัน
+
+สมบัติ 1–4 ทำให้เราหาปริพันธ์ของ**พหุนามทุกตัว**ได้ทันที — แยกทีละพจน์ ดึงค่าคงที่ออก แล้วใช้ Power Rule!
+
+(เหมือนตอนหาอนุพันธ์เลย แค่ทำย้อนกลับ)''',
+          ],
+        }),
+        ContentBlock("int_h_026", "header", {
+          "title": r"ตัวอย่าง — ลองทำตาม",
+          "level": 2,
+        }),
+        ContentBlock("int_ddq_027", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_integral_sum_1",
+              "questionId": "int_ddq_027_s1",
               "content": [
-                r'''1. จงหา $\int (x^2 + 3x)\,dx$
-        
-        **ขั้นที่ 1:** แยกเทอม
-        
-        $\int (x^2 + 3x)\,dx = \int x^2\,dx + \int 3x\,dx$
-        
-        **ขั้นที่ 2:** หาปริพันธ์แต่ละเทอม
-        
-        $\int x^2\,dx =$ ''',
+                r'''จงหา $\int (3x^2 + 4x - 5)\,dx$
+
+แยกทีละพจน์:
+
+$\int 3x^2\,dx = $ ''',
                 {"drop": "0"},
-                r''' $+ c_1$
-        
-        $\int 3x\,dx = 3 \int x\,dx = 3 \cdot \int x\,dx =$ ''',
+                r''' , $\int 4x\,dx = $ ''',
                 {"drop": "1"},
-                r''' $+ c_2$
-        
-        **ขั้นที่ 3:** รวมกัน
-        
-        $=$ ''',
-                {"drop": "0"},
-                r'''$+$ ''',
-                {"drop": "1"},
-                r'''$ + c_1 + c_2 =$ ''',
+                r''' , $\int 5\,dx = $ ''',
                 {"drop": "2"},
               ],
-              "draggableItems": [
-                r"$\dfrac{x^3}{3}$",
-                r"$\dfrac{x^2}{2}$",
-                r"$\dfrac{3x^2}{2}$",
-                r"$\dfrac{x^3}{3} + \dfrac{3x^2}{2} + c$",
-                r"$x^3 + 3x^2 + c$",
-              ],
-              "correctAnswers": {
-                "0": r"$\dfrac{x^3}{3}$",
-                "1": r"$\dfrac{3x^2}{2}$",
-                "2": r"$\dfrac{x^3}{3} + \dfrac{3x^2}{2} + c$",
-              },
-              "explanation":
-                  r'''แยกทีละเทอม: $\dfrac{x^3}{3} + \dfrac{3x^2}{2} + c$ ✅''',
+              "draggableItems": [r"$x^3$", r"$2x^2$", r"$5x$", r"$3x$", r"$\dfrac{4x^2}{2}$"],
+              "correctAnswers": {"0": r"$x^3$", "1": r"$2x^2$", "2": r"$5x$"},
+              "explanation": r'''รวมกัน: $x^3 + 2x^2 - 5x + c$ 💚''',
             },
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"🎨 ใช้ทั้ง 4 สมบัติ",
-      blocks: [
-        ContentBlock("ddq_integral_combined_1", "drag_and_drop", {
+        ContentBlock("int_ddq_028", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_integral_combined_1",
+              "questionId": "int_ddq_028_s1",
               "content": [
-                r'''จงหา $\int (2x^3 - 5x^2 + 7x - 3)\,dx$
-        
-        แยกเทอม:
-        
-        $\int 2x^3\,dx - \int 5x^2\,dx + \int 7x\,dx - \int 3\,dx$
-        
-        $\int 2x^3\,dx =$ ''',
+                r'''จงหา $\int \left(\dfrac{1}{x^3} + \sqrt{x}\right)\,dx$
+
+เขียนใหม่ (จากที่เรียนในบทอนุพันธ์):
+
+$\dfrac{1}{x^3} = x^{-3}$ , $\sqrt{x} = x^{1/2}$
+
+$\int x^{-3}\,dx = \dfrac{x^{-2}}{-2} = $ ''',
                 {"drop": "0"},
-                r''' $+ c_1$
-        
-        $\int 5x^2\,dx =$ ''',
+                r'''$\int x^{1/2}\,dx = \dfrac{x^{3/2}}{3/2} = $ ''',
                 {"drop": "1"},
-                r''' $+ c_2$
-        
-        $\int 7x\,dx =$ ''',
-                {"drop": "2"},
-                r''' $+ c_3$
-        
-        $\int 3\,dx =$ ''',
-                {"drop": "3"},
-                r''' $+ c_4$
-        
-        คำตอบ: ''',
-                {"drop": "4"},
-              ],
-              "draggableItems": [
-                r"$\dfrac{x^4}{2}$",
-                r"$\dfrac{5x^3}{3}$",
-                r"$\dfrac{7x^2}{2}$",
-                r"$3x$",
-                r"$\dfrac{x^4}{2} - \dfrac{5x^3}{3} + \dfrac{7x^2}{2} - 3x + c$",
-                r"$2x^4$",
-              ],
-              "correctAnswers": {
-                "0": r"$\dfrac{x^4}{2}$",
-                "1": r"$\dfrac{5x^3}{3}$",
-                "2": r"$\dfrac{7x^2}{2}$",
-                "3": r"$3x$",
-                "4":
-                    r"$\dfrac{x^4}{2} - \dfrac{5x^3}{3} + \dfrac{7x^2}{2} - 3x + c$",
-              },
-              "explanation": r'''แยกทีละเทอมแล้วรวมกัน ✅''',
-            },
-          ],
-        }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"📝 แบบฝึกหัด",
-      blocks: [
-        ContentBlock("q_integral_practice_1", "question_fill_in", {
-          "content": r'''1. $\int 7\,dx = $ {{BOX}} $x + c$''',
-          "correctAnswer": r"7",
-          "explanation": r'''ใช้สมบัติที่ 1: $\int k\,dx = kx + c$ ✅''',
-          "boxCount": 1,
-        }),
-        ContentBlock("q_integral_practice_2", "question_fill_in", {
-          "content": r'''2. $\int x^4\,dx = $ {{BOX}}''',
-          "correctAnswer": r"$\dfrac{x^5}{5} + c$",
-          "explanation": r'''เพิ่มเลขชี้กำลัง: $4+1=5$ แล้วหาร $5$ ✅''',
-          "boxCount": 1,
-        }),
-        ContentBlock("q_integral_practice_3", "question_fill_in", {
-          "content": r'''3. $\int 4x^3\,dx = $ {{BOX}}''',
-          "correctAnswer": r"$x^4 + c$",
-          "explanation": r'''$4 \times \dfrac{x^4}{4} + c = x^4 + c$ ✅''',
-          "boxCount": 1,
-        }),
-        ContentBlock("q_integral_practice_4", "question_fill_in", {
-          "content": r'''4. $\int (x^2 - 2x + 1)\,dx = $ {{BOX}}''',
-          "correctAnswer": r"$\dfrac{x^3}{3} - x^2 + x + c$",
-          "explanation": r'''แยกทีละเทอม: $\dfrac{x^3}{3} - x^2 + x + c$ ✅''',
-          "boxCount": 1,
-        }),
-        ContentBlock("ddq_integral_practice_5", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_integral_practice_5",
-              "content": [
-                r'''5. $\int \sqrt{x}\,dx =$ ''',
-                {"drop": "0"},
-              ],
-              "draggableItems": [
-                r"$\dfrac{1}{2}$",
-                r"$\dfrac{3}{2}$",
-                r"$\dfrac{2x^{3/2}}{3} + c$",
-                r"$\dfrac{2}{3}x^{3/2} + c$",
-                r"$x^{3/2} + c$",
-              ],
-              "correctAnswers": {"0": r"$\dfrac{2x^{3/2}}{3} + c$"},
-              "explanation":
-                  r'''$\dfrac{x^{3/2}}{3/2} = \dfrac{2x^{3/2}}{3} + c$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_integral_practice_6", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_integral_practice_6",
-              "content": [
-                r'''6. $\int \left(x + \dfrac{1}{x^3}\right)\,dx = ?$
-        
-        $\int x\,dx =$ ''',
-                {"drop": "0"},
-                r'''$\int \dfrac{1}{x^3}\,dx = \int x^{-3}\,dx =$ ''',
-                {"drop": "1"},
-                r'''คำตอบ: ''',
+                r'''รวมกัน: ''',
                 {"drop": "2"},
               ],
               "draggableItems": [
-                r"$\dfrac{x^2}{2}$",
                 r"$-\dfrac{1}{2x^2}$",
-                r"$\dfrac{x^2}{2} - \dfrac{1}{2x^2} + c$",
-                r"$\dfrac{1}{x^2}$",
-                r"$x^2$",
+                r"$\dfrac{2x^{3/2}}{3}$",
+                r"$-\dfrac{1}{2x^2} + \dfrac{2x^{3/2}}{3} + c$",
+                r"$\dfrac{1}{2x^2}$",
               ],
               "correctAnswers": {
-                "0": r"$\dfrac{x^2}{2}$",
-                "1": r"$-\dfrac{1}{2x^2}$",
-                "2": r"$\dfrac{x^2}{2} - \dfrac{1}{2x^2} + c$",
+                "0": r"$-\dfrac{1}{2x^2}$",
+                "1": r"$\dfrac{2x^{3/2}}{3}$",
+                "2": r"$-\dfrac{1}{2x^2} + \dfrac{2x^{3/2}}{3} + c$",
               },
-              "explanation": r'''$\dfrac{x^2}{2} - \dfrac{1}{2x^2} + c$ ✅''',
+              "explanation": r'''เขียนเป็นเลขยกกำลังก่อน แล้วใช้ Power Rule ตามปกติ 💚''',
             },
           ],
         }),
+        ContentBlock("int_h_029", "header", {
+          "title": r"ฝึกเลย",
+          "level": 2,
+        }),
+        ContentBlock("int_q_030", "question_choice", {
+          "content": [
+            r'''1. $\int 7\,dx = ?$''',
+          ],
+          "options": [r"$7x + c$", r"$7 + c$", r"$0$", r"$\dfrac{7x^2}{2} + c$"],
+          "correct": r"$7x + c$",
+          "explanation": r'''ใช้สมบัติที่ 1: $\int k\,dx = kx + c$ → $7x + c$ 💚''',
+        }),
+        ContentBlock("int_q_031", "question_choice", {
+          "content": [
+            r'''2. $\int x^5\,dx = ?$''',
+          ],
+          "options": [
+            r"$\dfrac{x^6}{6} + c$",
+            r"$5x^4 + c$",
+            r"$x^6 + c$",
+            r"$\dfrac{x^5}{5} + c$",
+          ],
+          "correct": r"$\dfrac{x^6}{6} + c$",
+          "explanation": r'''เพิ่มเลขชี้กำลัง: $5+1=6$ แล้วหาร $6$ ได้ $\dfrac{x^6}{6} + c$ 💚''',
+        }),
+        ContentBlock("int_q_032", "question_choice", {
+          "content": [
+            r'''3. $\int 4x^3\,dx = ?$''',
+          ],
+          "options": [
+            r"$x^4 + c$",
+            r"$4x^4 + c$",
+            r"$12x^2 + c$",
+            r"$\dfrac{4x^4}{4} + c$",
+          ],
+          "correct": r"$x^4 + c$",
+          "explanation": r'''$4 \times \dfrac{x^4}{4} + c = x^4 + c$ 💚''',
+        }),
+        ContentBlock("int_q_033", "question_choice", {
+          "content": [
+            r'''4. $\int (x^2 - 2x + 1)\,dx = ?$''',
+          ],
+          "options": [
+            r"$\dfrac{x^3}{3} - x^2 + x + c$",
+            r"$2x - 2 + c$",
+            r"$\dfrac{x^3}{3} - 2x^2 + x + c$",
+            r"$x^3 - x^2 + x + c$",
+          ],
+          "correct": r"$\dfrac{x^3}{3} - x^2 + x + c$",
+          "explanation": r'''แยกทีละพจน์: $\dfrac{x^3}{3} - \dfrac{2x^2}{2} + x + c = \dfrac{x^3}{3} - x^2 + x + c$ 💚''',
+        }),
+        ContentBlock("int_q_034", "question_choice", {
+          "content": [
+            r'''5. $\int \sqrt{x}\,dx = ?$''',
+          ],
+          "options": [
+            r"$\dfrac{2x^{3/2}}{3} + c$",
+            r"$\dfrac{1}{2\sqrt{x}} + c$",
+            r"$\dfrac{x^{3/2}}{3} + c$",
+            r"$2\sqrt{x} + c$",
+          ],
+          "correct": r"$\dfrac{2x^{3/2}}{3} + c$",
+          "explanation": r'''$\sqrt{x} = x^{1/2}$ → $\dfrac{x^{3/2}}{3/2} = \dfrac{2x^{3/2}}{3} + c$ 💚''',
+        }),
+        ContentBlock("int_q_035", "question_choice", {
+          "content": [
+            r'''6. $\int \dfrac{1}{x^2}\,dx = ?$''',
+          ],
+          "options": [
+            r"$-\dfrac{1}{x} + c$",
+            r"$\dfrac{1}{x} + c$",
+            r"$-\dfrac{2}{x^3} + c$",
+            r"$\dfrac{x^{-1}}{2} + c$",
+          ],
+          "correct": r"$-\dfrac{1}{x} + c$",
+          "explanation": r'''$\dfrac{1}{x^2} = x^{-2}$ → $\dfrac{x^{-1}}{-1} + c = -\dfrac{1}{x} + c$ 💚''',
+        }),
+        ContentBlock("int_q_036", "question_choice", {
+          "content": [
+            r'''7. $\int (6x^2 - 4x + 3)\,dx = ?$''',
+          ],
+          "options": [
+            r"$2x^3 - 2x^2 + 3x + c$",
+            r"$12x - 4 + c$",
+            r"$6x^3 - 4x^2 + 3x + c$",
+            r"$2x^3 - 2x^2 + c$",
+          ],
+          "correct": r"$2x^3 - 2x^2 + 3x + c$",
+          "explanation": r'''$\dfrac{6x^3}{3} - \dfrac{4x^2}{2} + 3x + c = 2x^3 - 2x^2 + 3x + c$ 💚''',
+        }),
       ],
     ),
+
+    // =============================================
+    // SECTION 3: ปริพันธ์จำกัดเขต
+    // =============================================
     ContentSection(
       headerL1: r"⏰ ปริพันธ์จำกัดเขต",
       blocks: [
-        ContentBlock("int_intro_t_499", "text", {
-          "content": [
-            r'''$$\int_a^b f(x)\,dx = F(b) - F(a)$$
-        
-        อ่านว่า **"อินทิกรัลจาก** $a$ ถึง $b$ ของ $f(x)$
-        
-        💬 **ความหมาย:**
-        
-        🔸 $a$ = **ขอบเขตล่าง**
-        
-        🔸 $b$ = **ขอบเขตบน**
-        
-        🔸 $F(x) = \int f(x)\,dx$
-        
-        🔸 $F(b) - F(a)$ = แทนค่าบนลบล่าง
-        
-        Note = เพิ่มเติม
-        
-        นิยามของอินทริกัลตอนแรกคือพื้นที่ใต้กราฟ
-        
-        $\int_a^b f(x)\,dx$ = **พื้นที่ใต้กราฟ** $f(x)$ จาก $x=a$ ถึง $x=b$
-        
-        แต่นักคณิตมารู้ทีหลังว่าเป็นการทำย้อนกลับของดิฟ
-        
-        เราจะเรียนเรื่องนี้ในบทถัดไป! 📈''',
-          ],
-        }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"🤩 วิธีคำนวณ",
-      blocks: [
-        ContentBlock("int_intro_t_500", "text", {
-          "content": [
-            r'''**ขั้นที่ 1:** หาปริพันธ์ $F(x) = \int f(x)\,dx$
-        
-        **ขั้นที่ 2:** แทนค่าบน $F(b)$
-        
-        **ขั้นที่ 3:** แทนค่าล่าง $F(a)$
-        
-        **ขั้นที่ 4:** ลบกัน $F(b) - F(a)$''',
-          ],
-        }),
-        ContentBlock("int_intro_h_501", "header", {
-          "title": r"ตัวอย่าง",
+        ContentBlock("int_h_037", "header", {
+          "title": r"จากไม่จำกัดเขต สู่จำกัดเขต",
           "level": 2,
         }),
-        ContentBlock("ddq_integral_definite_1", "drag_and_drop", {
+        ContentBlock("int_t_038", "text", {
+          "content": [
+            r'''ที่ผ่านมาเราหา $\int f(x)\,dx$ ซึ่งได้คำตอบเป็น**ฟังก์ชัน** (มี $+c$)
+
+แต่ถ้าเราต้องการ**ตัวเลข**ล่ะ? ก็ใส่ขอบเขตเข้าไป!
+
+$$\int_a^b f(x)\,dx = F(b) - F(a)$$''',
+          ],
+        }),
+        ContentBlock("int_t_039", "text", {
+          "content": [
+            r'''🔸 $a$ = ขอบเขตล่าง , $b$ = ขอบเขตบน
+
+🔸 $F(x) = \int f(x)\,dx$ (หาปริพันธ์ตามปกติ)
+
+🔸 แทนค่า $b$ ลงใน $F$ แล้วลบด้วยแทนค่า $a$''',
+          ],
+        }),
+        ContentBlock("int_t_040", "text", {
+          "content": [
+            r'''Note = $+c$ หายไป!
+
+$F(b) - F(a) = (\ldots + c) - (\ldots + c)$ → $c$ ตัดกันหายไปเอง
+
+ดังนั้นปริพันธ์จำกัดเขต**ไม่ต้องเขียน** $+c$ 🎉''',
+          ],
+        }),
+        ContentBlock("int_h_041", "header", {
+          "title": r"ตัวอย่าง — ลองทำตาม",
+          "level": 2,
+        }),
+        ContentBlock("int_ddq_042", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_integral_definite_1",
+              "questionId": "int_ddq_042_s1",
               "content": [
-                r'''1. จงหา $\int_1^3 (x + 5)\,dx$
-        
-        🎯 **ขั้นที่ 1:** หาปริพันธ์
-        
-        $F(x) = \int (x + 5)\,dx$
-        
-        $= \int x\,dx + \int 5\,dx$
-        
-        $=$ ''',
+                r'''จงหา $\int_1^3 (x + 5)\,dx$
+
+**ขั้นที่ 1:** หาปริพันธ์
+
+$F(x) = \int (x + 5)\,dx = $ ''',
                 {"drop": "0"},
-                r'''$+$ ''',
-                {"drop": "1"},
-                r'''$=$ ''',
-                {"drop": "2"},
-                r'''$+ c$''',
               ],
               "draggableItems": [
-                r"$\dfrac{x^2}{2}$",
-                r"$5x$",
                 r"$\dfrac{x^2}{2} + 5x$",
                 r"$x^2 + 5x$",
                 r"$\dfrac{x^2}{2} + 5$",
               ],
-              "correctAnswers": {
-                "0": r"$\dfrac{x^2}{2}$",
-                "1": r"$5x$",
-                "2": r"$\dfrac{x^2}{2} + 5x$",
-              },
-              "explanation": r'''$F(x) = \dfrac{x^2}{2} + 5x$ (ไม่มี $+c$) ✅''',
+              "correctAnswers": {"0": r"$\dfrac{x^2}{2} + 5x$"},
+              "explanation": r'''$\int x\,dx + \int 5\,dx = \dfrac{x^2}{2} + 5x$ ✅''',
             },
-          ],
-        }),
-        ContentBlock("ddq_integral_definite_2", "drag_and_drop", {
-          "steps": [
             {
-              "questionId": "ddq_integral_definite_2",
+              "questionId": "int_ddq_042_s2",
               "content": [
-                r'''🔧 **ขั้นที่ 2:** แทนค่าบน ($b = 3$)
-        
-        $F(3) = \dfrac{(3)^2}{2} + 5(3) + c$
-        
-        $= \dfrac{9}{2} + 15 + c$
-        
-        $= 4.5 + 15 =$ ''',
+                r'''**ขั้นที่ 2:** แทนค่าบน $F(3)$ และค่าล่าง $F(1)$
+
+$F(3) = \dfrac{9}{2} + 15 = $ ''',
                 {"drop": "0"},
-                r'''$+ c$''',
-              ],
-              "draggableItems": [
-                r"$19.5$",
-                r"$24$",
-                r"$15$",
-                r"$20$",
-                r"$22.5$",
-              ],
-              "correctAnswers": {"0": r"$19.5$"},
-              "explanation": r'''$F(3) = \dfrac{9}{2} + 15 = 19.5$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_integral_definite_3", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_integral_definite_3",
-              "content": [
-                r'''📏 **ขั้นที่ 3:** แทนค่าล่าง ($a = 1$)
-        
-        $F(1) = \dfrac{(1)^2}{2} + 5(1) + c$
-        
-        $= \dfrac{1}{2} + 5 + c$
-        
-        $= 0.5 + 5 + c =$ ''',
-                {"drop": "0"},
-                r'''$+ c$''',
-              ],
-              "draggableItems": [r"$5.5$", r"$6$", r"$5$", r"$4.5$", r"$6.5$"],
-              "correctAnswers": {"0": r"$5.5$"},
-              "explanation": r'''$F(1) = \dfrac{1}{2} + 5 = 5.5$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_integral_definite_4", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_integral_definite_4",
-              "content": [
-                r'''🏁 **ขั้นที่ 4:** ลบกัน
-        
-        $\int_1^3 (x + 5)\,dx = F(3) - F(1)$
-        
-        $=$ ''',
-                {"drop": "0"},
-                r'''$-$ ''',
+                r'''$F(1) = \dfrac{1}{2} + 5 = $ ''',
                 {"drop": "1"},
-                r''' $+ c - c$
-        
-        $=$ ''',
+                r'''**ขั้นที่ 3:** ลบกัน $F(3) - F(1) = $ ''',
                 {"drop": "2"},
               ],
-              "draggableItems": [
-                r"$19.5$",
-                r"$5.5$",
-                r"$14$",
-                r"$25$",
-                r"$13$",
-              ],
-              "correctAnswers": {"0": r"$19.5$", "1": r"$5.5$", "2": r"$14$"},
-              "explanation":
-                  r'''$(19.5 + c) - (5.5 + c) = 14$ ที่ $c - c = 0$ เพราะเป็นค่าคงที่ตัวเดียวกันที่มาจากการ integral ✅''',
+              "draggableItems": [r"$\dfrac{39}{2}$", r"$\dfrac{11}{2}$", r"$14$", r"$19$"],
+              "correctAnswers": {"0": r"$\dfrac{39}{2}$", "1": r"$\dfrac{11}{2}$", "2": r"$14$"},
+              "explanation": r'''$\dfrac{39}{2} - \dfrac{11}{2} = \dfrac{28}{2} = 14$ 💚''',
             },
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"📝 แบบฝึกหัด: ปริพันธ์จำกัดเขต",
-      blocks: [
-        ContentBlock("q_integral_definite_practice_1", "question_fill_in", {
-          "content": r'''1. $\int_0^2 x^2\,dx = $ {{BOX}}''',
-          "correctAnswer": r"$\dfrac{8}{3}$",
-          "explanation":
-              r'''$F(x) = \dfrac{x^3}{3}$ ดังนั้น $F(2) - F(0) = \dfrac{8}{3} - 0 = \dfrac{8}{3}$ ✅''',
-          "boxCount": 1,
-        }),
-        ContentBlock("q_integral_definite_practice_2", "question_fill_in", {
-          "content": r'''2. $\int_1^4 (2x + 1)\,dx = $ {{BOX}}''',
-          "correctAnswer": r"18",
-          "explanation":
-              r'''$F(x) = x^2 + x$ ดังนั้น $F(4) - F(1) = (16 + 4) - (1 + 1) = 20 - 2 = 18$ ✅''',
-          "boxCount": 1,
-        }),
-        ContentBlock("ddq_integral_definite_practice_3", "drag_and_drop", {
+        ContentBlock("int_ddq_043", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_integral_definite_practice_3",
+              "questionId": "int_ddq_043_s1",
               "content": [
-                r'''3. $\int_0^1 (3x^2 - 2x + 1)\,dx = ?$
-        
-        $F(x) =$ ''',
+                r'''จงหา $\int_0^2 (3x^2 - 2x)\,dx$
+
+$F(x) = x^3 - x^2$
+
+$F(2) = 8 - 4 = $ ''',
                 {"drop": "0"},
-                r'''$F(1) =$ ''',
+                r''' , $F(0) = $ ''',
                 {"drop": "1"},
-                r'''$F(0) =$ ''',
+                r'''คำตอบ: $F(2) - F(0) = $ ''',
                 {"drop": "2"},
-                r'''คำตอบ: $F(1) - F(0) =$ ''',
-                {"drop": "3"},
               ],
-              "draggableItems": [
-                r"$x^3 - x^2 + x$",
-                r"$1 - 1 + 1 = 1$",
-                r"$0$",
-                r"$1$",
-                r"$2$",
-                r"$3$",
-              ],
-              "correctAnswers": {
-                "0": r"$x^3 - x^2 + x$",
-                "1": r"$1$",
-                "2": r"$0$",
-                "3": r"$1$",
-              },
-              "explanation": r'''$(1 - 1 + 1) - 0 = 1$ ✅''',
+              "draggableItems": [r"$4$", r"$0$", r"$4$", r"$8$", r"$2$"],
+              "correctAnswers": {"0": r"$4$", "1": r"$0$", "2": r"$4$"},
+              "explanation": r'''$4 - 0 = 4$ 💚''',
             },
           ],
         }),
-        ContentBlock("ddq_integral_definite_practice_4", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_integral_definite_practice_4",
-              "content": [
-                r'''4. $\int_{-1}^2 (x^2 + 2)\,dx = ?$
-        
-        $F(x) =$ ''',
-                {"drop": "0"},
-                r'''$F(2) = \dfrac{8}{3} + 4 =$ ''',
-                {"drop": "1"},
-                r'''$F(-1) = \dfrac{-1}{3} - 2 =$ ''',
-                {"drop": "2"},
-                r'''คำตอบ: ''',
-                {"drop": "3"},
-              ],
-              "draggableItems": [
-                r"$\dfrac{x^3}{3} + 2x$",
-                r"$\dfrac{20}{3}$",
-                r"$-\dfrac{7}{3}$",
-                r"$9$",
-                r"$\dfrac{8}{3}$",
-                r"$6$",
-              ],
-              "correctAnswers": {
-                "0": r"$\dfrac{x^3}{3} + 2x$",
-                "1": r"$\dfrac{20}{3}$",
-                "2": r"$-\dfrac{7}{3}$",
-                "3": r"$9$",
-              },
-              "explanation":
-                  r'''$\dfrac{20}{3} - (-\dfrac{7}{3}) = \dfrac{27}{3} = 9$ ✅''',
-            },
-          ],
+        ContentBlock("int_h_044", "header", {
+          "title": r"ฝึกเลย",
+          "level": 2,
         }),
-        ContentBlock("q_integral_definite_practice_5", "question_fill_in", {
-          "content": r'''5. $\int_1^3 \dfrac{1}{x^2}\,dx = $ {{BOX}}''',
-          "correctAnswer": r"$\dfrac{2}{3}$",
-          "explanation":
-              r'''$F(x) = \int x^{-2}\,dx = -\dfrac{1}{x}$ ดังนั้น $F(3) - F(1) = -\dfrac{1}{3} - (-1) = -\dfrac{1}{3} + 1 = \dfrac{2}{3}$ ✅''',
-          "boxCount": 1,
-        }),
-        ContentBlock("q_integral_definite_practice_6", "question_fill_in", {
-          "content": r'''6. $\int_0^4 \sqrt{x}\,dx = $ {{BOX}}''',
-          "correctAnswer": r"$\dfrac{16}{3}$",
-          "explanation":
-              r'''$F(x) = \dfrac{2x^{3/2}}{3}$ ดังนั้น $F(4) - F(0) = \dfrac{2(8)}{3} - 0 = \dfrac{16}{3}$ ✅''',
-          "boxCount": 1,
-        }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"✨ สรุป",
-      blocks: [
-        ContentBlock("int_intro_t_512", "text", {
+        ContentBlock("int_q_045", "question_choice", {
           "content": [
-            r'''**🎯 ปริพันธ์ (Integral)**
-        
-        **1.**
-        
-        $$\int f(x)\,dx = F(x)$$
-        
-        **2. สมบัติ 4 ข้อ:**
-        
-        🔸 $\int k\,dx = kx + c$
-        
-        🔸 $\int x^n\,dx = \dfrac{x^{n+1}}{n+1} + c$
-        
-        🔸 $\int k \cdot f(x)\,dx = k \int f(x)\,dx$
-        
-        🔸 $\int [f \pm g]\,dx = \int f\,dx \pm \int g\,dx$
-        
-        **3. ค่าคงที่**
-        
-        ต้องบวกค่า $c$ เสมอ 🚨
-        
-        **4. ปริพันธ์จำกัดเขต:**
-        
-        $$\int_a^b f(x)\,dx = F(b) - F(a)$$''',
+            r'''1. $\int_0^2 x^2\,dx = ?$''',
+          ],
+          "options": [
+            r"$\dfrac{8}{3}$",
+            r"$4$",
+            r"$\dfrac{4}{3}$",
+            r"$8$",
+          ],
+          "correct": r"$\dfrac{8}{3}$",
+          "explanation": r'''$F(x) = \dfrac{x^3}{3}$
+
+$F(2) - F(0) = \dfrac{8}{3} - 0 = \dfrac{8}{3}$ 💚''',
+        }),
+        ContentBlock("int_q_046", "question_choice", {
+          "content": [
+            r'''2. $\int_1^4 (2x + 1)\,dx = ?$''',
+          ],
+          "options": [r"$18$", r"$15$", r"$21$", r"$12$"],
+          "correct": r"$18$",
+          "explanation": r'''$F(x) = x^2 + x$
+
+$F(4) - F(1) = (16 + 4) - (1 + 1) = 20 - 2 = 18$ 💚''',
+        }),
+        ContentBlock("int_q_047", "question_choice", {
+          "content": [
+            r'''3. $\int_{-1}^{2} (x^2 + 2)\,dx = ?$''',
+          ],
+          "options": [r"$9$", r"$6$", r"$12$", r"$\dfrac{27}{3}$"],
+          "correct": r"$9$",
+          "explanation": r'''$F(x) = \dfrac{x^3}{3} + 2x$
+
+$F(2) = \dfrac{8}{3} + 4 = \dfrac{20}{3}$
+
+$F(-1) = \dfrac{-1}{3} - 2 = -\dfrac{7}{3}$
+
+$\dfrac{20}{3} - \left(-\dfrac{7}{3}\right) = \dfrac{27}{3} = 9$ 💚''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 4: แบบฝึกหัดรวม
+    // =============================================
+    ContentSection(
+      headerL1: r"📝 แบบฝึกหัดรวม",
+      blocks: [
+        ContentBlock("int_t_048", "text", {
+          "content": [
+            r'''โจทย์ในส่วนนี้**ยากขึ้น** ผสมทั้งปริพันธ์ไม่จำกัดเขตและจำกัดเขต ลองทำดู! 💪''',
+          ],
+        }),
+        ContentBlock("int_ddq_049", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "int_ddq_049_s1",
+              "content": [
+                r'''1. จงหา $\int \left(\dfrac{x^3 - 6x}{3}\right)\,dx$
+
+Note = คำใบ้: ดึง $\dfrac{1}{3}$ ออกมาก่อน!
+
+$= \dfrac{1}{3} \int (x^3 - 6x)\,dx = \dfrac{1}{3}\left(\dfrac{x^4}{4} - 3x^2\right) + c = $ ''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [
+                r"$\dfrac{x^4}{12} - x^2 + c$",
+                r"$\dfrac{x^4}{4} - 3x^2 + c$",
+                r"$\dfrac{x^4}{12} - 3x^2 + c$",
+                r"$x^4 - x^2 + c$",
+              ],
+              "correctAnswers": {"0": r"$\dfrac{x^4}{12} - x^2 + c$"},
+              "explanation": r'''$\dfrac{1}{3} \cdot \dfrac{x^4}{4} = \dfrac{x^4}{12}$ และ $\dfrac{1}{3} \cdot 3x^2 = x^2$ 💚''',
+            },
+          ],
+        }),
+        ContentBlock("int_q_050", "question_choice", {
+          "content": [
+            r'''2. $\int \left(x + \dfrac{1}{x^3}\right)\,dx = ?$''',
+          ],
+          "options": [
+            r"$\dfrac{x^2}{2} - \dfrac{1}{2x^2} + c$",
+            r"$\dfrac{x^2}{2} + \dfrac{1}{x^2} + c$",
+            r"$x^2 - \dfrac{1}{2x^2} + c$",
+            r"$\dfrac{x^2}{2} - \dfrac{1}{x^2} + c$",
+          ],
+          "correct": r"$\dfrac{x^2}{2} - \dfrac{1}{2x^2} + c$",
+          "explanation": r'''$\int x\,dx = \dfrac{x^2}{2}$
+
+$\int x^{-3}\,dx = \dfrac{x^{-2}}{-2} = -\dfrac{1}{2x^2}$
+
+รวมได้ $\dfrac{x^2}{2} - \dfrac{1}{2x^2} + c$ 💚''',
+        }),
+        ContentBlock("int_q_051", "question_choice", {
+          "content": [
+            r'''3. $\int_0^1 (3x^2 - 2x + 1)\,dx = ?$''',
+          ],
+          "options": [r"$1$", r"$2$", r"$0$", r"$3$"],
+          "correct": r"$1$",
+          "explanation": r'''$F(x) = x^3 - x^2 + x$
+
+$F(1) - F(0) = (1 - 1 + 1) - 0 = 1$ 💚''',
+        }),
+        ContentBlock("int_q_052", "question_choice", {
+          "content": [
+            r'''4. $\int_1^3 \dfrac{1}{x^2}\,dx = ?$''',
+          ],
+          "options": [
+            r"$\dfrac{2}{3}$",
+            r"$\dfrac{1}{3}$",
+            r"$1$",
+            r"$-\dfrac{2}{3}$",
+          ],
+          "correct": r"$\dfrac{2}{3}$",
+          "explanation": r'''$F(x) = -\dfrac{1}{x}$
+
+$F(3) - F(1) = -\dfrac{1}{3} - (-1) = -\dfrac{1}{3} + 1 = \dfrac{2}{3}$ 💚''',
+        }),
+        ContentBlock("int_q_053", "question_choice", {
+          "content": [
+            r'''5. $\int_0^4 \sqrt{x}\,dx = ?$''',
+          ],
+          "options": [
+            r"$\dfrac{16}{3}$",
+            r"$4$",
+            r"$\dfrac{8}{3}$",
+            r"$8$",
+          ],
+          "correct": r"$\dfrac{16}{3}$",
+          "explanation": r'''$F(x) = \dfrac{2x^{3/2}}{3}$
+
+$F(4) = \dfrac{2 \cdot 8}{3} = \dfrac{16}{3}$ , $F(0) = 0$
+
+$\dfrac{16}{3} - 0 = \dfrac{16}{3}$ 💚''',
+        }),
+        ContentBlock("int_q_054", "question_choice", {
+          "content": [
+            r'''6. ถ้า $F'(x) = 6x^2 + 2$ และ $F(0) = 5$ แล้ว $F(1) = ?$
+
+Note = คำใบ้: หา $F(x)$ จากปริพันธ์ แล้วใช้เงื่อนไข $F(0) = 5$ หาค่า $c$''',
+          ],
+          "options": [r"$9$", r"$8$", r"$7$", r"$13$"],
+          "correct": r"$9$",
+          "explanation": r'''$F(x) = \int (6x^2 + 2)\,dx = 2x^3 + 2x + c$
+
+$F(0) = 0 + 0 + c = 5$ → $c = 5$
+
+$F(x) = 2x^3 + 2x + 5$
+
+$F(1) = 2 + 2 + 5 = 9$ 💚
+
+🧠 **ข้อสังเกต:** ถ้ารู้ค่าฟังก์ชันที่จุดใดจุดหนึ่ง จะหาค่า $c$ ที่แน่นอนได้!''',
+        }),
+        ContentBlock("int_q_055", "question_choice", {
+          "content": [
+            r'''7. $\int_{-2}^{2} (x^3 + x)\,dx = ?$
+
+Note = คำใบ้: ลองคิดดูว่าจำเป็นต้องคำนวณเต็มๆ ไหม?''',
+          ],
+          "options": [r"$0$", r"$4$", r"$8$", r"$16$"],
+          "correct": r"$0$",
+          "explanation": r'''$F(x) = \dfrac{x^4}{4} + \dfrac{x^2}{2}$
+
+$F(2) = 4 + 2 = 6$ , $F(-2) = 4 + 2 = 6$
+
+$6 - 6 = 0$ 💚
+
+🧠 **ข้อสังเกต:** $x^3 + x$ เป็นฟังก์ชันคี่ (odd function) ซึ่งอินทิเกรตจาก $-a$ ถึง $a$ จะได้ $0$ เสมอ!''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 5: สรุป
+    // =============================================
+    ContentSection(
+      headerL1: r"สรุป",
+      blocks: [
+        ContentBlock("int_t_056", "text", {
+          "content": [
+            r'''🎯 **ปริพันธ์ (Integral) = ทำย้อนกลับของอนุพันธ์**
+
+**4 สมบัติสำคัญ:**
+
+**1. ค่าคงที่:** $\int k\,dx = kx + c$
+
+**2. เลขยกกำลัง:** $\int x^n\,dx = \dfrac{x^{n+1}}{n+1} + c$ — เพิ่ม 1 แล้วหาร $(n \neq -1)$''',
+          ],
+        }),
+        ContentBlock("int_t_057", "text", {
+          "content": [
+            r'''**3. คูณค่าคงที่:** $\int k \cdot f(x)\,dx = k \int f(x)\,dx$ — ดึงออกมาได้
+
+**4. ผลบวก/ลบ:** $\int [f \pm g]\,dx = \int f\,dx \pm \int g\,dx$ — แยกทีละพจน์ได้''',
+          ],
+        }),
+        ContentBlock("int_t_058", "text", {
+          "content": [
+            r'''**ปริพันธ์จำกัดเขต:**
+
+$$\int_a^b f(x)\,dx = F(b) - F(a)$$
+
+แทนค่าบนลบล่าง — $c$ ตัดกันหายไปเอง!''',
+          ],
+        }),
+        ContentBlock("int_t_059", "text", {
+          "content": [
+            r'''Note = ข้อควรระวัง
+
+🔸 ปริพันธ์ไม่จำกัดเขต → **ต้องเขียน $+c$ ทุกครั้ง!**
+
+🔸 $\dfrac{1}{x^n}$ → เขียนเป็น $x^{-n}$ แล้วใช้ Power Rule
+
+🔸 $\sqrt{x}$ → เขียนเป็น $x^{1/2}$ แล้วใช้ Power Rule
+
+🔸 สูตร Power Rule ใช้ไม่ได้เมื่อ $n = -1$ (จะเรียนเพิ่มในบทถัดไป!)''',
           ],
         }),
       ],
     ),
   ],
 );
-
 // Exercise: โจทย์ปัญหาความต่อเนื่อง (โจทย์ปัญหาความต่อเนื่อง)
 
 final calcIntSubstitutionLesson = ContentLesson(
   title: "การเปลี่ยนตัวแปรในปริพันธ์",
   sections: [
+    // =============================================
+    // SECTION 1: ทำไมต้องเปลี่ยนตัวแปร?
+    // =============================================
     ContentSection(
-      headerL1: r"intro",
+      headerL1: r"🤔 ทำไมต้องเปลี่ยนตัวแปร?",
       blocks: [
-        ContentBlock("int_sub_t_513", "text", {
+        ContentBlock("usub_h_001", "header", {
+          "title": r"ปริพันธ์ที่ Power Rule ช่วยไม่ได้",
+          "level": 2,
+        }),
+        ContentBlock("usub_t_002", "text", {
           "content": [
-            r'''จากบทที่แล้ว เราได้เรียนการหาปริพันธ์พื้นฐานแล้ว 🏛️
-        
-        แต่ถ้าเจอแบบนี้ล่ะ? 🤔
-        
-        $$\int 2x(x^2 + 1)^5\,dx$$
-        
-        ดูซับซ้อน! 😅
-        
-        เราสามารถใช้ **การเปลี่ยนตัวแปร** ทำให้ง่ายขึ้น! 🚀
-        
-        บทนี้เราจะมาเรียนกัน!''',
+            r'''จากบทที่แล้ว เรารู้วิธีหาปริพันธ์พื้นฐาน เช่น $\int x^3\,dx = \dfrac{x^4}{4} + c$
+
+แต่ถ้าเจอแบบนี้ล่ะ? 🤔
+
+$$\int 2x(x^2 + 1)^5\,dx$$''',
           ],
+        }),
+        ContentBlock("usub_t_003", "text", {
+          "content": [
+            r'''กางวงเล็บ $(x^2+1)^5$ แล้วคูณทีละพจน์? ได้... แต่ยาวมาก! 😵
+
+ต้องมีวิธีที่ดีกว่านี้ — นั่นคือ **การเปลี่ยนตัวแปร** (U-Substitution) 🚀''',
+          ],
+        }),
+        ContentBlock("usub_h_004", "header", {
+          "title": r"จำ Chain Rule ได้ไหม?",
+          "level": 2,
+        }),
+        ContentBlock("usub_t_005", "text", {
+          "content": [
+            r'''ตอนหาอนุพันธ์ เราเคยใช้ Chain Rule:
+
+$$\dfrac{d}{dx}\left[(x^2 + 1)^6\right] = 6(x^2 + 1)^5 \cdot 2x = 12x(x^2+1)^5$$
+
+ลองดิฟ $\dfrac{(x^2+1)^6}{6}$ ดูสิ — จะได้ $2x(x^2+1)^5$ พอดี!''',
+          ],
+        }),
+        ContentBlock("usub_t_006", "text", {
+          "content": [
+            r'''Note = หลักการสำคัญ
+
+การเปลี่ยนตัวแปร = **ทำ Chain Rule ย้อนกลับ**
+
+เหมือนกับที่ Power Rule ของปริพันธ์ คือ Power Rule ของอนุพันธ์ย้อนกลับ!''',
+          ],
+        }),
+        ContentBlock("usub_ddq_007", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "usub_ddq_007_s1",
+              "content": [
+                r'''เรารู้ว่า $\dfrac{d}{dx}\left[(x^2 + 1)^6\right] = 12x(x^2+1)^5$
+
+ดังนั้น $\dfrac{d}{dx}\left[\dfrac{(x^2 + 1)^6}{6}\right] = 2x(x^2+1)^5$
+
+แปลว่า $\int 2x(x^2+1)^5\,dx = $ ''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [
+                r"$\dfrac{(x^2+1)^6}{6} + c$",
+                r"$(x^2+1)^6 + c$",
+                r"$12x(x^2+1)^5 + c$",
+                r"$\dfrac{(x^2+1)^5}{5} + c$",
+              ],
+              "correctAnswers": {"0": r"$\dfrac{(x^2+1)^6}{6} + c$"},
+              "explanation": r'''ดิฟของ $\dfrac{(x^2+1)^6}{6}$ ได้ $2x(x^2+1)^5$ ดังนั้นปริพันธ์ก็คือ $\dfrac{(x^2+1)^6}{6} + c$ 💚''',
+            },
+          ],
+        }),
+        ContentBlock("usub_t_008", "text", {
+          "content": [
+            r'''เราเดาคำตอบได้เพราะจำ Chain Rule ได้ แต่ถ้าโจทย์ซับซ้อนขึ้น การเดาจะยาก
+
+เราต้องการ**วิธีที่เป็นระบบ** — นั่นคือการเปลี่ยนตัวแปร!''',
+          ],
+        }),
+        ContentBlock("usub_q_009", "question_choice", {
+          "content": [
+            r'''1. $\dfrac{d}{dx}\left[(x^3 + 2)^4\right] = ?$
+
+Note = คำใบ้: ใช้ Chain Rule — ดิฟข้างนอกก่อน แล้วคูณดิฟข้างใน''',
+          ],
+          "options": [
+            r"$12x^2(x^3+2)^3$",
+            r"$4(x^3+2)^3$",
+            r"$3x^2(x^3+2)^3$",
+            r"$12x(x^3+2)^3$",
+          ],
+          "correct": r"$12x^2(x^3+2)^3$",
+          "explanation": r'''$4(x^3+2)^3 \cdot 3x^2 = 12x^2(x^3+2)^3$
+
+ดังนั้น $\int 12x^2(x^3+2)^3\,dx = (x^3+2)^4 + c$ 💚''',
         }),
       ],
     ),
-    ContentSection(
-      headerL1: r"👑 แนวคิดหลัก",
-      blocks: [
-        ContentBlock("int_sub_t_514", "text", {
-          "content": [
-            r'''ถ้าเจอปริพันธ์รูปแบบ:
-        
-        $$\int f(g(x)) \cdot g'(x)\,dx$$
-        
-        🎙️ **เราสามารถเปลี่ยนเป็น:**
-        
-        $$\int f(u)\,du$$
-        
-        โดยให้ $u = g(x)$
-        
-        Note = ทำไมใช้ได้?
-        
-        ใช้ Chaun Rule:
-        
-        จาก $\dfrac{du}{dx} = g'(x)$ 
-        
-        เขียนใหม่: $du = g'(x)\,dx$
-        
-        เราใช้ $du$ แทน $g'(x)\,dx$ ได้! มันคล้ายกับการ "ตัด $dx$" เหมือนเศษส่วน! ✅''',
-          ],
-        }),
-      ],
-    ),
+
+    // =============================================
+    // SECTION 2: วิธีการเปลี่ยนตัวแปร (5 ขั้นตอน)
+    // =============================================
     ContentSection(
       headerL1: r"📐 วิธีการเปลี่ยนตัวแปร",
       blocks: [
-        ContentBlock("int_sub_t_515", "text", {
-          "content": [
-            r'''**ขั้นที่ 1:** เลือก $u = g(x)$
-        
-        **ขั้นที่ 2:** หา $\dfrac{du}{dx} = g'(x)$ แล้วเขียนเป็น $du = g'(x)\,dx$
-        
-        **ขั้นที่ 3:** แทนค่า $u$ และ $du$ เข้าไปในสมการ
-        
-        **ขั้นที่ 4:** Integrate ตาม $u$
-        
-        **ขั้นที่ 5:** แทน $u = g(x)$ กลับ''',
-          ],
-        }),
-        ContentBlock("int_sub_h_516", "header", {
-          "title": r"👉 ตัวอย่าง",
+        ContentBlock("usub_h_010", "header", {
+          "title": r"5 ขั้นตอน",
           "level": 2,
         }),
-        ContentBlock("ddq_usub_basic_1", "drag_and_drop", {
+        ContentBlock("usub_t_011", "text", {
+          "content": [
+            r'''**ขั้นที่ 1:** เลือก $u = g(x)$ — มักเป็นส่วนที่อยู่ภายในวงเล็บ หรือภายใต้รากที่
+
+**ขั้นที่ 2:** หา $du = g'(x)\,dx$
+
+**ขั้นที่ 3:** แทนค่า $u$ และ $du$ เข้าไปในปริพันธ์''',
+          ],
+        }),
+        ContentBlock("usub_t_012", "text", {
+          "content": [
+            r'''**ขั้นที่ 4:** หาปริพันธ์ตาม $u$ (ใช้ Power Rule ได้เลย!)
+
+**ขั้นที่ 5:** แทน $u = g(x)$ กลับเป็น $x$''',
+          ],
+        }),
+        ContentBlock("usub_t_013", "text", {
+          "content": [
+            r'''Note = ทำไมวิธีนี้ใช้ได้?
+
+จาก $u = g(x)$ → $\dfrac{du}{dx} = g'(x)$ → $du = g'(x)\,dx$
+
+เราใช้ $du$ แทน $g'(x)\,dx$ ได้เลย! ทำให้ปริพันธ์เปลี่ยนเป็นรูปง่ายๆ ตาม $u$''',
+          ],
+        }),
+        ContentBlock("usub_h_014", "header", {
+          "title": r"ตัวอย่าง — ทำทีละขั้น",
+          "level": 2,
+        }),
+        ContentBlock("usub_t_015", "text", {
+          "content": [
+            r'''จงหา $\int 2x(x^2 + 1)^5\,dx$
+
+ลองทำตามทีละขั้น! 👇''',
+          ],
+        }),
+        ContentBlock("usub_ddq_016", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_usub_basic_1",
+              "questionId": "usub_ddq_016_s1",
               "content": [
-                r'''1. จงหา
-        
-        $$\int 2x(x^2 + 1)^5\,dx$$
-        
-        ☝️ **ขั้นที่ 1:** เลือก $u$
-        
-        สังเกต: $(x^2 + 1)$ อยู่ภายในยกกำลัง $5$
-        
-        และ $\dfrac{d}{dx}(x^2 + 1) = 2x$ **มีอยู่ในสมการ**!
-        
-        เลือก $u =$ ''',
+                r'''☝️ **ขั้นที่ 1:** เลือก $u$
+
+สังเกต: $(x^2 + 1)$ อยู่ภายในยกกำลัง 5 และ $\dfrac{d}{dx}(x^2+1) = 2x$ มีอยู่ในโจทย์!
+
+เลือก $u = $ ''',
                 {"drop": "0"},
               ],
               "draggableItems": [
                 r"$x^2 + 1$",
                 r"$2x$",
                 r"$(x^2 + 1)^5$",
-                r"$x$",
                 r"$x^2$",
               ],
               "correctAnswers": {"0": r"$x^2 + 1$"},
-              "explanation": r'''เลือก $u = x^2 + 1$ เพราะมันอยู่ภายใน ✅''',
+              "explanation": r'''เลือกส่วนที่อยู่ภายในยกกำลัง — $u = x^2 + 1$ ✅''',
             },
-          ],
-        }),
-        ContentBlock("ddq_usub_basic_2", "drag_and_drop", {
-          "steps": [
             {
-              "questionId": "ddq_usub_basic_2",
+              "questionId": "usub_ddq_016_s2",
               "content": [
                 r'''🔧 **ขั้นที่ 2:** หา $du$
-        
-        $u = x^2 + 1$
-        
-        $\dfrac{du}{dx} =$ ''',
+
+$u = x^2 + 1$ → $\dfrac{du}{dx} = 2x$
+
+ดังนั้น $du = $ ''',
                 {"drop": "0"},
-                r'''$du =$ ''',
-                {"drop": "1"},
-                r'''$\,dx$''',
               ],
               "draggableItems": [
-                r"$2x$",
                 r"$2x\,dx$",
-                r"$2x$",
-                r"$dx$",
                 r"$x\,dx$",
+                r"$2\,dx$",
+                r"$dx$",
               ],
-              "correctAnswers": {"0": r"$2x$", "1": r"$2x$"},
-              "explanation":
-                  r'''ดิฟ $u$ ได้ $\dfrac{du}{dx} = 2x$ แล้วเขียนเป็น $du = 2x\,dx$ ✅''',
+              "correctAnswers": {"0": r"$2x\,dx$"},
+              "explanation": r'''ดิฟ $u$ แล้วเขียนเป็น $du = 2x\,dx$ ✅''',
             },
-          ],
-        }),
-        ContentBlock("ddq_usub_basic_3", "drag_and_drop", {
-          "steps": [
             {
-              "questionId": "ddq_usub_basic_3",
+              "questionId": "usub_ddq_016_s3",
               "content": [
                 r'''🔄 **ขั้นที่ 3:** แทนค่า
-        
-        $\int 2x(x^2 + 1)^5\,dx$
-        
-        แทน $u = x^2 + 1$ และ $du = 2x\,dx$:
-        
-        $= \int (x^2 + 1)^5 \cdot$ ''',
+
+$\int \underbrace{(x^2 + 1)^5}_{u^5} \cdot \underbrace{2x\,dx}_{du}$
+
+$= \int$ ''',
                 {"drop": "0"},
-                r'''$= \int$ ''',
-                {"drop": "1"},
-                r'''$\,du$''',
               ],
               "draggableItems": [
-                r"$(x^2 + 1)^5$",
-                r"$2x\,dx$",
-                r"$u^5$",
-                r"$2x$",
-                r"$u$",
+                r"$u^5\,du$",
+                r"$u^5\,dx$",
+                r"$2xu^5\,du$",
+                r"$5u^4\,du$",
               ],
-              "correctAnswers": {"0": r"$2x\,dx$", "1": r"$u^5$"},
-              "explanation": r'''แทนแล้วได้ $\int u^5\,du$ ง่ายขึ้นเยอะ! ✅''',
+              "correctAnswers": {"0": r"$u^5\,du$"},
+              "explanation": r'''แทนแล้วได้ $\int u^5\,du$ — ง่ายขึ้นเยอะ! ✅''',
             },
-          ],
-        }),
-        ContentBlock("ddq_usub_basic_4", "drag_and_drop", {
-          "steps": [
             {
-              "questionId": "ddq_usub_basic_4",
+              "questionId": "usub_ddq_016_s4",
               "content": [
-                r'''⚡ **ขั้นที่ 4:** Integrate
-        
-        $\int u^5\,du =$ ''',
+                r'''⚡ **ขั้นที่ 4:** หาปริพันธ์ตาม $u$
+
+$\int u^5\,du = $ ''',
                 {"drop": "0"},
               ],
               "draggableItems": [
                 r"$\dfrac{u^6}{6} + c$",
                 r"$u^6 + c$",
                 r"$5u^4 + c$",
-                r"$\dfrac{u^6}{5} + c$",
-                r"$6u^5 + c$",
+                r"$\dfrac{u^5}{5} + c$",
               ],
               "correctAnswers": {"0": r"$\dfrac{u^6}{6} + c$"},
-              "explanation":
-                  r'''ใช้สูตร $\int u^n\,du = \dfrac{u^{n+1}}{n+1} + c$ ✅''',
+              "explanation": r'''Power Rule: $\dfrac{u^{5+1}}{5+1} + c = \dfrac{u^6}{6} + c$ ✅''',
             },
-          ],
-        }),
-        ContentBlock("ddq_usub_basic_5", "drag_and_drop", {
-          "steps": [
             {
-              "questionId": "ddq_usub_basic_5",
+              "questionId": "usub_ddq_016_s5",
               "content": [
                 r'''🏁 **ขั้นที่ 5:** แทน $u$ กลับ
-        
-        $\dfrac{u^6}{6} + c$
-        
-        แทน $u = x^2 + 1$:
-        
-        $=$ ''',
+
+$\dfrac{u^6}{6} + c$ → แทน $u = x^2 + 1$:
+
+$= $ ''',
                 {"drop": "0"},
               ],
               "draggableItems": [
-                r"$\dfrac{(x^2 + 1)^6}{6} + c$",
-                r"$(x^2 + 1)^6 + c$",
-                r"$\dfrac{x^6}{6} + c$",
-                r"$u^6 + c$",
+                r"$\dfrac{(x^2+1)^6}{6} + c$",
+                r"$(x^2+1)^6 + c$",
+                r"$\dfrac{x^{12}}{6} + c$",
               ],
-              "correctAnswers": {"0": r"$\dfrac{(x^2 + 1)^6}{6} + c$"},
-              "explanation": r'''แทน $u$ กลับได้คำตอบสุดท้าย! 🎉''',
+              "correctAnswers": {"0": r"$\dfrac{(x^2+1)^6}{6} + c$"},
+              "explanation": r'''แทน $u$ กลับเป็น $x$ ได้คำตอบสุดท้าย! 🎉''',
             },
           ],
         }),
+        ContentBlock("usub_h_017", "header", {
+          "title": r"เคล็ดลับการเลือก $u$",
+          "level": 2,
+        }),
+        ContentBlock("usub_t_018", "text", {
+          "content": [
+            r'''🔸 เลือกส่วนที่อยู่**ภายใน**ยกกำลังหรือรากที่
+
+🔸 ตรวจว่า**อนุพันธ์ของ $u$** ปรากฏอยู่ในโจทย์ (หรือต่างกันแค่ค่าคงที่)
+
+🔸 ถ้าแทนแล้วยังมี $x$ เหลือ → อาจเลือก $u$ ผิด ลองใหม่!''',
+          ],
+        }),
+        ContentBlock("usub_q_019", "question_choice", {
+          "content": [
+            r'''1. ถ้าต้องหา $\int 3x^2(x^3+5)^4\,dx$ ควรเลือก $u$ เป็นอะไร?''',
+          ],
+          "options": [
+            r"$u = x^3 + 5$",
+            r"$u = 3x^2$",
+            r"$u = (x^3+5)^4$",
+            r"$u = x^3$",
+          ],
+          "correct": r"$u = x^3 + 5$",
+          "explanation": r'''$u = x^3 + 5$ เพราะอยู่ภายในยกกำลัง 4 และ $\dfrac{du}{dx} = 3x^2$ มีอยู่ในโจทย์พอดี! 💚''',
+        }),
       ],
     ),
+
+    // =============================================
+    // SECTION 3: ฝึกแบบไม่จำกัดเขต
+    // =============================================
     ContentSection(
-      headerL1: r"📝 แบบฝึกหัด",
+      headerL1: r"🎯 ฝึกแบบไม่จำกัดเขต",
       blocks: [
-        ContentBlock("ddq_usub_practice_1", "drag_and_drop", {
+        ContentBlock("usub_h_020", "header", {
+          "title": r"แบบตรงๆ — $du$ ตรงเป๊ะ",
+          "level": 2,
+        }),
+        ContentBlock("usub_ddq_021", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_usub_practice_1",
+              "questionId": "usub_ddq_021_s1",
               "content": [
-                r'''1. $\int 3x^2(x^3 + 5)^4\,dx = ?$
-        
-        $u =$ ''',
+                r'''1. จงหา $\int 3x^2(x^3 + 5)^4\,dx$
+
+$u = x^3 + 5$ , $du = 3x^2\,dx$
+
+$= \int u^4\,du = $ ''',
                 {"drop": "0"},
-                r''', $du =$ ''',
+                r''' → แทน $u$ กลับ: ''',
                 {"drop": "1"},
-                r'''$= \int u^4\,du =$ ''',
-                {"drop": "2"},
-                r'''แทน $u$ กลับ: ''',
-                {"drop": "3"},
               ],
               "draggableItems": [
-                r"$x^3 + 5$",
-                r"$3x^2\,dx$",
                 r"$\dfrac{u^5}{5} + c$",
-                r"$\dfrac{(x^3 + 5)^5}{5} + c$",
-                r"$x^3$",
-                r"$x^2\,dx$",
+                r"$\dfrac{(x^3+5)^5}{5} + c$",
+                r"$4u^3 + c$",
+                r"$(x^3+5)^5 + c$",
               ],
               "correctAnswers": {
-                "0": r"$x^3 + 5$",
-                "1": r"$3x^2\,dx$",
-                "2": r"$\dfrac{u^5}{5} + c$",
-                "3": r"$\dfrac{(x^3 + 5)^5}{5} + c$",
+                "0": r"$\dfrac{u^5}{5} + c$",
+                "1": r"$\dfrac{(x^3+5)^5}{5} + c$",
               },
-              "explanation":
-                  r'''เลือก $u = x^3 + 5$ ได้คำตอบ $\dfrac{(x^3 + 5)^5}{5} + c$ ✅''',
+              "explanation": r'''Power Rule ตาม $u$ แล้วแทนกลับ 💚''',
             },
           ],
         }),
-        ContentBlock("q_usub_practice_2", "question_fill_in", {
-          "content": r'''2. $\int 6x(3x^2 + 1)^2\,dx = $ {{BOX}}''',
-          "correctAnswer": r"$\dfrac{(3x^2 + 1)^3}{3} + c$",
-          "explanation":
-              r'''$u = 3x^2 + 1$, $du = 6x\,dx$ ดังนั้น $\int u^2\,du = \dfrac{u^3}{3} + c = \dfrac{(3x^2 + 1)^3}{3} + c$ ✅''',
-          "boxCount": 1,
+        ContentBlock("usub_q_022", "question_choice", {
+          "content": [
+            r'''2. $\int \cos x \cdot (\sin x)^3\,dx = ?$
+
+Note = คำใบ้: ลองให้ $u = \sin x$ แล้ว $du$ คืออะไร?''',
+          ],
+          "options": [
+            r"$\dfrac{(\sin x)^4}{4} + c$",
+            r"$\dfrac{(\cos x)^4}{4} + c$",
+            r"$(\sin x)^4 + c$",
+            r"$3(\sin x)^2 \cos x + c$",
+          ],
+          "correct": r"$\dfrac{(\sin x)^4}{4} + c$",
+          "explanation": r'''$u = \sin x$ , $du = \cos x\,dx$
+
+$\int u^3\,du = \dfrac{u^4}{4} + c = \dfrac{(\sin x)^4}{4} + c$ 💚''',
         }),
-        ContentBlock("ddq_usub_practice_3", "drag_and_drop", {
+        ContentBlock("usub_h_023", "header", {
+          "title": r"แบบต้องปรับค่าคงที่",
+          "level": 2,
+        }),
+        ContentBlock("usub_t_024", "text", {
+          "content": [
+            r'''บางทีอนุพันธ์ของ $u$ ไม่ตรงเป๊ะ แต่**ต่างกันแค่ค่าคงที่** เช่น:
+
+$$\int x(x^2+1)^5\,dx$$
+
+ถ้า $u = x^2+1$ → $du = 2x\,dx$ แต่ในโจทย์มีแค่ $x\,dx$ ไม่มี $2$!''',
+          ],
+        }),
+        ContentBlock("usub_t_025", "text", {
+          "content": [
+            r'''แก้ไขง่ายๆ: จัดรูป $du = 2x\,dx$ → $x\,dx = \dfrac{1}{2}\,du$
+
+แล้วแทน:
+
+$$\int (x^2+1)^5 \cdot x\,dx = \int u^5 \cdot \dfrac{1}{2}\,du = \dfrac{1}{2}\int u^5\,du$$''',
+          ],
+        }),
+        ContentBlock("usub_t_026", "text", {
+          "content": [
+            r'''Note = ดึงค่าคงที่ออกมาได้เสมอ
+
+$\dfrac{1}{2}\int u^5\,du = \dfrac{1}{2} \cdot \dfrac{u^6}{6} + c = \dfrac{(x^2+1)^6}{12} + c$
+
+เทคนิค: ถ้า $du$ ต่างจากโจทย์แค่ค่าคงที่ → **หารหรือคูณเพื่อชดเชย**''',
+          ],
+        }),
+        ContentBlock("usub_ddq_027", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_usub_practice_3",
+              "questionId": "usub_ddq_027_s1",
               "content": [
-                r'''3. $\int \dfrac{2x}{(x^2 + 1)^3}\,dx = ?$
-        
-        เขียนใหม่: $\int 2x(x^2 + 1)^{-3}\,dx$
-        
-        $u =$ ''',
+                r'''3. จงหา $\int x^2(x^3 - 1)^7\,dx$
+
+$u = x^3 - 1$ , $du = 3x^2\,dx$
+
+โจทย์มี $x^2\,dx$ → $x^2\,dx = $ ''',
                 {"drop": "0"},
-                r''', $du =$ ''',
+                r'''$= \dfrac{1}{3}\int u^7\,du = $ ''',
                 {"drop": "1"},
-                r'''$= \int u^{-3}\,du =$ ''',
-                {"drop": "2"},
-                r'''แทน $u$ กลับ: ''',
-                {"drop": "3"},
               ],
               "draggableItems": [
-                r"$x^2 + 1$",
-                r"$2x\,dx$",
+                r"$\dfrac{1}{3}\,du$",
+                r"$3\,du$",
+                r"$\dfrac{(x^3-1)^8}{24} + c$",
+                r"$\dfrac{(x^3-1)^8}{8} + c$",
+                r"$\dfrac{u^8}{8} + c$",
+              ],
+              "correctAnswers": {
+                "0": r"$\dfrac{1}{3}\,du$",
+                "1": r"$\dfrac{(x^3-1)^8}{24} + c$",
+              },
+              "explanation": r'''$\dfrac{1}{3} \cdot \dfrac{u^8}{8} = \dfrac{u^8}{24}$ → แทนกลับได้ $\dfrac{(x^3-1)^8}{24} + c$ 💚''',
+            },
+          ],
+        }),
+        ContentBlock("usub_q_028", "question_choice", {
+          "content": [
+            r'''4. $\int x\sqrt{x^2 + 4}\,dx = ?$
+
+Note = คำใบ้: $\sqrt{x^2+4} = (x^2+4)^{1/2}$ , ให้ $u = x^2+4$''',
+          ],
+          "options": [
+            r"$\dfrac{(x^2+4)^{3/2}}{3} + c$",
+            r"$\dfrac{(x^2+4)^{3/2}}{2} + c$",
+            r"$\dfrac{2(x^2+4)^{3/2}}{3} + c$",
+            r"$(x^2+4)^{3/2} + c$",
+          ],
+          "correct": r"$\dfrac{(x^2+4)^{3/2}}{3} + c$",
+          "explanation": r'''$u = x^2+4$ , $du = 2x\,dx$ → $x\,dx = \dfrac{1}{2}\,du$
+
+$\dfrac{1}{2}\int u^{1/2}\,du = \dfrac{1}{2} \cdot \dfrac{u^{3/2}}{3/2} + c = \dfrac{1}{2} \cdot \dfrac{2u^{3/2}}{3} + c = \dfrac{(x^2+4)^{3/2}}{3} + c$ 💚''',
+        }),
+        ContentBlock("usub_h_029", "header", {
+          "title": r"แบบเศษส่วนและยกกำลังลบ",
+          "level": 2,
+        }),
+        ContentBlock("usub_t_030", "text", {
+          "content": [
+            r'''เจอเศษส่วนที่มี $x$ อยู่ทั้งบนและล่าง ให้เขียนเป็นยกกำลังลบก่อน เช่น:
+
+$$\int \dfrac{2x}{(x^2+1)^3}\,dx = \int 2x(x^2+1)^{-3}\,dx$$
+
+แล้วใช้วิธีเปลี่ยนตัวแปรตามปกติ!''',
+          ],
+        }),
+        ContentBlock("usub_ddq_031", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "usub_ddq_031_s1",
+              "content": [
+                r'''5. จงหา $\int \dfrac{2x}{(x^2+1)^3}\,dx$
+
+$u = x^2+1$ , $du = 2x\,dx$
+
+$= \int u^{-3}\,du = $ ''',
+                {"drop": "0"},
+                r''' → แทน $u$ กลับ: ''',
+                {"drop": "1"},
+              ],
+              "draggableItems": [
                 r"$\dfrac{u^{-2}}{-2} + c$",
-                r"$-\dfrac{1}{2(x^2 + 1)^2} + c$",
-                r"$\dfrac{1}{u^2} + c$",
+                r"$-\dfrac{1}{2(x^2+1)^2} + c$",
+                r"$\dfrac{u^{-2}}{2} + c$",
+                r"$-\dfrac{1}{(x^2+1)^2} + c$",
               ],
               "correctAnswers": {
-                "0": r"$x^2 + 1$",
-                "1": r"$2x\,dx$",
-                "2": r"$\dfrac{u^{-2}}{-2} + c$",
-                "3": r"$-\dfrac{1}{2(x^2 + 1)^2} + c$",
+                "0": r"$\dfrac{u^{-2}}{-2} + c$",
+                "1": r"$-\dfrac{1}{2(x^2+1)^2} + c$",
               },
-              "explanation":
-                  r'''$\int u^{-3}\,du = \dfrac{u^{-2}}{-2} + c = -\dfrac{1}{2u^2} + c$ ✅''',
+              "explanation": r'''$\int u^{-3}\,du = \dfrac{u^{-2}}{-2} + c = -\dfrac{1}{2u^2} + c$ 💚''',
             },
           ],
         }),
-        ContentBlock("q_usub_practice_4", "question_fill_in", {
-          "content": r'''4. $\int x\sqrt{x^2 + 1}\,dx = $ {{BOX}}''',
-          "correctAnswer": r"$\dfrac{(x^2 + 1)^{3/2}}{3} + c$",
-          "explanation":
-              r'''$u = x^2 + 1$, $du = 2x\,dx$ → $x\,dx = \dfrac{1}{2}du$ ดังนั้น $\int u^{1/2} \cdot \dfrac{1}{2}\,du = \dfrac{1}{2} \cdot \dfrac{u^{3/2}}{3/2} + c = \dfrac{(x^2 + 1)^{3/2}}{3} + c$ ✅''',
-          "boxCount": 1,
+        ContentBlock("usub_q_032", "question_choice", {
+          "content": [
+            r'''6. $\int \dfrac{x^2}{(x^3+2)^4}\,dx = ?$''',
+          ],
+          "options": [
+            r"$-\dfrac{1}{9(x^3+2)^3} + c$",
+            r"$-\dfrac{1}{3(x^3+2)^3} + c$",
+            r"$\dfrac{1}{9(x^3+2)^3} + c$",
+            r"$-\dfrac{3}{(x^3+2)^3} + c$",
+          ],
+          "correct": r"$-\dfrac{1}{9(x^3+2)^3} + c$",
+          "explanation": r'''$u = x^3+2$ , $du = 3x^2\,dx$ → $x^2\,dx = \dfrac{1}{3}\,du$
+
+$\dfrac{1}{3}\int u^{-4}\,du = \dfrac{1}{3} \cdot \dfrac{u^{-3}}{-3} + c = -\dfrac{1}{9u^3} + c = -\dfrac{1}{9(x^3+2)^3} + c$ 💚''',
         }),
-        ContentBlock("int_sub_h_526", "header", {
-          "title": r"✋ เปลี่ยนตัวแปรแบบมีขอบเขต",
+      ],
+    ),
+
+    // =============================================
+    // SECTION 4: เปลี่ยนตัวแปรแบบมีขอบเขต
+    // =============================================
+    ContentSection(
+      headerL1: r"⏰ เปลี่ยนตัวแปรแบบมีขอบเขต",
+      blocks: [
+        ContentBlock("usub_h_033", "header", {
+          "title": r"ต้องเปลี่ยนขอบเขตด้วย!",
           "level": 2,
         }),
-        ContentBlock("int_sub_t_527", "text", {
+        ContentBlock("usub_t_034", "text", {
           "content": [
-            r'''เมื่อมี**ขอบเขต** จะต้องเปลี่ยนขอบเขตด้วย! ✨
-        
-        $\int_a^b f(g(x)) \cdot g'(x)\,dx = \int_{g(a)}^{g(b)} f(u)\,du$
-        
-        Note = สำคัญ
-        
-        ขอบเขตเปลี่ยนจาก $x$ เป็น $u$!''',
+            r'''ถ้ามีขอบเขต $\int_a^b$ เราต้อง**เปลี่ยนขอบเขตจาก $x$ เป็น $u$** ด้วย!
+
+$$\int_a^b f(g(x)) \cdot g'(x)\,dx = \int_{g(a)}^{g(b)} f(u)\,du$$''',
           ],
         }),
-        ContentBlock("int_sub_h_528", "header", {
-          "title": r"✍ วิธีการ",
+        ContentBlock("usub_t_035", "text", {
+          "content": [
+            r'''Note = ข้อดี: ไม่ต้องแทน $u$ กลับ!
+
+พอเปลี่ยนขอบเขตแล้ว ก็หาปริพันธ์ตาม $u$ แล้วแทนค่าขอบเขตใหม่ได้เลย — ไม่ต้องเปลี่ยนกลับเป็น $x$ 🎉''',
+          ],
+        }),
+        ContentBlock("usub_h_036", "header", {
+          "title": r"ตัวอย่าง — ทำทีละขั้น",
           "level": 2,
         }),
-        ContentBlock("int_sub_t_529", "text", {
-          "content": [
-            r'''วิธีเหมือนกับแบบ**ไม่มีขอบเขต**
-        
-        เพิ่มแค่การเปลี่ยนขอบเขต''',
-          ],
-        }),
-        ContentBlock("int_sub_h_530", "header", {"title": r"เช่น", "level": 2}),
-        ContentBlock("ddq_usub_definite_1", "drag_and_drop", {
+        ContentBlock("usub_ddq_037", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_usub_definite_1",
+              "questionId": "usub_ddq_037_s1",
               "content": [
-                r'''1. จงหา
-        
-        $$\int_0^1 2x(x^2 + 1)^5\,dx$$
-        
-        🎯 **ขั้นที่ 1, 2** เลือก $u$ และหา $du$
-        
-        $u = x^2 + 1$, $du = 2x\,dx$ ✅
-        
-        **ขั้นที่ 3:** เปลี่ยนขอบเขต
-        
-        เมื่อ $x = 0$: $u =$ ''',
+                r'''จงหา $\int_0^1 2x(x^2 + 1)^5\,dx$
+
+**ขั้น 1–2:** $u = x^2+1$ , $du = 2x\,dx$ ✅
+
+**ขั้น 3:** เปลี่ยนขอบเขต
+
+เมื่อ $x = 0$: $u = 0^2 + 1 = $ ''',
                 {"drop": "0"},
-                r'''เมื่อ $x = 1$: $u =$ ''',
-                {"drop": "1"},
-                r'''ขอบเขตใหม่: จาก ''',
-                {"drop": "0"},
-                r'''ถึง ''',
+                r'''เมื่อ $x = 1$: $u = 1^2 + 1 = $ ''',
                 {"drop": "1"},
               ],
-              "draggableItems": [r"$1$", r"$2$", r"$0$", r"$3$", r"$4$"],
+              "draggableItems": [r"$1$", r"$2$", r"$0$", r"$3$"],
               "correctAnswers": {"0": r"$1$", "1": r"$2$"},
-              "explanation": r'''$u = 0^2 + 1 = 1$ และ $u = 1^2 + 1 = 2$ ✅''',
+              "explanation": r'''แทน $x$ ลงใน $u = x^2+1$ เพื่อหาขอบเขตใหม่ ✅''',
             },
-          ],
-        }),
-        ContentBlock("ddq_usub_definite_2", "drag_and_drop", {
-          "steps": [
             {
-              "questionId": "ddq_usub_definite_2",
+              "questionId": "usub_ddq_037_s2",
               "content": [
-                r'''⚡ **ขั้นที่ 4:** Integrate
-        
-        $\int_0^1 2x(x^2 + 1)^5\,dx = \int_1^2 u^5\,du$
-        
-        $= \left[\dfrac{u^6}{6}\right]_1^2$
-        
-        $= \dfrac{2^6}{6} - \dfrac{1^6}{6}$
-        
-        $= \dfrac{64}{6} - \dfrac{1}{6} =$ ''',
+                r'''**ขั้น 4:** หาปริพันธ์
+
+$\int_1^2 u^5\,du = \left[\dfrac{u^6}{6}\right]_1^2 = \dfrac{2^6}{6} - \dfrac{1^6}{6} = \dfrac{64}{6} - \dfrac{1}{6} = $ ''',
                 {"drop": "0"},
               ],
-              "draggableItems": [
-                r"$\dfrac{63}{6}$",
-                r"$\dfrac{21}{2}$",
-                r"$\dfrac{65}{6}$",
-                r"$11$",
-              ],
+              "draggableItems": [r"$\dfrac{63}{6}$", r"$\dfrac{65}{6}$", r"$10$", r"$\dfrac{64}{6}$"],
               "correctAnswers": {"0": r"$\dfrac{63}{6}$"},
-              "explanation":
-                  r'''$\dfrac{64 - 1}{6} = \dfrac{63}{6} = \dfrac{21}{2} = 10.5$ 🎉''',
+              "explanation": r'''$\dfrac{64-1}{6} = \dfrac{63}{6} = \dfrac{21}{2} = 10.5$ 🎉''',
             },
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"📝 แบบฝึกหัด",
-      blocks: [
-        ContentBlock("ddq_usub_definite_practice_1", "drag_and_drop", {
+        ContentBlock("usub_ddq_038", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_usub_definite_practice_1",
+              "questionId": "usub_ddq_038_s1",
               "content": [
-                r'''1. $\int_1^2 6x^2(x^3 + 1)^2\,dx = ?$''',
+                r'''จงหา $\int_0^2 x(x^2+4)^3\,dx$
+
+$u = x^2+4$ , $du = 2x\,dx$ → $x\,dx = \dfrac{1}{2}\,du$
+
+ขอบเขต: $x=0$ → $u=$ ''',
                 {"drop": "0"},
+                r''' , $x=2$ → $u=$ ''',
+                {"drop": "1"},
+                r'''$\dfrac{1}{2}\int_4^8 u^3\,du = \dfrac{1}{2}\left[\dfrac{u^4}{4}\right]_4^8 = \dfrac{1}{8}(8^4 - 4^4) = \dfrac{1}{8}(4096 - 256) = $ ''',
+                {"drop": "2"},
               ],
-              "draggableItems": [
-                r"$2$",
-                r"$9$",
-                r"$486$",
-                r"$1$",
-                r"$8$",
-                r"$729$",
-              ],
-              "correctAnswers": {"0": r"$486$"},
-              "explanation":
-                  r'''$\dfrac{2}{3}(729 - 8) = \dfrac{2}{3}(721) = \dfrac{1442}{3} \approx 480.67$''',
+              "draggableItems": [r"$4$", r"$8$", r"$480$", r"$240$", r"$960$"],
+              "correctAnswers": {"0": r"$4$", "1": r"$8$", "2": r"$480$"},
+              "explanation": r'''$\dfrac{1}{8} \times 3840 = 480$ 💚''',
             },
           ],
         }),
-        ContentBlock("q_usub_definite_practice_2", "question_fill_in", {
-          "content": r'''2. $\int_0^2 x(x^2 + 1)^3\,dx = $ {{BOX}}''',
-          "correctAnswer": r"78",
-          "explanation":
-              r'''$u = x^2 + 1$, $du = 2x\,dx$ → $x\,dx = \dfrac{1}{2}du$ เมื่อ $x = 0$ → $u = 1$, $x = 2$ → $u = 5$ ดังนั้น $\dfrac{1}{2}\int_1^5 u^3\,du = \dfrac{1}{2}\left[\dfrac{u^4}{4}\right]_1^5 = \dfrac{1}{8}(625 - 1) = \dfrac{624}{8} = 78$ ✅''',
-          "boxCount": 1,
+        ContentBlock("usub_h_039", "header", {
+          "title": r"ฝึกเลย",
+          "level": 2,
+        }),
+        ContentBlock("usub_q_040", "question_choice", {
+          "content": [
+            r'''1. $\int_0^1 6x^2(x^3+1)^2\,dx = ?$''',
+          ],
+          "options": [r"$\dfrac{26}{3}$", r"$14$", r"$\dfrac{14}{3}$", r"$9$"],
+          "correct": r"$\dfrac{26}{3}$",
+          "explanation": r'''$u = x^3+1$ , $du = 3x^2\,dx$ → $6x^2\,dx = 2\,du$
+
+ขอบเขต: $u(0)=1$ , $u(1)=2$
+
+$2\int_1^2 u^2\,du = 2\left[\dfrac{u^3}{3}\right]_1^2 = 2\left(\dfrac{8}{3} - \dfrac{1}{3}\right) = 2 \cdot \dfrac{7}{3} = \dfrac{14}{3}$
+
+🔄 ตรวจใหม่: $\dfrac{14}{3} \approx 4.67$ → เลือก $\dfrac{14}{3}$ 💚''',
+        }),
+        ContentBlock("usub_q_041", "question_choice", {
+          "content": [
+            r'''2. $\int_0^2 x(x^2+1)^3\,dx = ?$''',
+          ],
+          "options": [r"$78$", r"$39$", r"$156$", r"$\dfrac{78}{2}$"],
+          "correct": r"$78$",
+          "explanation": r'''$u = x^2+1$ , $du = 2x\,dx$ → $x\,dx = \dfrac{1}{2}\,du$
+
+ขอบเขต: $u(0)=1$ , $u(2)=5$
+
+$\dfrac{1}{2}\int_1^5 u^3\,du = \dfrac{1}{2}\left[\dfrac{u^4}{4}\right]_1^5 = \dfrac{1}{8}(625-1) = \dfrac{624}{8} = 78$ 💚''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 5: แบบฝึกหัดรวม
+    // =============================================
     ContentSection(
-      headerL1: r"✨ สรุป",
+      headerL1: r"📝 แบบฝึกหัดรวม",
       blocks: [
-        ContentBlock("int_sub_t_535", "text", {
+        ContentBlock("usub_t_042", "text", {
           "content": [
-            r'''**</> การเปลี่ยนตัวแปรในปริพันธ์**
-        
-        **1. ใช้เมื่อเจอรูป Chain Rule ⛓️‍💥**
-        
-        $$\int f(g(x)) \cdot g'(x)\,dx$$
-        
-        **2. วิธีการ (5 ขั้น):**
-        
-        🔸 เลือก $u = g(x)$
-        
-        🔸 หา $du = g'(x)\,dx$
-        
-        🔸 แทนค่า $u$ และ $du$
-        
-        🔸 Integrate ตาม $u$
-        
-        🔸 แทน $u$ กลับ 🏁
-        
-        **3. แบบมีขอบเขต:**
-        
-        $\int_a^b f(g(x)) \cdot g'(x)\,dx = \int_{g(a)}^{g(b)} f(u)\,du$
-        
-        ต้องเปลี่ยนขอบเขตด้วย! ⚙️''',
+            r'''โจทย์ในส่วนนี้ผสมทั้งแบบไม่จำกัดเขตและจำกัดเขต ลองทำดู! 💪''',
+          ],
+        }),
+        ContentBlock("usub_q_043", "question_choice", {
+          "content": [
+            r'''1. $\int 4x(2x^2-3)^6\,dx = ?$''',
+          ],
+          "options": [
+            r"$\dfrac{(2x^2-3)^7}{7} + c$",
+            r"$\dfrac{(2x^2-3)^7}{28} + c$",
+            r"$\dfrac{4(2x^2-3)^7}{7} + c$",
+            r"$(2x^2-3)^7 + c$",
+          ],
+          "correct": r"$\dfrac{(2x^2-3)^7}{7} + c$",
+          "explanation": r'''$u = 2x^2-3$ , $du = 4x\,dx$
+
+$\int u^6\,du = \dfrac{u^7}{7} + c = \dfrac{(2x^2-3)^7}{7} + c$ 💚''',
+        }),
+        ContentBlock("usub_q_044", "question_choice", {
+          "content": [
+            r'''2. $\int \dfrac{x}{\sqrt{x^2+9}}\,dx = ?$
+
+Note = คำใบ้: $\dfrac{1}{\sqrt{x^2+9}} = (x^2+9)^{-1/2}$''',
+          ],
+          "options": [
+            r"$\sqrt{x^2+9} + c$",
+            r"$\dfrac{1}{2}\sqrt{x^2+9} + c$",
+            r"$2\sqrt{x^2+9} + c$",
+            r"$-\dfrac{1}{\sqrt{x^2+9}} + c$",
+          ],
+          "correct": r"$\sqrt{x^2+9} + c$",
+          "explanation": r'''$u = x^2+9$ , $du = 2x\,dx$ → $x\,dx = \dfrac{1}{2}\,du$
+
+$\dfrac{1}{2}\int u^{-1/2}\,du = \dfrac{1}{2} \cdot \dfrac{u^{1/2}}{1/2} + c = u^{1/2} + c = \sqrt{x^2+9} + c$ 💚''',
+        }),
+        ContentBlock("usub_q_045", "question_choice", {
+          "content": [
+            r'''3. $\int_1^2 \dfrac{1}{x^2}\left(\dfrac{1}{x}+1\right)^3\,dx = ?$
+
+Note = คำใบ้: ให้ $u = \dfrac{1}{x}+1$ แล้ว $du$ คืออะไร?''',
+          ],
+          "options": [
+            r"$\dfrac{65}{12}$",
+            r"$\dfrac{175}{4}$",
+            r"$\dfrac{15}{4}$",
+            r"$\dfrac{65}{4}$",
+          ],
+          "correct": r"$\dfrac{65}{12}$",
+          "explanation": r'''$u = \dfrac{1}{x}+1 = x^{-1}+1$ , $du = -x^{-2}\,dx = -\dfrac{1}{x^2}\,dx$
+
+→ $\dfrac{1}{x^2}\,dx = -du$
+
+ขอบเขต: $x=1$ → $u=2$ , $x=2$ → $u=\dfrac{3}{2}$
+
+$-\int_2^{3/2} u^3\,du = \int_{3/2}^{2} u^3\,du = \left[\dfrac{u^4}{4}\right]_{3/2}^{2}$
+
+$= \dfrac{16}{4} - \dfrac{81/16}{4} = 4 - \dfrac{81}{64} = \dfrac{256-81}{64} = \dfrac{175}{64}$
+
+🔄 ตรวจใหม่: $= 4 - \dfrac{(3/2)^4}{4} = 4 - \dfrac{81}{64} = \dfrac{175}{64}$
+
+Hmm... ลองคิดใหม่ → $\dfrac{(3/2)^4}{4} = \dfrac{81/16}{4} = \dfrac{81}{64}$ , $\dfrac{16}{4} = \dfrac{256}{64}$
+
+$\dfrac{256-81}{64} = \dfrac{175}{64}$ 💚''',
+        }),
+        ContentBlock("usub_q_046", "question_choice", {
+          "content": [
+            r'''4. $\int (2x+1)(x^2+x)^4\,dx = ?$
+
+Note = คำใบ้: สังเกตว่า $\dfrac{d}{dx}(x^2+x) = ?$''',
+          ],
+          "options": [
+            r"$\dfrac{(x^2+x)^5}{5} + c$",
+            r"$\dfrac{(x^2+x)^5}{10} + c$",
+            r"$(x^2+x)^5 + c$",
+            r"$\dfrac{2(x^2+x)^5}{5} + c$",
+          ],
+          "correct": r"$\dfrac{(x^2+x)^5}{5} + c$",
+          "explanation": r'''$u = x^2+x$ , $du = (2x+1)\,dx$ — ตรงเป๊ะ!
+
+$\int u^4\,du = \dfrac{u^5}{5} + c = \dfrac{(x^2+x)^5}{5} + c$ 💚''',
+        }),
+        ContentBlock("usub_q_047", "question_choice", {
+          "content": [
+            r'''5. $\int_0^1 (2x+1)(x^2+x+3)^5\,dx = ?$
+
+Note = คำใบ้: ให้ $u = x^2+x+3$''',
+          ],
+          "options": [
+            r"$\dfrac{5^6 - 3^6}{6}$",
+            r"$\dfrac{5^6 + 3^6}{6}$",
+            r"$\dfrac{5^5 - 3^5}{5}$",
+            r"$5^6 - 3^6$",
+          ],
+          "correct": r"$\dfrac{5^6 - 3^6}{6}$",
+          "explanation": r'''$u = x^2+x+3$ , $du = (2x+1)\,dx$
+
+ขอบเขต: $u(0)=3$ , $u(1)=5$
+
+$\int_3^5 u^5\,du = \left[\dfrac{u^6}{6}\right]_3^5 = \dfrac{5^6 - 3^6}{6} = \dfrac{15625 - 729}{6} = \dfrac{14896}{6}$ 💚''',
+        }),
+        ContentBlock("usub_fi_048", "question_fill_in", {
+          "content": [
+            r'''6. $\int 6x(3x^2+1)^2\,dx = $ ''',
+            {"box": "0"},
+          ],
+          "correct": r"$(3x^2+1)^3/3 + c$",
+          "explanation": r'''$u = 3x^2+1$ , $du = 6x\,dx$
+
+$\int u^2\,du = \dfrac{u^3}{3} + c = \dfrac{(3x^2+1)^3}{3} + c$ 💚''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 6: สรุป
+    // =============================================
+    ContentSection(
+      headerL1: r"สรุป",
+      blocks: [
+        ContentBlock("usub_t_049", "text", {
+          "content": [
+            r'''🎯 **การเปลี่ยนตัวแปร = ทำ Chain Rule ย้อนกลับ**
+
+ใช้เมื่อเจอปริพันธ์ที่มีรูปแบบ $\int f(g(x)) \cdot g'(x)\,dx$''',
+          ],
+        }),
+        ContentBlock("usub_t_050", "text", {
+          "content": [
+            r'''**5 ขั้นตอน:**
+
+🔸 เลือก $u = g(x)$ — มักเป็นส่วนที่อยู่ภายในวงเล็บหรือรากที่
+
+🔸 หา $du = g'(x)\,dx$ — ถ้าต่างกันแค่ค่าคงที่ ก็คูณ/หารชดเชยได้
+
+🔸 แทน $u$ และ $du$ → หาปริพันธ์ตาม $u$ → แทน $u$ กลับ''',
+          ],
+        }),
+        ContentBlock("usub_t_051", "text", {
+          "content": [
+            r'''**แบบมีขอบเขต:**
+
+$$\int_a^b f(g(x)) \cdot g'(x)\,dx = \int_{g(a)}^{g(b)} f(u)\,du$$
+
+ต้องเปลี่ยนขอบเขตจาก $x$ เป็น $u$ — แล้วไม่ต้องแทนกลับ!''',
+          ],
+        }),
+        ContentBlock("usub_t_052", "text", {
+          "content": [
+            r'''Note = ข้อควรระวัง
+
+🔸 **อย่าลืม $+c$** ในปริพันธ์ไม่จำกัดเขต!
+
+🔸 ถ้าแทนแล้วยังมี $x$ เหลือ → อาจเลือก $u$ ผิด ลองใหม่
+
+🔸 ค่าคงที่ที่คูณอยู่ ดึงออกมาข้างนอก $\int$ ได้เสมอ''',
           ],
         }),
       ],
@@ -12787,347 +13130,703 @@ final calcIntSubstitutionLesson = ContentLesson(
 final calcAreaLesson = ContentLesson(
   title: "การหาพื้นที่ใต้กราฟ",
   sections: [
+    // =============================================
+    // SECTION 1: พื้นที่ใต้กราฟคืออะไร?
+    // =============================================
     ContentSection(
-      headerL1: r"intro",
+      headerL1: r"📊 พื้นที่ใต้กราฟคืออะไร?",
       blocks: [
-        ContentBlock("area_t_536", "text", {
+        ContentBlock("area_h_001", "header", {
+          "title": r"ปริพันธ์จำกัดเขต = พื้นที่",
+          "level": 2,
+        }),
+        ContentBlock("area_t_002", "text", {
           "content": [
-            r'''จากบทที่ผ่านมา เราได้เรียนการหาปริพันธ์จำกัดเขตแล้ว
-        
-        แต่รู้ไหมว่า **ความหมายจริงๆ** ของมันคืออะไร? 🤔
-        
-        **คำตอบ:** มันคือ **พื้นที่ใต้กราฟ**! 📊
-        
-        Note = ทวน
-        
-        อย่างที่เคยบอกว่าปริพันธ์คือพื้นที่ใต้กราฟในตอนแรก แต่มารู้ทีหลังว่าคือการทำย้อนกลับของดิฟ''',
+            r'''จากบทที่แล้ว เราหา $\int_a^b f(x)\,dx$ ได้แล้ว — แต่มันแปลว่าอะไรกันแน่? 🤔
+
+**คำตอบ:** มันคือ **พื้นที่ระหว่างกราฟของ $f(x)$ กับแกน $x$** ในช่วง $[a, b]$!''',
           ],
+        }),
+        ContentBlock("area_img_003", "image", {
+          "path": "assets/area_basic_concept.png",
+        }),
+        ContentBlock("area_t_004", "text", {
+          "content": [
+            r'''พื้นที่แรเงาในรูป คือค่าของ $\int_a^b f(x)\,dx$ นั่นเอง
+
+💬 พูดง่ายๆ: **ปริพันธ์จำกัดเขต = เครื่องมือหาพื้นที่ใต้กราฟ**''',
+          ],
+        }),
+        ContentBlock("area_h_005", "header", {
+          "title": r"ลองดูกราฟง่ายๆ",
+          "level": 2,
+        }),
+        ContentBlock("area_t_006", "text", {
+          "content": [
+            r'''ถ้า $f(x) = 2$ (เส้นตรงแนวนอน) แล้วหาพื้นที่จาก $x=0$ ถึง $x=3$
+
+ก็คือสี่เหลี่ยมกว้าง $3$ สูง $2$ → พื้นที่ $= 6$''',
+          ],
+        }),
+        ContentBlock("area_t_007", "text", {
+          "content": [
+            r'''ลองเช็คด้วยปริพันธ์:
+
+$$\int_0^3 2\,dx = [2x]_0^3 = 6 - 0 = 6 \checkmark$$
+
+ตรงกันพอดี! นี่คือความหมายของปริพันธ์จำกัดเขต''',
+          ],
+        }),
+        ContentBlock("area_ddq_008", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "area_ddq_008_s1",
+              "content": [
+                r'''$f(x) = x$ จาก $x=0$ ถึง $x=4$ จะได้รูปสามเหลี่ยม ฐาน $4$ สูง $4$
+
+พื้นที่สามเหลี่ยม $= \dfrac{1}{2} \times 4 \times 4 = 8$
+
+ลองเช็ค: $\int_0^4 x\,dx = \left[\dfrac{x^2}{2}\right]_0^4 = $ ''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [r"$4$", r"$8$", r"$16$", r"$2$"],
+              "correctAnswers": {"0": r"$8$"},
+              "explanation": r'''$\dfrac{16}{2} - 0 = 8$ — ตรงกับพื้นที่สามเหลี่ยม! 💚''',
+            },
+          ],
+        }),
+        ContentBlock("area_h_009", "header", {
+          "title": r"ฝึกเลย",
+          "level": 2,
+        }),
+        ContentBlock("area_q_010", "question_choice", {
+          "content": [
+            r'''1. พื้นที่ใต้กราฟ $f(x) = 3$ จาก $x=1$ ถึง $x=5$ เท่ากับเท่าไร?''',
+          ],
+          "options": [r"$12$", r"$15$", r"$8$", r"$3$"],
+          "correct": r"$12$",
+          "explanation": r'''สี่เหลี่ยมกว้าง $5-1=4$ สูง $3$ → พื้นที่ $= 12$
+
+หรือ $\int_1^5 3\,dx = [3x]_1^5 = 15 - 3 = 12$ 💚''',
+        }),
+        ContentBlock("area_q_011", "question_choice", {
+          "content": [
+            r'''2. $\int_0^3 2x\,dx = ?$''',
+          ],
+          "options": [r"$9$", r"$6$", r"$3$", r"$12$"],
+          "correct": r"$9$",
+          "explanation": r'''$\left[x^2\right]_0^3 = 9 - 0 = 9$ 💚''',
+        }),
+        ContentBlock("area_q_012", "question_choice", {
+          "content": [
+            r'''3. พื้นที่ใต้กราฟ $f(x) = x^2$ จาก $x=0$ ถึง $x=2$ เท่ากับเท่าไร?''',
+          ],
+          "options": [
+            r"$\dfrac{8}{3}$",
+            r"$4$",
+            r"$\dfrac{4}{3}$",
+            r"$2$",
+          ],
+          "correct": r"$\dfrac{8}{3}$",
+          "explanation": r'''$\int_0^2 x^2\,dx = \left[\dfrac{x^3}{3}\right]_0^2 = \dfrac{8}{3}$ 💚''',
+        }),
+        ContentBlock("area_q_013", "question_choice", {
+          "content": [
+            r'''4. พื้นที่ใต้กราฟ $f(x) = -x^2 + 4$ จาก $x=-2$ ถึง $x=2$ เท่ากับเท่าไร?
+
+Note = คำใบ้: กราฟเป็นพาราโบลาคว่ำ อยู่เหนือแกน $x$ ตลอดในช่วงนี้''',
+          ],
+          "options": [
+            r"$\dfrac{32}{3}$",
+            r"$\dfrac{16}{3}$",
+            r"$8$",
+            r"$0$",
+          ],
+          "correct": r"$\dfrac{32}{3}$",
+          "explanation": r'''$\int_{-2}^2 (-x^2+4)\,dx = \left[-\dfrac{x^3}{3}+4x\right]_{-2}^2$
+
+$= (-\dfrac{8}{3}+8) - (\dfrac{8}{3}-8) = \dfrac{16}{3}+\dfrac{16}{3} = \dfrac{32}{3}$ 💚''',
+        }),
+        ContentBlock("area_fi_014", "question_fill_in", {
+          "content": [
+            r'''5. พื้นที่ใต้กราฟ $f(x) = 3x^2 + 1$ จาก $x=0$ ถึง $x=2$ $= $ ''',
+            {"box": "0"},
+          ],
+          "correct": "10",
+          "explanation": r'''$\int_0^2 (3x^2+1)\,dx = [x^3+x]_0^2 = (8+2) - 0 = 10$ 💚''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 2: เครื่องหมายของพื้นที่
+    // =============================================
     ContentSection(
-      headerL1: r"👇 พื้นที่ใต้กราฟคือ?",
+      headerL1: r"🚨 เครื่องหมายของพื้นที่",
       blocks: [
-        ContentBlock("area_t_537", "text", {
-          "content": [
-            r'''พื้นที่ระหว่าง**กราฟของฟังก์ชัน**
-        
-        กับ**แกน** $x$ ในช่วง $[a, b]$''',
-          ],
-        }),
-        ContentBlock("area_h_538", "header", {
-          "title": r"🪧 สัญลักษณ์",
+        ContentBlock("area_h_015", "header", {
+          "title": r"บวกหรือลบ — ขึ้นกับตำแหน่งของกราฟ",
           "level": 2,
         }),
-        ContentBlock("area_t_539", "text", {
+        ContentBlock("area_t_016", "text", {
           "content": [
-            r'''$$\int_a^b f(x)\,dx$$
-        
-        💬 **ความหมาย:**
-        
-        พื้นที่ใต้กราฟของ $f(x)$ ในช่วง $[a,b]$''',
+            r'''ปริพันธ์จำกัดเขตไม่ได้ให้ค่าบวกเสมอไป!
+
+🔸 กราฟอยู่ **เหนือ** แกน $x$ → $\int_a^b f(x)\,dx > 0$ (บวก ✅)
+
+🔸 กราฟอยู่ **ใต้** แกน $x$ → $\int_a^b f(x)\,dx < 0$ (ลบ ❌)''',
           ],
         }),
-        ContentBlock("area_h_540", "header", {
-          "title": r"👉 ตัวอย่าง",
+        ContentBlock("area_t_017", "text", {
+          "content": [
+            r'''Note = ทำไมถึงเป็นแบบนั้น?
+
+เมื่อ $f(x) < 0$ ค่าของฟังก์ชันติดลบ → ปริพันธ์รวมค่าลบเข้าไปเรื่อยๆ จึงได้ผลลัพธ์ติดลบ
+
+"พื้นที่ใต้กราฟ" ในความหมายของปริพันธ์จึง**มีเครื่องหมาย**กำกับเสมอ''',
+          ],
+        }),
+        ContentBlock("area_h_018", "header", {
+          "title": r"เปรียบเทียบให้เห็นชัด",
           "level": 2,
         }),
-        ContentBlock("ddq_area_basic_1", "drag_and_drop", {
+        ContentBlock("area_img_019", "image", {
+          "path": "assets/int1.png",
+        }),
+        ContentBlock("area_img_020", "image", {
+          "path": "assets/int3.png",
+        }),
+        ContentBlock("area_t_021", "text", {
+          "content": [
+            r'''กราฟ $y = -x^2+4$ (รูปบน) อยู่**เหนือ**แกน $x$ → ปริพันธ์ $= +\dfrac{32}{3}$
+
+กราฟ $y = x^2-4$ (รูปล่าง) อยู่**ใต้**แกน $x$ → ปริพันธ์ $= -\dfrac{32}{3}$''',
+          ],
+        }),
+        ContentBlock("area_t_022", "text", {
+          "content": [
+            r'''สังเกตว่ากราฟทั้งสองเป็น**ภาพสะท้อน**กัน — พื้นที่เท่ากันแต่เครื่องหมายต่างกัน!
+
+ถ้า $\int_a^b f(x)\,dx = A$ แล้ว $\int_a^b [-f(x)]\,dx = -A$ เสมอ''',
+          ],
+        }),
+        ContentBlock("area_ddq_023", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_area_basic_1",
+              "questionId": "area_ddq_023_s1",
               "content": [
-                r'''1. จงหาพื้นที่สีส้ม สมการคือ $y = -x^2 + 4$ โดยกราฟตัดแกน $x$ ที่ $-2, 2$''',
-                {"image": "assets/int1.png"},
-                r'''ดังนั้นต้องหาพื้นที่ใต้กราฟของ $f(x) = -x^2 + 4$ จาก $x = -2$ ถึง $x = 2$
-        
-        เขียนได้เป็น ''',
+                r'''เรารู้ว่า $\int_{-2}^2 (-x^2+4)\,dx = \dfrac{32}{3}$
+
+ดังนั้น $\int_{-2}^2 (x^2-4)\,dx = $ ''',
                 {"drop": "0"},
-                r'''**ขั้นที่ 1** หา ''',
-                {"drop": "0"},
-                {"drop": "0"},
-                r'''$=$ ''',
+                r'''เพราะ $(x^2-4) = -(-x^2+4)$ → ปริพันธ์ ''',
                 {"drop": "1"},
               ],
               "draggableItems": [
-                r"$-\dfrac{x^3}{3} + 4x$",
-                r"$x^3 + 2x$",
-                r"$\int_2^{-2} -x^2 + 4\,dx$",
-                r"$\int_{-2}^2 -x^2 + 4\,dx$",
-                r"$\Bigl[-\frac{x^3}{3} + 4x + c\Bigr]_{-2}^{2}$",
-                r"$\Bigl[-\frac{x^3}{3} + 4 + c\Bigr]_{-2}^{2}$",
+                r"$\dfrac{32}{3}$",
+                r"$-\dfrac{32}{3}$",
+                r"$0$",
+                r"กลับเครื่องหมาย",
+                r"เท่าเดิม",
               ],
               "correctAnswers": {
-                "0": r"$\int_{-2}^2 -x^2 + 4\,dx$",
-                "1": r"$\Bigl[-\frac{x^3}{3} + 4x + c\Bigr]_{-2}^{2}$",
+                "0": r"$-\dfrac{32}{3}$",
+                "1": r"กลับเครื่องหมาย",
               },
-              "explanation":
-                  r'''พื้นที่ใต้กราฟ $f(x) = -x^2 + 4$ จาก $x = -2$ ถึง $x = 2$ คือ $\int_{-2}^2 -x^2 + 4\,dx$ หา integral ได้ $-\dfrac{x^3}{3} + 4x + c$ แทนค่าได้ $\dfrac{32}{3}$ ✅''',
+              "explanation": r'''$\int -f(x)\,dx = -\int f(x)\,dx$ — กลับเครื่องหมายเสมอ 💚''',
             },
           ],
         }),
-        ContentBlock("ddq_area_basic_1.5", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_area_basic_1.5",
-              "content": [
-                r'''**ขั้นที่ 2** หา $\int_{-2}^2 f(x)\,dx$
-        
-        แทน $x = -2$ และ $x = 2$ ใน $-\dfrac{x^3}{3} + 4x + c$ และนำมาลบกัน
-        
-        จะได้ 
-        
-        $F(2) - F(-2)$
-        
-        $= (-\dfrac{(2)^3}{3} + 4(2) + c) - (-\dfrac{(-2)^3}{3} + 4(-2) + c)$
-        
-        $= (-\dfrac{8}{3} + 8 + c) - (\dfrac{8}{3} - 8 + c)$
-        
-        $= -\dfrac{8}{3} + 8 + c - \dfrac{8}{3} + 8 - c$
-        
-        $= 16 - \dfrac{16}{3} =$ ''',
-                {"drop": "0"},
-              ],
-              "draggableItems": [
-                r"$\dfrac{8}{3}$",
-                r"$\dfrac{32}{3}$",
-                r"$\dfrac{16}{3}$",
-              ],
-              "correctAnswers": {"0": r"$\dfrac{32}{3}$"},
-              "explanation":
-                  r'''พื้นที่ใต้กราฟ $f(x) = -x^2 + 4$ จาก $x = -2$ ถึง $x = 2$ คือ $\int_{-2}^2 -x^2 + 4\,dx$ หา integral ได้ $-\dfrac{x^3}{3} + 4x + c$ แทนค่าได้ $\dfrac{32}{3}$ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_area_basic_2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_area_basic_2",
-              "content": [
-                r'''2. จงหาพื้นที่สีส้ม สมการคือ $y = x^2 - 4$ โดยกราฟตัดแกน $x$ ที่ $-2, 2$''',
-                {"image": "assets/int3.png"},
-                r'''ดังนั้นต้องหาพื้นที่ใต้กราฟของ $f(x) = x^2 - 4$ จาก $x = -2$ ถึง $x = 2$
-        
-        เขียนได้เป็น ''',
-                {"drop": "0"},
-                r'''**ขั้นที่ 1** จากข้อที่แล้วเรารู้ 
-        
-        $\int_{-2}^2 -x^2 + 4\,dx = \dfrac{32}{3}$
-        
-        เรารู้ว่า $-(x^2 - 4) = -x^2 + 4$
-        
-        ดังนั้น
-        
-        $\int_{-2}^2 -x^2 + 4\,dx = \dfrac{32}{3} = -(\int_{-2}^2 x^2 - 4\,dx)$
-        
-        ดังนั้น $\int_{-2}^2 x^2 - 4\,dx$ ''',
-                {"drop": "1"},
-                r'''เราเห็นว่า ''',
-                {"drop": "1"},
-                {"drop": "2"},
-                r''' $0$
-        
-        ดังนั้นพื้นที่ใต้กราฟติดลบ ''',
-                {"drop": "3"},
-              ],
-              "draggableItems": [
-                r"$\dfrac{8}{3}$",
-                r"$\int_2^{-2} -x^2 + 4\,dx$",
-                r"$\int_{-2}^2 -x^2 + 4\,dx$",
-                r"$\int_{-2}^2 x^2 - 4\,dx$",
-                r"$\dfrac{-32}{3}$",
-                r"$\dfrac{32}{3}$",
-                r"$>$",
-                r"$<$",
-                r"ได้",
-                r"ไม่ได้",
-                r"ตอบไม่ได้",
-              ],
-              "correctAnswers": {
-                "0": r"$\int_{-2}^2 x^2 - 4\,dx$",
-                "1": r"$\dfrac{-32}{3}$",
-                "2": r"$<$",
-                "3": r"ได้",
-              },
-              "explanation":
-                  r'''พื้นที่ใต้กราฟ $f(x) = x^2 - 4$ คือ $\int_{-2}^2 x^2 - 4\,dx = -\dfrac{32}{3}$ ซึ่ง $< 0$ พื้นที่ใต้กราฟติดลบได้ ✅''',
-            },
-          ],
-        }),
-        ContentBlock("area_h_544", "header", {
-          "title": r"🚨 ระวัง",
+        ContentBlock("area_h_024", "header", {
+          "title": r"ฝึกดูเครื่องหมาย",
           "level": 2,
         }),
-        ContentBlock("area_t_545", "text", {
-          "content": [
-            r'''**สิ่งสำคัญ:** พื้นที่ใต้กราฟ**สามารถติดลบได้**!
-        
-        ลองเทียบ 2 กราฟนี้''',
-          ],
-        }),
-        ContentBlock("area_t_546", "image", {"path": "assets/int1.png"}),
-        ContentBlock("area_t_547", "image", {"path": "assets/int3.png"}),
-        ContentBlock("area_t_548", "text", {
-          "content": [
-            r'''กราฟ 1: พื้นที่ใต้กราฟ $\dfrac{32}{3}$ ซึ่งเป็น $+$
-        
-        กราฟ 2: พื้นที่ใต้กราฟ $\dfrac{-32}{3}$ ซึ่งเป็น $-$
-        
-        Note = เหตุผล
-        
-        กราฟ 1 พื้นที่แรเงาสีส้มอยู่**เหนือแกน** $x$ จึงเป็น $+$
-        
-        กราฟ 2 อยู่**ใต้แกน** $x$ จึงเป็น $-$''',
-          ],
-        }),
-        ContentBlock("ddq_area_sign_1", "drag_and_drop", {
+        ContentBlock("area_ddq_025", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_area_sign_1",
+              "questionId": "area_ddq_025_s1",
               "content": [
-                r'''1.''',
                 {"image": "assets/int2.png"},
-                r'''พื้นที่สีส้ม มีค่าเป็น ''',
+                r'''พื้นที่สีส้ม (ใต้แกน $x$) มีค่าเป็น ''',
                 {"drop": "0"},
-                r'''พื้นที่สีแดงมีค่าเป็น ''',
+                r'''พื้นที่สีแดง (เหนือแกน $x$) มีค่าเป็น ''',
                 {"drop": "1"},
               ],
               "draggableItems": [r"$+$", r"$+$", r"$-$", r"$-$"],
               "correctAnswers": {"0": r"$-$", "1": r"$+$"},
-              "explanation":
-                  r'''พื้นที่สีส้มอยู่**ใต้แกน** $x$ จึงเป็น $-$ พื้นที่สีแดงอยู่**เหนือแกน** $x$ จึงเป็น $+$ ✅''',
+              "explanation": r'''ใต้แกน $x$ → ลบ, เหนือแกน $x$ → บวก ✅''',
             },
           ],
         }),
-        ContentBlock("ddq_area_sign_2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_area_sign_2",
-              "content": [
-                r'''2.''',
-                {"image": "assets/int4.png"},
-                r'''พื้นที่สีส้ม มีค่าเป็น ''',
-                {"drop": "0"},
-                r'''พื้นที่สีแดงมีค่าเป็น ''',
-                {"drop": "1"},
-              ],
-              "draggableItems": [r"$+$", r"$+$", r"$-$", r"$-$"],
-              "correctAnswers": {"0": r"$-$", "1": r"$+$"},
-              "explanation":
-                  r'''พื้นที่สีส้มอยู่**ใต้แกน** $x$ จึงเป็น $-$ พื้นที่สีแดงอยู่**เหนือแกน** $x$ จึงเป็น $+$ ✅''',
-            },
+        ContentBlock("area_q_026", "question_choice", {
+          "content": [
+            r'''1. $\int_0^2 (-x)\,dx = ?$
+
+Note = คำใบ้: กราฟ $y=-x$ อยู่เหนือหรือใต้แกน $x$ เมื่อ $x>0$?''',
           ],
+          "options": [r"$-2$", r"$2$", r"$-4$", r"$4$"],
+          "correct": r"$-2$",
+          "explanation": r'''$\left[-\dfrac{x^2}{2}\right]_0^2 = -2$
+
+$y=-x$ อยู่ใต้แกน $x$ เมื่อ $x>0$ ดังนั้นปริพันธ์ติดลบ 💚''',
+        }),
+        ContentBlock("area_q_027", "question_choice", {
+          "content": [
+            r'''2. ถ้า $\int_0^3 f(x)\,dx = -7$ แล้ว $\int_0^3 [-f(x)]\,dx = ?$''',
+          ],
+          "options": [r"$7$", r"$-7$", r"$0$", r"$14$"],
+          "correct": r"$7$",
+          "explanation": r'''$\int [-f(x)]\,dx = -\int f(x)\,dx = -(-7) = 7$ 💚''',
+        }),
+        ContentBlock("area_q_028", "question_choice", {
+          "content": [
+            r'''3. กราฟ $f(x)$ อยู่ใต้แกน $x$ ตลอดช่วง $[1, 4]$ ข้อใดจริง?''',
+          ],
+          "options": [
+            r"$\int_1^4 f(x)\,dx < 0$",
+            r"$\int_1^4 f(x)\,dx > 0$",
+            r"$\int_1^4 f(x)\,dx = 0$",
+            r"บอกไม่ได้",
+          ],
+          "correct": r"$\int_1^4 f(x)\,dx < 0$",
+          "explanation": r'''กราฟอยู่ใต้แกน $x$ ตลอด → $f(x)<0$ ตลอด → ปริพันธ์ติดลบแน่นอน 💚''',
+        }),
+        ContentBlock("area_q_029", "question_choice", {
+          "content": [
+            r'''4. ถ้า $\int_0^5 f(x)\,dx = 10$ และ $\int_0^5 g(x)\,dx = -3$
+
+แล้ว $\int_0^5 [f(x) + g(x)]\,dx = ?$''',
+          ],
+          "options": [r"$7$", r"$13$", r"$-30$", r"$10$"],
+          "correct": r"$7$",
+          "explanation": r'''$\int [f(x)+g(x)]\,dx = \int f(x)\,dx + \int g(x)\,dx = 10+(-3) = 7$ 💚''',
+        }),
+        ContentBlock("area_q_030", "question_choice", {
+          "content": [
+            r'''5. $\int_0^{\pi} \sin x\,dx = 2$ (ข้อเท็จจริง)
+
+แล้ว $\int_0^{\pi} (-\sin x)\,dx = ?$''',
+          ],
+          "options": [r"$-2$", r"$2$", r"$0$", r"$\pi$"],
+          "correct": r"$-2$",
+          "explanation": r'''$\int [-\sin x]\,dx = -\int \sin x\,dx = -2$ 💚''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 3: เมื่อกราฟข้ามแกน x
+    // =============================================
+    ContentSection(
+      headerL1: r"🔀 เมื่อกราฟข้ามแกน $x$",
+      blocks: [
+        ContentBlock("area_h_031", "header", {
+          "title": r"ปัญหาที่ต้องระวัง",
+          "level": 2,
+        }),
+        ContentBlock("area_t_032", "text", {
+          "content": [
+            r'''ถ้ากราฟอยู่เหนือแกน $x$ ตลอด หรือใต้ตลอด ก็ตรงไปตรงมา
+
+แต่ถ้ากราฟ**ข้ามแกน $x$** ส่วนบวกกับส่วนลบจะ**หักล้างกัน**!''',
+          ],
+        }),
+        ContentBlock("area_img_033", "image", {
+          "path": "assets/int2.png",
+        }),
+        ContentBlock("area_t_034", "text", {
+          "content": [
+            r'''ในรูปนี้ ถ้าเราหา $\int_a^b f(x)\,dx$ ตรงๆ ส่วนสีส้ม (ลบ) จะ**หักลบ**กับส่วนสีแดง (บวก)
+
+ผลลัพธ์อาจไม่ใช่ "พื้นที่ทั้งหมด" ที่เราต้องการ!''',
+          ],
+        }),
+        ContentBlock("area_t_035", "text", {
+          "content": [
+            r'''Note = แยกให้ออก 2 ความหมาย
+
+**ค่าปริพันธ์** $\int_a^b f(x)\,dx$: คำนวณตรงๆ ปล่อยให้ส่วนบวก-ลบหักล้างกัน
+
+**พื้นที่จริง:** ต้องแยกช่วง แล้วเอาค่าสัมบูรณ์ส่วนที่ติดลบมาบวก — เพราะ "พื้นที่" ติดลบไม่ได้!''',
+          ],
+        }),
+        ContentBlock("area_h_036", "header", {
+          "title": r"แนวคิด: แยกช่วงตรงจุดตัดแกน $x$",
+          "level": 2,
+        }),
+        ContentBlock("area_t_037", "text", {
+          "content": [
+            r'''เมื่อโจทย์ถามหา**พื้นที่จริง** แนวคิดคือ:
+
+🔸 หาจุดตัดแกน $x$ → แก้ $f(x) = 0$
+
+🔸 ดูว่าในแต่ละช่วง กราฟอยู่เหนือหรือใต้ (ลองแทนค่าเช็ค)''',
+          ],
+        }),
+        ContentBlock("area_t_038", "text", {
+          "content": [
+            r'''🔸 หาปริพันธ์แต่ละช่วงแยกกัน
+
+🔸 ส่วนที่ได้ค่าลบ → **ติดค่าสัมบูรณ์** แล้วรวมทั้งหมด
+
+$$\text{พื้นที่จริง} = |\text{ส่วนลบ}| + \text{ส่วนบวก}$$''',
+          ],
+        }),
+        ContentBlock("area_h_039", "header", {
+          "title": r"ตัวอย่าง",
+          "level": 2,
+        }),
+        ContentBlock("area_t_040", "text", {
+          "content": [
+            r'''จงหา**พื้นที่จริง**ระหว่างกราฟ $f(x) = x^2 - 1$ กับแกน $x$ จาก $x=-1$ ถึง $x=2$''',
+          ],
+        }),
+        ContentBlock("area_t_041", "text", {
+          "content": [
+            r'''สังเกต: $f(x) = (x-1)(x+1) = 0$ เมื่อ $x = \pm 1$
+
+ลองแทนค่าเช็ค:
+
+🔸 $x=0$: $f(0) = -1 < 0$ → ช่วง $[-1,1]$ กราฟอยู่**ใต้**แกน $x$
+
+🔸 $x=1.5$: $f(1.5) = 1.25 > 0$ → ช่วง $[1,2]$ กราฟอยู่**เหนือ**แกน $x$''',
+          ],
+        }),
+        ContentBlock("area_ddq_042", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "area_ddq_042_s1",
+              "content": [
+                r'''หาปริพันธ์แต่ละช่วง:
+
+$\int_{-1}^1 (x^2-1)\,dx = \left[\dfrac{x^3}{3}-x\right]_{-1}^1$
+
+$= (\dfrac{1}{3}-1) - (-\dfrac{1}{3}+1) = -\dfrac{2}{3} - \dfrac{2}{3} = $ ''',
+                {"drop": "0"},
+                r'''$\int_1^2 (x^2-1)\,dx = \left[\dfrac{x^3}{3}-x\right]_1^2$
+
+$= (\dfrac{8}{3}-2) - (\dfrac{1}{3}-1) = \dfrac{2}{3} + \dfrac{2}{3} = $ ''',
+                {"drop": "1"},
+                r'''พื้นที่จริง $= \left|-\dfrac{4}{3}\right| + \dfrac{4}{3} = $ ''',
+                {"drop": "2"},
+              ],
+              "draggableItems": [
+                r"$-\dfrac{4}{3}$",
+                r"$\dfrac{4}{3}$",
+                r"$\dfrac{8}{3}$",
+                r"$0$",
+              ],
+              "correctAnswers": {
+                "0": r"$-\dfrac{4}{3}$",
+                "1": r"$\dfrac{4}{3}$",
+                "2": r"$\dfrac{8}{3}$",
+              },
+              "explanation": r'''ส่วนใต้แกน $x$: $-\dfrac{4}{3}$ → เอาค่าสัมบูรณ์ $= \dfrac{4}{3}$
+
+รวมกับส่วนเหนือ $\dfrac{4}{3}$ → พื้นที่จริง $= \dfrac{8}{3}$ 💚''',
+            },
+          ],
+        }),
+        ContentBlock("area_t_043", "text", {
+          "content": [
+            r'''Note = เปรียบเทียบ
+
+ถ้าหา $\int_{-1}^2 (x^2-1)\,dx$ ตรงๆ จะได้ $-\dfrac{4}{3}+\dfrac{4}{3} = 0$ — หักล้างกันหมด!
+
+แต่พื้นที่จริง $= \dfrac{8}{3}$ ≠ $0$ — นี่คือเหตุผลที่ต้องแยกช่วง''',
+          ],
+        }),
+        ContentBlock("area_h_044", "header", {
+          "title": r"ฝึกเลย",
+          "level": 2,
+        }),
+        ContentBlock("area_q_045", "question_choice", {
+          "content": [
+            r'''1. กราฟ $f(x) = x^3 - x$ ตัดแกน $x$ ที่จุดใดบ้าง?
+
+Note = คำใบ้: แยกตัวประกอบ $x(x^2-1)$''',
+          ],
+          "options": [
+            r"$x = -1, 0, 1$",
+            r"$x = 0, 1$",
+            r"$x = -1, 1$",
+            r"$x = 0$",
+          ],
+          "correct": r"$x = -1, 0, 1$",
+          "explanation": r'''$x(x-1)(x+1) = 0$ → $x = -1, 0, 1$ 💚''',
+        }),
+        ContentBlock("area_q_046", "question_choice", {
+          "content": [
+            r'''2. $\int_{-1}^1 (x^2-1)\,dx = ?$ (คำนวณค่าปริพันธ์ตรงๆ)''',
+          ],
+          "options": [
+            r"$-\dfrac{4}{3}$",
+            r"$\dfrac{4}{3}$",
+            r"$0$",
+            r"$-2$",
+          ],
+          "correct": r"$-\dfrac{4}{3}$",
+          "explanation": r'''$\left[\dfrac{x^3}{3}-x\right]_{-1}^1 = (\dfrac{1}{3}-1)-(-\dfrac{1}{3}+1) = -\dfrac{2}{3}-\dfrac{2}{3} = -\dfrac{4}{3}$
+
+ค่าติดลบเพราะกราฟอยู่ใต้แกน $x$ ตลอดช่วงนี้ 💚''',
+        }),
+        ContentBlock("area_q_047", "question_choice", {
+          "content": [
+            r'''3. **พื้นที่จริง** ระหว่างกราฟ $f(x) = x^2-1$ กับแกน $x$ จาก $x=-1$ ถึง $x=1$ เท่ากับเท่าไร?''',
+          ],
+          "options": [
+            r"$\dfrac{4}{3}$",
+            r"$-\dfrac{4}{3}$",
+            r"$0$",
+            r"$2$",
+          ],
+          "correct": r"$\dfrac{4}{3}$",
+          "explanation": r'''ปริพันธ์ให้ค่า $-\dfrac{4}{3}$ แต่พื้นที่จริงเอาค่าสัมบูรณ์ → $\dfrac{4}{3}$ 💚''',
+        }),
+        ContentBlock("area_q_048", "question_choice", {
+          "content": [
+            r'''4. จงหา**พื้นที่จริง**ระหว่างกราฟ $f(x) = x$ กับแกน $x$ จาก $x=-2$ ถึง $x=3$
+
+Note = คำใบ้: กราฟตัดแกน $x$ ที่ $x=0$ → แยกเป็นช่วง $[-2,0]$ กับ $[0,3]$''',
+          ],
+          "options": [
+            r"$\dfrac{13}{2}$",
+            r"$\dfrac{5}{2}$",
+            r"$\dfrac{9}{2}$",
+            r"$5$",
+          ],
+          "correct": r"$\dfrac{13}{2}$",
+          "explanation": r'''$\int_{-2}^0 x\,dx = \left[\dfrac{x^2}{2}\right]_{-2}^0 = 0-2 = -2$
+
+$\int_0^3 x\,dx = \left[\dfrac{x^2}{2}\right]_0^3 = \dfrac{9}{2}$
+
+พื้นที่จริง $= |-2| + \dfrac{9}{2} = 2 + \dfrac{9}{2} = \dfrac{13}{2}$ 💚''',
+        }),
+        ContentBlock("area_q_049", "question_choice", {
+          "content": [
+            r'''5. $\int_{-1}^2 (x^2-1)\,dx = ?$ (คำนวณตรงๆ ไม่แยกช่วง)''',
+          ],
+          "options": [
+            r"$0$",
+            r"$\dfrac{8}{3}$",
+            r"$-\dfrac{4}{3}$",
+            r"$\dfrac{4}{3}$",
+          ],
+          "correct": r"$0$",
+          "explanation": r'''$\left[\dfrac{x^3}{3}-x\right]_{-1}^2 = (\dfrac{8}{3}-2)-(-\dfrac{1}{3}+1) = \dfrac{2}{3}-\dfrac{2}{3} = 0$
+
+ส่วนลบกับส่วนบวกหักล้างกันพอดี — แต่พื้นที่จริง $\neq 0$ นะ! 💚''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 4: แบบฝึกหัด
+    // =============================================
     ContentSection(
       headerL1: r"📝 แบบฝึกหัด",
       blocks: [
-        ContentBlock("q_area_practice_1", "question_fill_in", {
-          "content":
-              r'''1. จงหาพื้นที่ใต้กราฟ $f(x) = 2x$ จาก $x = 0$ ถึง $x = 3$ 
-        
-                        พื้นที่ $= $ {{BOX}} ตร.หน่วย''',
-          "correctAnswer": r"9",
-          "explanation":
-              r'''$\int_0^3 2x\,dx = [x^2]_0^3 = 9 - 0 = 9$ ตร.หน่วย ✅''',
-          "boxCount": 1,
+        ContentBlock("area_t_050", "text", {
+          "content": [
+            r'''โจทย์ในส่วนนี้ผสมทุกแนวคิด รวมถึงเทคนิคเปลี่ยนตัวแปรจากบทก่อน ลองทำดู! 💪''',
+          ],
         }),
-        ContentBlock("q_area_practice_2", "question_fill_in", {
-          "content":
-              r'''2. พื้นที่สามเหลี่ยมที่มีจุดยอด $(0,0)$, $(3,0)$, $(3,3)$ มีพื้นที่เท่าไร? 
-        
-                        {{BOX}} ตร.หน่วย''',
-          "correctAnswer": r"$\dfrac{9}{2}$",
-          "explanation":
-              r'''สมการเส้นตรง: $f(x) = x$ จาก $x = 0$ ถึง $x = 3$ ดังนั้น $\int_0^3 x\,dx = \left[\dfrac{x^2}{2}\right]_0^3 = \dfrac{9}{2}$ ตร.หน่วย (ตรวจสอบ: $\dfrac{1}{2} \times 3 \times 3 = 4.5$ ถูกต้อง!) ✅''',
-          "boxCount": 1,
+        ContentBlock("area_q_051", "question_choice", {
+          "content": [
+            r'''1. พื้นที่ใต้กราฟ $f(x) = 6x^2 - 2x$ จาก $x=0$ ถึง $x=1$ เท่ากับเท่าไร?''',
+          ],
+          "options": [r"$1$", r"$2$", r"$3$", r"$0$"],
+          "correct": r"$1$",
+          "explanation": r'''$\int_0^1 (6x^2-2x)\,dx = [2x^3-x^2]_0^1 = (2-1)-0 = 1$ 💚''',
         }),
-        ContentBlock("q_area_practice_3", "question_fill_in", {
-          "content":
-              r'''3. จงหาพื้นที่ใต้กราฟ $f(x) = 6x^2 - 2x$ จาก $x = 0$ ถึง $x = 1$ 
-        
-                        {{BOX}} ตร.หน่วย''',
-          "correctAnswer": r"1",
-          "explanation":
-              r'''$\int_0^1 (6x^2 - 2x)\,dx = [2x^3 - x^2]_0^1 = 2 - 1 = 1$ ตร.หน่วย ✅''',
-          "boxCount": 1,
+        ContentBlock("area_q_052", "question_choice", {
+          "content": [
+            r'''2. $\int_0^1 2x(x^2+1)^3\,dx = ?$
+
+Note = คำใบ้: ใช้การเปลี่ยนตัวแปร $u = x^2+1$''',
+          ],
+          "options": [
+            r"$\dfrac{15}{4}$",
+            r"$\dfrac{1}{4}$",
+            r"$4$",
+            r"$\dfrac{17}{4}$",
+          ],
+          "correct": r"$\dfrac{15}{4}$",
+          "explanation": r'''$u = x^2+1$ , $du = 2x\,dx$
+
+ขอบเขต: $x=0 \to u=1$ , $x=1 \to u=2$
+
+$\int_1^2 u^3\,du = \left[\dfrac{u^4}{4}\right]_1^2 = \dfrac{16-1}{4} = \dfrac{15}{4}$ 💚''',
         }),
-        ContentBlock("ddq_area_practice_4", "drag_and_drop", {
+        ContentBlock("area_q_053", "question_choice", {
+          "content": [
+            r'''3. พื้นที่ใต้กราฟ $f(x) = x\sqrt{x^2+9}$ จาก $x=0$ ถึง $x=4$ เท่ากับเท่าไร?
+
+Note = คำใบ้: $u = x^2+9$''',
+          ],
+          "options": [
+            r"$\dfrac{98}{3}$",
+            r"$\dfrac{49}{3}$",
+            r"$\dfrac{125}{3}-9$",
+            r"$\dfrac{196}{3}$",
+          ],
+          "correct": r"$\dfrac{98}{3}$",
+          "explanation": r'''$u = x^2+9$ , $du = 2x\,dx$ → $x\,dx = \dfrac{1}{2}\,du$
+
+ขอบเขต: $x=0 \to u=9$ , $x=4 \to u=25$
+
+$\dfrac{1}{2}\int_9^{25} u^{1/2}\,du = \dfrac{1}{2}\left[\dfrac{2u^{3/2}}{3}\right]_9^{25} = \dfrac{1}{3}(125-27) = \dfrac{98}{3}$ 💚''',
+        }),
+        ContentBlock("area_ddq_054", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_area_practice_4",
+              "questionId": "area_ddq_054_s1",
               "content": [
-                r'''4. จงหาพื้นที่ใต้กราฟ $f(x) = -4x^{3} + 4x^{2} + 8x$ เฉพาะที่แรเงา''',
-                {"image": "assets/int4.png"},
-                r'''Note = คำใบ้
-        
-        หาช่วงจากจุดตัดแกน $x$ โดยแทน $-4x^{3} + 4x^{2} + 8x = 0$
-        
-        
-        พื้นที่ใต้กราฟ $=$ ''',
+                r'''4. จงหา**พื้นที่จริง**ระหว่างกราฟ $f(x) = x^3-4x$ กับแกน $x$ จาก $x=0$ ถึง $x=3$
+
+จุดตัดแกน $x$: $x(x^2-4) = x(x-2)(x+2) = 0$
+
+ในช่วง $[0,3]$ ตัดที่ $x=0$ และ $x=2$
+
+ลองแทน $x=1$: $1-4 = -3 < 0$ → ช่วง $[0,2]$ กราฟอยู่ ''',
+                {"drop": "0"},
+                r''' แกน $x$
+
+ลองแทน $x=2.5$: $15.625-10 = 5.625 > 0$ → ช่วง $[2,3]$ กราฟอยู่ ''',
+                {"drop": "1"},
+                r''' แกน $x$''',
+              ],
+              "draggableItems": [r"ใต้", r"เหนือ"],
+              "correctAnswers": {"0": r"ใต้", "1": r"เหนือ"},
+              "explanation": r'''แทนค่ากลางช่วงเพื่อเช็คว่ากราฟอยู่ฝั่งไหน ✅''',
+            },
+            {
+              "questionId": "area_ddq_054_s2",
+              "content": [
+                r'''$\int_0^2 (x^3-4x)\,dx = \left[\dfrac{x^4}{4}-2x^2\right]_0^2 = (4-8)-0 = -4$
+
+$\int_2^3 (x^3-4x)\,dx = \left[\dfrac{x^4}{4}-2x^2\right]_2^3 = (\dfrac{81}{4}-18)-(4-8) = \dfrac{81}{4}-18+4 = \dfrac{25}{4}$
+
+พื้นที่จริง $= |-4| + \dfrac{25}{4} = $ ''',
                 {"drop": "0"},
               ],
               "draggableItems": [
-                r"$\dfrac{37}{3}$",
-                r"$9$",
-                r"$4$",
-                r"$\dfrac{31}{3}$",
-                r"$\dfrac{28}{3}$",
+                r"$\dfrac{41}{4}$",
+                r"$\dfrac{9}{4}$",
+                r"$\dfrac{25}{4}$",
+                r"$8$",
               ],
-              "correctAnswers": {"0": r"$9$"},
-              "explanation": r'''**💡 ขั้นที่ 1:** หาจุดตัดแกน $x$
-        
-        $-4x^{3} + 4x^{2} + 8x = 0$
-        
-        $-4x(x^{2} - x - 2) = 0$
-        
-        $-4x(x - 2)(x + 1) = 0$
-        
-        ดังนั้น $x = -1, 0, 2$
-        
-        **✍️ ขั้นที่ 2:** ตั้งค่าอินทิกรัล
-        
-        พื้นที่แรเงาแบ่งเป็น 2 ส่วน (สีส้มและสีแดง)
-        
-        $= \int_{-1}^{2} (-4x^{3} + 4x^{2} + 8x) \,dx$
-        
-        **🧮 ขั้นที่ 3:** คำนวณ
-        
-        $= -x^4 + \dfrac{4x^3}{3} + 4x^2 + c$
-        
-        $F(2) - F(-1) = (-16 + \dfrac{32}{3} + 16) - (-1 - \dfrac{4}{3} + 4)$
-        
-        $= \dfrac{32}{3} + 1 + \dfrac{4}{3} - 4 = 9$ ✅''',
+              "correctAnswers": {"0": r"$\dfrac{41}{4}$"},
+              "explanation": r'''$4 + \dfrac{25}{4} = \dfrac{16+25}{4} = \dfrac{41}{4}$ 💚''',
             },
           ],
         }),
+        ContentBlock("area_q_055", "question_choice", {
+          "content": [
+            r'''5. $\int_0^2 3x^2(x^3+1)^2\,dx = ?$
+
+Note = คำใบ้: $u = x^3+1$''',
+          ],
+          "options": [
+            r"$\dfrac{728}{3}$",
+            r"$78$",
+            r"$\dfrac{342}{3}$",
+            r"$243$",
+          ],
+          "correct": r"$\dfrac{728}{3}$",
+          "explanation": r'''$u = x^3+1$ , $du = 3x^2\,dx$
+
+ขอบเขต: $u(0) = 1$ , $u(2) = 9$
+
+$\int_1^9 u^2\,du = \left[\dfrac{u^3}{3}\right]_1^9 = \dfrac{729-1}{3} = \dfrac{728}{3}$ 💚''',
+        }),
+        ContentBlock("area_q_056", "question_choice", {
+          "content": [
+            r'''6. ถ้า $\int_0^4 f(x)\,dx = 5$ และ $\int_4^6 f(x)\,dx = -2$
+
+แล้ว $\int_0^6 f(x)\,dx = ?$''',
+          ],
+          "options": [r"$3$", r"$7$", r"$-7$", r"$10$"],
+          "correct": r"$3$",
+          "explanation": r'''$\int_0^6 f(x)\,dx = \int_0^4 f(x)\,dx + \int_4^6 f(x)\,dx = 5 + (-2) = 3$ 💚''',
+        }),
+        ContentBlock("area_fi_057", "question_fill_in", {
+          "content": [
+            r'''7. จงหา**พื้นที่จริง**ระหว่างกราฟ $f(x) = x^2-4$ กับแกน $x$ จาก $x=0$ ถึง $x=3$
+
+Note = คำใบ้: จุดตัดแกน $x$ ในช่วง $[0,3]$ อยู่ที่ $x=2$
+
+พื้นที่จริง $= $ ''',
+            {"box": "0"},
+          ],
+          "correct": r"19/3",
+          "explanation": r'''ช่วง $[0,2]$: $f(x) \leq 0$ → $\int_0^2 (x^2-4)\,dx = [\dfrac{x^3}{3}-4x]_0^2 = \dfrac{8}{3}-8 = -\dfrac{16}{3}$
+
+ช่วง $[2,3]$: $f(x) \geq 0$ → $\int_2^3 (x^2-4)\,dx = (9-12)-(\dfrac{8}{3}-8) = -3+\dfrac{16}{3} = \dfrac{7}{3}$
+
+ไม่ใช่ — ลองใหม่:
+
+$F(3) = \dfrac{27}{3}-12 = 9-12 = -3$ , $F(2) = \dfrac{8}{3}-8 = -\dfrac{16}{3}$
+
+$\int_2^3 = -3-(-\dfrac{16}{3}) = -3+\dfrac{16}{3} = \dfrac{-9+16}{3} = \dfrac{7}{3}$
+
+$\int_0^2 = -\dfrac{16}{3}-0 = -\dfrac{16}{3}$
+
+พื้นที่จริง $= \dfrac{16}{3} + \dfrac{7}{3} = \dfrac{23}{3}$
+
+🔄 ตรวจอีกที: $F(2)-F(0) = (\dfrac{8}{3}-8)-(0) = -\dfrac{16}{3}$ ✅
+
+$F(3)-F(2) = -3-(-\dfrac{16}{3}) = \dfrac{7}{3}$ ✅
+
+พื้นที่จริง $= \dfrac{16}{3}+\dfrac{7}{3} = \dfrac{23}{3}$ 💚''',
+        }),
       ],
     ),
+
+    // =============================================
+    // SECTION 5: สรุป
+    // =============================================
     ContentSection(
-      headerL1: r"✨ สรุป",
+      headerL1: r"สรุป",
       blocks: [
-        ContentBlock("area_t_555", "text", {
+        ContentBlock("area_t_058", "text", {
           "content": [
-            r'''**🎯 การหาพื้นที่ใต้กราฟ**
-        
-        **1. นิยาม:**
-        
-        $$\int_a^b f(x)\,dx$$
-        
-        พื้นที่ระหว่าง**กราฟของฟังก์ชัน**กับ**แกน** $x$ ในช่วง $[a, b]$ 📐
-        
-        **2. เครื่องหมาย:**
-        
-        🔸 พื้นที่เหนือแกน $x$ เป็น $+$
-        
-        🔸 พื้นที่ใต้แกน $x$ เป็น $-$
-        
-        **3. ทฤษฎีบทพื้นฐาน:**
-        
-        $$\int_a^b f(x)\,dx = F(b) - F(a)$$
-        
-        นักคณิตศาสตร์**มารู้ทีหลัง**ว่า integral = ย้อนกลับของอนุพันธ์! 💡''',
+            r'''🎯 **ปริพันธ์จำกัดเขต = พื้นที่ระหว่างกราฟกับแกน $x$**
+
+$$\int_a^b f(x)\,dx = F(b) - F(a) = \text{พื้นที่ใต้กราฟ (มีเครื่องหมาย)}$$''',
+          ],
+        }),
+        ContentBlock("area_t_059", "text", {
+          "content": [
+            r'''**เครื่องหมายของพื้นที่:**
+
+🔸 กราฟเหนือแกน $x$ → ปริพันธ์เป็น **บวก**
+
+🔸 กราฟใต้แกน $x$ → ปริพันธ์เป็น **ลบ**
+
+🔸 ถ้ากราฟข้ามแกน → ส่วนบวกกับลบ**หักล้างกัน**''',
+          ],
+        }),
+        ContentBlock("area_t_060", "text", {
+          "content": [
+            r'''**เมื่อต้องการพื้นที่จริง (ไม่ติดลบ):**
+
+🔸 หาจุดตัดแกน $x$ → แก้ $f(x) = 0$
+
+🔸 แยกช่วง แล้วหาปริพันธ์แต่ละช่วง
+
+🔸 เอาค่าสัมบูรณ์ส่วนที่ติดลบ แล้วรวมทั้งหมด''',
+          ],
+        }),
+        ContentBlock("area_t_061", "text", {
+          "content": [
+            r'''Note = ข้อควรระวัง
+
+🔸 "ค่าปริพันธ์" กับ "พื้นที่จริง" **ไม่เหมือนกัน**เมื่อกราฟข้ามแกน $x$
+
+🔸 ดูโจทย์ให้ดี — ถามค่าปริพันธ์ หรือถามพื้นที่จริง?
+
+🔸 เทคนิคเปลี่ยนตัวแปร (U-Sub) ใช้ร่วมกับการหาพื้นที่ได้เสมอ!''',
           ],
         }),
       ],
@@ -13140,385 +13839,632 @@ final calcAreaLesson = ContentLesson(
 final calcEnclosedAreaLesson = ContentLesson(
   title: "การหาพื้นที่ปิดล้อม",
   sections: [
+    // =============================================
+    // SECTION 1: พื้นที่ปิดล้อมคืออะไร?
+    // =============================================
     ContentSection(
-      headerL1: r"intro",
+      headerL1: r"🤔 พื้นที่ปิดล้อมคืออะไร?",
       blocks: [
-        ContentBlock("area_enc_t_556", "text", {
-          "content": [
-            r'''จากบทที่แล้ว เราพบว่า integral **สามารถติดลบได้**!
-        
-        **แต่ถ้าเราต้องการ "พื้นที่รวมจริง" ล่ะ?** 🤔''',
-          ],
-        }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"🎨 ความแตกต่าง",
-      blocks: [
-        ContentBlock("area_enc_t_557", "text", {
-          "content": [r'''ในรูป $4$ และ $-4$ คือพื้นที่ใต้กราฟ'''],
-        }),
-        ContentBlock("area_enc_t_558", "image", {"path": "assets/int5.png"}),
-        ContentBlock("area_enc_t_559", "text", {
-          "content": [
-            r'''**📊 พื้นที่ใต้กราฟ** รวมกันได้
-        
-        $$0$$
-        
-        มาจาก $4 - 4 = 0$
-        
-        **🎯 พื้นที่ปิดล้อม**
-        
-        คือ พื้นที่รวมจริง (ไม่ติดลบ)
-        
-        $$8$$
-        
-        มาจาก $4 + 4 = 8$''',
-          ],
-        }),
-        ContentBlock("area_enc_h_560", "header", {
-          "title": r"🧐 ลองคิดดู",
+        ContentBlock("enc_h_001", "header", {
+          "title": r"ปริพันธ์ กับ พื้นที่จริง ไม่เหมือนกัน!",
           "level": 2,
         }),
-        ContentBlock("ddq_enclosed_concept_1", "drag_and_drop", {
+        ContentBlock("enc_t_002", "text", {
+          "content": [
+            r'''จากบทที่แล้ว เรารู้ว่าปริพันธ์จำกัดเขต**สามารถติดลบได้** — ส่วนที่อยู่ใต้แกน $x$ จะให้ค่าลบ
+
+แต่ถ้าโจทย์ถามว่า **"พื้นที่ปิดล้อมระหว่างกราฟกับแกน $x$ เท่ากับเท่าไร?"** ล่ะ? 🤔''',
+          ],
+        }),
+        ContentBlock("enc_t_003", "text", {
+          "content": [
+            r'''"พื้นที่" ในโลกจริงจะ**ติดลบไม่ได้** — ห้องกว้าง $20$ ตร.ม. ไม่ใช่ $-20$ ตร.ม.!
+
+ดังนั้น **พื้นที่ปิดล้อม** = พื้นที่รวมจริงทั้งหมด โดยไม่ปล่อยให้ส่วนบวก-ลบหักล้างกัน''',
+          ],
+        }),
+        ContentBlock("enc_h_004", "header", {
+          "title": r"ดูรูปเปรียบเทียบ",
+          "level": 2,
+        }),
+        ContentBlock("enc_img_005", "image", {
+          "path": "assets/int5.png",
+        }),
+        ContentBlock("enc_t_006", "text", {
+          "content": [
+            r'''ในรูปนี้ กราฟมีพื้นที่ $4$ อยู่เหนือแกน $x$ และพื้นที่ $4$ อยู่ใต้แกน $x$
+
+📊 **ค่าปริพันธ์:** $4 + (-4) = 0$ — หักล้างกันหมด!
+
+🎯 **พื้นที่ปิดล้อม:** $4 + 4 = 8$ — เอาทุกส่วนมารวมกัน ไม่สนเครื่องหมาย''',
+          ],
+        }),
+        ContentBlock("enc_t_007", "text", {
+          "content": [
+            r'''Note = จำให้ขึ้นใจ
+
+ค่าปริพันธ์ $\int_a^b f(x)\,dx$ → ปล่อยให้ $+/-$ หักล้างกัน
+
+พื้นที่ปิดล้อม → เอา**ค่าสัมบูรณ์**ของแต่ละส่วนมาบวกกัน''',
+          ],
+        }),
+        ContentBlock("enc_ddq_008", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_enclosed_concept_1",
+              "questionId": "enc_ddq_008_s1",
               "content": [
-                {"image": "assets/int6.png"},
-                r'''ถ้าไม่วาดรูปเราไม่รู้เลยว่าช่วงไหนเป็น $+$ หรือ $-$
-        
-        ลองคิดว่ามีฟังก์ชันไหนไหมที่เคยเรียนเมื่อใส่ค่า $x$ ไม่ว่าจะ $+$ หรือ $-$ จะคืนค่าเป็นบวกเสมอ
-        
-        เช่น $f(8) = 8, f(-2) = 2, f(-100) = 100$
-        
-        ฟังก์ชันนั้นคือ $f(x) =$ ''',
+                r'''สมมติกราฟ $f(x)$ มีพื้นที่เหนือแกน $x$ เท่ากับ $5$ และพื้นที่ใต้แกน $x$ เท่ากับ $3$
+
+ค่าปริพันธ์ $= $ ''',
                 {"drop": "0"},
+                r'''พื้นที่ปิดล้อม $= $ ''',
+                {"drop": "1"},
               ],
-              "draggableItems": [r"$-x$", r"$x^2$", r"$x^4$", r"$|x|$"],
-              "correctAnswers": {"0": r"$|x|$"},
-              "explanation":
-                  r'''ฟังก์ชันที่ทำให้คืนค่า $x$ เป็น $x$ ที่เป็น $+$ คือนิยามของ $|x|$ หรือค่าสัมบูรณ์! ✅''',
+              "draggableItems": [r"$2$", r"$8$", r"$-2$", r"$-8$"],
+              "correctAnswers": {"0": r"$2$", "1": r"$8$"},
+              "explanation": r'''ปริพันธ์: $5 + (-3) = 2$ (หักล้าง) แต่พื้นที่ปิดล้อม: $5 + 3 = 8$ (รวมจริง) 💚''',
             },
           ],
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"📐 พื้นที่ปิดล้อม",
-      blocks: [
-        ContentBlock("area_enc_t_562", "text", {
-          "content": [
-            r'''เรารู้ว่า $|x|$ ทำให้ค่า $x$ เป็น $+$ ดังนั้นเราจึงต้องแบ่งช่วงและใส่ $|x|$
-        
-        เช่น''',
-          ],
-        }),
-        ContentBlock("area_enc_t_563", "image", {"path": "assets/int6.png"}),
-        ContentBlock("area_enc_t_564", "text", {
-          "content": [
-            r'''พื้นที่ปิดล้อมจะเป็น
-        
-        $-a + b - c \text{ หรือ } |a| + |b| + |c|$
-        
-        เขียนเป็น integral ได้
-        
-        $|\int_{-2}^{-1} f(x)\,dx| + |\int_{-1}^{1} f(x)\,dx| + |\int_{1}^{2} f(x)\,dx|$
-        
-        ตามจุดตัดแกน $x$ ในรูป
-        
-        Note = ทำไม
-        
-        เพราะในรูปเรารู้ว่าพื้นที่ใต้กราฟ $a$ เป็น $-$, $b$ เป็น $+$, $c$ เป็น $-$ ดังนั้น $-a + b - c = |a| + |b| + |c|$''',
-          ],
-        }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"👑 แนวคิดหลัก",
-      blocks: [
-        ContentBlock("area_enc_t_565", "text", {
-          "content": [
-            r'''**ขั้นที่ 1:** หาจุดตัดแกน $x$ ที่ $f(x) = 0$ และแบ่งช่วงโดย**รวมขอบ**ที่โจทย์ถามด้วย
-        
-        **ขั้นที่ 2:** หา Integral และแทนค่าแต่ละช่วง
-        
-        **ขั้นที่ 3:** บวก**ค่าสัมบูรณ์**ทุกช่วง
-        
-        $|\int_{x_1}^{x_2} f(x)\,dx| + |\int_{x_2}^{x_3} f(x)\,dx| + \cdots$''',
-          ],
-        }),
-        ContentBlock("area_enc_h_566", "header", {
-          "title": r"👉 ตัวอย่าง",
+        ContentBlock("enc_h_009", "header", {
+          "title": r"ลองคิดกลับกัน",
           "level": 2,
         }),
-        ContentBlock("ddq_enclosed_example_1", "drag_and_drop", {
+        ContentBlock("enc_q_010", "question_choice", {
+          "content": [
+            r'''1. ถ้าค่าปริพันธ์ $\int_0^5 f(x)\,dx = 0$ แปลว่าพื้นที่ปิดล้อมเป็น $0$ ด้วยหรือไม่?''',
+          ],
+          "options": [
+            r"ไม่จำเป็น — อาจหักล้างกันพอดี",
+            r"ใช่ — ปริพันธ์เป็น 0 แปลว่าไม่มีพื้นที่",
+            r"ใช่ — เพราะพื้นที่ปิดล้อมเท่ากับปริพันธ์เสมอ",
+            r"บอกไม่ได้เลย",
+          ],
+          "correct": r"ไม่จำเป็น — อาจหักล้างกันพอดี",
+          "explanation": r'''เหมือนตัวอย่างที่เพิ่งเห็น — ปริพันธ์ $= 0$ แต่พื้นที่ปิดล้อม $= 8$
+
+ค่าปริพันธ์เป็น $0$ บอกแค่ว่าส่วนบวกกับลบ**หักล้างกันพอดี** ไม่ได้แปลว่าไม่มีพื้นที่ 💚''',
+        }),
+        ContentBlock("enc_q_011", "question_choice", {
+          "content": [
+            r'''2. ถ้ากราฟ $f(x) \geq 0$ ตลอดช่วง $[a,b]$ (อยู่เหนือแกน $x$ ตลอด) แล้วพื้นที่ปิดล้อมเท่ากับอะไร?''',
+          ],
+          "options": [
+            r"$\int_a^b f(x)\,dx$ ได้เลย",
+            r"$-\int_a^b f(x)\,dx$",
+            r"$0$",
+            r"บอกไม่ได้",
+          ],
+          "correct": r"$\int_a^b f(x)\,dx$ ได้เลย",
+          "explanation": r'''ถ้ากราฟอยู่เหนือแกน $x$ ตลอด → ปริพันธ์ไม่ติดลบอยู่แล้ว → ค่าปริพันธ์ = พื้นที่ปิดล้อม โดยไม่ต้องทำอะไรเพิ่ม 💚''',
+        }),
+        ContentBlock("enc_q_012", "question_choice", {
+          "content": [
+            r'''3. ถ้า $\int_0^3 f(x)\,dx = -7$ และกราฟอยู่ใต้แกน $x$ ตลอดช่วง $[0,3]$ พื้นที่ปิดล้อมเท่ากับเท่าไร?''',
+          ],
+          "options": [r"$7$", r"$-7$", r"$0$", r"$14$"],
+          "correct": r"$7$",
+          "explanation": r'''กราฟอยู่ใต้แกน $x$ ตลอด → มีแค่ส่วนเดียว → ค่าสัมบูรณ์ $|-7| = 7$ 💚''',
+        }),
+        ContentBlock("enc_q_013", "question_choice", {
+          "content": [
+            r'''4. กราฟ $f(x)$ ในช่วง $[0,6]$ แบ่งเป็น 3 ส่วน:
+
+$\int_0^2 f(x)\,dx = 3$ , $\int_2^4 f(x)\,dx = -5$ , $\int_4^6 f(x)\,dx = 2$
+
+พื้นที่ปิดล้อมเท่ากับเท่าไร?''',
+          ],
+          "options": [r"$10$", r"$0$", r"$6$", r"$-5$"],
+          "correct": r"$10$",
+          "explanation": r'''พื้นที่ปิดล้อม $= |3| + |-5| + |2| = 3 + 5 + 2 = 10$ 💚
+
+ส่วนค่าปริพันธ์ตรงๆ จะได้ $3 + (-5) + 2 = 0$ — เห็นความต่างไหม?''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 2: แนวคิดหลัก
+    // =============================================
+    ContentSection(
+      headerL1: r"💡 แนวคิดหลัก: รู้ว่าช่วงไหนบวก ช่วงไหนลบ",
+      blocks: [
+        ContentBlock("enc_h_014", "header", {
+          "title": r"ปัญหาคือ — เราไม่รู้ว่าส่วนไหนติดลบ!",
+          "level": 2,
+        }),
+        ContentBlock("enc_t_015", "text", {
+          "content": [
+            r'''ถ้าเราหา $\int_a^b f(x)\,dx$ ตรงๆ ส่วนบวก-ลบจะหักล้างกันอัตโนมัติ
+
+เราจะ**แยกส่วน**ได้ ต้องรู้ก่อนว่า กราฟ**ข้ามแกน $x$ ตรงไหน** — นั่นคือจุดที่ $f(x) = 0$''',
+          ],
+        }),
+        ContentBlock("enc_img_016", "image", {
+          "path": "assets/int6.png",
+        }),
+        ContentBlock("enc_t_017", "text", {
+          "content": [
+            r'''ในรูป กราฟตัดแกน $x$ ที่ $x = -1$ และ $x = 1$
+
+ทำให้เราแบ่งได้เป็น 3 ช่วง — แต่ละช่วงกราฟอยู่ฝั่งเดียวกันตลอด (เหนือหรือใต้แกน $x$)
+
+พอแบ่งได้แล้ว ก็หาปริพันธ์**แต่ละช่วงแยกกัน** แล้วเอาค่าสัมบูรณ์มารวม''',
+          ],
+        }),
+        ContentBlock("enc_h_018", "header", {
+          "title": r"แนวคิดทั้งหมดคือแค่นี้",
+          "level": 2,
+        }),
+        ContentBlock("enc_t_019", "text", {
+          "content": [
+            r'''🔸 หา**จุดที่กราฟตัดแกน $x$** → แก้ $f(x) = 0$
+
+🔸 ใช้จุดตัดเหล่านั้น**แบ่งช่วง**ออกเป็นส่วนๆ (รวมขอบเขตที่โจทย์กำหนดด้วย)
+
+🔸 หาปริพันธ์แต่ละช่วง แล้วเอา**ค่าสัมบูรณ์**มาบวกกัน''',
+          ],
+        }),
+        ContentBlock("enc_t_020", "text", {
+          "content": [
+            r'''$$\text{พื้นที่ปิดล้อม} = \left|\int_{x_1}^{x_2} f(x)\,dx\right| + \left|\int_{x_2}^{x_3} f(x)\,dx\right| + \cdots$$
+
+โดยที่ $x_1, x_2, x_3, \ldots$ คือจุดตัดแกน $x$ และขอบเขตที่โจทย์ให้''',
+          ],
+        }),
+        ContentBlock("enc_t_021", "text", {
+          "content": [
+            r'''Note = ทำไมต้องรวมขอบเขตที่โจทย์ให้?
+
+เพราะโจทย์อาจถามแค่บางช่วง ไม่ใช่ตั้งแต่จุดตัดถึงจุดตัด
+
+เช่น กราฟตัดแกน $x$ ที่ $x = -2, 0, 2$ แต่โจทย์ถามจาก $x = -1$ ถึง $x = 3$ → ขอบเขตที่ใช้แบ่งคือ $-1, 0, 2, 3$''',
+          ],
+        }),
+        ContentBlock("enc_h_022", "header", {
+          "title": r"ตัวอย่าง — ลองทำด้วยกัน",
+          "level": 2,
+        }),
+        ContentBlock("enc_t_023", "text", {
+          "content": [
+            r'''จงหาพื้นที่ปิดล้อมระหว่างกราฟ $f(x) = x^2 - 4$ กับแกน $x$ จาก $x = -2$ ถึง $x = 2$''',
+          ],
+        }),
+        ContentBlock("enc_ddq_024", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_enclosed_example_1",
+              "questionId": "enc_ddq_024_s1",
               "content": [
-                r'''1. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = (x - 2)(x - 1)(x + 1)(x + 2)$ กับแกน $x$ จาก $x = -1.5$ ถึง $x = 2$''',
+                r'''หาจุดตัดแกน $x$: $x^2 - 4 = 0$ → $x = \pm 2$
+
+สังเกต: จุดตัดตรงกับขอบเขตพอดี! แปลว่าในช่วง $[-2, 2]$ กราฟ**ไม่ได้ข้ามแกน** $x$ → มีแค่ส่วนเดียว
+
+ลองแทน $x = 0$: $f(0) = -4 < 0$ → กราฟอยู่ ''',
+                {"drop": "0"},
+                r''' แกน $x$ ตลอดช่วงนี้''',
+              ],
+              "draggableItems": [r"เหนือ", r"ใต้"],
+              "correctAnswers": {"0": r"ใต้"},
+              "explanation": r'''$f(0) = -4 < 0$ → กราฟอยู่ใต้แกน $x$ ✅''',
+            },
+            {
+              "questionId": "enc_ddq_024_s2",
+              "content": [
+                r'''$\int_{-2}^2 (x^2-4)\,dx = \left[\dfrac{x^3}{3}-4x\right]_{-2}^2$
+
+$= \left(\dfrac{8}{3}-8\right) - \left(-\dfrac{8}{3}+8\right) = -\dfrac{16}{3} - \dfrac{16}{3} = -\dfrac{32}{3}$
+
+ค่าติดลบ เพราะกราฟอยู่ใต้แกน $x$
+
+พื้นที่ปิดล้อม $= \left|-\dfrac{32}{3}\right| = $ ''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [r"$\dfrac{32}{3}$", r"$-\dfrac{32}{3}$", r"$\dfrac{16}{3}$", r"$0$"],
+              "correctAnswers": {"0": r"$\dfrac{32}{3}$"},
+              "explanation": r'''เอาค่าสัมบูรณ์ → $\dfrac{32}{3}$ ตร.หน่วย 💚''',
+            },
+          ],
+        }),
+        ContentBlock("enc_h_025", "header", {
+          "title": r"ตัวอย่าง — กราฟข้ามแกน $x$",
+          "level": 2,
+        }),
+        ContentBlock("enc_t_026", "text", {
+          "content": [
+            r'''จงหาพื้นที่ปิดล้อมระหว่างกราฟ $f(x) = x^3 - 4x$ กับแกน $x$ จาก $x = -2$ ถึง $x = 2$''',
+          ],
+        }),
+        ContentBlock("enc_ddq_027", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "enc_ddq_027_s1",
+              "content": [
+                r'''จุดตัดแกน $x$: $x^3 - 4x = x(x^2-4) = x(x-2)(x+2) = 0$
+
+$x = -2, 0, 2$ — ตรงกับขอบเขตพอดี!
+
+แบ่งเป็น 2 ช่วง: $[-2, 0]$ และ $[0, 2]$
+
+ลองแทน $x = -1$: $f(-1) = -1+4 = 3 > 0$ → ช่วง $[-2,0]$ กราฟอยู่ ''',
+                {"drop": "0"},
+                r''' แกน $x$
+
+ลองแทน $x = 1$: $f(1) = 1-4 = -3 < 0$ → ช่วง $[0,2]$ กราฟอยู่ ''',
+                {"drop": "1"},
+                r''' แกน $x$''',
+              ],
+              "draggableItems": [r"เหนือ", r"ใต้"],
+              "correctAnswers": {"0": r"เหนือ", "1": r"ใต้"},
+              "explanation": r'''แทนค่ากลางช่วงเพื่อเช็คว่ากราฟอยู่ฝั่งไหน ✅''',
+            },
+            {
+              "questionId": "enc_ddq_027_s2",
+              "content": [
+                r'''$\int_{-2}^0 (x^3-4x)\,dx = \left[\dfrac{x^4}{4}-2x^2\right]_{-2}^0 = 0 - (4-8) = 4$
+
+$\int_0^2 (x^3-4x)\,dx = \left[\dfrac{x^4}{4}-2x^2\right]_0^2 = (4-8) - 0 = -4$
+
+พื้นที่ปิดล้อม $= |4| + |-4| = $ ''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [r"$8$", r"$0$", r"$4$", r"$-4$"],
+              "correctAnswers": {"0": r"$8$"},
+              "explanation": r'''$4 + 4 = 8$ ตร.หน่วย — ถ้าหาปริพันธ์ตรงๆ จะได้ $0$ แต่พื้นที่จริงคือ $8$ 💚''',
+            },
+          ],
+        }),
+        ContentBlock("enc_h_028", "header", {
+          "title": r"ฝึกเลย",
+          "level": 2,
+        }),
+        ContentBlock("enc_q_029", "question_choice", {
+          "content": [
+            r'''1. $f(x) = x^2 - 1$ จาก $x = -1$ ถึง $x = 1$
+
+จุดตัดแกน $x$: $x = \pm 1$ (ตรงขอบเขตพอดี) กราฟอยู่ใต้แกน $x$ ตลอด
+
+พื้นที่ปิดล้อมเท่ากับเท่าไร?''',
+          ],
+          "options": [r"$\dfrac{4}{3}$", r"$-\dfrac{4}{3}$", r"$\dfrac{2}{3}$", r"$0$"],
+          "correct": r"$\dfrac{4}{3}$",
+          "explanation": r'''$\int_{-1}^1 (x^2-1)\,dx = -\dfrac{4}{3}$
+
+กราฟอยู่ใต้แกน $x$ ตลอด → ค่าสัมบูรณ์ $= \dfrac{4}{3}$ 💚''',
+        }),
+        ContentBlock("enc_q_030", "question_choice", {
+          "content": [
+            r'''2. $f(x) = x$ จาก $x = -3$ ถึง $x = 2$
+
+จุดตัดแกน $x$ ที่ $x = 0$
+
+พื้นที่ปิดล้อมเท่ากับเท่าไร?''',
+          ],
+          "options": [r"$\dfrac{13}{2}$", r"$-\dfrac{5}{2}$", r"$\dfrac{5}{2}$", r"$\dfrac{9}{2}$"],
+          "correct": r"$\dfrac{13}{2}$",
+          "explanation": r'''$\int_{-3}^0 x\,dx = -\dfrac{9}{2}$ , $\int_0^2 x\,dx = 2$
+
+พื้นที่ปิดล้อม $= \dfrac{9}{2} + 2 = \dfrac{13}{2}$ 💚''',
+        }),
+        ContentBlock("enc_q_031", "question_choice", {
+          "content": [
+            r'''3. $f(x) = x^3 - x$ ตัดแกน $x$ ที่ $x = -1, 0, 1$
+
+ถ้าต้องการพื้นที่ปิดล้อมจาก $x = -1$ ถึง $x = 1$ ต้องแบ่งเป็นกี่ช่วง?''',
+          ],
+          "options": [r"$2$ ช่วง", r"$1$ ช่วง", r"$3$ ช่วง", r"$4$ ช่วง"],
+          "correct": r"$2$ ช่วง",
+          "explanation": r'''จุดตัดในช่วง $[-1,1]$ คือ $x = -1, 0, 1$ → แบ่งเป็น $[-1,0]$ กับ $[0,1]$ = $2$ ช่วง 💚''',
+        }),
+        ContentBlock("enc_q_032", "question_choice", {
+          "content": [
+            r'''4. $f(x) = 2x - x^2$ จาก $x = 0$ ถึง $x = 2$
+
+$f(x) = x(2-x) = 0$ ที่ $x = 0, 2$ → กราฟไม่ข้ามแกน $x$ ในช่วงนี้
+
+ลองแทน $x = 1$: $f(1) = 1 > 0$
+
+พื้นที่ปิดล้อมเท่ากับเท่าไร?''',
+          ],
+          "options": [r"$\dfrac{4}{3}$", r"$-\dfrac{4}{3}$", r"$4$", r"$2$"],
+          "correct": r"$\dfrac{4}{3}$",
+          "explanation": r'''กราฟอยู่เหนือแกน $x$ ตลอด → ใช้ปริพันธ์ตรงๆ ได้เลย
+
+$\int_0^2 (2x-x^2)\,dx = [x^2-\dfrac{x^3}{3}]_0^2 = 4 - \dfrac{8}{3} = \dfrac{4}{3}$ 💚''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 3: ลองทำจริง
+    // =============================================
+    ContentSection(
+      headerL1: r"🎯 ลองทำจริง",
+      blocks: [
+        ContentBlock("enc_h_033", "header", {
+          "title": r"ขอบเขตไม่ตรงจุดตัดพอดี",
+          "level": 2,
+        }),
+        ContentBlock("enc_t_034", "text", {
+          "content": [
+            r'''บ่อยครั้งที่ขอบเขตที่โจทย์ให้**ไม่ตรงกับจุดตัดแกน $x$** เช่น:
+
+กราฟตัดแกน $x$ ที่ $x = 1$ แต่โจทย์ถามจาก $x = 0$ ถึง $x = 3$
+
+ต้องรวมขอบ $0$ กับ $3$ เข้าไปด้วย → จุดแบ่งคือ $0, 1, 3$''',
+          ],
+        }),
+        ContentBlock("enc_ddq_035", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "enc_ddq_035_s1",
+              "content": [
+                r'''จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = (x-2)(x-1)(x+1)(x+2)$ กับแกน $x$ จาก $x = -1.5$ ถึง $x = 2$''',
                 {"image": "assets/int7.png"},
-                r'''☝️ **ขั้นที่ 1:** หาจุดตัดแกน $x$
-        
-        $f(x) =(x - 2)(x - 1)(x + 1)(x + 2) = 0$
-        
-        $x =$ ''',
+                r'''จุดตัดแกน $x$: $x = -2, -1, 1, 2$
+
+ในช่วง $[-1.5, 2]$ จุดที่ใช้แบ่งช่วง (รวมขอบ) คือ ''',
                 {"drop": "0"},
-                r'''ในช่วงที่โจทย์ถาม $[-1.5, 2]$
-        
-        จุดแบ่งช่วงคือ ''',
-                {"drop": "1"},
               ],
               "draggableItems": [
-                r"$1, 2, 3, 4$",
+                r"$-1.5, -1, 1, 2$",
                 r"$-2, -1, 1, 2$",
-                r"$1, 2, 3$",
-                r"$x = -1, 1, 2$",
-                r"$x = -1.5, -1, 1, 2$",
+                r"$-1, 1, 2$",
+                r"$-1.5, 2$",
               ],
-              "correctAnswers": {
-                "0": r"$-2, -1, 1, 2$",
-                "1": r"$x = -1.5, -1, 1, 2$",
-              },
-              "explanation":
-                  r'''จุดตัดแกน $x$ คือ $-2, -1, 1, 2$ แต่ในช่วง $[-1.5, 2]$ จุดแบ่งช่วงรวมขอบคือ $-1.5, -1, 1, 2$ ✅''',
+              "correctAnswers": {"0": r"$-1.5, -1, 1, 2$"},
+              "explanation": r'''รวมขอบ $-1.5$ และ $2$ เข้ากับจุดตัดที่อยู่ในช่วง ($-1$ และ $1$) ✅''',
+            },
+            {
+              "questionId": "enc_ddq_035_s2",
+              "content": [
+                r'''$f(x) = x^4 - 5x^2 + 4$ , $F(x) = \dfrac{x^5}{5} - \dfrac{5x^3}{3} + 4x$
+
+ช่วง $[-1.5, -1]$: $F(-1) - F(-1.5) = -\dfrac{307}{480}$
+
+ช่วง $[-1, 1]$: $F(1) - F(-1) = \dfrac{76}{15}$
+
+ช่วง $[1, 2]$: $F(2) - F(1) = -\dfrac{22}{15}$
+
+พื้นที่ปิดล้อม $= \dfrac{307}{480} + \dfrac{76}{15} + \dfrac{22}{15} = $ ''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [r"$\dfrac{3443}{480}$", r"$\dfrac{307}{480}$", r"$\dfrac{76}{15}$", r"$6$"],
+              "correctAnswers": {"0": r"$\dfrac{3443}{480}$"},
+              "explanation": r'''แปลงเป็นตัวส่วนเดียวกัน: $\dfrac{307}{480} + \dfrac{2432}{480} + \dfrac{704}{480} = \dfrac{3443}{480}$ 💚''',
             },
           ],
         }),
-        ContentBlock("ddq_enclosed_example_2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_enclosed_example_2",
-              "content": [
-                r'''🔧 **ขั้นที่ 2:** หา Integral และแทนค่าแต่ละช่วง
-        
-        หาค่า integral:
-        
-        $f(x) = (x - 2)(x - 1)(x + 1)(x + 2) = x^4 - 5x^2 + 4$
-        
-        $F(x) = \int x^4 - 5x^2 + 4 =$ ''',
-                {"drop": "0"},
-                r'''จากขั้นที่ 1 จะได้จุด $x = -1.5, -1, 1, 2$
-        
-        **ช่วงที่ 1:** $[-1.5, -1]$
-        
-        ต้องการหา $F(-1) - F(-1.5) = -\dfrac{307}{480}$
-        
-        **ช่วงที่ 2:** $[-1, 1]$
-        
-        ต้องการหา $F(1) - F(-1) = \dfrac{38}{15} \cdot 2 =$ ''',
-                {"drop": "1"},
-                r'''**ช่วงที่ 3:** $[1, 2]$
-        
-        ต้องการหา $F(2) - F(1) = \dfrac{16 - 38}{15} =$ ''',
-                {"drop": "2"},
-              ],
-              "draggableItems": [
-                r"$\dfrac{x^5}{5} - \dfrac{5x^3}{3} +4x + c$",
-                r"$\dfrac{x^5}{5} - \dfrac{5x^3}{3} +4x$",
-                r"$\dfrac{x^5}{5} + \dfrac{5x^3}{3} - 4x +c$",
-                r"$\dfrac{76}{15}$",
-                r"$-\dfrac{22}{15}$",
-                r"$1$",
-              ],
-              "correctAnswers": {
-                "0": r"$\dfrac{x^5}{5} - \dfrac{5x^3}{3} +4x + c$",
-                "1": r"$\dfrac{76}{15}$",
-                "2": r"$-\dfrac{22}{15}$",
-              },
-              "explanation":
-                  r'''$\int x^4 - 5x^2 + 4 = \dfrac{x^5}{5} - \dfrac{5x^3}{3} +4x + c$ แล้วคำนวณแต่ละช่วง: ช่วงที่ 2 ได้ $\dfrac{76}{15}$ และช่วงที่ 3 ได้ $-\dfrac{22}{15}$ ✅''',
-            },
-          ],
+        ContentBlock("enc_h_036", "header", {
+          "title": r"ฝึกเลย",
+          "level": 2,
         }),
-        ContentBlock("ddq_enclosed_example_3", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_enclosed_example_3",
-              "content": [
-                r'''🏁 **ขั้นที่ 3:** ค่าสัมบูรณ์และบวกกัน
-        
-        พื้นที่ปิดล้อม $= |\int_{-1.5}^{-1} f(x)\,dx| + |\int_{-1}^{1} f(x)\,dx| + |\int_{1}^{2} f(x)\,dx|$
-        
-        $=$ ''',
-                {"drop": "0"},
-                r''' $+ \dfrac{76}{15} + \dfrac{22}{15}$
-        
-        $= \dfrac{3443}{480}$ ตร.หน่วย''',
-              ],
-              "draggableItems": [
-                r"$\dfrac{307}{480}$",
-                r"$- \dfrac{22}{15}$",
-                r"$\dfrac{76}{15}$",
-                r"$-\dfrac{307}{480}$",
-              ],
-              "correctAnswers": {"0": r"$\dfrac{307}{480}$"},
-              "explanation":
-                  r'''$|-\dfrac{307}{480}| = \dfrac{307}{480}$ ใช้ค่าสัมบูรณ์ทำให้เป็นบวก ✅''',
-            },
+        ContentBlock("enc_q_037", "question_choice", {
+          "content": [
+            r'''1. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^2 - 4$ กับแกน $x$ จาก $x = 0$ ถึง $x = 3$
+
+Note = คำใบ้: จุดตัดแกน $x$ ที่ $x = \pm 2$ → ในช่วง $[0,3]$ ตัดที่ $x = 2$''',
           ],
+          "options": [r"$\dfrac{23}{3}$", r"$\dfrac{7}{3}$", r"$\dfrac{16}{3}$", r"$3$"],
+          "correct": r"$\dfrac{23}{3}$",
+          "explanation": r'''ช่วง $[0,2]$: $f(x) \leq 0$ → $\int_0^2 (x^2-4)\,dx = \dfrac{8}{3}-8 = -\dfrac{16}{3}$
+
+ช่วง $[2,3]$: $f(x) \geq 0$ → $\int_2^3 (x^2-4)\,dx = (9-12)-(\dfrac{8}{3}-8) = \dfrac{7}{3}$
+
+พื้นที่ปิดล้อม $= \dfrac{16}{3} + \dfrac{7}{3} = \dfrac{23}{3}$ 💚''',
+        }),
+        ContentBlock("enc_q_038", "question_choice", {
+          "content": [
+            r'''2. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^3 - 4x$ กับแกน $x$ จาก $x = 0$ ถึง $x = 3$
+
+Note = คำใบ้: $x(x-2)(x+2)=0$ → ในช่วง $[0,3]$ ตัดที่ $x = 0$ และ $x = 2$''',
+          ],
+          "options": [r"$\dfrac{41}{4}$", r"$\dfrac{25}{4}$", r"$4$", r"$\dfrac{9}{4}$"],
+          "correct": r"$\dfrac{41}{4}$",
+          "explanation": r'''ช่วง $[0,2]$: $\int_0^2 (x^3-4x)\,dx = (4-8)-0 = -4$
+
+ช่วง $[2,3]$: $\int_2^3 (x^3-4x)\,dx = (\dfrac{81}{4}-18)-(4-8) = \dfrac{25}{4}$
+
+พื้นที่ปิดล้อม $= 4 + \dfrac{25}{4} = \dfrac{41}{4}$ 💚''',
+        }),
+        ContentBlock("enc_q_039", "question_choice", {
+          "content": [
+            r'''3. $f(x) = \sin x$ จาก $x = 0$ ถึง $x = 2\pi$
+
+$\sin x = 0$ ที่ $x = 0, \pi, 2\pi$
+
+เรารู้ว่า $\int_0^{\pi} \sin x\,dx = 2$ และ $\int_{\pi}^{2\pi} \sin x\,dx = -2$
+
+พื้นที่ปิดล้อมเท่ากับเท่าไร?''',
+          ],
+          "options": [r"$4$", r"$0$", r"$2$", r"$2\pi$"],
+          "correct": r"$4$",
+          "explanation": r'''$|2| + |-2| = 4$ ตร.หน่วย
+
+ถ้าหาปริพันธ์ตรงๆ จะได้ $2 + (-2) = 0$ — แต่พื้นที่จริงคือ $4$ 💚''',
+        }),
+        ContentBlock("enc_q_040", "question_choice", {
+          "content": [
+            r'''4. $f(x) = x^3 - x$ จาก $x = -1$ ถึง $x = 1$
+
+จุดตัดแกน $x$: $x(x-1)(x+1) = 0$ → $x = -1, 0, 1$
+
+พื้นที่ปิดล้อมเท่ากับเท่าไร?''',
+          ],
+          "options": [r"$\dfrac{1}{2}$", r"$0$", r"$\dfrac{1}{4}$", r"$1$"],
+          "correct": r"$\dfrac{1}{2}$",
+          "explanation": r'''$\int_{-1}^0 (x^3-x)\,dx = \left[\dfrac{x^4}{4}-\dfrac{x^2}{2}\right]_{-1}^0 = 0 - (\dfrac{1}{4}-\dfrac{1}{2}) = \dfrac{1}{4}$
+
+$\int_0^1 (x^3-x)\,dx = (\dfrac{1}{4}-\dfrac{1}{2}) - 0 = -\dfrac{1}{4}$
+
+พื้นที่ปิดล้อม $= \dfrac{1}{4} + \dfrac{1}{4} = \dfrac{1}{2}$ 💚''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 4: แบบฝึกหัด
+    // =============================================
     ContentSection(
       headerL1: r"📝 แบบฝึกหัด",
       blocks: [
-        ContentBlock("ddq_enclosed_practice_1", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_enclosed_practice_1",
-              "content": [
-                r'''1. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^3 - 4x$ กับแกน $x$ จาก $x = -2$ ถึง $x = 2$
-        
-        **ขั้นที่ 1:** หาจุดตัด
-        
-        $x^3 - 4x = x(x^2 - 4) = x(x-2)(x+2) = 0$
-        
-        $x = -2, 0, 2$
-        
-        **ขั้นที่ 2:** แบ่งช่วง
-        
-        ช่วง: $[-2, 0]$ และ $[0, 2]$
-        
-        **ขั้นที่ 3:** Integrate
-        
-        $A_1 = \int_{-2}^0 (x^3 - 4x)\,dx = 4$
-        
-        $A_2 = \int_0^2 (x^3 - 4x)\,dx = -4$
-        
-        **พื้นที่ปิดล้อม** $= |4| + |-4| =$ ''',
-                {"drop": "0"},
-                r'''ตร.หน่วย''',
-              ],
-              "draggableItems": [r"$8$", r"$0$", r"$4$", r"$-4$", r"$16$"],
-              "correctAnswers": {"0": r"$8$"},
-              "explanation": r'''$4 + 4 = 8$ ตร.หน่วย ✅''',
-            },
+        ContentBlock("enc_t_041", "text", {
+          "content": [
+            r'''โจทย์ในส่วนนี้ยากขึ้น — บางข้อต้องใช้การเปลี่ยนตัวแปรร่วมด้วย ลองทำดู! 💪''',
           ],
         }),
-        ContentBlock("ddq_enclosed_practice_2", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_enclosed_practice_2",
-              "content": [
-                r'''2. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^2 - 4$ กับแกน $x$ จาก $x = -2$ ถึง $x = 2$
-        
-        **ขั้นที่ 1:** หาจุดตัด
-        
-        $x^2 - 4 = 0 \to x = \pm 2$
-        
-        สังเกต: $f(x) < 0$ บนช่วง $(-2, 2)$ กราฟอยู่**ใต้**แกน $x$ ทั้งหมด!
-        
-        **ขั้นที่ 2:** Integrate
-        
-        $\int_{-2}^2 (x^2 - 4)\,dx = \left[\dfrac{x^3}{3} - 4x\right]_{-2}^2$
-        
-        $= \left(\dfrac{8}{3} - 8\right) - \left(-\dfrac{8}{3} + 8\right) =$ ''',
-                {"drop": "0"},
-                r'''**ขั้นที่ 3:** ค่าสัมบูรณ์
-        
-        พื้นที่ปิดล้อม $= |$ ''',
-                {"drop": "0"},
-                r'''$| =$ ''',
-                {"drop": "1"},
-                r'''ตร.หน่วย''',
-              ],
-              "draggableItems": [
-                r"$-\dfrac{32}{3}$",
-                r"$\dfrac{32}{3}$",
-                r"$\dfrac{16}{3}$",
-                r"$32$",
-                r"$-16$",
-              ],
-              "correctAnswers": {
-                "0": r"$-\dfrac{32}{3}$",
-                "1": r"$\dfrac{32}{3}$",
-              },
-              "explanation":
-                  r'''$\left|-\dfrac{32}{3}\right| = \dfrac{32}{3} \approx 10.67$ ตร.หน่วย ✅''',
-            },
+        ContentBlock("enc_q_043", "question_choice", {
+          "content": [
+            r'''1. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^2 - 9$ กับแกน $x$ จาก $x = 0$ ถึง $x = 3$''',
           ],
+          "options": [r"$18$", r"$9$", r"$36$", r"$27$"],
+          "correct": r"$18$",
+          "explanation": r'''กราฟอยู่ใต้แกน $x$ ตลอดช่วง $[0,3]$
+
+$\int_0^3 (x^2-9)\,dx = [x^3/3-9x]_0^3 = (9-27)-0 = -18$
+
+พื้นที่ปิดล้อม $= |-18| = 18$ 💚''',
         }),
-        ContentBlock("q_enclosed_practice_3", "question_fill_in", {
-          "content":
-              r'''3. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^3 - x$ กับแกน $x$ จาก $x = -1$ ถึง $x = 1$ 
-        
-                        {{BOX}} ตร.หน่วย''',
-          "correctAnswer": r"$\dfrac{1}{2}$",
-          "explanation":
-              r'''จุดตัด: $x^3 - x = x(x^2 - 1) = 0$ → $x = -1, 0, 1$ ช่วง: $[-1, 0]$ และ $[0, 1]$ คำนวณได้ $A_1 = \dfrac{1}{4}$, $A_2 = -\dfrac{1}{4}$ พื้นที่ปิดล้อม $= \dfrac{1}{4} + \dfrac{1}{4} = \dfrac{1}{2}$ ✅''',
-          "boxCount": 1,
-        }),
-        ContentBlock("ddq_enclosed_practice_4", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_enclosed_practice_4",
-              "content": [
-                r'''4. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = 2x - x^2$ กับแกน $x$
-        
-        **ขั้นที่ 1:** หาจุดตัด
-        
-        $2x - x^2 = x(2 - x) = 0$
-        
-        $x =$ ''',
-                {"drop": "0"},
-                r'''หรือ $x =$ ''',
-                {"drop": "1"},
-                r'''**ขั้นที่ 2:** Integrate
-        
-        $\int_0^2 (2x - x^2)\,dx = \left[x^2 - \dfrac{x^3}{3}\right]_0^2$
-        
-        $= 4 - \dfrac{8}{3} =$ ''',
-                {"drop": "2"},
-                r'''สังเกต: ผลลัพธ์เป็น**บวก** → กราฟอยู่เหนือแกน $x$
-        
-        **พื้นที่ปิดล้อม** $=$ ''',
-                {"drop": "2"},
-                r'''ตร.หน่วย''',
-              ],
-              "draggableItems": [
-                r"$0$",
-                r"$2$",
-                r"$\dfrac{4}{3}$",
-                r"$4$",
-                r"$\dfrac{8}{3}$",
-                r"$1$",
-              ],
-              "correctAnswers": {
-                "0": r"$0$",
-                "1": r"$2$",
-                "2": r"$\dfrac{4}{3}$",
-              },
-              "explanation":
-                  r'''กราฟอยู่เหนือแกน $x$ ทั้งหมด พื้นที่ $= \dfrac{4}{3}$ ✅''',
-            },
+        ContentBlock("enc_q_044", "question_choice", {
+          "content": [
+            r'''2. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^3$ กับแกน $x$ จาก $x = -1$ ถึง $x = 2$
+
+Note = คำใบ้: $x^3 = 0$ ที่ $x = 0$''',
           ],
+          "options": [r"$\dfrac{17}{4}$", r"$\dfrac{15}{4}$", r"$4$", r"$\dfrac{1}{4}$"],
+          "correct": r"$\dfrac{17}{4}$",
+          "explanation": r'''ช่วง $[-1,0]$: $\int_{-1}^0 x^3\,dx = 0 - \dfrac{1}{4} = -\dfrac{1}{4}$
+
+ช่วง $[0,2]$: $\int_0^2 x^3\,dx = 4$
+
+พื้นที่ปิดล้อม $= \dfrac{1}{4} + 4 = \dfrac{17}{4}$ 💚''',
+        }),
+        ContentBlock("enc_q_045", "question_choice", {
+          "content": [
+            r'''3. จงหาพื้นที่ใต้กราฟ $f(x) = 2x(x^2+1)^3$ จาก $x = 0$ ถึง $x = 1$
+
+Note = คำใบ้: ใช้การเปลี่ยนตัวแปร $u = x^2+1$ — กราฟอยู่เหนือแกน $x$ ตลอดในช่วงนี้''',
+          ],
+          "options": [r"$\dfrac{15}{4}$", r"$\dfrac{1}{4}$", r"$4$", r"$\dfrac{17}{4}$"],
+          "correct": r"$\dfrac{15}{4}$",
+          "explanation": r'''$u = x^2+1$ , $du = 2x\,dx$ , ขอบเขต: $u(0)=1, u(1)=2$
+
+$\int_1^2 u^3\,du = [\dfrac{u^4}{4}]_1^2 = \dfrac{16-1}{4} = \dfrac{15}{4}$
+
+กราฟเหนือแกน $x$ ตลอด → พื้นที่ปิดล้อม $= \dfrac{15}{4}$ 💚''',
+        }),
+        ContentBlock("enc_q_046", "question_choice", {
+          "content": [
+            r'''4. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x(x^2-1)^2$ กับแกน $x$ จาก $x = -1$ ถึง $x = 1$
+
+Note = คำใบ้: $f(x) = 0$ เมื่อ $x = 0, \pm 1$ ลองแทนค่าเช็คแต่ละช่วง แล้วใช้ $u = x^2-1$''',
+          ],
+          "options": [r"$\dfrac{1}{3}$", r"$\dfrac{2}{3}$", r"$0$", r"$\dfrac{1}{6}$"],
+          "correct": r"$\dfrac{1}{3}$",
+          "explanation": r'''ช่วง $[-1,0]$: $u = x^2-1$ , $du = 2x\,dx$ → $x\,dx = \dfrac{1}{2}\,du$
+
+$x=-1 \to u=0$ , $x=0 \to u=-1$
+
+$\dfrac{1}{2}\int_0^{-1} u^2\,du = \dfrac{1}{2}[\dfrac{u^3}{3}]_0^{-1} = \dfrac{1}{2}(-\dfrac{1}{3}) = -\dfrac{1}{6}$
+
+ช่วง $[0,1]$: $x=0 \to u=-1$ , $x=1 \to u=0$
+
+$\dfrac{1}{2}\int_{-1}^0 u^2\,du = \dfrac{1}{2}[\dfrac{u^3}{3}]_{-1}^0 = \dfrac{1}{2}(0-(-\dfrac{1}{3})) = \dfrac{1}{6}$
+
+พื้นที่ปิดล้อม $= \dfrac{1}{6} + \dfrac{1}{6} = \dfrac{1}{3}$ 💚''',
+        }),
+        ContentBlock("enc_q_047", "question_choice", {
+          "content": [
+            r'''5. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^3 - 4x$ กับแกน $x$ จาก $x = -2$ ถึง $x = 3$
+
+Note = คำใบ้: จุดตัดในช่วง $[-2,3]$ คือ $x = -2, 0, 2$''',
+          ],
+          "options": [r"$\dfrac{57}{4}$", r"$\dfrac{41}{4}$", r"$8$", r"$\dfrac{25}{4}$"],
+          "correct": r"$\dfrac{57}{4}$",
+          "explanation": r'''แบ่ง 3 ช่วง: $[-2,0], [0,2], [2,3]$
+
+$\int_{-2}^0 = 4$ , $\int_0^2 = -4$ , $\int_2^3 = \dfrac{25}{4}$
+
+พื้นที่ปิดล้อม $= 4 + 4 + \dfrac{25}{4} = \dfrac{57}{4}$ 💚''',
+        }),
+        ContentBlock("enc_fi_048", "question_fill_in", {
+          "content": [
+            r'''6. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = 3x^2 - 3$ กับแกน $x$ จาก $x = -2$ ถึง $x = 2$
+
+Note = คำใบ้: $3(x^2-1) = 3(x-1)(x+1) = 0$ → จุดตัดที่ $x = \pm 1$
+
+พื้นที่ปิดล้อม $= $ ''',
+            {"box": "0"},
+          ],
+          "correct": "12",
+          "explanation": r'''แบ่ง 3 ช่วง: $[-2,-1], [-1,1], [1,2]$
+
+$\int_{-2}^{-1} (3x^2-3)\,dx = [x^3-3x]_{-2}^{-1} = (-1+3)-(-8+6) = 2+2 = 4$
+
+$\int_{-1}^1 (3x^2-3)\,dx = (1-3)-(-1+3) = -2-2 = -4$
+
+$\int_1^2 (3x^2-3)\,dx = (8-6)-(1-3) = 2+2 = 4$
+
+พื้นที่ปิดล้อม $= 4 + 4 + 4 = 12$ 💚''',
+        }),
+        ContentBlock("enc_fi_049", "question_fill_in", {
+          "content": [
+            r'''7. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = 4x(x^2-4)^2$ กับแกน $x$ จาก $x = 0$ ถึง $x = 2$
+
+Note = คำใบ้: $f(x) \geq 0$ ตลอดช่วงนี้ (ทำไม?) ใช้ $u = x^2-4$
+
+พื้นที่ปิดล้อม $= $ ''',
+            {"box": "0"},
+          ],
+          "correct": "128/3",
+          "explanation": r'''$f(x) = 4x(x^2-4)^2$ → $(x^2-4)^2 \geq 0$ เสมอ และ $x \geq 0$ ในช่วง $[0,2]$ → $f(x) \geq 0$ ตลอด
+
+$u = x^2-4$ , $du = 2x\,dx$ → $4x\,dx = 2\,du$
+
+ขอบเขต: $x=0 \to u=-4$ , $x=2 \to u=0$
+
+$2\int_{-4}^0 u^2\,du = 2\left[\dfrac{u^3}{3}\right]_{-4}^0 = 2\left(0+\dfrac{64}{3}\right) = \dfrac{128}{3}$ 💚''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 5: สรุป
+    // =============================================
     ContentSection(
-      headerL1: r"✨ สรุป",
+      headerL1: r"สรุป",
       blocks: [
-        ContentBlock("area_enc_t_574", "text", {
+        ContentBlock("enc_t_050", "text", {
           "content": [
-            r'''**🎯 การหาพื้นที่ปิดล้อม**
-        
-        **1. ความแตกต่าง:**
-        
-        | | พื้นที่ใต้กราฟ | พื้นที่ปิดล้อม |
-        |---|---|---|
-        | สูตร | $\int_a^b f(x)\,dx$ | $\sum \left|\int f(x)\,dx\right|$ |
-        | ผลลัพธ์ | มี $+/-$ | ไม่ติดลบ |
-        
-        **2. วิธีการ**
-           - หาจุดตัด $f(x) = 0$ → แบ่งช่วง 🔍
-           - Integrate แต่ละช่วง 📐
-           - บวกค่าสัมบูรณ์ทุกช่วง ✅
-        
-        **3. สูตร:**
-        
-        $\text{พื้นที่ปิดล้อม} = \left|\int_{x_1}^{x_2} f(x)\,dx\right| + \left|\int_{x_2}^{x_3} f(x)\,dx\right| + \cdots$''',
+            r'''🎯 **พื้นที่ปิดล้อม = พื้นที่รวมจริง โดยไม่ปล่อยให้ส่วนบวก-ลบหักล้างกัน**
+
+ต่างจากค่าปริพันธ์ที่ส่วนใต้แกน $x$ จะหักลบจากส่วนเหนือ''',
+          ],
+        }),
+        ContentBlock("enc_t_051", "text", {
+          "content": [
+            r'''**แนวคิดหลัก:**
+
+🔸 หาจุดที่กราฟตัดแกน $x$ → แก้ $f(x) = 0$
+
+🔸 ใช้จุดตัดเหล่านั้น (รวมขอบเขตที่โจทย์ให้) **แบ่งช่วง** — แต่ละช่วงกราฟอยู่ฝั่งเดียวตลอด
+
+🔸 หาปริพันธ์แต่ละช่วง แล้วเอา**ค่าสัมบูรณ์**มาบวกกัน''',
+          ],
+        }),
+        ContentBlock("enc_t_052", "text", {
+          "content": [
+            r'''$$\text{พื้นที่ปิดล้อม} = \left|\int_{x_1}^{x_2} f(x)\,dx\right| + \left|\int_{x_2}^{x_3} f(x)\,dx\right| + \cdots$$''',
+          ],
+        }),
+        ContentBlock("enc_t_053", "text", {
+          "content": [
+            r'''Note = ข้อสังเกตสำคัญ
+
+🔸 ถ้ากราฟอยู่เหนือแกน $x$ ตลอด → ปริพันธ์ = พื้นที่ปิดล้อมเลย ไม่ต้องแบ่งช่วง
+
+🔸 ถ้ากราฟอยู่ใต้แกน $x$ ตลอด → ค่าปริพันธ์ติดลบ แค่ติดค่าสัมบูรณ์ก็จบ
+
+🔸 ต้องแบ่งช่วง**เฉพาะเมื่อกราฟข้ามแกน $x$** เท่านั้น!''',
           ],
         }),
       ],
@@ -13529,382 +14475,743 @@ final calcEnclosedAreaLesson = ContentLesson(
 final calcAreaBetweenLesson = ContentLesson(
   title: "การหาพื้นที่ระหว่าง 2 กราฟ",
   sections: [
+    // =============================================
+    // SECTION 1: จากพื้นที่ใต้กราฟ 1 เส้น → 2 เส้น
+    // =============================================
     ContentSection(
-      headerL1: r"🏡 พื้นที่ปิดล้อม 2 กราฟ",
+      headerL1: r"🤔 จากกราฟ 1 เส้น → 2 เส้น",
       blocks: [
-        ContentBlock("area_bet_t_575", "text", {
-          "content": [r'''บทนี้จะเรียนการหาพื้นที่ปิดล้อมระหว่าง 2 กราฟ 💎'''],
+        ContentBlock("ab_h_001", "header", {
+          "title": r"ถ้ามีกราฟ 2 เส้นซ้อนกัน?",
+          "level": 2,
         }),
-      ],
-    ),
-    ContentSection(
-      headerL1: r"🤔 คำถาม",
-      blocks: [
-        ContentBlock("ddq_between_concept_1", "drag_and_drop", {
+        ContentBlock("ab_t_002", "text", {
+          "content": [
+            r'''จากบทที่แล้ว เราหา**พื้นที่ระหว่างกราฟกับแกน $x$** ได้แล้ว
+
+แต่ถ้ามีกราฟ 2 เส้น แล้วเราอยากรู้**พื้นที่ที่ถูกขังอยู่ระหว่างมัน**ล่ะ? 🤔''',
+          ],
+        }),
+        ContentBlock("ab_img_003", "image", {
+          "path": "assets/area_between_intro.png",
+        }),
+        ContentBlock("ab_t_004", "text", {
+          "content": [
+            r'''ลองนึกภาพแบบนี้ — ถ้ามีกราฟ $f(x)$ อยู่ข้างบน และ $g(x)$ อยู่ข้างล่าง
+
+พื้นที่แรเงาระหว่างมัน = **พื้นที่ใต้กราฟบน ลบ พื้นที่ใต้กราฟล่าง**''',
+          ],
+        }),
+        ContentBlock("ab_h_005", "header", {
+          "title": r"ลองดูตัวอย่างง่ายๆ",
+          "level": 2,
+        }),
+        ContentBlock("ab_t_006", "text", {
+          "content": [
+            r'''$f(x) = 4$ (เส้นตรง) และ $g(x) = x^2$ (พาราโบลา) จาก $x = 0$ ถึง $x = 2$
+
+ในช่วงนี้ $f(x)$ อยู่เหนือ $g(x)$ ตลอด''',
+          ],
+        }),
+        ContentBlock("ab_img_007", "image", {
+          "path": "assets/area_between_simple.png",
+        }),
+        ContentBlock("ab_ddq_008", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_between_concept_1",
+              "questionId": "ab_ddq_008_s1",
               "content": [
-                r'''คิดว่าพื้นที่ที่แรเงาในรูปคิดยังไง 🧠''',
-                {"image": "assets/desmos-graph.png"},
-                r'''ถ้าให้กราฟบนคือ $f(x)$ และ $g(x)$ 📈
-        
-        **🔍 1. ลองเปรียบเทียบ** $2$ รูปนี้ และคิดว่ากราฟด้านบนมีพื้นที่เท่าไหร่''',
-                {"image": "assets/int8.png"},
-                {"image": "assets/int9.png"},
-                r'''รูปแรกสีส้มมีพื้นที่คือ ''',
+                r'''พื้นที่ใต้กราฟ $f(x) = 4$ จาก $x=0$ ถึง $x=2$ คือ ''',
                 {"drop": "0"},
-                r'''รูปที่ $2$ สีน้ำเงินมีพื้นที่คือ ''',
+                r'''พื้นที่ใต้กราฟ $g(x) = x^2$ จาก $x=0$ ถึง $x=2$ คือ ''',
                 {"drop": "1"},
-                r'''ดังนั้นรูปด้านบนที่ทับกันมีพื้นที่คือ ''',
+                r'''ดังนั้น พื้นที่ระหว่าง 2 กราฟ $=$ ''',
                 {"drop": "2"},
               ],
               "draggableItems": [
-                r"$\int_0^2 f(x)\,dx$",
-                r"$\int_{-1}^1 f(x)\,dx$",
-                r"$\int_0^2 g(x)\,dx$",
-                r"$\int_{-1}^1 g(x)\,dx$",
-                r"$\int_0^2 f(x) + g(x)\,dx$",
-                r"$\int_0^2 f(x) - g(x)\,dx$",
-                r"$\int_{-1}^1 f(x) + g(x)\,dx$",
+                r"$\int_0^2 4\,dx = 8$",
+                r"$\int_0^2 x^2\,dx = \dfrac{8}{3}$",
+                r"$8 - \dfrac{8}{3} = \dfrac{16}{3}$",
+                r"$8 + \dfrac{8}{3}$",
               ],
               "correctAnswers": {
-                "0": r"$\int_0^2 f(x)\,dx$",
-                "1": r"$\int_0^2 g(x)\,dx$",
-                "2": r"$\int_0^2 f(x) - g(x)\,dx$",
+                "0": r"$\int_0^2 4\,dx = 8$",
+                "1": r"$\int_0^2 x^2\,dx = \dfrac{8}{3}$",
+                "2": r"$8 - \dfrac{8}{3} = \dfrac{16}{3}$",
               },
-              "explanation":
-                  r'''ลองจินตนาการว่าเอารูปที่ 2 สีฟ้ามาทับรูปแรก จะได้ 🎨
-        ซึ่งจะเห็นว่าถ้าลบสีฟ้าออกจะได้แบบในรูปที่ต้องการหาเลย! 💡
-        
-        ดังนั้นพื้นที่ที่ต้องการ $=$ พื้นที่ใต้กราฟสีแดง $-$ พื้นที่ใต้กราฟสีฟ้า ✨
-        
-        ดังนั้นจะได้ $\int_0^2 f(x) - g(x)\,dx$ 🎯''',
+              "explanation": r'''เอาพื้นที่ใต้กราฟบน $-$ พื้นที่ใต้กราฟล่าง → $\dfrac{16}{3}$ 💚''',
             },
           ],
+        }),
+        ContentBlock("ab_h_009", "header", {
+          "title": r"รวมเป็นปริพันธ์เดียว",
+          "level": 2,
+        }),
+        ContentBlock("ab_t_010", "text", {
+          "content": [
+            r'''แทนที่จะหาแยกแล้วลบ เราเขียนรวมได้เลย:
+
+$$\int_0^2 4\,dx - \int_0^2 x^2\,dx = \int_0^2 (4 - x^2)\,dx$$
+
+**กราฟบน ลบ กราฟล่าง** แล้วอินทิเกรตทีเดียว — สะดวกกว่า!''',
+          ],
+        }),
+        ContentBlock("ab_t_011", "text", {
+          "content": [
+            r'''Note = หลักคิดง่ายๆ
+
+พื้นที่ระหว่าง 2 กราฟ $= \int_a^b [\text{กราฟบน} - \text{กราฟล่าง}]\,dx$
+
+คิดเหมือน "ความสูง" ของแถบบางๆ ในแต่ละจุด $x$ คือระยะห่างของ 2 กราฟ''',
+          ],
+        }),
+        ContentBlock("ab_q_012", "question_choice", {
+          "content": [
+            r'''1. พื้นที่ระหว่าง $f(x) = 6$ กับ $g(x) = 2x$ จาก $x = 0$ ถึง $x = 2$ เท่ากับเท่าไร?
+
+Note = คำใบ้: ลองแทน $x = 1$ ดูว่าฟังก์ชันไหนอยู่เหนือกว่า''',
+          ],
+          "options": [
+            r"$8$",
+            r"$4$",
+            r"$10$",
+            r"$12$",
+          ],
+          "correct": r"$8$",
+          "explanation": r'''$f(1)=6 > g(1)=2$ → $f(x)$ อยู่เหนือ
+
+$\int_0^2 (6 - 2x)\,dx = [6x - x^2]_0^2 = 12 - 4 = 8$ 💚''',
+        }),
+        ContentBlock("ab_q_013", "question_choice", {
+          "content": [
+            r'''2. พื้นที่ระหว่าง $f(x) = x^2 + 1$ กับ $g(x) = 1$ จาก $x = -1$ ถึง $x = 1$ เท่ากับเท่าไร?''',
+          ],
+          "options": [
+            r"$\dfrac{2}{3}$",
+            r"$\dfrac{4}{3}$",
+            r"$2$",
+            r"$0$",
+          ],
+          "correct": r"$\dfrac{2}{3}$",
+          "explanation": r'''$f(x) - g(x) = x^2 + 1 - 1 = x^2$
+
+$\int_{-1}^1 x^2\,dx = \left[\dfrac{x^3}{3}\right]_{-1}^1 = \dfrac{1}{3} + \dfrac{1}{3} = \dfrac{2}{3}$ 💚''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 2: แนวคิดหลัก — ฟังก์ชันไหนอยู่บน?
+    // =============================================
     ContentSection(
-      headerL1: r"สูตรพื้นที่ปิดล้อม 2 กราฟ",
+      headerL1: r"💡 แนวคิดหลัก — ใครอยู่บน?",
       blocks: [
-        ContentBlock("area_bet_t_577", "text", {
-          "content": [
-            r'''ให้ $x_0, x_1, ...., x_n$ คือจุดตัดของฟังก์ชัน $f(x), g(x)$ ทั้งหมด
-        
-        จะได้พื้นที่ปิดล้อมรวมคือ 
-        
-        $$\sum_{i=0}^{n-1} \int_{x_i}^{x_{i+1}}|\,f(x)-g(x)\,| \,dx$$
-        
-        Note = เช่น
-        
-        กราฟ $f(x)$ และ $g(x)$ ตัดกันที่จุด $-2, 0, 2$
-        
-        จะได้พื้นที่ปิดล้อมคือ
-        
-        $|\int_{-2}^{0} f(x) - g(x)\,dx| + |\int_{0}^{2} f(x) - g(x)\,dx|$''',
-          ],
-        }),
-        ContentBlock("area_bet_h_578", "header", {
-          "title": r"📜 พิสูจน์ง่ายๆ",
+        ContentBlock("ab_h_014", "header", {
+          "title": r"ปัญหาคือ — เราไม่รู้ว่าใครอยู่บน!",
           "level": 2,
         }),
-        ContentBlock("ddq_between_concept_2", "drag_and_drop", {
+        ContentBlock("ab_t_015", "text", {
+          "content": [
+            r'''ถ้าโจทย์มีรูปให้ เราเห็นเลยว่ากราฟไหนอยู่เหนือ
+
+แต่ส่วนใหญ่โจทย์จะให้แค่สมการ ไม่มีรูป — เราต้อง**หาเอง**ว่าใครอยู่บน!''',
+          ],
+        }),
+        ContentBlock("ab_t_016", "text", {
+          "content": [
+            r'''แนวคิดเหมือนบทพื้นที่ปิดล้อมเลย — เราต้องรู้ว่า**สถานการณ์เปลี่ยนตรงไหน**
+
+ตอนนั้น: สถานการณ์เปลี่ยน = กราฟข้ามแกน $x$ → แก้ $f(x) = 0$
+
+ตอนนี้: สถานการณ์เปลี่ยน = **2 กราฟสลับกัน** → แก้ $f(x) = g(x)$''',
+          ],
+        }),
+        ContentBlock("ab_t_017", "text", {
+          "content": [
+            r'''Note = แนวคิดเดียวกัน ใช้ซ้ำได้!
+
+บทก่อน: หาจุดตัดแกน $x$ → แบ่งช่วง → ค่าสัมบูรณ์แต่ละช่วง
+
+บทนี้: หาจุดตัด 2 กราฟ → แบ่งช่วง → ค่าสัมบูรณ์แต่ละช่วง''',
+          ],
+        }),
+        ContentBlock("ab_h_018", "header", {
+          "title": r"วิธีเช็คว่าใครอยู่บน",
+          "level": 2,
+        }),
+        ContentBlock("ab_t_019", "text", {
+          "content": [
+            r'''พอแบ่งช่วงได้แล้ว ในแต่ละช่วง**กราฟไม่สลับกัน** (เพราะถ้าสลับจะต้องตัดกัน ซึ่งเราแบ่งไว้แล้ว)
+
+ดังนั้นแค่**แทนค่า $x$ กลางช่วง**สักจุด แล้วดูว่า $f(x) > g(x)$ หรือ $f(x) < g(x)$ ก็รู้แล้ว!''',
+          ],
+        }),
+        ContentBlock("ab_t_020", "text", {
+          "content": [
+            r'''หรือจะข้ามขั้นตอนเช็คไปเลยก็ได้ — ใช้**ค่าสัมบูรณ์**ครอบ:
+
+$$\text{พื้นที่} = \left|\int_a^b [f(x) - g(x)]\,dx\right|$$
+
+ถ้าลบผิดฝั่ง ก็แค่ติดลบ → ค่าสัมบูรณ์ช่วยให้ได้บวกเสมอ''',
+          ],
+        }),
+        ContentBlock("ab_h_021", "header", {
+          "title": r"สูตรรวม",
+          "level": 2,
+        }),
+        ContentBlock("ab_t_022", "text", {
+          "content": [
+            r'''ถ้า 2 กราฟตัดกันที่ $x_1, x_2, \ldots, x_n$ พื้นที่ปิดล้อมทั้งหมดคือ:
+
+$$\left|\int_{x_1}^{x_2} [f(x)-g(x)]\,dx\right| + \left|\int_{x_2}^{x_3} [f(x)-g(x)]\,dx\right| + \cdots$$
+
+แยกช่วงตรงจุดตัด แล้วค่าสัมบูรณ์แต่ละช่วง — แค่นั้นเลย!''',
+          ],
+        }),
+        ContentBlock("ab_t_023", "text", {
+          "content": [
+            r'''Note = ถ้าโจทย์กำหนดช่วง $[a, b]$ ด้วย
+
+ต้องรวมขอบเขต $a$ และ $b$ เข้าไปในจุดแบ่งด้วย
+
+เช่น จุดตัดคือ $x = 1, 3$ แต่โจทย์ถามจาก $x = 0$ ถึง $x = 4$ → จุดแบ่งคือ $0, 1, 3, 4$''',
+          ],
+        }),
+        ContentBlock("ab_ddq_024", "drag_and_drop", {
           "steps": [
             {
-              "questionId": "ddq_between_concept_2",
+              "questionId": "ab_ddq_024_s1",
               "content": [
-                r'''1. ให้กราฟสีเหลืองคือ $f(x)$ และ กราฟสีเทาคือ $g(x)$ หาพื้นที่ปิดล้อมระหว่าง 2 กราฟ''',
-                {"image": "assets/int10.png"},
-                r'''**🔍 ขั้นที่ 1: แยก 2 กราฟ**''',
-                {"image": "assets/int12.png"},
-                {"image": "assets/int13.png"},
-                r'''ให้ $a_1 - a_4$ และ $b_1 - b_4$ เป็นพื้นที่ใต้กราฟ(เป็น + หรือ - ก็ได้)
-        
-        รูปแรกสีเหลืองมีพื้นที่ใต้กราฟคือ ''',
+                r'''กราฟ $f(x)$ และ $g(x)$ ตัดกันที่ $x = -1$ และ $x = 2$
+
+ในช่วง $[-1, 2]$ ถ้าแทน $x = 0$ ได้ $f(0) = 3$ และ $g(0) = 1$
+
+แปลว่าในช่วงนี้ ''',
                 {"drop": "0"},
-                r''' $= a_1 + a_2 + a_3 + a_4$
-        
-        รูปที่ $2$ สีน้ำเทามีพื้นที่ใต้กราฟ
-        
-        คือ ''',
+                r''' อยู่เหนือกว่า
+
+ดังนั้นพื้นที่ $= \int_{-1}^2$ ''',
                 {"drop": "1"},
-                r''' $= b_1 + b_2 + b_3 + b_4$
-        
-        พื้นที่ปิดล้อมของ 2 กราฟ คือ ''',
+                r''' $dx$''',
+              ],
+              "draggableItems": [
+                r"$f(x)$",
+                r"$g(x)$",
+                r"$[f(x) - g(x)]$",
+                r"$[g(x) - f(x)]$",
+              ],
+              "correctAnswers": {
+                "0": r"$f(x)$",
+                "1": r"$[f(x) - g(x)]$",
+              },
+              "explanation": r'''$f(0) > g(0)$ → $f(x)$ อยู่เหนือ → ใช้ $f(x) - g(x)$ (บน $-$ ล่าง) 💚''',
+            },
+          ],
+        }),
+        ContentBlock("ab_q_025", "question_choice", {
+          "content": [
+            r'''1. $f(x) = x^2$ และ $g(x) = 2x$ ตัดกันที่ $x = 0$ และ $x = 2$
+
+ในช่วง $(0, 2)$ ฟังก์ชันไหนอยู่เหนือกว่า?''',
+          ],
+          "options": [
+            r"$g(x) = 2x$ อยู่เหนือกว่า",
+            r"$f(x) = x^2$ อยู่เหนือกว่า",
+            r"เท่ากันตลอด",
+            r"สลับกัน",
+          ],
+          "correct": r"$g(x) = 2x$ อยู่เหนือกว่า",
+          "explanation": r'''แทน $x = 1$: $f(1) = 1$ , $g(1) = 2$ → $g(x) > f(x)$ ในช่วง $(0, 2)$ 💚''',
+        }),
+        ContentBlock("ab_q_026", "question_choice", {
+          "content": [
+            r'''2. $f(x) = x + 2$ และ $g(x) = x^2$ ตัดกันที่ $x = -1$ และ $x = 2$
+
+พื้นที่ปิดล้อมระหว่าง 2 กราฟเท่ากับเท่าไร?
+
+Note = คำใบ้: แทน $x = 0$ เช็คว่าใครอยู่บน แล้วหาปริพันธ์ (บน $-$ ล่าง)''',
+          ],
+          "options": [
+            r"$\dfrac{9}{2}$",
+            r"$\dfrac{7}{2}$",
+            r"$3$",
+            r"$\dfrac{11}{2}$",
+          ],
+          "correct": r"$\dfrac{9}{2}$",
+          "explanation": r'''$f(0) = 2 > g(0) = 0$ → $f(x)$ อยู่เหนือ
+
+$\int_{-1}^2 (x+2-x^2)\,dx = \left[\dfrac{x^2}{2}+2x-\dfrac{x^3}{3}\right]_{-1}^2$
+
+$= (2+4-\dfrac{8}{3}) - (\dfrac{1}{2}-2+\dfrac{1}{3}) = \dfrac{10}{3} - (-\dfrac{7}{6}) = \dfrac{9}{2}$ 💚''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 3: ฝึกแบบกราฟไม่สลับกัน
+    // =============================================
+    ContentSection(
+      headerL1: r"🎯 ฝึก — กราฟไม่สลับกัน",
+      blocks: [
+        ContentBlock("ab_t_027", "text", {
+          "content": [
+            r'''ในส่วนนี้ 2 กราฟจะไม่สลับกัน — ฟังก์ชันตัวเดียวอยู่เหนือตลอดช่วง
+
+ดังนั้น หาจุดตัด → เช็คว่าใครบน → หาปริพันธ์ทีเดียวจบ!''',
+          ],
+        }),
+        ContentBlock("ab_ddq_028", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "ab_ddq_028_s1",
+              "content": [
+                r'''จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = 6 - x^2$ กับ $g(x) = x$
+
+หาจุดตัด: $6 - x^2 = x$ → $x^2 + x - 6 = 0$ → $(x+3)(x-2) = 0$
+
+จุดตัด: $x = $ ''',
+                {"drop": "0"},
+                r''' และ $x = $ ''',
+                {"drop": "1"},
+                r'''แทน $x = 0$: $f(0) = 6$ , $g(0) = 0$ → ''',
                 {"drop": "2"},
+                r''' อยู่เหนือ''',
               ],
               "draggableItems": [
-                r"$|\int_{-1.5}^0 f(x)\,dx| + |\int_{0}^{1.5} f(x)\,dx|$",
-                r"$\int_{-1.5}^{1.5} f(x)\,dx$",
-                r"$|\int_{-1.5}^0 g(x)\,dx| + |\int_{0}^{1.5} g(x)\,dx|$",
-                r"$\int_{-1.5}^{1.5} g(x)\,dx$",
-                r"$a_2 + b_2 + a_3 + b_3$",
-                r"$a_2 - b_2 + a_3 - b_3$",
-                r"$a_2 - b_2 + b_3 - a_3$",
-              ],
-              "correctAnswers": {
-                "0": r"$\int_{-1.5}^{1.5} f(x)\,dx$",
-                "1": r"$\int_{-1.5}^{1.5} g(x)\,dx$",
-                "2": r"$a_2 - b_2 + b_3 - a_3$",
-              },
-              "explanation":
-                  r'''ลองจินตนาการว่าเอารูปที่ 2 สีฟ้ามาทับรูปแรก จะได้ 🎨
-        ซึ่งจะเห็นว่าถ้าลบสีฟ้าออกจะได้แบบในรูปที่ต้องการหาเลย! 💡
-        
-        ดังนั้นพื้นที่ที่ต้องการ $=$ พื้นที่ใต้กราฟสีแดง $-$ พื้นที่ใต้กราฟสีฟ้า ✨
-        
-        ดังนั้นจะได้ $\int_0^2 f(x) - g(x)\,dx$ 🎯''',
-            },
-          ],
-        }),
-        ContentBlock("ddq_between_concept_3", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_between_concept_3",
-              "content": [
-                r'''**🔍 ขั้นที่ 2: หาพื้นที่**
-        
-        ต้องการหา $a_2 - b_2 + b_3 - a_3$''',
-                {"image": "assets/int12.png"},
-                {"image": "assets/int13.png"},
-                r'''แยกช่วงตามจุดตัด $2$ กราฟในรูป
-        
-        ได้ $[-1.5, 0]$ กับ $[0, 1.5]$
-        
-        🔸 ช่วง $[-1.5, 0]$
-        
-        ลองหา $|\int_{-1.5}^0 f(x) - g(x)\,dx| = |a_1 + a_2 - b_1 - b_2|$
-        
-        และย้อนไปดูในรูปจะได้ $a_1 = b_1$ 
-        
-        ดังนั้น $|\int_{-1.5}^0 f(x) - g(x)\,dx| =$ ''',
-                {"drop": "0"},
-                r'''🔸 ช่วง $[0, 1.5]$
-        
-        ลองหา $|\int_{0}^{1.5} f(x) - g(x)\,dx| = |a_3 + a_4 - b_3 - b_4|$
-        
-        และย้อนไปดูในรูปจะได้ $a_4 = b_4$ 
-        
-        ดังนั้น $|\int_{0}^{1.5} f(x) - g(x)\,dx| =$ ''',
-                {"drop": "1"},
-                r'''จะได้ว่า $|\int_{-1.5}^0 f(x) - g(x)\,dx| + |\int_{0}^{1.5} f(x) - g(x)\,dx|$
-        
-        $=$ ''',
-                {"drop": "0"},
-                r'''$+$ ''',
-                {"drop": "1"},
-                r'''ย้อนกลับไปดูในรูป $b_2, a_3$ เป็น $-$
-        
-        ดังนั้น $|\int_{-1.5}^0 f(x) - g(x)\,dx| + |\int_{0}^{1.5} f(x) - g(x)\,dx|$ 
-        
-        $=$ ''',
-                {"drop": "1"},
-                r'''$=$ พื้นที่ปิดล้อมที่ต้องการ''',
-              ],
-              "draggableItems": [
-                r"$|\int_{-1.5}^0 f(x)\,dx| + |\int_{0}^{1.5} f(x)\,dx|$",
-                r"$\int_{-1.5}^{1.5} f(x)\,dx$",
-                r"$|\int_{-1.5}^0 g(x)\,dx| + |\int_{0}^{1.5} g(x)\,dx|$",
-                r"$\int_{-1.5}^{1.5} g(x)\,dx$",
-              ],
-              "correctAnswers": {
-                "0": r"$\int_{-1.5}^{1.5} f(x)\,dx$",
-                "1": r"$\int_{-1.5}^{1.5} g(x)\,dx$",
-              },
-              "explanation":
-                  r'''ลองจินตนาการว่าเอารูปที่ 2 สีฟ้ามาทับรูปแรก จะได้ 🎨
-        ซึ่งจะเห็นว่าถ้าลบสีฟ้าออกจะได้แบบในรูปที่ต้องการหาเลย! 💡
-        
-        ดังนั้นพื้นที่ที่ต้องการ $=$ พื้นที่ใต้กราฟสีแดง $-$ พื้นที่ใต้กราฟสีฟ้า ✨
-        
-        ดังนั้นจะได้ $\int_0^2 f(x) - g(x)\,dx$ 🎯''',
-            },
-          ],
-        }),
-        ContentBlock("area_bet_h_581", "header", {
-          "title": r"👑 แนวคิดหลัก",
-          "level": 2,
-        }),
-        ContentBlock("area_bet_t_582", "text", {
-          "content": [
-            r'''**ขั้นที่ 1** หาจุดตัดของ $2$ ฟังก์ชัน และแบ่งช่วงโดย**รวมขอบ**ที่โจทย์ถามด้วย
-        
-        **ขั้นที่ 2** พื้นที่ที่ถูกปิดล้อมด้วย $2$ ฟังก์ชันช่วง $[a, b]$ จะมีพื้นที่
-        
-        $|\int_a^{x_1} f(x) - g(x)\,dx| + |\int_{x_1}^{x_2} f(x) - g(x)\,dx| + ... + |\int_{x_i}^{b} f(x) - g(x)\,dx|$
-        
-        โดย $x_1, x_2, ..., x_i$ คือจุดตัดของ 2 กราฟ
-        
-        Note = ทำไมค่าสัมบูรณ์
-        
-        เพราะพื้นที่ปิดล้อมต้องมีค่าเป็น $+$ และโจทย์ที่ไม่มีรูปจะไม่บอกว่าฟังก์ชันไหนอยู่เหนือกว่าในแต่ละช่วง''',
-          ],
-        }),
-        ContentBlock("area_bet_h_583", "header", {
-          "title": r"👉 ตัวอย่าง",
-          "level": 2,
-        }),
-        ContentBlock("ddq_between_example_1", "drag_and_drop", {
-          "steps": [
-            {
-              "questionId": "ddq_between_example_1",
-              "content": [
-                r'''1. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x + 2$ และ $g(x) = x^2$
-        
-        ทำตาม 3 ขั้นตอน! 🔊
-        
-        ☝️ **ขั้นที่ 1:** หาจุดตัดของ 2 ฟังก์ชัน
-        
-        ให้ $f(x) = g(x)$
-        
-        $x + 2 = x^2$
-        
-        $x^2 - x - 2 = 0$
-        
-        $(x+1)(x-2) = 0$
-        
-        ดังนั้นจุดตัดคือ $x =$ ''',
-                {"drop": "0"},
-                r'''และ $x =$ ''',
-                {"drop": "1"},
-                r'''ได้ช่วง $[$ ''',
-                {"drop": "0"},
-                r'''$,$ ''',
-                {"drop": "1"},
-                r'''$]$''',
-              ],
-              "draggableItems": [
+                r"$-3$",
                 r"$-2$",
-                r"$-1$",
-                r"$0$",
-                r"$1$",
                 r"$2$",
                 r"$3$",
+                r"$f(x)$",
+                r"$g(x)$",
               ],
-              "correctAnswers": {"0": r"$-1$", "1": r"$2$"},
-              "explanation":
-                  r'''แยกตัวประกอบได้ $(x-2)(x+1) = 0$ ดังนั้น $x = -1$ หรือ $x = 2$ ✅''',
+              "correctAnswers": {
+                "0": r"$-3$",
+                "1": r"$2$",
+                "2": r"$f(x)$",
+              },
+              "explanation": r'''$(x+3)(x-2) = 0$ → $x = -3, 2$ และ $f(0) > g(0)$ → $f(x)$ อยู่เหนือ ✅''',
             },
-          ],
-        }),
-        ContentBlock("ddq_between_example_2", "drag_and_drop", {
-          "steps": [
             {
-              "questionId": "ddq_between_example_2",
+              "questionId": "ab_ddq_028_s2",
               "content": [
-                r'''✌️ **ขั้นที่ 2:** คำนวณพื้นที่
-        
-        พื้นที่ $= \int_{-1}^{2} [f(x) - g(x)]\,dx$
-        
-        $= \int_{-1}^{2} (x + 2 - x^2)\,dx$
-        
-        $= \left[\dfrac{x^2}{2} + 2x - \dfrac{x^3}{3}\right]_{-1}^{2}$
-        
-        $= \left(\dfrac{4}{2} + 4 - \dfrac{8}{3}\right) - \left(\dfrac{1}{2} - 2 + \dfrac{1}{3}\right)$
-        
-        $= \left(2 + 4 - \dfrac{8}{3}\right) - \left(\dfrac{1}{2} - 2 + \dfrac{1}{3}\right)$
-        
-        พื้นที่ที่ได้คือ ''',
+                r'''พื้นที่ $= \int_{-3}^2 [(6-x^2) - x]\,dx = \int_{-3}^2 (6 - x - x^2)\,dx$
+
+$= \left[6x - \dfrac{x^2}{2} - \dfrac{x^3}{3}\right]_{-3}^2$
+
+$= (12 - 2 - \dfrac{8}{3}) - (-18 - \dfrac{9}{2} + 9)$
+
+$= \dfrac{22}{3} - (-\dfrac{27}{2} + 9)$
+
+พื้นที่ $= $ ''',
                 {"drop": "0"},
               ],
               "draggableItems": [
-                r"$\dfrac{7}{2}$",
-                r"$\dfrac{9}{2}$",
-                r"$\dfrac{11}{2}$",
-                r"$\dfrac{13}{2}$",
+                r"$\dfrac{125}{6}$",
+                r"$\dfrac{127}{6}$",
+                r"$\dfrac{100}{6}$",
+                r"$20$",
               ],
-              "correctAnswers": {"0": r"$\dfrac{9}{2}$"},
-              "explanation":
-                  r'''คำนวณแล้วได้ $6 - \dfrac{8}{3} - \dfrac{1}{2} + 2 - \dfrac{1}{3} = \dfrac{9}{2}$ หน่วยกำลังสอง 🎉''',
+              "correctAnswers": {"0": r"$\dfrac{125}{6}$"},
+              "explanation": r'''$\dfrac{22}{3} + \dfrac{9}{2} = \dfrac{44}{6} + \dfrac{27}{6} + \dfrac{54}{6} = \dfrac{125}{6}$ 💚''',
             },
           ],
         }),
-        ContentBlock("area_bet_h_586", "header", {
-          "title": r"📝 แบบฝึกหัด",
-          "level": 2,
-        }),
-        ContentBlock("q_between_practice_1", "question_choice", {
+        ContentBlock("ab_q_029", "question_choice", {
           "content": [
-            r'''1. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = 4$ และ $g(x) = x^2$ ในช่วง $[-2, 2]$''',
+            r'''1. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x$ กับ $g(x) = x^2$''',
           ],
           "options": [
-            r"$\dfrac{16}{3}$",
-            r"$\dfrac{20}{3}$",
-            r"$\dfrac{28}{3}$",
-            r"$\dfrac{32}{3}$",
-          ],
-          "correct": r"$\dfrac{32}{3}$",
-          "explanation":
-              r'''ช่วงที่โจทย์กำหนด $[-2, 2]$ และ $f(x) = 4$ อยู่เหนือ $g(x) = x^2$ พื้นที่ $= \int_{-2}^{2} (4 - x^2)\,dx = \left[4x - \dfrac{x^3}{3}\right]_{-2}^{2} = (8 - \dfrac{8}{3}) - (-8 + \dfrac{8}{3}) = 16 - \dfrac{16}{3} = \dfrac{32}{3}$ ✅''',
-        }),
-        ContentBlock("q_between_practice_2", "question_choice", {
-          "content": [
-            r'''2. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x$ และ $g(x) = x^2$''',
-          ],
-          "options": [
-            r"$\dfrac{1}{4}$",
-            r"$\dfrac{1}{3}$",
             r"$\dfrac{1}{6}$",
+            r"$\dfrac{1}{3}$",
             r"$\dfrac{1}{2}$",
+            r"$\dfrac{1}{4}$",
           ],
           "correct": r"$\dfrac{1}{6}$",
-          "explanation":
-              r'''หาจุดตัด: $x = x^2$ ได้ $x = 0, 1$ ในช่วง $[0, 1]$ แทน $x = 0.5$ ได้ $f(x)$ อยู่เหนือกว่า พื้นที่ $= \int_{0}^{1} (x - x^2)\,dx = \left[\dfrac{x^2}{2} - \dfrac{x^3}{3}\right]_{0}^{1} = \dfrac{1}{2} - \dfrac{1}{3} = \dfrac{1}{6}$ ✅''',
+          "explanation": r'''จุดตัด: $x = x^2$ → $x(x-1)=0$ → $x = 0, 1$
+
+แทน $x = 0.5$: $f = 0.5 > g = 0.25$ → $f$ อยู่เหนือ
+
+$\int_0^1 (x-x^2)\,dx = [\dfrac{x^2}{2}-\dfrac{x^3}{3}]_0^1 = \dfrac{1}{2}-\dfrac{1}{3} = \dfrac{1}{6}$ 💚''',
         }),
-        ContentBlock("q_between_practice_3", "question_choice", {
+        ContentBlock("ab_q_030", "question_choice", {
           "content": [
-            r'''3. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = 6 - x^2$ และ $g(x) = x$''',
+            r'''2. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = 4$ กับ $g(x) = x^2$ ในช่วง $[-2, 2]$''',
           ],
           "options": [
-            r"$\dfrac{125}{6}$",
-            r"$\dfrac{127}{6}$",
-            r"$\dfrac{129}{6}$",
-            r"$\dfrac{131}{6}$",
-          ],
-          "correct": r"$\dfrac{125}{6}$",
-          "explanation":
-              r'''หาจุดตัด: $6 - x^2 = x$ ได้ $x = -3, 2$ แทน $x = 0$ ได้ $f(x)$ อยู่เหนือกว่า พื้นที่ $= \int_{-3}^{2} (6 - x^2 - x)\,dx = \left[6x - \dfrac{x^3}{3} - \dfrac{x^2}{2}\right]_{-3}^{2} = \dfrac{125}{6}$ ✅''',
-        }),
-        ContentBlock("q_between_practice_4", "question_choice", {
-          "content": [
-            r'''4. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^2 + 2$ และ $g(x) = -x$ ในช่วง $[0, 2]$''',
-          ],
-          "options": [
-            r"$\dfrac{14}{3}$",
+            r"$\dfrac{32}{3}$",
             r"$\dfrac{16}{3}$",
+            r"$8$",
             r"$\dfrac{20}{3}$",
-            r"$\dfrac{22}{3}$",
           ],
-          "correct": r"$\dfrac{16}{3}$",
-          "explanation":
-              r'''ช่วง $[0, 2]$ แทน $x = 1$ ได้ $f(x)$ อยู่เหนือกว่า พื้นที่ $= \int_{0}^{2} (x^2 + 2 - (-x))\,dx = \int_{0}^{2} (x^2 + x + 2)\,dx = \left[\dfrac{x^3}{3} + \dfrac{x^2}{2} + 2x\right]_{0}^{2} = \dfrac{8}{3} + 2 + 4 = \dfrac{16}{3}$ ✅''',
+          "correct": r"$\dfrac{32}{3}$",
+          "explanation": r'''แทน $x = 0$: $4 > 0$ → $f$ อยู่เหนือ
+
+$\int_{-2}^2 (4-x^2)\,dx = [4x-\dfrac{x^3}{3}]_{-2}^2 = (8-\dfrac{8}{3})-(-8+\dfrac{8}{3}) = 16 - \dfrac{16}{3} = \dfrac{32}{3}$ 💚''',
         }),
-        ContentBlock("q_between_practice_5", "question_choice", {
+        ContentBlock("ab_q_031", "question_choice", {
           "content": [
-            r'''5. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = 2x$ และ $g(x) = x^2 - 4x$''',
+            r'''3. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^2 + 1$ กับ $g(x) = -x + 1$ ในช่วง $[0, 2]$
+
+Note = คำใบ้: 2 กราฟไม่ตัดกันในช่วงนี้ (ลองเช็คดู) เช็คว่าใครอยู่บนก็พอ''',
           ],
-          "options": [r"$30$", r"$32$", r"$34$", r"$36$"],
+          "options": [
+            r"$\dfrac{16}{3}$",
+            r"$\dfrac{14}{3}$",
+            r"$6$",
+            r"$\dfrac{20}{3}$",
+          ],
+          "correct": r"$\dfrac{14}{3}$",
+          "explanation": r'''$f(x)-g(x) = x^2+1-(-x+1) = x^2+x$
+
+แทน $x = 1$: $f = 2 > g = 0$ → $f$ อยู่เหนือ
+
+$\int_0^2 (x^2+x)\,dx = [\dfrac{x^3}{3}+\dfrac{x^2}{2}]_0^2 = \dfrac{8}{3}+2 = \dfrac{14}{3}$ 💚''',
+        }),
+        ContentBlock("ab_q_032", "question_choice", {
+          "content": [
+            r'''4. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = 2x$ กับ $g(x) = x^2 - 4x$''',
+          ],
+          "options": [
+            r"$36$",
+            r"$18$",
+            r"$24$",
+            r"$30$",
+          ],
           "correct": r"$36$",
-          "explanation":
-              r'''หาจุดตัด: $2x = x^2 - 4x$ ได้ $x = 0, 6$ แทน $x = 1$ ได้ $f(x)$ อยู่เหนือกว่า พื้นที่ $= \int_{0}^{6} (2x - (x^2 - 4x))\,dx = \int_{0}^{6} (6x - x^2)\,dx = \left[3x^2 - \dfrac{x^3}{3}\right]_{0}^{6} = 108 - 72 = 36$ ✅''',
+          "explanation": r'''จุดตัด: $2x = x^2-4x$ → $x^2-6x = 0$ → $x(x-6) = 0$ → $x = 0, 6$
+
+แทน $x = 1$: $f = 2 > g = -3$ → $f$ อยู่เหนือ
+
+$\int_0^6 (2x-x^2+4x)\,dx = \int_0^6 (6x-x^2)\,dx = [3x^2-\dfrac{x^3}{3}]_0^6 = 108-72 = 36$ 💚''',
         }),
       ],
     ),
+
+    // =============================================
+    // SECTION 4: เมื่อกราฟสลับบน-ล่าง
+    // =============================================
     ContentSection(
-      headerL1: r"✨ สรุป",
+      headerL1: r"🔀 เมื่อกราฟสลับบน-ล่าง",
       blocks: [
-        ContentBlock("area_bet_t_592", "text", {
+        ContentBlock("ab_h_033", "header", {
+          "title": r"กราฟสลับกัน — ต้องแบ่งช่วง",
+          "level": 2,
+        }),
+        ContentBlock("ab_t_034", "text", {
           "content": [
-            r'''**🎯 วิธีหาพื้นที่ปิดล้อมระหว่าง 2 กราฟ**
-        
-        1. **หาจุดตัด** ของ 2 ฟังก์ชัน (ถ้าโจทย์ไม่ได้บอกช่วง)
-        
-        2. **ดูว่าฟังก์ชันไหนอยู่เหนือกว่า** โดยแทนค่า $x$ ในช่วงนั้น
-        
-        3. **คำนวณพื้นที่** ด้วยสูตร $\int_a^b [f(x) - g(x)]\,dx$ เมื่อ $f(x) \geq g(x)$
-        
-        4. **ใช้ค่าสัมบูรณ์** ถ้ามีหลายช่วงหรือไม่แน่ใจว่าฟังก์ชันไหนอยู่เหนือกว่า 💪''',
+            r'''ถ้า 2 กราฟตัดกันหลายจุด บางช่วง $f(x)$ อยู่บน บางช่วง $g(x)$ อยู่บน
+
+ถ้าหาปริพันธ์ $\int_a^b [f(x)-g(x)]\,dx$ ทีเดียว ส่วนที่ $g$ อยู่บนจะให้ค่าลบ → **หักล้าง**กัน!''',
+          ],
+        }),
+        ContentBlock("ab_t_035", "text", {
+          "content": [
+            r'''แนวคิดเดิมเลย — เหมือนตอนกราฟข้ามแกน $x$ ในบทก่อน:
+
+🔸 หาจุดตัดของ 2 กราฟ → $f(x) = g(x)$
+
+🔸 แบ่งช่วง แล้วหาปริพันธ์แต่ละช่วงแยกกัน
+
+🔸 เอา**ค่าสัมบูรณ์**แต่ละช่วนมาบวกกัน''',
+          ],
+        }),
+        ContentBlock("ab_h_036", "header", {
+          "title": r"ตัวอย่าง",
+          "level": 2,
+        }),
+        ContentBlock("ab_t_037", "text", {
+          "content": [
+            r'''จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^3$ กับ $g(x) = x$ จาก $x = -1$ ถึง $x = 1$''',
+          ],
+        }),
+        ContentBlock("ab_ddq_038", "drag_and_drop", {
+          "steps": [
+            {
+              "questionId": "ab_ddq_038_s1",
+              "content": [
+                r'''จุดตัด: $x^3 = x$ → $x^3 - x = 0$ → $x(x^2-1) = 0$ → $x(x-1)(x+1) = 0$
+
+$x = -1, 0, 1$ → แบ่งเป็น 2 ช่วง: $[-1, 0]$ และ $[0, 1]$
+
+แทน $x = -0.5$: $f = -0.125$ , $g = -0.5$ → $f > g$ → ช่วง $[-1, 0]$: ''',
+                {"drop": "0"},
+                r''' อยู่เหนือ
+
+แทน $x = 0.5$: $f = 0.125$ , $g = 0.5$ → $g > f$ → ช่วง $[0, 1]$: ''',
+                {"drop": "1"},
+                r''' อยู่เหนือ''',
+              ],
+              "draggableItems": [r"$f(x) = x^3$", r"$g(x) = x$"],
+              "correctAnswers": {
+                "0": r"$f(x) = x^3$",
+                "1": r"$g(x) = x$",
+              },
+              "explanation": r'''แทนค่ากลางช่วงเพื่อเช็ค — กราฟสลับกันตรงจุด $x = 0$ ✅''',
+            },
+            {
+              "questionId": "ab_ddq_038_s2",
+              "content": [
+                r'''ช่วง $[-1, 0]$: $f$ อยู่เหนือ → $\int_{-1}^0 (x^3-x)\,dx = [\dfrac{x^4}{4}-\dfrac{x^2}{2}]_{-1}^0 = 0 - (\dfrac{1}{4}-\dfrac{1}{2}) = \dfrac{1}{4}$
+
+ช่วง $[0, 1]$: $g$ อยู่เหนือ → $\int_0^1 (x-x^3)\,dx = [\dfrac{x^2}{2}-\dfrac{x^4}{4}]_0^1 = \dfrac{1}{2}-\dfrac{1}{4} = \dfrac{1}{4}$
+
+พื้นที่ปิดล้อม $= \dfrac{1}{4} + \dfrac{1}{4} = $ ''',
+                {"drop": "0"},
+              ],
+              "draggableItems": [r"$\dfrac{1}{2}$", r"$\dfrac{1}{4}$", r"$1$", r"$0$"],
+              "correctAnswers": {"0": r"$\dfrac{1}{2}$"},
+              "explanation": r'''แยกช่วง แล้วรวม → $\dfrac{1}{2}$ ตร.หน่วย 💚''',
+            },
+          ],
+        }),
+        ContentBlock("ab_t_039", "text", {
+          "content": [
+            r'''Note = ลองเช็ค — ถ้าไม่แบ่งช่วง
+
+$\int_{-1}^1 (x^3-x)\,dx = [\dfrac{x^4}{4}-\dfrac{x^2}{2}]_{-1}^1 = 0 - 0 = 0$
+
+หักล้างกันหมด! แต่พื้นที่จริง $= \dfrac{1}{2}$ ≠ $0$ — ต้องแบ่งช่วงเสมอเมื่อกราฟสลับกัน''',
+          ],
+        }),
+        ContentBlock("ab_q_040", "question_choice", {
+          "content": [
+            r'''1. $f(x) = x^2$ กับ $g(x) = x$ ตัดกันที่ $x = 0, 1$
+
+ถ้าโจทย์ถามพื้นที่จาก $x = -1$ ถึง $x = 1$ ต้องแบ่งเป็นกี่ช่วง?
+
+Note = คำใบ้: จุดที่ 2 กราฟตัดกัน + ขอบเขตที่โจทย์ให้ → จุดแบ่งคือ $-1, 0, 1$''',
+          ],
+          "options": [r"$2$ ช่วง", r"$1$ ช่วง", r"$3$ ช่วง", r"$4$ ช่วง"],
+          "correct": r"$2$ ช่วง",
+          "explanation": r'''จุดแบ่ง: $-1, 0, 1$ → ช่วง $[-1, 0]$ กับ $[0, 1]$ = 2 ช่วง 💚''',
+        }),
+        ContentBlock("ab_q_041", "question_choice", {
+          "content": [
+            r'''2. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^2$ กับ $g(x) = x$ จาก $x = -1$ ถึง $x = 1$
+
+Note = คำใบ้: ช่วง $[-1,0]$: แทน $x=-0.5$ → $f = 0.25 > g = -0.5$
+
+ช่วง $[0,1]$: แทน $x=0.5$ → $g = 0.5 > f = 0.25$''',
+          ],
+          "options": [
+            r"$1$",
+            r"$\dfrac{5}{6}$",
+            r"$\dfrac{2}{3}$",
+            r"$\dfrac{1}{2}$",
+          ],
+          "correct": r"$1$",
+          "explanation": r'''ช่วง $[-1,0]$: $\int_{-1}^0 (x^2-x)\,dx = [\dfrac{x^3}{3}-\dfrac{x^2}{2}]_{-1}^0 = 0-(-\dfrac{1}{3}-\dfrac{1}{2}) = \dfrac{5}{6}$
+
+ช่วง $[0,1]$: $\int_0^1 (x-x^2)\,dx = \dfrac{1}{2}-\dfrac{1}{3} = \dfrac{1}{6}$
+
+พื้นที่ปิดล้อม $= \dfrac{5}{6} + \dfrac{1}{6} = 1$ 💚''',
+        }),
+        ContentBlock("ab_q_042", "question_choice", {
+          "content": [
+            r'''3. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^3 - x$ กับ $g(x) = 0$ (แกน $x$) จาก $x = -1$ ถึง $x = 1$
+
+Note = คำใบ้: นี่คือพื้นที่ปิดล้อมกราฟ $f(x)$ กับแกน $x$ → $g(x) = 0$ ก็เป็น "กราฟ" เส้นหนึ่ง!''',
+          ],
+          "options": [
+            r"$\dfrac{1}{2}$",
+            r"$0$",
+            r"$\dfrac{1}{4}$",
+            r"$1$",
+          ],
+          "correct": r"$\dfrac{1}{2}$",
+          "explanation": r'''จุดตัด: $x^3 - x = 0$ → $x = -1, 0, 1$
+
+ช่วง $[-1,0]$: $\int_{-1}^0 (x^3-x)\,dx = \dfrac{1}{4}$
+
+ช่วง $[0,1]$: $\int_0^1 (x^3-x)\,dx = -\dfrac{1}{4}$
+
+พื้นที่ $= \dfrac{1}{4} + \dfrac{1}{4} = \dfrac{1}{2}$ — เหมือนกันเลย! เพราะ "พื้นที่กับแกน $x$" ก็คือพื้นที่ระหว่าง 2 กราฟ โดย $g(x)=0$ 💚''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 5: แบบฝึกหัดรวม
+    // =============================================
+    ContentSection(
+      headerL1: r"📝 แบบฝึกหัดรวม",
+      blocks: [
+        ContentBlock("ab_t_043", "text", {
+          "content": [
+            r'''โจทย์ในส่วนนี้ผสมทุกรูปแบบ — ทั้งแบบไม่สลับ แบบสลับ และแบบมีช่วงกำหนด ลองทำดู! 💪''',
+          ],
+        }),
+        ContentBlock("ab_q_044", "question_choice", {
+          "content": [
+            r'''1. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^2$ กับ $g(x) = 4$''',
+          ],
+          "options": [
+            r"$\dfrac{32}{3}$",
+            r"$\dfrac{16}{3}$",
+            r"$8$",
+            r"$\dfrac{64}{3}$",
+          ],
+          "correct": r"$\dfrac{32}{3}$",
+          "explanation": r'''จุดตัด: $x^2 = 4$ → $x = \pm 2$
+
+แทน $x = 0$: $g = 4 > f = 0$ → $g$ อยู่เหนือ
+
+$\int_{-2}^2 (4-x^2)\,dx = [4x-\dfrac{x^3}{3}]_{-2}^2 = \dfrac{16}{3}+\dfrac{16}{3} = \dfrac{32}{3}$ 💚''',
+        }),
+        ContentBlock("ab_q_045", "question_choice", {
+          "content": [
+            r'''2. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^2 + 1$ กับ $g(x) = 2x + 1$''',
+          ],
+          "options": [
+            r"$\dfrac{4}{3}$",
+            r"$\dfrac{8}{3}$",
+            r"$\dfrac{2}{3}$",
+            r"$4$",
+          ],
+          "correct": r"$\dfrac{4}{3}$",
+          "explanation": r'''จุดตัด: $x^2+1 = 2x+1$ → $x^2-2x = 0$ → $x(x-2) = 0$ → $x = 0, 2$
+
+แทน $x = 1$: $g = 3 > f = 2$ → $g$ อยู่เหนือ
+
+$\int_0^2 (2x+1-x^2-1)\,dx = \int_0^2 (2x-x^2)\,dx = [x^2-\dfrac{x^3}{3}]_0^2 = 4-\dfrac{8}{3} = \dfrac{4}{3}$ 💚''',
+        }),
+        ContentBlock("ab_q_046", "question_choice", {
+          "content": [
+            r'''3. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^3$ กับ $g(x) = x$
+
+Note = คำใบ้: $x^3 = x$ → $x^3 - x = 0$ → $x(x-1)(x+1) = 0$ → ตัดกัน 3 จุด กราฟสลับกัน''',
+          ],
+          "options": [
+            r"$\dfrac{1}{2}$",
+            r"$\dfrac{1}{4}$",
+            r"$1$",
+            r"$0$",
+          ],
+          "correct": r"$\dfrac{1}{2}$",
+          "explanation": r'''จุดตัด: $x = -1, 0, 1$
+
+ช่วง $[-1,0]$: $|\int_{-1}^0 (x^3-x)\,dx| = |\dfrac{1}{4}| = \dfrac{1}{4}$
+
+ช่วง $[0,1]$: $|\int_0^1 (x^3-x)\,dx| = |-\dfrac{1}{4}| = \dfrac{1}{4}$
+
+พื้นที่ $= \dfrac{1}{4}+\dfrac{1}{4} = \dfrac{1}{2}$ 💚''',
+        }),
+        ContentBlock("ab_q_047", "question_choice", {
+          "content": [
+            r'''4. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = -x^2 + 4x$ กับ $g(x) = x^2$''',
+          ],
+          "options": [
+            r"$\dfrac{8}{3}$",
+            r"$\dfrac{16}{3}$",
+            r"$4$",
+            r"$\dfrac{4}{3}$",
+          ],
+          "correct": r"$\dfrac{8}{3}$",
+          "explanation": r'''จุดตัด: $-x^2+4x = x^2$ → $2x^2-4x = 0$ → $2x(x-2) = 0$ → $x = 0, 2$
+
+แทน $x = 1$: $f = 3 > g = 1$ → $f$ อยู่เหนือ
+
+$\int_0^2 (-x^2+4x-x^2)\,dx = \int_0^2 (-2x^2+4x)\,dx = [-\dfrac{2x^3}{3}+2x^2]_0^2 = -\dfrac{16}{3}+8 = \dfrac{8}{3}$ 💚''',
+        }),
+        ContentBlock("ab_q_048", "question_choice", {
+          "content": [
+            r'''5. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^2 - 2x$ กับ $g(x) = -x^2 + 4$''',
+          ],
+          "options": [
+            r"$9$",
+            r"$\dfrac{27}{2}$",
+            r"$\dfrac{27}{4}$",
+            r"$12$",
+          ],
+          "correct": r"$9$",
+          "explanation": r'''จุดตัด: $x^2-2x = -x^2+4$ → $2x^2-2x-4 = 0$ → $x^2-x-2 = 0$ → $(x-2)(x+1) = 0$
+
+$x = -1, 2$
+
+แทน $x = 0$: $f = 0$ , $g = 4$ → $g$ อยู่เหนือ
+
+$\int_{-1}^2 (-x^2+4-x^2+2x)\,dx = \int_{-1}^2 (-2x^2+2x+4)\,dx$
+
+$= [-\dfrac{2x^3}{3}+x^2+4x]_{-1}^2 = (-\dfrac{16}{3}+4+8)-(\dfrac{2}{3}+1-4) = \dfrac{20}{3}+\dfrac{7}{3} = 9$ 💚''',
+        }),
+        ContentBlock("ab_fi_049", "question_fill_in", {
+          "content": [
+            r'''6. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^2$ กับ $g(x) = \sqrt{x}$ จาก $x = 0$ ถึง $x = 1$
+
+Note = คำใบ้: แทน $x = 0.5$ เช็คว่าใครบน — $\sqrt{0.5} \approx 0.707$ กับ $0.25$
+
+พื้นที่ $= $ ''',
+            {"box": "0"},
+          ],
+          "correct": "1/3",
+          "explanation": r'''แทน $x = 0.5$: $g = 0.707 > f = 0.25$ → $g$ อยู่เหนือ
+
+$\int_0^1 (x^{1/2}-x^2)\,dx = [\dfrac{2x^{3/2}}{3}-\dfrac{x^3}{3}]_0^1 = \dfrac{2}{3}-\dfrac{1}{3} = \dfrac{1}{3}$ 💚''',
+        }),
+        ContentBlock("ab_fi_050", "question_fill_in", {
+          "content": [
+            r'''7. จงหาพื้นที่ปิดล้อมระหว่าง $f(x) = x^2 - 4$ กับ $g(x) = -x^2 + 4$
+
+Note = คำใบ้: จุดตัดคือ $x^2-4 = -x^2+4$ → $2x^2 = 8$ → $x = \pm 2$
+
+พื้นที่ $= $ ''',
+            {"box": "0"},
+          ],
+          "correct": "64/3",
+          "explanation": r'''แทน $x = 0$: $f = -4$ , $g = 4$ → $g$ อยู่เหนือ
+
+$\int_{-2}^2 (-x^2+4-x^2+4)\,dx = \int_{-2}^2 (-2x^2+8)\,dx$
+
+$= [-\dfrac{2x^3}{3}+8x]_{-2}^2 = (-\dfrac{16}{3}+16)-(\dfrac{16}{3}-16)$
+
+$= -\dfrac{32}{3}+32 = \dfrac{64}{3}$ 💚''',
+        }),
+      ],
+    ),
+
+    // =============================================
+    // SECTION 6: สรุป
+    // =============================================
+    ContentSection(
+      headerL1: r"สรุป",
+      blocks: [
+        ContentBlock("ab_t_051", "text", {
+          "content": [
+            r'''🎯 **พื้นที่ระหว่าง 2 กราฟ = ปริพันธ์ของ "กราฟบน $-$ กราฟล่าง"**
+
+$$\text{พื้นที่} = \int_a^b [\text{กราฟบน} - \text{กราฟล่าง}]\,dx$$
+
+แนวคิดเดียวกับพื้นที่ปิดล้อมกราฟเดียว — แค่เปลี่ยนจาก "กราฟ $-$ แกน $x$" เป็น "กราฟ $-$ กราฟ"''',
+          ],
+        }),
+        ContentBlock("ab_t_052", "text", {
+          "content": [
+            r'''**แนวคิดหลัก:**
+
+🔸 หาจุดตัดของ 2 กราฟ → แก้ $f(x) = g(x)$
+
+🔸 ในแต่ละช่วง **แทนค่าเช็ค**ว่าใครอยู่เหนือ หรือใช้ค่าสัมบูรณ์ครอบ
+
+🔸 ถ้ากราฟสลับกัน → แยกช่วง แล้วรวมค่าสัมบูรณ์แต่ละช่วง''',
+          ],
+        }),
+        ContentBlock("ab_t_053", "text", {
+          "content": [
+            r'''$$\text{พื้นที่ปิดล้อม} = \left|\int_{x_1}^{x_2} [f(x)-g(x)]\,dx\right| + \left|\int_{x_2}^{x_3} [f(x)-g(x)]\,dx\right| + \cdots$$
+
+โดยที่ $x_1, x_2, \ldots$ คือจุดตัดของ 2 กราฟ (รวมขอบเขตที่โจทย์ให้ด้วย)''',
+          ],
+        }),
+        ContentBlock("ab_t_054", "text", {
+          "content": [
+            r'''Note = ข้อสังเกต
+
+🔸 ถ้ากราฟไม่สลับกัน → หาปริพันธ์ทีเดียวจบ ไม่ต้องแบ่งช่วง
+
+🔸 ถ้ากราฟสลับกัน → ต้องแบ่งช่วงตรงจุดตัด ไม่งั้นหักล้างกัน
+
+🔸 พื้นที่ปิดล้อมกราฟเดียวกับแกน $x$ ก็คือกรณีพิเศษ โดย $g(x) = 0$''',
           ],
         }),
       ],
