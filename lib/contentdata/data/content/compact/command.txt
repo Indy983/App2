@@ -1,0 +1,6 @@
+cd lib/contentdata/data/content/compact
+
+python3 compact_dart.py to_compact test.dart > test.compact
+python3 compact_dart.py to_dart test.compact > test.dart
+
+mv /Users/wayu/Downloads/limcheck3.png /Users/wayu/Math/assets

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import '../db/sync_service.dart';
 import 'catalog_screen.dart';
 import 'login_screen.dart';
+import 'google_sign_in.dart';
 
 class LandingScreen extends StatefulWidget {
   final SyncService syncService;
@@ -41,9 +41,7 @@ class _LandingScreenState extends State<LandingScreen> {
     await Supabase.instance.client.auth.signOut();
     
     // Clear Google Sign In
-    final googleSignIn = GoogleSignIn();
-    await googleSignIn.disconnect();
-    await googleSignIn.signOut();
+    await clearGoogleSignIn();
     
     if (context.mounted) {
       Navigator.of(context).pushReplacement(

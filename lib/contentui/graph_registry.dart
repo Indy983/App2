@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../contentdata/interactivegraph/limitFound/graph_data1.dart' as LimFound1;
+import '../contentdata/interactivegraph/limcomp/graph_data1.dart' as LimComp1;
 import '../contentdata/interactivegraph/limit/graph_data_1.dart' as Graph1;
 import '../contentdata/interactivegraph/limit/graph_data2.dart' as Graph2;
 import '../contentdata/interactivegraph/limit/graph_data3.dart' as Graph3;
@@ -36,6 +38,10 @@ import '../contentdata/interactivegraph/tangent/graph_data_tangent2.dart' as Gra
 class GraphRegistry {
   static Widget getGraph(String path) {
     switch (path) {
+      case 'limFound1':
+       return LimFound1.getGraphWidget();
+      case 'limComp1':
+       return LimComp1.getGraphWidget();
       case 'graph_data_1':
         return Graph1.getGraphWidget(); // From graph_data_1.dart
       case 'graph_data_2':

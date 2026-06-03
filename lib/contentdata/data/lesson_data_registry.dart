@@ -114,15 +114,14 @@ dynamic getLessonData(String id) {
     'calc_limit_graph':      calcLimitGraphLesson,
     'calc_limit_comp':       calcCompositeLimitGraphLesson,
     'calc_limit_condition':  calcLimitConditionLesson,
-    'calc_limit_poly':       calcLimitPolynomialLesson,
-    'calc_limit_abs':        calcLimitAbsoluteLesson,
-    'calc_limit_piece':      calcLimitPiecewiseLesson,
+    'calc_limit_poly':       calcLimitIndeterminateForms,
+    'calc_limit_piece':      calcLimitConditionalLesson,
     'calc_limit_inf':        calcLimitInfinityLesson,
+    'calc_limit_more':       calcLimitInfinityMoreLesson,
     'calc_limit_inf2':       calcLimitInfinityExtraLesson,
     // ลิมิตและความต่อเนื่อง → ความต่อเนื่องฟังก์ชันและอัตราเปลี่ยนแปลง
     'calc_continuity':       calcContinuityLesson,
     'calc_rate':             calcRateOfChangeLesson,
-    'calc_rate_pt':          calcRateAtPointLesson,
     // อนุพันธ์ → การหาค่าอนุพันธ์
     'calc_deriv_intro':      calcDerivIntroLesson,
     'calc_chain_rule':       calcChainRuleLesson,
@@ -137,10 +136,8 @@ dynamic getLessonData(String id) {
     'calc_int_intro':        calcIntIntroLesson,
     'calc_int_sub':          calcIntSubstitutionLesson,
     // ปริพันธ์ → พื้นที่ใต้กราฟ
-    'calc_area':             calcAreaLesson,
-    'calc_area_enc':         calcEnclosedAreaLesson,
+    'calc_area':             calcAreaAndEnclosedLesson,
     'calc_area_bet':         calcAreaBetweenLesson,
-    'calc_int_app':          calcIntApplicationLesson,
   };
 
   return lessonRegistry[id];

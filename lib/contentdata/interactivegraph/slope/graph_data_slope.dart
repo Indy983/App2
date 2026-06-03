@@ -17,12 +17,12 @@ class _GraphDataSlope {
   static const double functionXMax = 2.7;
   
   // Initial draggable points - positioned on the function curve
-  static const double initialXLeft = -1.5;
+  static const double initialXLeft = -1;
   static const double initialXRight = 2.0;
   
   // Drag constraints - same as original graphs
-  static const double dragMinLeft = -1.5;
-  static const double dragMaxLeft = -1.5; // Fixed position
+  static const double dragMinLeft = -1;
+  static const double dragMaxLeft = -1; // Fixed position
   static const double dragMinRight = -2.5;
   static const double dragMaxRight = 2.5;
   
